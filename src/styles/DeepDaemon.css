@@ -1,0 +1,153 @@
+.DeepDaemon {
+    text-align: center;
+    /*min-width: 600px;*/
+  }
+  
+  .ddlogo {
+    /*animation: App-logo-spin infinite 20s linear;*/
+    height: 30vmin;
+    pointer-events: none;
+  }
+  
+  .dd_header {
+    background: url("./assets/img/bg/header_bg.png") no-repeat center top;
+    text-align: center;
+    background-position: center center;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    text-shadow: 1px 1px 1px #000;
+  }
+  
+  h1 {
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 40px;
+    letter-spacing: 3px;
+    margin: 15px;
+  }
+  
+  h2 {
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 40px;
+    letter-spacing: 3px;
+    margin: 15px;
+  }
+  
+  p {
+    text-align: center;
+    margin: 15px;
+    margin-bottom: 25px;
+  }
+  
+  hr:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: #ccc;
+  }
+  
+  hr {
+    position: relative;
+    display: block;
+    height: 1px;
+    border: 0;
+    /*border-top: 1px solid #ccc;*/
+    margin: 1em 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .section {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    margin-top: -59px;
+    padding-top: 81px;
+    margin-bottom: auto;
+  }
+  
+  .section h1 {
+    text-transform: uppercase;
+  }
+  
+  .academy {
+    background-image: url("./assets/img/bg/academy_bg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #012e4d;
+    min-height: 300px;
+    align-items: stretch;
+    display: flex;
+  }
+  .team_separator {
+    background-image: url("./assets/img/bg/todos_2018_bg.jpg");
+    background-position: top center;
+    min-height: 300px;
+    align-items: stretch;
+    display: flex;
+  }
+  
+  .section .icon {
+    font-size: 50px;
+    line-height: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .white {
+    color: white;
+  }
+  
+  .contact {
+    background-image: url("./assets/img/bg/contact_bg.jpg");
+    background-position: center center;
+    margin-top: auto;
+    font-size: 1.5rem;
+  }
+  .contact .icon {
+    font-size: 1.2rem;
+    line-height: 30px;
+    margin-bottom: 10px;
+    padding: 0 0.5rem;
+  }
+  
+  .projects .nav-item {
+    margin: auto;
+  }
+  .projects .nav-link {
+    background-color: transparent;
+    color: inherit;
+    border-radius: 10px;
+  }
+  
+  .projects .nav-link.active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  @import url("https://use.fontawesome.com/releases/v5.0.10/css/all.css");
+  
+  /*@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  */
+  
