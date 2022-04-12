@@ -1,6 +1,5 @@
 import React from 'react'
 import { AddNewFab } from '../../ui/AddNewFab'
-import { SearchScreen } from '../../ui/SearchScreen'
 import { ModalAddProject } from './ModalAddProject'
 import ProjectList from './ProjectList'
 
@@ -15,7 +14,6 @@ export const ProjectsScreen = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <SearchScreen />
                     <div className="col-md-2 mb-2">
                         <ModalAddProject />
                         <AddNewFab /> 

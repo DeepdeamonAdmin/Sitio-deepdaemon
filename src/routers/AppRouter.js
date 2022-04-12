@@ -4,25 +4,22 @@ import { firebase } from '../firebase/firebase-config'
 //uso de rutas e
 import {
     BrowserRouter as Router,
-    Switch,
-    Redirect
+    Route,
+    Routes
   } from 'react-router-dom';
 
 
 import { login } from '../actions/auth';
 
-//rutas sitio publico
-import { DashboardRouters } from './DashboardRouters';
+
 
 //rutas para sitio de administración
 import { AdminDashBoard } from './AdminDashBoard';
 
-//componente para auth
-import { Login } from '../componentes/Admin/Login';
-
 //proteccion de rutas
-import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { ProtectedRoute } from './ProtectedRoute';
+import { HomeRoutes } from './HomeRoutes';
 
 
 
@@ -33,6 +30,7 @@ export const AppRouter = () => {
 
     const [ checking, setChecking ] = useState(true);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+    const [ role, setRole ] = useState(null);
 
 
     useEffect(() => {
@@ -62,26 +60,24 @@ export const AppRouter = () => {
 
      return (
         <Router>
-            <div>
-                    <Switch>
-                        <PublicRoute 
-                            exact
-                            path="/login" 
-                            component={ Login }
-                            isAuthenticated={ isLoggedIn }  />
-                        <PrivateRoute 
-                            path="/Admin"
-                            component={ AdminDashBoard }
-                            isAuthenticated={ isLoggedIn } />       
-                       
-                        <PublicRoute 
-                            path="/" 
-                            component={ DashboardRouters }
-                            isAuthenticated={ isLoggedIn } />
-                        <Redirect to='/'/>
-
-                    </Switch>
-            </div>
+            <Routes>
+                <Route 
+                    path='/*'
+                    element={
+                        <PublicRoute isAuthenticade = { isLoggedIn } rol= {role} >
+                        <HomeRoutes /> 
+                        </PublicRoute>
+                    } 
+                />
+                <Route 
+                    path="Admin/*"
+                    element={ 
+                        <ProtectedRoute isAuthenticade={isLoggedIn}>
+                            <AdminDashBoard />
+                        </ProtectedRoute>
+                    } 
+                />       
+            </Routes>
         </Router>
     )
 }

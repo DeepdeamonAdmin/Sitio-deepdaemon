@@ -1,26 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Redirect, Route } from 'react-router-dom';
 
-export const PublicRoute = ({
-    isAuthenticated,
-    component: Component,
-    ...rest
-}) => {
+import PropTypes from 'prop-types'
+import { Navigate } from 'react-router-dom';
 
-    return (
-       <Route { ...rest }
-            component={ (props) => (
-                ( !isAuthenticated )
-                    ? ( <Component { ...props } /> ) 
-                    : ( <Redirect to='/admin' /> )
+export const PublicRoute = ({isAuthenticade, children, rol}) => {
+    
+    if (isAuthenticade && rol !== 'i9feCRbgSiYTYHfGrRagJvcAHR73') {
+        return <Navigate to="/admin" replace />;
+      }else if(isAuthenticade && rol !== 'i9feCRbgSiYTYHfGrRagJvcAHR73' ){
+        return <Navigate to="/" replace />;
+      }
+    return children;
+};
 
-            )}
-        />
-    )
-}
 
 PublicRoute.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    component: PropTypes.func.isRequired
+    isAuthenticade: PropTypes.bool.isRequired,
+    children: PropTypes.element.isRequired
 }

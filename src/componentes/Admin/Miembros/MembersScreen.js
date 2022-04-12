@@ -1,7 +1,7 @@
 import React from 'react';
 import { ModalAddMembers } from './ModalAddMembers';
 import { AddNewFab } from '../../ui/AddNewFab';
-import { SearchScreen } from '../../ui/SearchScreen';
+//import { SearchScreen } from '../../ui/SearchScreen';
 import { MemberList } from './MemberList';
 
 
@@ -20,7 +20,7 @@ export const MembersScreen = () => {
                 </div>
             </div>
             <div className="row">
-                <SearchScreen />
+                {/* <SearchScreen /> */}
                 <div className="col-md-2 mb-2">
                     <ModalAddMembers />
                     <AddNewFab /> 

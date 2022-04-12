@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink, Link, useHistory} from 'react-router-dom';
+import { NavLink, Link, useNavigate} from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
 
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
@@ -10,7 +10,7 @@ export const NavBarAdmin = () => {
 
    
     const dispatch = useDispatch();
-    const history = useHistory();
+    const history = useNavigate();
 
     const handleLogout = () => {
         dispatch(startLogout());

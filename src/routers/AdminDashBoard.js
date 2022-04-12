@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 import { Admin } from '../componentes/Admin/Admin';
 import { GaleryScreen } from '../componentes/Admin/Galeria/GaleryScreen';
 import { MembersScreen } from '../componentes/Admin/Miembros/MembersScreen';
@@ -8,24 +8,25 @@ import { ReleaseScreen } from '../componentes/Admin/Publcaciones/ReleaseScreen';
 import { OtherScreen } from '../componentes/Admin/Other/OtherScreen';
 import { NavBarAdmin } from '../componentes/ui/NavBarAdmin';
 import { FormEditProject } from '../componentes/Admin/Proyectos/FormEditProject';
+import { RutaError } from '../componentes/ui/RutaError';
 
 export const AdminDashBoard = () => {
     return (
         <>
           <NavBarAdmin />
             <div>
-                <Switch>
-                    <Route exact path="/admin" component={ Admin } />
-                    <Route exact path="/admin/members" component={ MembersScreen } />
-                    <Route exact path="/admin/projects" component={ ProjectsScreen } />
-                    <Route exact path="/admin/projects/:idProject/:params" component={ FormEditProject } />
-                    <Route exact path="/admin/release" component={ ReleaseScreen } />
-                    <Route exact path="/admin/galery" component={ GaleryScreen }  />
-                    <Route exact path="/admin/other" component={ OtherScreen } />
+                <Routes>
+                    <Route  path="/" element={ <Admin />} />
+                    <Route  path="members" element={ <MembersScreen /> } />
+                    <Route  path="projects" element={ <ProjectsScreen /> } />
+                    <Route  path="projects/:idProject/:params" element={ <FormEditProject /> } />
+                    <Route  path="release" element={ <ReleaseScreen /> } />
+                    <Route  path="galery" element={ <GaleryScreen /> }  />
+                    <Route  path="other" element={ <OtherScreen /> } />
                     
 
-                    <Redirect to="/login" />
-                </Switch>
+                    <Route path="*" element={ <RutaError />} />
+                </Routes>
             </div>
         </>
     )
