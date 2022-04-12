@@ -34,8 +34,8 @@ export const LeaderScreen = () => {
 									<div className="card-body">
 										<h5 className="card-title"> {item.name} </h5>
 										<ControlModal idModal={item.id} />
-										{/* <ModalInfoProject item={item} key={item.id} /> */}
-										{/* <p className="card-text"> {item.email} </p> */}
+										<ModalInfoProject item={item} key={item.id} />
+										<p className="card-text"> {item.email} </p>
 									</div>
 								</div>
 							</div>
