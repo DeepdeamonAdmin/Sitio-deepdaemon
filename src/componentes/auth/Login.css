@@ -1,0 +1,96 @@
+.principal{
+  padding: 3%;
+  width: 500px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login{
+  background-color: rgba(178, 178, 221, 0.024);
+  padding: 2%;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.medio{
+  padding: 2%;
+  width: 350px;
+  height: 75px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.medio-cont{
+font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: 16px;
+width: 300px;
+height: 70px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.iconn-google{
+  width: 25px;
+  margin-left: -60px;
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.iconn-apple{
+  width: 22px;
+  margin-left: -70px;
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.iconn-correo {
+  width: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+  transform: translateY(-50%);
+}
+
+
+.boton-red {
+  border: 1px solid #0e0e84; /*anchura, estilo y color borde*/
+  background-color:rgba(51, 8, 130, 0.815); /*color botón*/
+  color: #ffffff; /*color texto*/
+  width: 300px;
+  height: 50px;
+  margin-top: 0px;
+}
+
+
+
+.correo {
+  border: 1px solid #220680; /*anchura, estilo y color borde*/
+  background-color:transparent;
+  color: #0b0a0a; /*color texto*/
+  width: 300px;
+  height: 50px;
+  padding: 5px;
+  margin-top: 0px;
+}
+
+.input-correo{
+    outline: none;
+    background-color: transparent;
+    border-color: transparent;
+    width: 210px;
+}
+
+.btn-login{
+  border: 1px solid #e9e1d6; /*anchura, estilo y color borde*/
+  background-color:rgba(7, 7, 7, 0.968); /*color botón*/
+  color: #ffffff; /*color texto*/
+  border-radius: 50px; /*bordes redondos*/
+  width: 300px;
+  height: 50px;
+  margin-top: 0px;
+}

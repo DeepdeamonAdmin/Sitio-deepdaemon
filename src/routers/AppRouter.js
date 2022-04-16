@@ -1,6 +1,6 @@
 import React, { useEffect, useState }from 'react'
-import { useDispatch } from 'react-redux';
-import { firebase } from '../firebase/firebase-config'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 //uso de rutas e
 import {
     BrowserRouter as Router,
@@ -9,9 +9,7 @@ import {
   } from 'react-router-dom';
 
 
-import { login } from '../actions/auth';
-
-
+import { getRolUid, login } from '../actions/auth';
 
 //rutas para sitio de administración
 import { AdminDashBoard } from './AdminDashBoard';
@@ -20,6 +18,7 @@ import { AdminDashBoard } from './AdminDashBoard';
 import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 import { HomeRoutes } from './HomeRoutes';
+import { UserDashBoard } from './UserDashBoard';
 
 
 
@@ -27,19 +26,25 @@ import { HomeRoutes } from './HomeRoutes';
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
+    const auth = getAuth();
 
     const [ checking, setChecking ] = useState(true);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-    const [ role, setRole ] = useState(null);
+    
+    const { gradoColaborador } = useSelector( state => state.rol );
 
+    console.log( gradoColaborador );
+
+    
 
     useEffect(() => {
         
-        firebase.auth().onAuthStateChanged( (user) => {
+        onAuthStateChanged(auth, ( user ) => {
 
             if ( user?.uid ) {
                 dispatch( login( user.uid, user.displayName ) );
                 setIsLoggedIn( true );
+                dispatch( getRolUid() );
             } else {
                 setIsLoggedIn( false );
             }
@@ -48,7 +53,7 @@ export const AppRouter = () => {
 
         });
         
-    }, [ dispatch, setChecking, setIsLoggedIn ])
+    }, [ dispatch, auth, setChecking, setIsLoggedIn ])
 
 
     if ( checking ) {
@@ -64,7 +69,7 @@ export const AppRouter = () => {
                 <Route 
                     path='/*'
                     element={
-                        <PublicRoute isAuthenticade = { isLoggedIn } rol= {role} >
+                        <PublicRoute isAuthenticade = { isLoggedIn } rol= { gradoColaborador } >
                         <HomeRoutes /> 
                         </PublicRoute>
                     } 
@@ -72,8 +77,16 @@ export const AppRouter = () => {
                 <Route 
                     path="Admin/*"
                     element={ 
-                        <ProtectedRoute isAuthenticade={isLoggedIn}>
+                        <ProtectedRoute isAuthenticade={isLoggedIn && gradoColaborador === 'Administrador' }>
                             <AdminDashBoard />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="user/*"
+                    element={ 
+                        <ProtectedRoute isAuthenticade={isLoggedIn && gradoColaborador !== 'Administrador' && gradoColaborador !== undefined }>
+                            <UserDashBoard />
                         </ProtectedRoute>
                     } 
                 />       

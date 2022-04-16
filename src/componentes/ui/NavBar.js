@@ -74,7 +74,24 @@ export const NavBar = () => {
                         duration={500}>
                             Contacto
                     </Link>
-                    <NavLink exact activeClassName="active" to="/login" className="nav-item nav-link"> Login</NavLink>
+                </div>
+                <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul className="navbar-nav ml-auto">
+                        <NavLink
+                            to ='/registrer'
+                            className="btn btn-outline-secondary nav-item nav-link"
+
+                        >
+                            Registrer
+                        </NavLink>
+                        <NavLink
+                            to ='/login'
+                            className="btn btn-outline-secondary nav-item nav-link"
+
+                        >
+                            Login
+                        </NavLink>
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux"; // para autenticación
 import thunk from 'redux-thunk'; //uso de middleware
+import { accesoRolReduccer } from "../reducers/accesoRolReduccer";
 
 import { authReducer } from "../reducers/authReducer";
 import { deleteReducer } from "../reducers/deleteReducer";
@@ -14,6 +15,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const reducers = combineReducers({
     auth: authReducer,
     ui: uiReduccer,
+    rol: accesoRolReduccer,
     reg: registerReducer,
     delete: deleteReducer,
     edit: editReducer

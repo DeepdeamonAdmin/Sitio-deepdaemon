@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import { Navigate } from 'react-router-dom';
 
 export const PublicRoute = ({isAuthenticade, children, rol}) => {
-    
-    if (isAuthenticade && rol !== 'i9feCRbgSiYTYHfGrRagJvcAHR73') {
-        return <Navigate to="/admin" replace />;
-      }else if(isAuthenticade && rol !== 'i9feCRbgSiYTYHfGrRagJvcAHR73' ){
-        return <Navigate to="/" replace />;
-      }
-    return children;
+  if(isAuthenticade && rol === undefined ){
+    return <Navigate to='/' replace />
+  }else if (isAuthenticade && rol === 'Administrador') {
+      return <Navigate to="/admin" replace />;
+    }else if(isAuthenticade && rol !== 'Administrador' ){
+      return <Navigate to="/user" replace />;
+    }
+  return children;
 };
 
 

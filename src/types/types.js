@@ -14,6 +14,8 @@ export const types = {
     uiOpenModal: '[UI] Open modal',
     uiCloseModal: '[UI] Close modal',
 
+    accesoRol: '[Acceso] Dato Obtenido',
+
     regMember: '[REG] Register member',
     regProject: '[REG] Register Project',
     regRelease: '[REG] Register publication',

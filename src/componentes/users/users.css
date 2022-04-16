@@ -1,0 +1,67 @@
+.foto{
+    height: 185px;
+    width: 185px;
+    padding: 10px; 
+}
+.center-user{
+    margin-top: 20px;
+    width: 800px;
+    height:550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titulo{
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 0px;
+
+}
+.linea {
+    margin:0px 20px;
+    width:90px;    
+    border-top:1px solid #999;
+    position: relative;
+    top:10px;
+    float:left;
+    }
+
+.leyenda {
+  font-weight:bold;
+  float:left;
+ }
+
+.caja-btn{
+    text-align: center;
+    height: 40px;
+}
+
+.btn{
+    margin-top: 20px;
+    margin-bottom: 15px;
+
+}
+
+.linea{
+    height: 1px;
+}
+.hr-cliente{
+    border: 0;
+    height: 0; 
+    box-shadow: 0 1px 5px 1px rgb(139, 26, 26);
+}
+
+.datos{
+    box-shadow: 0 3px 5px 1px rgb(139, 26, 26);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tb-cliente{
+   
+    border-collapse: collapse;
+    box-shadow: 0 1px 5px 1px rgb(139, 26, 26);
+    width: 800px;
+    
+}
