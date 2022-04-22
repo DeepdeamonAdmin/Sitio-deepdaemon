@@ -5,9 +5,9 @@ import { Navigate } from 'react-router-dom';
 export const PublicRoute = ({isAuthenticade, children, rol}) => {
   if(isAuthenticade && rol === undefined ){
     return <Navigate to='/' replace />
-  }else if (isAuthenticade && rol === 'Administrador') {
+  }else if (isAuthenticade && rol === 'administrador') {
       return <Navigate to="/admin" replace />;
-    }else if(isAuthenticade && rol !== 'Administrador' ){
+    }else if(isAuthenticade && rol !== 'administrador' ){
       return <Navigate to="/user" replace />;
     }
   return children;

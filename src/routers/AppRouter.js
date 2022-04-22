@@ -8,9 +8,6 @@ import {
     Routes
   } from 'react-router-dom';
 
-
-import { getRolUid, login } from '../actions/auth';
-
 //rutas para sitio de administración
 import { AdminDashBoard } from './AdminDashBoard';
 
@@ -19,6 +16,10 @@ import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 import { HomeRoutes } from './HomeRoutes';
 import { UserDashBoard } from './UserDashBoard';
+import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
+import { login } from '../actions/auth';
+import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
+import { startLoadingPublication } from '../actions/publications';
 
 
 
@@ -31,20 +32,26 @@ export const AppRouter = () => {
     const [ checking, setChecking ] = useState(true);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
     
-    const { gradoColaborador } = useSelector( state => state.rol );
+    const { rol } = useSelector( state => state.user );
 
-    console.log( gradoColaborador );
-
-    
+  
 
     useEffect(() => {
+
+        dispatch( startLoadinUsersAll() );
+        dispatch( startLoadinProjectsAll() );
         
         onAuthStateChanged(auth, ( user ) => {
 
             if ( user?.uid ) {
                 dispatch( login( user.uid, user.displayName ) );
                 setIsLoggedIn( true );
-                dispatch( getRolUid() );
+                dispatch( getUserRolUid() );
+                dispatch( startLoadingProject() );
+                dispatch( startLoadingPublication() );
+                dispatch( startLoadinProjectsAll() );
+                
+
             } else {
                 setIsLoggedIn( false );
             }
@@ -69,7 +76,7 @@ export const AppRouter = () => {
                 <Route 
                     path='/*'
                     element={
-                        <PublicRoute isAuthenticade = { isLoggedIn } rol= { gradoColaborador } >
+                        <PublicRoute isAuthenticade = { isLoggedIn } rol= { rol } >
                         <HomeRoutes /> 
                         </PublicRoute>
                     } 
@@ -77,7 +84,7 @@ export const AppRouter = () => {
                 <Route 
                     path="Admin/*"
                     element={ 
-                        <ProtectedRoute isAuthenticade={isLoggedIn && gradoColaborador === 'Administrador' }>
+                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador' }>
                             <AdminDashBoard />
                         </ProtectedRoute>
                     } 
@@ -85,7 +92,7 @@ export const AppRouter = () => {
                 <Route 
                     path="user/*"
                     element={ 
-                        <ProtectedRoute isAuthenticade={isLoggedIn && gradoColaborador !== 'Administrador' && gradoColaborador !== undefined }>
+                        <ProtectedRoute isAuthenticade={isLoggedIn && rol !== 'Administrador' && rol !== undefined }>
                             <UserDashBoard />
                         </ProtectedRoute>
                     } 

@@ -17,10 +17,13 @@ export const NavBarUser = () => {
 
     }
 
+    const { datos }  = useSelector( state => state.user );
+    let nombre;
+    if(datos){
+        nombre = datos.nombre
+    }
 
-    const { name }  = useSelector( state => state.auth )
     
-
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -58,7 +61,7 @@ export const NavBarUser = () => {
                 className="btn btn-outline-secondary nav-item nav-link"
 
             >
-                { name }
+                { nombre }
             </Link>
         </ul>
         <ul>

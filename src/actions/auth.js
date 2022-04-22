@@ -8,7 +8,7 @@ import {
     updateProfile
 } from 'firebase/auth';
 
-import { doc, setDoc, getDoc  } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
 import { db } from "../firebase/firebase-config";
 import { googleAuthProvider } from '../firebase/firebase-config';
@@ -44,16 +44,64 @@ export const startRegisterWithEmailPassword = ( formValues ) => {
 
 const completarDatos = async(uid, formvalues) =>{
     //agregamos los datos en fireStore
-    await setDoc(doc(db, uid, 'Datos' ), {
-        "gradoColaborador": 'Other',
+    await setDoc(doc(db, 'Usuarios', uid ), {
+        "rol": 'other',
         "nombre": formvalues.name,
         "email": formvalues.email,
         "password": formvalues.password,
         "password2": formvalues.password2,
+        "fechaNac":'',
+        'urlImg':'',
+        'grado':'',
+        "descripcion":'',
+        "school":'',
+        "unidad":'',
+        "titulo":'',
+        "linkedin":'',
+        "facebook":'',
+        "Github":'',
     })
     console.log('Se agrego la bd');
+ 
 }
 
+const completarDatosGoogle = async(uid, name, email) =>{
+     //Obtenemos el rol de la base si existe
+     const docRef = doc(db, 'Usuarios', uid );
+     const docSnap = await getDoc(docRef);
+     const data = docSnap.data();
+     
+     if (docSnap.exists()) {
+        //agregamos los datos en fireStore
+            if ( data.rol === 'administrador' ){   
+                await updateDoc(doc(db, 'Usuarios', uid ), {
+                    "nombre": name,
+                    "email": email
+                    })
+            } else{
+
+                    await setDoc(doc(db, 'Usuarios', uid ), {
+                        "rol": 'other',
+                        "nombre": name,
+                        "email": email, 
+                        "password":'',
+                        "password2":'',
+                        "fechaNac":'',
+                        'urlImg':'',
+                        'grado':'',
+                        "descripcion":'',
+                        "school":'',
+                        "unidad":'',
+                        "titulo":'',
+                        "linkedin":'',
+                        "facebook":'',
+                        "Github":'',
+                    })
+                    console.log('Se agrego la bd'); 
+                    }
+                }
+                        
+}
 
 
 
@@ -65,6 +113,7 @@ export const startLoginEmailPassword = (email, password) => {
                 
         signInWithEmailAndPassword( auth, email, password )
             .then( ({ user }) => {
+               
                 dispatch(login( user.uid, user.displayName ));
 
                 dispatch( finishLoading() );
@@ -85,6 +134,7 @@ export const startGoogleLogin = () =>{
         const auth = getAuth();
         signInWithPopup(auth, googleAuthProvider)
             .then(({user}) =>{
+                completarDatosGoogle( user.uid, user.displayName, user.email );
                 dispatch(login(user.uid, user.displayName))
             });
     }
@@ -114,37 +164,3 @@ export const logout = () => ({
 })
 
 
-export const getRolUid = () => {
-    return async(dispatch, getState ) => {
-        
-        //obtenermos el uid 
-        const { uid } = getState().auth;
-
-        const docRef = doc(db, uid, "Datos");
-        const docSnap = await getDoc(docRef);
-        const data = docSnap.data();
-        
-
-        //verificamos que obtenimos el documento 
-        if (docSnap.exists()) {
-            //mandamos el rol junto el uid a nuestro redux
-            dispatch(
-                getUserRol( data.gradoColaborador )
-            );
-        } else {
-            // doc.data() will be undefined in this case
-                //getUserRol('Other')
-            Swal.fire('Error gradoColabarador no identificado');
-        }
-    }
-}
-
-//obtener datos usuario actual en redux
-const getUserRol = (gradoColaborador) =>(
-    {
-        type:types.accesoRol,
-        payload:{
-            gradoColaborador,
-        }
-    }
-) 

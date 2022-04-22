@@ -1,19 +1,64 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './users.css'
 import fotoPerfil from '../../assets/Usuario.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { activeData, startSaveData, startUploading } from '../../actions/user';
+import { useForm } from '../../hooks/useForm';
 
 export const Perfil = () => {
-  const nombre = '';
-  const descripcion='';
+
+  const dispatch = useDispatch();
+
+  const { datos:datoUser } = useSelector( state => state.user );
+  const [ formValues, handleInputChange ] = useForm(datoUser);
+
+  const { nombre, email, fechaNac, urlImg, grado,
+          descripcion, school, unidad, titulo, linkedin, facebook, Github } = formValues;
+
+  const { active } = useSelector( state => state.user );
+
+  
+  useEffect(() => {
+         
+    dispatch( activeData( {...formValues} ) );
+
+  }, [formValues, dispatch])
+
+  const handleSave = () => {
+    dispatch( startSaveData( active ) );
+  }
+
+   //carga de imagenes
+  const handlePictureClick = () => {
+    document.querySelector('#fileSelector').click();
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if ( file ) {
+      dispatch( startUploading( file ) );
+    }
+  }
+
+  
   return (
     <div className='container'>
       <div className="center-user">
-        <table className='tb-cliente'>
+        <table className='tb-user'>
           <tr>
             <td rowSpan={3}>
-              <img className='foto' src={fotoPerfil} alt="Foto de Perfil" />
+              <div onClick={ handlePictureClick }>
+                <img className='foto' src={urlImg ||fotoPerfil} alt="Foto de Perfil" />
+              </div>
             </td>
             <td colSpan={2}>
+              <input 
+                  id="fileSelector"
+                  type="file"
+                  name="file"
+                  style={{ display: 'none' }}
+                  onChange={ handleFileChange }
+              />
               <p className='titulo'>Información Básica </p>
             </td>
           </tr>
@@ -24,10 +69,10 @@ export const Perfil = () => {
                 type='label'
                 placeholder='Nombre:' 
                 className='form-control datos' 
-                name='name' 
+                name='nombre' 
                 required
                 value={nombre}
-                // onChange={ handleInputChange }
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -38,10 +83,10 @@ export const Perfil = () => {
               <input 
                 type='date' 
                 className='form-control datos' 
-                name='name' 
+                name='fechaNac' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={fechaNac}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -49,8 +94,9 @@ export const Perfil = () => {
               <div className='container'> 
                 <select
                   className="form-control datos"
-                  name='modalType'
-                  // onChange={ handleInputChange }
+                  name='grado'
+                  value={grado}
+                  onChange={ handleInputChange }
                 >
                   <option value = 'current' > Current </option>
                   <option value = 'graduate' > Graduate </option>
@@ -69,7 +115,7 @@ export const Perfil = () => {
                   name='descripcion'
                   placeholder='Descripcion'
                   value = { descripcion }
-                  // onChange={ handleInputChange }
+                  onChange={ handleInputChange }
                 />
               </div>
             </td>
@@ -85,12 +131,12 @@ export const Perfil = () => {
               <div className='container'> 
               <input 
                 type='label'
-                placeholder='Nombre:' 
+                placeholder='Institución' 
                 className='form-control datos' 
-                name='name' 
+                name='school' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={school}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -100,12 +146,12 @@ export const Perfil = () => {
               <div className='container'> 
               <input 
                 type='label'
-                placeholder='Nombre:' 
+                placeholder='Unidad: ' 
                 className='form-control datos' 
-                name='name' 
+                name='unidad' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={unidad}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -115,12 +161,12 @@ export const Perfil = () => {
               <div className='container'> 
               <input 
                 type='label'
-                placeholder='Nombre:' 
+                placeholder='Titulo:' 
                 className='form-control datos' 
-                name='name' 
+                name='titulo' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={titulo}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -135,13 +181,13 @@ export const Perfil = () => {
           <td colspan={3}>
               <div className='container'> 
               <input 
-                type='label'
-                placeholder='Nombre:' 
+                type='email'
+                placeholder='Email:' 
                 className='form-control datos' 
-                name='name' 
+                name='email' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={email}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -150,13 +196,13 @@ export const Perfil = () => {
             <td colspan={3}>
               <div className='container'> 
               <input 
-                type='label'
-                placeholder='Nombre:' 
+                type='url'
+                placeholder='Linkedin:' 
                 className='form-control datos' 
-                name='name' 
+                name='linkedin' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={linkedin}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -165,13 +211,13 @@ export const Perfil = () => {
             <td colspan={3}>
               <div className='container'> 
               <input 
-                type='label'
-                placeholder='Nombre:' 
+                type='url'
+                placeholder='Github:' 
                 className='form-control datos' 
-                name='name' 
+                name='Github' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={Github}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
@@ -180,26 +226,24 @@ export const Perfil = () => {
             <td colspan={3}>
               <div className='container'> 
               <input 
-                type='label'
-                placeholder='Nombre:' 
+                type='url'
+                placeholder='Facebook' 
                 className='form-control datos' 
-                name='name' 
+                name='facebook' 
                 required
-                value={nombre}
-                // onChange={ handleInputChange }
+                value={facebook}
+                onChange={ handleInputChange }
               />        
               </div>
             </td>
           </tr>
           <tr>
-            <td colSpan={2} className='caja-btn'>
-              <button className='btn btn-secondary'>
-                Cambiar Contraseña
-              </button>
-            </td>
-            <td className='caja-btn'>
-              <button className='btn btn-secondary'>
-                Cambiar Contraseña
+            <td colSpan={3} className='caja-btn'>
+              <button
+               className='btn btn-secondary'
+               onClick={ handleSave }
+              >
+                Guardar
               </button>
             </td>
           </tr>
