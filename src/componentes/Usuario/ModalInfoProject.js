@@ -39,6 +39,7 @@ export const ModalInfoProject = ({ item }) => {
 						<li class="list-group-item"> {item.descr}</li>
 						<li class="list-group-item">{item.impact}</li>
 						<li class="list-group-item"><a href={item.link} class="card-link">GitHub</a></li>
+						<li class="list-group-item"><a href={item.link} class="card-link">GitHub</a></li>
 
 					</ul>
 

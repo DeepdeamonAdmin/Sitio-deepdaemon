@@ -12,10 +12,13 @@ export const TeamScreen = ({ status }) => {
 	return (
 		<>
 
-			
 			<div className="card-columns animate__animated animate__fadeIn">
 				{
 					usuarios.map(usuario => (
+
+						//Imprimir solamente los usuarios del grado que selecciono
+						(usuario.grado === status) && (
+
 						<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
 							<div className="row no-gutters">
 								<div className="col-md-4">
@@ -35,6 +38,7 @@ export const TeamScreen = ({ status }) => {
 
 							</div>
 						</div>
+						)
 					))
 				}
 			</div>

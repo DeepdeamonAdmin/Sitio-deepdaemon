@@ -191,7 +191,7 @@ export const General = ({ id }) => {
 					Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
 				</p>
 				<p>
-					{/* <FormCorreo /> */}
+					 <FormCorreo /> 
 					<span className="icon icon-envelop" />
 					<a href="mailto:contacto@deepdaemon.org">
 						contacto@deepdaemon.org{" "}
