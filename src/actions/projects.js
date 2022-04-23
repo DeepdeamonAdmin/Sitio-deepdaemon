@@ -103,7 +103,8 @@ export const setProjects = ( projects ) => ({
 export const startLoadinProjectsAll = () => {
     return async(dispatch) => {
         const ruta = 'Projects'
-        const projects = await loadAllWorks(ruta);
+        const projects = await loadAllWorks(ruta); 
+        console.log(projects);
         if(projects){
             dispatch(setAllProjects(projects));
         }else {

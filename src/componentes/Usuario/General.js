@@ -16,7 +16,6 @@ import { ProjectScreen } from './ProjectScreen';
 import { TeamScreen } from './TeamScreen';
 import { PublicationScreen } from './PublicationScreen';
 import FormCorreo from './FormCorreo';
-import { FormCorreoJS } from './FormCorreoJS';
 
 
 export const General = ({ id }) => {
@@ -192,7 +191,7 @@ export const General = ({ id }) => {
 					Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
 				</p>
 				<p>
-					<FormCorreo />
+					{/* <FormCorreo /> */}
 					<span className="icon icon-envelop" />
 					<a href="mailto:contacto@deepdaemon.org">
 						contacto@deepdaemon.org{" "}

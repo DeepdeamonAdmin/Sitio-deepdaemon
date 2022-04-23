@@ -24,6 +24,7 @@ import { startLoadingPublication } from '../actions/publications';
 
 
 
+
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
@@ -34,8 +35,7 @@ export const AppRouter = () => {
     
     const { rol } = useSelector( state => state.user );
 
-  
-
+   
     useEffect(() => {
 
         dispatch( startLoadinUsersAll() );
@@ -92,7 +92,7 @@ export const AppRouter = () => {
                 <Route 
                     path="user/*"
                     element={ 
-                        <ProtectedRoute isAuthenticade={isLoggedIn && rol !== 'Administrador' && rol !== undefined }>
+                        <ProtectedRoute isAuthenticade={isLoggedIn && rol !== 'administrador' && rol !== undefined }>
                             <UserDashBoard />
                         </ProtectedRoute>
                     } 

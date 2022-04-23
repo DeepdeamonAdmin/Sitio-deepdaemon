@@ -92,7 +92,7 @@ export const Projects = () => {
                             </td>
                             <td className='td-project'>
 
-                                <button
+                                <button 
                                     //id del proyecto concatenado con el nombre del proyecto
                                     id={project.id + "btn"}
                                     className="btn btn-outline-secondary nav-item nav-link" 
@@ -100,8 +100,8 @@ export const Projects = () => {
                                     Ver más
                                 </button>
 
-                                {/*
-                                <Link
+                                
+                                {/* <Link
                                     to ={`/user/moreproject/${project.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >

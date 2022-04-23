@@ -19,6 +19,7 @@ import { types } from '../types/types';
 
 const initialState = {
     projects: [],
+    projectsAll: [],
     active: null
 }
 

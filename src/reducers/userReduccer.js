@@ -12,7 +12,8 @@ import { types } from '../types/types';
 
 const initialState = {
     rol: 'other',
-    active: null
+    active: null,
+    usuarios: []
 }
 
 
