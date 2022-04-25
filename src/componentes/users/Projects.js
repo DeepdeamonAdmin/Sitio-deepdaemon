@@ -92,6 +92,7 @@ export const Projects = () => {
                             </td>
                             <td className='td-project'>
 
+                                {/*
                                 <button 
                                     //id del proyecto concatenado con el nombre del proyecto
                                     id={project.id + "btn"}
@@ -99,15 +100,16 @@ export const Projects = () => {
                                     onClick={ () => handleVermas(project.id) }>
                                     Ver más
                                 </button>
-
+                                */}
                                 
-                                {/* <Link
+                                <Link
                                     to ={`/user/moreproject/${project.id}`}
+                                    //to ={`/user/moreproject:${project.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >
                                     Ver más
                                 </Link>
-                                */}
+                                
                                 <div id={project.id} style={{display: 'none'}}>
                                     <div className='div-project'>
                                         <div className='div-project-img'>

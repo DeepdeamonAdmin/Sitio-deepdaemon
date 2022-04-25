@@ -1,14 +1,20 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { startNewProject, startUploadingProject } from '../../actions/projects';
 import { useForm } from '../../hooks/useForm';
 
 export const EditInfoProject= () => {
 
-
     const dispatch = useDispatch();
     const { projects } = useSelector( state => state.projects );
-    const dataProject = projects.filter(project=> project.id ==='1UYmm6ZAUzkm1RJrNWRZ');
+
+	const { idProject } = useParams();
+
+	//const data = projects.find( project => project.id === idProject );
+
+	//const dataProject = projects;
+    const dataProject = projects.filter(project=> project.id === idProject);
     
     const [ formValues, handleInputChange, reset ] = useForm({
         name: dataProject[0].name,
@@ -104,6 +110,7 @@ export const EditInfoProject= () => {
 				</div>
 				<div className="row">
 					<div className="col mb-6">
+
 						<input 
 							className='form-control'
 							type="file"

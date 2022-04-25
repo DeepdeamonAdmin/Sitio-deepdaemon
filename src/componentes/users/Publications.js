@@ -62,7 +62,8 @@ export const Publications = () => {
                             </td>
                             <td className='td-project'>
                                 <Link
-                                    to ={`/user/moreproject:${publication.id}`}
+                                    to ='/user/morepublication/a'
+                                    //to ={`/user/moreproject/${publication.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >
                                     Ver más
