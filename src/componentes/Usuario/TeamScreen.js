@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useGet } from '../../hooks/useGet';
 import { getMemberStatus } from '../../selectors/get/getMemberStatus';
-import { ControlModal } from './ControlModal';
+import { TeamDetaills } from './TeamDetaills';
+// import {  } from './ProjectDetaills';
 
 
 export const TeamScreen = ({ status }) => {
@@ -17,7 +18,7 @@ export const TeamScreen = ({ status }) => {
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios del grado que selecciono
 						(usuario.grado === status) && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-dark mb-3" style={{ width: 340 }}>
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-dark mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }}>
 
 								<img
 									className="card-img"
@@ -31,10 +32,9 @@ export const TeamScreen = ({ status }) => {
 
 								<div className="card-body text-dark">
 									<h5 className="card-title"> {usuario.nombre} </h5>
-									<ControlModal color={"dark"} idModal={usuario.id} />
+
+									<TeamDetaills color={"dark"} usuario={usuario} />
 								</div>
-
-
 							</div>
 						)
 					))

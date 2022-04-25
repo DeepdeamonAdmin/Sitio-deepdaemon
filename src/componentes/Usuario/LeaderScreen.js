@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGet } from '../../hooks/useGet';
 import { getMemberStatus } from '../../selectors/get/getMemberStatus';
-import { ControlModal } from './ControlModal';
+import { LeaderDetaills } from './LeaderDetaills';
 import { ModalInfoProject } from './ModalInfoProject';
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
@@ -19,7 +19,7 @@ export const LeaderScreen = () => {
 			<div className="card-columns cards-cols animate__animated animate__fadeIn">
 				{
 					leaders.map(leader => (
-						<div className="d-flex flex-row card animate__animated animate__fadeIn border-success mb-3" style={{ width: 380, Maxheight: 150 }}>
+						<div className="d-flex flex-row card animate__animated animate__fadeIn border-success mb-3" style={{ MaxWidth: 380, MaxHeight: 150 }}>
 							{/* {console.log(leader)} */}
 							<img
 								className="card-img"
@@ -32,8 +32,8 @@ export const LeaderScreen = () => {
 								alt="member"
 							/>
 							<div className="card-body text-success">
-								<h5 className="card-title"> {leader.name} </h5>
-								<ControlModal color={"success"} idModal={leader.id} />
+								<h5 className="card-title"> {leader.name} {leader.lastname} </h5>
+								<LeaderDetaills color={"success"} leader={leader} />
 								{/* <ModalInfoProject item={leader} key={leader.id} /> */}
 							</div>
 						</div>
