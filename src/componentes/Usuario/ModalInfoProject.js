@@ -29,7 +29,6 @@ export const ModalInfoProject = ({ item }) => {
 				<div className='card-body'>
 					<img class="card-img-top" src={item.modal_media} alt="Modal Image" />
 					<div className='d-flex justify-content-between'>
-						{console.log(item)}
 						<h5 className="card-title">{item.name} </h5>
 						<button onClick={closeModal} className="btn btn-light">
 							<span className='fas fa-times-circle'></span>
@@ -39,11 +38,8 @@ export const ModalInfoProject = ({ item }) => {
 						<li class="list-group-item"> {item.descr}</li>
 						<li class="list-group-item">{item.impact}</li>
 						<li class="list-group-item"><a href={item.link} class="card-link">GitHub</a></li>
-						<li class="list-group-item"><a href={item.link} class="card-link">GitHub</a></li>
-
+						{/* <li class="list-group-item"><a href={item.link} class="card-link">GitHub</a></li> */}
 					</ul>
-
-					{/* <span class="fa-brands fa-github-"></span> */}
 				</div>
 
 			</div >

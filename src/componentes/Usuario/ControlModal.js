@@ -2,19 +2,18 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { uiOpenModal } from '../../actions/ui';
 
-export const ControlModal = ({ idModal }) => {
+export const ControlModal = ({ idModal, color }) => {
 	const dispatch = useDispatch();
 	const [currentModal, setCurrentModal] = useState(null)
 
 	const handleClickNew = () => {
 		dispatch(uiOpenModal());
-		setCurrentModal(currentModal)
-		console.log(idModal);
+		setCurrentModal(idModal)
 	}
 
 	return (
 		<button
-			className="btn btn-primary "
+			className={`btn btn-${color}`}
 			onClick={handleClickNew}>
 			Ver más..
 		</button>
