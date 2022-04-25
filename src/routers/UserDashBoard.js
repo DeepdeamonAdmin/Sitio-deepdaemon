@@ -22,8 +22,8 @@ export const UserDashBoard = () => {
                     <Route path='perfil' element={ <Perfil /> } />
                     <Route path='addproject' element={ <FormAddProject /> } />
                     <Route path='addpublication' element={ <FormAddRelease /> } />
-                    <Route path='morepublication' element={ <FormAddRelease /> } />
-                    <Route path='moreproject:idProject' element={ <EditInfoProject /> } />
+                    <Route path='morepublication/:idPub' element={ <FormAddRelease /> } exact/>
+                    <Route path='moreproject/:idProject' element={ <EditInfoProject /> } exact/>
                     <Route path="*" element={ <RutaError />} />
                 </Routes>
         </div>
