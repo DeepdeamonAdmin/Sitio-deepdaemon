@@ -155,11 +155,11 @@ export const General = ({ id }) => {
 				</Container>
 			</Container>
 
-			{/* <Container fluid className="section portfolio" id='Lideres'>
+			<Container fluid className="section portfolio" id='Lideres'>
 				<h1>Los líderes</h1>
 				<hr />
 				<LeaderScreen />
-			</Container> */}
+			</Container>
 
 			{/* 
 			<Container fluid className="section" id='Equipo'>

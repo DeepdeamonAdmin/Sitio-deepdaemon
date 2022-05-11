@@ -46,7 +46,7 @@ export const NavBar = () => {
 						Publicaciones
 					</Link> */}
 
-					{/* <Link activeClass="active"
+					<Link activeClass="active"
 						className="nav-item nav-link"
 						to='Lideres'
 						spy={true}
@@ -54,7 +54,7 @@ export const NavBar = () => {
 						offset={-70}
 						duration={500}>
 						Lideres
-					</Link> */}
+					</Link>
 
 					{/* <Link activeClass="active"
 						className="nav-item nav-link"
