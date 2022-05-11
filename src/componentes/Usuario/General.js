@@ -85,7 +85,7 @@ export const General = ({ id }) => {
 				</Container>
 			</Container>
 
-			<Container fluid className="section portfolio" id='Proyectos'>
+			{/* <Container fluid className="section portfolio" id='Proyectos'>
 				<h1>Proyectos increibles</h1>
 
 				<Tab.Container defaultActiveKey="inDevelop">
@@ -103,9 +103,9 @@ export const General = ({ id }) => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container>
+			</Container> */}
 
-			<Container fluid className="section portfolio" id='Publicaciones'>
+			{/* <Container fluid className="section portfolio" id='Publicaciones'>
 				<h1> Publicaciones </h1>
 
 				<Tab.Container defaultActiveKey="inDevelop">
@@ -123,7 +123,7 @@ export const General = ({ id }) => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container>
+			</Container> */}
 
 			<Container className="section">
 				<Row>
@@ -155,13 +155,13 @@ export const General = ({ id }) => {
 				</Container>
 			</Container>
 
-			<Container fluid className="section portfolio" id='Lideres'>
+			{/* <Container fluid className="section portfolio" id='Lideres'>
 				<h1>Los líderes</h1>
 				<hr />
 				<LeaderScreen />
-			</Container>
+			</Container> */}
 
-
+			{/* 
 			<Container fluid className="section" id='Equipo'>
 				<h1>Colaboradores</h1>
 				<Tab.Container defaultActiveKey="current">
@@ -179,7 +179,7 @@ export const General = ({ id }) => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container>
+			</Container> */}
 
 			<Container fluid className="section contact white" id='Contacto'>
 				<h1>Hecho en la Ciudad de México</h1>
@@ -191,7 +191,7 @@ export const General = ({ id }) => {
 					Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
 				</p>
 				<p>
-					 <FormCorreo /> 
+					<FormCorreo />
 					<span className="icon icon-envelop" />
 					<a href="mailto:contacto@deepdaemon.org">
 						contacto@deepdaemon.org{" "}
