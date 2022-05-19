@@ -4,11 +4,12 @@ import React from 'react'
 //imagenes fijas
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
-
+import azul from "../../assets/azul.jpg";
+import bg from "../../styles/assets/img/bg/header_bg.png"
 
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa 
 import "../../styles/DeepDaemon.css";
-import { Container, Nav } from 'react-bootstrap';
+import { Container, Nav, Carousel } from 'react-bootstrap';
 import { Row, Col, Button, Image } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
 import { LeaderScreen } from './LeaderScreen';
@@ -27,6 +28,33 @@ export const General = ({ id }) => {
 				<hr />
 				<h2>Comunidad de conocimiento</h2>
 			</header>
+			<br />
+			<Container className='section'>
+				<Carousel className="w-100">
+					<Carousel.Item>
+						<Image src={azul} className="w-100" alt="logo" />
+						<Carousel.Caption>
+							<h3>PRIMER AVISO</h3>
+							<p>Información del primer aviso</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item>
+						<Image src={bg} className="w-100" alt="logo" />
+						<Carousel.Caption>
+							<h3>SEGUNDO AVISO</h3>
+							<p>Información de segundo aviso</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item>
+						<Image src={azul} className="w-100" alt="logo" />
+						<Carousel.Caption>
+							<h3>TERCER AVISO</h3>
+							<p>Información de tercer aviso</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+				</Carousel>
+			</Container>
+
 
 			<Container className="section" id='Nosotros'>
 				<h1>Un poco sobre nosotros</h1>
@@ -84,26 +112,6 @@ export const General = ({ id }) => {
 					</p>
 				</Container>
 			</Container>
-
-			{/* <Container fluid className="section portfolio" id='Proyectos'>
-				<h1>Proyectos increibles</h1>
-
-				<Tab.Container defaultActiveKey="inDevelop">
-					<Nav className="projects">
-						<Nav.Item><Nav.Link eventKey="inDevelop"><h1>En desarrollo</h1></Nav.Link></Nav.Item>
-						<Nav.Item><Nav.Link eventKey="completed"><h1>Concluidos</h1></Nav.Link></Nav.Item>
-					</Nav>
-					<hr />
-					<Tab.Content>
-						<Tab.Pane eventKey="inDevelop">
-							<ProjectScreen status='indevelop' />
-						</Tab.Pane>
-						<Tab.Pane eventKey="completed">
-							<ProjectScreen status='completed' />
-						</Tab.Pane>
-					</Tab.Content>
-				</Tab.Container>
-			</Container> */}
 
 			{/* <Container fluid className="section portfolio" id='Publicaciones'>
 				<h1> Publicaciones </h1>
