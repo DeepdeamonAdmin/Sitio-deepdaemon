@@ -93,7 +93,7 @@ return (
           </div>
         </div>
         <div className='row'>
-          <div className='mb-2 col-sm-6'>
+          <div className='mb-2 col-sm-7'>
             <label className='form-label'>Contraseña* </label>
             <input 
               type='password' 
@@ -103,7 +103,7 @@ return (
               onChange={ handleInputChange }
             />          
           </div> 
-          <div className='mb-2 col-sm-6'>
+          <div className='mb-2 col-sm-7'>
             <label className='form-label'>Confirmar Contraseña* </label>
             <input 
               type='password' 
@@ -118,9 +118,9 @@ return (
               disabled= { loading }
             >
                   Registrar
-            </button>         
+            </button>     
           </div>
-
+          <script src="https://www.google.com/recaptcha/api.js?render=6LdS-QMgAAAAAKZa0X39DZQjBIp2NhckXDwksoa-"></script>    
         </div>
       </form>
     </div>

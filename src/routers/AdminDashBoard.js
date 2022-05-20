@@ -9,6 +9,7 @@ import { OtherScreen } from '../componentes/Admin/Other/OtherScreen';
 import { NavBarAdmin } from '../componentes/ui/NavBarAdmin';
 import { FormEditProject } from '../componentes/Admin/Proyectos/FormEditProject';
 import { RutaError } from '../componentes/ui/RutaError';
+import { RegAlumn } from '../componentes/Admin/RegAlumn/RegAlumn';
 
 export const AdminDashBoard = () => {
     return (
@@ -21,6 +22,7 @@ export const AdminDashBoard = () => {
                     <Route  path="projects" element={ <ProjectsScreen /> } />
                     <Route  path="projects/:idProject/:params" element={ <FormEditProject /> } />
                     <Route  path="release" element={ <ReleaseScreen /> } />
+                    <Route  path="addmember" element={ <RegAlumn /> }  />
                     <Route  path="galery" element={ <GaleryScreen /> }  />
                     <Route  path="other" element={ <OtherScreen /> } />
                     

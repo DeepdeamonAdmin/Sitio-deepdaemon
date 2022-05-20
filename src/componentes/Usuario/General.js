@@ -5,6 +5,7 @@ import React from 'react'
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import azul from "../../assets/azul.jpg";
+import QR from "../../assets/qrcontacto.png";
 import bg from "../../styles/assets/img/bg/header_bg.png"
 
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa 
@@ -133,6 +134,23 @@ export const General = ({ id }) => {
 				</Tab.Container>
 			</Container> */}
 
+			<Container fluid className="section portfolio" id='Lideres'>
+				<h1>Los líderes</h1>
+				<hr />
+				<LeaderScreen />
+			</Container>
+
+			<Container fluid className="team_separator">
+				<Container className="section white">
+					<h1>Inteligencia colectiva</h1>
+					<hr />
+					<h2>
+						Alumnos e Investigadores colaborando para resolver problemas
+						multidisciplinarios.
+					</h2>
+				</Container>
+			</Container>
+
 			<Container className="section">
 				<Row>
 					<Col md="auto">
@@ -150,23 +168,6 @@ export const General = ({ id }) => {
 						<Button variant="secondary">Contáctanos</Button>
 					</Col>
 				</Row>
-			</Container>
-
-			<Container fluid className="team_separator">
-				<Container className="section white">
-					<h1>Inteligencia colectiva</h1>
-					<hr />
-					<h2>
-						Alumnos e Investigadores colaborando para resolver problemas
-						multidisciplinarios.
-					</h2>
-				</Container>
-			</Container>
-
-			<Container fluid className="section portfolio" id='Lideres'>
-				<h1>Los líderes</h1>
-				<hr />
-				<LeaderScreen />
 			</Container>
 
 			{/* 
@@ -198,6 +199,7 @@ export const General = ({ id }) => {
 					<br />
 					Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
 				</p>
+				<Image src={QR}	style={{ height: "200px" }}	alt="QR Contacto" />
 				<p>
 					<FormCorreo />
 					<span className="icon icon-envelop" />
