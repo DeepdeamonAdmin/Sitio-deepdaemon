@@ -14,7 +14,7 @@ import { removeError, setError } from '../../../actions/ui';
 import azul from "../../../assets/azul.jpg";
 import verde from "../../../assets/verde.jpg";
 
-export const RegAlumn = () => {
+export const RegLider = () => {
 
 //Funcion de registro de usuarios
 const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const isFormValid = () => {
 return (
 <div className='container'>
   <div className='centro'>
-    <h2> Dar de alta alumno </h2>
+    <h2> Registrar Lider </h2>
     <hr/>
     <form onSubmit={ handleRegistrer }> 
 
@@ -122,24 +122,10 @@ return (
 
         <div className='row'>
           <div className='mb-2 col-sm-6'>
-            <label className='form-label'>Boleta* </label>
-            <input 
-              type='password' 
-              className='form-control' 
-              name='password' 
-              required 
-              onChange={ handleInputChange }
-            />          
-          </div> 
-          <div className='mb-2 col-sm-6'>
             <label className="form-label">Seleccionar una foto de la galeria</label>
             <input type="file" className="form-control" name="fotoPerfil" onChange={ handleInputChange } />
             <img src={ fotoPerfil } alt="fotoPerfil" className="img-fluid" />
           </div>
-        </div>
-
-        <div className='row'>
-
           <div className='mb-2 col-sm-6'>
             <button 
                 type="submit"
