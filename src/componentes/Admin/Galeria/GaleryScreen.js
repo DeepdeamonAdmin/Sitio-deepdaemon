@@ -15,28 +15,43 @@ export const GaleryScreen = () => {
 			<AddNewFab />
 			<div className='section'>
 				<div className="card-columns">
-					<div className="card">
-						<img className="card-img-top" src={azul} alt="Card image cap" />
+					<div className="card w-50 p-2">
+						<img className="card-img-top " src={azul} alt="Card image cap" />
 					</div>
-					<div className="card w-50">
+					<div className="card w-50 p-2">
 						<img className="card-img-top" src={verde} alt="Card image cap" />
 					</div>
-					<div className="card w-75">
+					<div className="card w-50 p-2">
 						<img className="card-img-top" src={rojo} alt="Card image cap" />
 					</div>
-					<div className="card ">
+					<div className="card w-50 p-2">
 						<img className="card-img-top" src={rosa} alt="Card image cap" />
 					</div>
-					<div className="card text-center w-50">
+					<div className="card text-center w-50 p-2">
 						<img className="card-img-top" src={rosa} alt="Card image cap" />
 					</div>
-					<div className="card">
+					<div className="card w-50 p-2">
 						<img className="card-img-top" src={rojo} alt="Card image cap" />
 					</div>
-					<div className="card">
+					<div className="card w-50 p-2">
 						<img className="card-img-top" src={azul} alt="Card image cap" />
 					</div>
-					<div className="card">
+					<div className="card w-50 p-2">
+						<img className="card-img-top" src={verde} alt="Card image cap" />
+					</div>
+					<div className="card w-50 p-2">
+						<img className="card-img-top" src={verde} alt="Card image cap" />
+					</div>
+					<div className="card w-50 p-2">
+						<img className="card-img-top" src={verde} alt="Card image cap" />
+					</div>
+					<div className="card w-50 p-2">
+						<img className="card-img-top" src={verde} alt="Card image cap" />
+					</div>
+					<div className="card w-50 p-2">
+						<img className="card-img-top" src={verde} alt="Card image cap" />
+					</div>
+					<div className="card w-50 p-2">
 						<img className="card-img-top" src={verde} alt="Card image cap" />
 					</div>
 				</div>
