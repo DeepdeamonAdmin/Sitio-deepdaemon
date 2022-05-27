@@ -11,7 +11,7 @@ import bg from "../../styles/assets/img/bg/header_bg.png"
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa 
 import "../../styles/DeepDaemon.css";
 import { Container, Nav, Carousel } from 'react-bootstrap';
-import { Row, Col, Button, Image } from "react-bootstrap";
+import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
 import { LeaderScreen } from './LeaderScreen';
 import { ProjectScreen } from './ProjectScreen';
@@ -22,13 +22,28 @@ import FormCorreo from './FormCorreo';
 
 export const General = ({ id }) => {
 	return (
-		<div className="DeepDaemon.css">
-			<header className='dd_header' id='Home'>
-				<img src={logo} className="ddlogo" alt="logo" />
-				<h1>DeepDaemon</h1>
-				<hr />
-				<h2>Comunidad de conocimiento</h2>
-			</header>
+		<div className="">
+			<div className='d-flex flex-row'>
+				<div className='dd_header' id='Home'>
+					<img src={logo} className="ddlogo" alt="logo" />
+					<h1>DeepDaemon</h1>
+					<hr />
+					<h2>Comunidad de conocimiento</h2>
+				</div>
+				<Ratio aspectRatio={"16x9"}>
+					<iframe
+						width="560"
+						height="315"
+						src="https://www.youtube.com/embed/OG0w_4qDiy8"
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen>
+					</iframe>
+				</Ratio>
+
+			</div>
+
 			<br />
 			<Container className='section'>
 				<Carousel className="w-100">
@@ -199,7 +214,7 @@ export const General = ({ id }) => {
 					<br />
 					Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
 				</p>
-				<Image src={QR}	style={{ height: "200px" }}	alt="QR Contacto" />
+				<Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
 				<p>
 					<FormCorreo />
 					<span className="icon icon-envelop" />
