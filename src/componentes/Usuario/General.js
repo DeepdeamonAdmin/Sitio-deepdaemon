@@ -22,28 +22,25 @@ import FormCorreo from './FormCorreo';
 
 export const General = ({ id }) => {
 	return (
-		<div className="">
-			<div className='d-flex flex-row'>
-				<div className='dd_header' id='Home'>
+		<div >
+			<div className='d-flex flex-row dd_header'>
+				<div>
 					<img src={logo} className="ddlogo" alt="logo" />
 					<h1>DeepDaemon</h1>
 					<hr />
 					<h2>Comunidad de conocimiento</h2>
 				</div>
-				<Ratio aspectRatio={"16x9"}>
-					<iframe
-						width="560"
-						height="315"
-						src="https://www.youtube.com/embed/OG0w_4qDiy8"
-						title="YouTube video player"
-						frameborder="0"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-						allowfullscreen>
-					</iframe>
-				</Ratio>
-
+				<iframe
+					width="560"
+					height="315"
+					src="https://www.youtube.com/embed/OG0w_4qDiy8"
+					title="YouTube video player"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen>
+				</iframe>
 			</div>
-
+			<h1>ANUNCIOS</h1>
 			<br />
 			<Container className='section'>
 				<Carousel className="w-100">
