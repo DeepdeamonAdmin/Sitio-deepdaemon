@@ -23,28 +23,24 @@ import FormCorreo from './FormCorreo';
 export const General = ({ id }) => {
 	return (
 		<div className="">
-			<div className='d-flex flex-row'>
-				<div className='dd_header' id='Home'>
+			<div className='d-flex flex-row dd_header'>
+				<div className='' id='Home'>
 					<img src={logo} className="ddlogo" alt="logo" />
 					<h1>DeepDaemon</h1>
 					<hr />
 					<h2>Comunidad de conocimiento</h2>
 				</div>
-				<Ratio aspectRatio={"16x9"}>
-					<iframe
-						width="560"
-						height="315"
-						src="https://www.youtube.com/embed/OG0w_4qDiy8"
-						title="YouTube video player"
-						frameborder="0"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-						allowfullscreen>
-					</iframe>
-				</Ratio>
-
+				<iframe
+					width="560"
+					height="315"
+					src="https://www.youtube.com/embed/OG0w_4qDiy8"
+					title="YouTube video player"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen>
+				</iframe>
 			</div>
-
-			<br />
+			<h1>ANUNCIOS</h1>
 			<Container className='section'>
 				<Carousel className="w-100">
 					<Carousel.Item>
@@ -185,7 +181,7 @@ export const General = ({ id }) => {
 				</Row>
 			</Container>
 
-			{/* 
+
 			<Container fluid className="section" id='Equipo'>
 				<h1>Colaboradores</h1>
 				<Tab.Container defaultActiveKey="current">
@@ -203,7 +199,7 @@ export const General = ({ id }) => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container> */}
+			</Container>
 
 			<Container fluid className="section contact white" id='Contacto'>
 				<h1>Hecho en la Ciudad de México</h1>
