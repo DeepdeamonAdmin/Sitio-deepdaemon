@@ -67,17 +67,17 @@ export const NavBarAdmin = () => {
                         activeClassName="active"
                         className="nav-item nav-link" 
                         exact
-                        to="/admin/addmember"
+                        to="/admin/alumnos"
                     >
-                        Alumno
+                        Alumnos
                     </NavLink>
                     <NavLink 
                         activeClassName="active"
                         className="nav-item nav-link" 
                         exact
-                        to="/admin/addlider"
+                        to="/admin/lideres"
                     >
-                        Lider
+                        Lideres
                     </NavLink>
                     <NavLink 
                         activeClassName="active"

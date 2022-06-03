@@ -22,25 +22,28 @@ import FormCorreo from './FormCorreo';
 
 export const General = ({ id }) => {
 	return (
-		<div >
-			<div className='d-flex flex-row dd_header'>
-				<div>
+		<div className="">
+			<div className='d-flex flex-row'>
+				<div className='dd_header' id='Home'>
 					<img src={logo} className="ddlogo" alt="logo" />
 					<h1>DeepDaemon</h1>
 					<hr />
 					<h2>Comunidad de conocimiento</h2>
 				</div>
-				<iframe
-					width="560"
-					height="315"
-					src="https://www.youtube.com/embed/OG0w_4qDiy8"
-					title="YouTube video player"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen>
-				</iframe>
+				<Ratio aspectRatio={"16x9"}>
+					<iframe
+						width="560"
+						height="315"
+						src="https://www.youtube.com/embed/OG0w_4qDiy8"
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen>
+					</iframe>
+				</Ratio>
+
 			</div>
-			<h1>ANUNCIOS</h1>
+
 			<br />
 			<Container className='section'>
 				<Carousel className="w-100">
@@ -177,15 +180,12 @@ export const General = ({ id }) => {
 							proyectos de IA aplicados a problemas reales o industriales, te
 							estamos buscando.
 						</p>
-						<div className='section'>
-							<Button variant="secondary">Contáctanos</Button>
-						</div>
-
+						<Button variant="secondary">Contáctanos</Button>
 					</Col>
 				</Row>
 			</Container>
 
-
+			{/* 
 			<Container fluid className="section" id='Equipo'>
 				<h1>Colaboradores</h1>
 				<Tab.Container defaultActiveKey="current">
@@ -203,7 +203,7 @@ export const General = ({ id }) => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container>
+			</Container> */}
 
 			<Container fluid className="section contact white" id='Contacto'>
 				<h1>Hecho en la Ciudad de México</h1>
