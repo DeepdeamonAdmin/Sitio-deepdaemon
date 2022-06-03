@@ -177,12 +177,15 @@ export const General = ({ id }) => {
 							proyectos de IA aplicados a problemas reales o industriales, te
 							estamos buscando.
 						</p>
-						<Button variant="secondary">Contáctanos</Button>
+						<div className='section'>
+							<Button variant="secondary">Contáctanos</Button>
+						</div>
+
 					</Col>
 				</Row>
 			</Container>
 
-			{/* 
+
 			<Container fluid className="section" id='Equipo'>
 				<h1>Colaboradores</h1>
 				<Tab.Container defaultActiveKey="current">
@@ -200,7 +203,7 @@ export const General = ({ id }) => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container> */}
+			</Container>
 
 			<Container fluid className="section contact white" id='Contacto'>
 				<h1>Hecho en la Ciudad de México</h1>
