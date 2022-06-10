@@ -9,6 +9,7 @@ import { Perfil } from '../componentes/users/Perfil';
 import { Projects } from '../componentes/users/Projects';
 import { Publications } from '../componentes/users/Publications';
 import { User } from '../componentes/users/User';
+import { Blog } from '../componentes/users/Blog';
 
 export const UserDashBoard = () => {
   return (
@@ -19,6 +20,7 @@ export const UserDashBoard = () => {
                     <Route  path="/" element={ <User /> } />
                     <Route path='proyectos' element={ <Projects/> } />
                     <Route path='publicaciones' element={ <Publications/> } />
+                    <Route path='blog' element={ <Blog /> } />
                     <Route path='perfil' element={ <Perfil /> } />
                     <Route path='addproject' element={ <FormAddProject /> } />
                     <Route path='addpublication' element={ <FormAddRelease /> } />
