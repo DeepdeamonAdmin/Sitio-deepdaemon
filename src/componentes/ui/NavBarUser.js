@@ -28,31 +28,36 @@ export const NavBarUser = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
           <img src={logo} style={{ width: "100px" }} alt="logoLiconApp" />
-      <div className="navbar-collapse">
-          <div className="navbar-nav">
-              <NavLink
-                  className="nav-item nav-link"
-                  to='/user'> 
-                  DeepDaemon 
-              </NavLink>
-          </div>
-      </div>
-      <div className="navbar-collapse">
-          <div className="navbar-nav">
-            <NavLink 
-                className="nav-item nav-link"
-                to="/user/proyectos"
-            >
-                Proyectos
-            </NavLink>
-            <NavLink 
-                className="nav-item nav-link" 
-                to="/user/publicaciones"
-            >
-                Publicaciones
-            </NavLink>
+        <div className="navbar-collapse">
+            <div className="navbar-nav">
+                <NavLink
+                    className="nav-item nav-link"
+                    to='/user'> 
+                        DeepDaemon 
+                </NavLink>
+            </div>
         </div>
-    </div>
+      
+        <div className="navbar-collapse">
+            <div className="navbar-nav">
+                <NavLink 
+                    className="nav-item nav-link"
+                    to="/user/proyectos">
+                        Proyectos
+                </NavLink>
+                <NavLink 
+                    className="nav-item nav-link" 
+                    to="/user/publicaciones">
+                        Publicaciones
+                </NavLink>
+                <NavLink 
+                    className="nav-item nav-link" 
+                    to="/user/blog">
+                        Blog
+                </NavLink>
+            </div>    
+        </div>
+        
 
     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul className="navbar-nav ml-auto">
