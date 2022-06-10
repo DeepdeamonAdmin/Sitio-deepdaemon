@@ -11,27 +11,29 @@ import { OtherScreen } from '../componentes/Admin/Other/OtherScreen';
 import { NavBarAdmin } from '../componentes/ui/NavBarAdmin';
 import { FormEditProject } from '../componentes/Admin/Proyectos/FormEditProject';
 import { RutaError } from '../componentes/ui/RutaError';
+import AvisosScreen from '../componentes/Admin/Avisos/AvisosScreen';
 
 export const AdminDashBoard = () => {
-    return (
-        <>
-          <NavBarAdmin />
-            <div>
-                <Routes>
-                    <Route  path="/" element={ <Admin />} />
-                    <Route  path="members" element={ <MembersScreen /> } />
-                    <Route  path="projects" element={ <ProjectsScreen /> } />
-                    <Route  path="projects/:idProject/:params" element={ <FormEditProject /> } />
-                    <Route  path="release" element={ <ReleaseScreen /> } />
-                    <Route  path="alumnos" element={ <AlumnoScreen /> }  />
-                    <Route  path="lideres" element={ <LiderScreen /> }  />
-                    <Route  path="galery" element={ <GaleryScreen /> }  />
-                    <Route  path="other" element={ <OtherScreen /> } />
-                    
+	return (
+		<>
+			<NavBarAdmin />
+			<div>
+				<Routes>
+					<Route path="/" element={<Admin />} />
+					<Route path="members" element={<MembersScreen />} />
+					<Route path="projects" element={<ProjectsScreen />} />
+					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
+					<Route path="release" element={<ReleaseScreen />} />
+					<Route path="alumnos" element={<AlumnoScreen />} />
+					<Route path="lideres" element={<LiderScreen />} />
+					<Route path="galery" element={<GaleryScreen />} />
+					<Route path="avisos" element={<AvisosScreen />} />
+					<Route path="other" element={<OtherScreen />} />
 
-                    <Route path="*" element={ <RutaError />} />
-                </Routes>
-            </div>
-        </>
-    )
+
+					<Route path="*" element={<RutaError />} />
+				</Routes>
+			</div>
+		</>
+	)
 }

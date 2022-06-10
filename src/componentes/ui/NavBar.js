@@ -56,7 +56,7 @@ export const NavBar = () => {
 						Lideres
 					</Link>
 
-					{/* <Link activeClass="active"
+					<Link activeClass="active"
 						className="nav-item nav-link"
 						to='Equipo'
 						spy={true}
@@ -64,7 +64,7 @@ export const NavBar = () => {
 						offset={-70}
 						duration={500}>
 						Equipo
-					</Link> */}
+					</Link>
 
 					<Link activeClass="active"
 						className="nav-item nav-link"
