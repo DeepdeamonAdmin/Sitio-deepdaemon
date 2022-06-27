@@ -65,6 +65,51 @@ const completarDatos = async(uid, formvalues) =>{
  
 }
 
+export const registroDesdeLider = async(formValues) =>{
+    return ( dispatch ) => {
+
+        const auth = getAuth();
+
+        createUserWithEmailAndPassword(auth, formValues.email, formValues.password )
+        .then( async({ user }) => {
+            await updateProfile( user, {displayName: formValues.name } );
+            completarDatosDesdeForm( user.uid, formValues);
+
+            dispatch(
+                login( user.uid, user.displayName )
+            );
+        })
+        .catch( e => {
+            console.log(e);
+            Swal.fire('Error', e.message, 'error');
+        })
+
+    }
+}
+
+const completarDatosDesdeForm = async(uid, formValues) =>{
+    //agregamos los datos en fireStore
+    await setDoc(doc(db, 'Usuarios', uid ), {
+        "rol": 'other',
+        "nombre": formValues.name,
+        "email": formValues.email,
+        "password": formValues.password,
+        "password2": formValues.password2,
+        "fechaNac":'',
+        'urlImg':'',
+        'grado':'',
+        "descripcion":'',
+        "school":'',
+        "unidad":'',
+        "titulo":'',
+        "linkedin":'',
+        "facebook":'',
+        "Github":'',
+    })
+    console.log('Se agrego la bd');
+ 
+}
+
 const completarDatosGoogle = async(uid, name, email) =>{
      //Obtenemos el rol de la base si existe
      const docRef = doc(db, 'Usuarios', uid );
