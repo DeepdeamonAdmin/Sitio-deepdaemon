@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { registerMember } from '../../../actions/register';
+import { registroDesdeLider } from '../../../actions/auth';
 import { useForm } from '../../../hooks/useForm';
 import { useGet } from '../../../hooks/useGet';
 import { getCareer } from '../../../selectors/get/getCareer';
@@ -35,9 +35,10 @@ export const FormAddMember = () => {
     //envio a la api
     const handleSubmit = (e) => {
         e.preventDefault();
-		dispatch( registerMember(formValues) );
+		dispatch( registroDesdeLider(formValues) );
 		console.log(formValues);
     }
+	
 	//Traemos la informacion de Career
 	const { data:dataCareer } = useGet(getCareer);
 	//Traemos la informacion de School
