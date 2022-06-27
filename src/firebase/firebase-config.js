@@ -8,7 +8,7 @@ import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider } from 'firebase/auth';
 //import { getAnalytics } from "firebase/analytics";
  
-
+//Constantes
 const firebaseConfig = {
   apiKey: "AIzaSyCUkR89_gPOF-uSi5OZFmyp6fvq9QYGQTc",
   authDomain: "deepdaemon-bf419.firebaseapp.com",
