@@ -10,68 +10,69 @@ export const FormAddMember = () => {
 
 	const dispatch = useDispatch();
 
-    const [ formValues, handleInputChange ] = useForm({
+	const [formValues, handleInputChange] = useForm({
 		name: '',
 		lastname: '',
 		password: '',
 		linkedin: '',
-        email: '',
-        shortDesc: '',
-        longDesc:'',
-        status: '', 
+		email: '',
+		shortDesc: '',
+		longDesc: '',
+		status: '',
 		photo: '',
 		ss: 0,
 		nivel: '',
 		start: '',
-		end:'',	
-		idSchool:'',
-		idCareer:''	  
+		end: '',
+		idSchool: '',
+		idCareer: ''
 	});
 
-	const { name, lastname,	password, linkedin,	email, shortDesc, longDesc,  
-			photo, start, end} = formValues;
+	const { name, lastname, password, linkedin, email, shortDesc, longDesc,
+		photo, start, end } = formValues;
 
-    
-    //envio a la api
-    const handleSubmit = (e) => {
-        e.preventDefault();
-		dispatch( registroDesdeLider(formValues) );
-		console.log(formValues);
-    }
-	
+
+	//envio a la api
+	const handleSubmit = (e) => {
+		// console.log(formValues);
+		e.preventDefault();
+		dispatch(registroDesdeLider(formValues));
+
+	}
+
 	//Traemos la informacion de Career
-	const { data:dataCareer } = useGet(getCareer);
+	const { data: dataCareer } = useGet(getCareer);
 	//Traemos la informacion de School
-	const { data:dataSchool } = useGet(getSchool);
+	const { data: dataSchool } = useGet(getSchool);
 
-    return (
+	return (
 		<div className="container">
 			<div className="app-title">
-            	<h2>Agregar Colaborador </h2>
-				<hr/>
+				<h2>Agregar Colaborador </h2>
+				<hr />
 			</div>
-			<form onSubmit={ handleSubmit }>
+			<form onSubmit={handleSubmit}>
 				<div className="row">
-					<div className= "col mb-3">
+					<div className="col mb-3">
 						<label> Name </label>
-						<input 
+						<input
 							className="form-control"
 							type='text'
 							name='name'
 							placeholder='Name'
-							value = { name }
-							onChange={ handleInputChange }
+							value={name}
+							onChange={handleInputChange}
 						/>
 					</div>
 					<div className="col mb-3">
 						<label> Lastname </label>
 						<input
-							className="form-control" 
+							className="form-control"
 							type='text'
 							name='lastname'
 							placeholder='Lastname'
-							value = { lastname }
-							onChange={ handleInputChange }
+							value={lastname}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
@@ -83,9 +84,9 @@ export const FormAddMember = () => {
 							type='email'
 							name='email'
 							placeholder='Email'
-							value = { email }
-							onChange={ handleInputChange }
-						/>				
+							value={email}
+							onChange={handleInputChange}
+						/>
 					</div>
 					<div className="col mb-3">
 						<label> Password </label>
@@ -94,11 +95,11 @@ export const FormAddMember = () => {
 							type='password'
 							name='password'
 							placeholder='Password'
-							value = { password }
-							onChange={ handleInputChange }
+							value={password}
+							onChange={handleInputChange}
 						/>
 					</div>
-				</div>	
+				</div>
 				<div className="row">
 					<div className="col mb-3">
 						<label> Linkedin </label>
@@ -107,18 +108,18 @@ export const FormAddMember = () => {
 							type='url'
 							name='linkedin'
 							placeholder='Likedin'
-							value = { linkedin }
-							onChange={ handleInputChange }
+							value={linkedin}
+							onChange={handleInputChange}
 						/>
 					</div>
 					<div className="col custom-file">
 						<label>Seleccione archivo </label>
-						<input 
+						<input
 							className="custom-file-input"
 							type='file'
 							name='photo'
-							value = { photo }
-							onChange={ handleInputChange }
+							value={photo}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
@@ -130,8 +131,8 @@ export const FormAddMember = () => {
 							rows='3' cols='40'
 							name='shortDesc'
 							placeholder='Short Desciption'
-							value = { shortDesc }
-							onChange={ handleInputChange }
+							value={shortDesc}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
@@ -143,8 +144,8 @@ export const FormAddMember = () => {
 							rows='10' cols='40'
 							name='longDesc'
 							placeholder='Desciption'
-							value = { longDesc }
-							onChange={ handleInputChange }
+							value={longDesc}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
@@ -154,12 +155,12 @@ export const FormAddMember = () => {
 						<select
 							className="form-control"
 							name='status'
-							onChange={ handleInputChange }
+							onChange={handleInputChange}
 						>
-							<option value = 'current' > current </option>
-							<option value = 'graduate' > graduate </option>
-							<option value = 'leader' > leader </option>
-							<option value = 'out' > out </option>
+							<option value='current' > current </option>
+							<option value='graduate' > graduate </option>
+							<option value='leader' > leader </option>
+							<option value='out' > out </option>
 						</select>
 					</div>
 					<div className="col-md-4 mb-2 ">
@@ -167,27 +168,27 @@ export const FormAddMember = () => {
 						<select
 							className="form-control"
 							name='nivel'
-							onChange={ handleInputChange }
+							onChange={handleInputChange}
 						>
-							<option value = 'bachelor' > bachelor </option>
-							<option value = 'masters' > masters </option>
-							<option value = 'phd' > phd </option>
-							<option value = 'work' > work </option>
+							<option value='bachelor' selected > bachelor </option>
+							<option value='masters' > masters </option>
+							<option value='phd' > phd </option>
+							<option value='work' > work </option>
 						</select>
 					</div>
 					<div className="col-md-2 mb-5">
 						<div className="input-group-prepend">
 							<div className="input-group-text col-12">
-							<label> S.S. </label>
-								<input 
+								<label> S.S. </label>
+								<input
 									type='checkbox'
 									name='ss'
 									value='1'
-									onChange={ handleInputChange }
-								/>	
+									onChange={handleInputChange}
+								/>
 							</div>
 						</div>
-					</div>	
+					</div>
 				</div>
 				<div className="row">
 					<div className="col mb-2">
@@ -195,10 +196,10 @@ export const FormAddMember = () => {
 						<select
 							className="form-control"
 							name='idSchool'
-							onChange={ handleInputChange }
+							onChange={handleInputChange}
 						>
 							{
-								dataSchool.map(item =>(
+								dataSchool.map(item => (
 									<option key={item.id} value={item.id}> {item.name} </option>
 								))
 							}
@@ -209,47 +210,47 @@ export const FormAddMember = () => {
 						<select
 							className="form-control"
 							name='idCareer'
-							onChange={ handleInputChange }
+							onChange={handleInputChange}
 						>
 							{
-								dataCareer.map(item =>(
+								dataCareer.map(item => (
 									<option key={item.id} value={item.id}> {item.name} </option>
 								))
 							}
 						</select>
-					</div>		
+					</div>
 				</div>
 				<div className="row">
 					<div className="col-md-6 mb-5">
 						<label> Comienzo </label>
-							<input 
-								className="form-control"
-								type='date'
-								min ='1900-01-01'
-								name='start'
-								value = { start }
-								onChange={ handleInputChange }
-							/>
+						<input
+							className="form-control"
+							type='date'
+							min='1900-01-01'
+							name='start'
+							value={start}
+							onChange={handleInputChange}
+						/>
 					</div>
 					<div className="col-md-6 mb-5">
 						<label> Termino </label>
-						<input 
+						<input
 							className="form-control"
 							type='date'
-							max ='2030-01-01'
+							max='2030-01-01'
 							name='end'
-							value = { end }
-							onChange={ handleInputChange }
+							value={end}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
 				<button
 					className="btn2 btn-primary btn-large btn-block mb-4"
-					type="submit"					
+					type="submit"
 				>
 					Agregar
-				</button>				
+				</button>
 			</form>
-		</div>	
-    )
+		</div>
+	)
 }

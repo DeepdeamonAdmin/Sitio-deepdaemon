@@ -176,7 +176,9 @@ export const General = ({ id }) => {
 							proyectos de IA aplicados a problemas reales o industriales, te
 							estamos buscando.
 						</p>
-						<Button variant="secondary">Contáctanos</Button>
+						<div className='text-center'>
+							<Button variant="secondary ">Contáctanos</Button>
+						</div>
 					</Col>
 				</Row>
 			</Container>
