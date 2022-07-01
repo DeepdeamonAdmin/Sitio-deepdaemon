@@ -89,8 +89,8 @@ export const registroDesdeLider = (formValues) => {
 
 const completarDatosDesdeForm = async (uid, formValues) => {
 	//agregamos los datos en fireStore
-	await setDoc(doc(db, 'Alumnos', uid), {
-		"rol": 'Alumno',
+	await setDoc(doc(db, 'Usuarios', uid), {
+		"rol": 'other',
 		"name": formValues.name,
 		'lastname': formValues.lastname,
 		'password': formValues.password,
@@ -107,6 +107,49 @@ const completarDatosDesdeForm = async (uid, formValues) => {
 		'idSchool': formValues.idSchool,
 		'idCareer': formValues.idCareer
 	})
+}
+
+export const registrarLider = (formValues) => {
+
+	return (dispatch) => {
+		const auth = getAuth();
+		createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
+			.then(async ({ user }) => {
+				await updateProfile(user, { displayName: formValues.name });
+
+				completarDatosDeLider(user.uid, formValues);
+
+				dispatch(
+					uiCloseModal()
+					// login(user.uid, user.displayName)
+				);
+			})
+			.catch(e => {
+				console.log(e);
+				Swal.fire('Error', e.message, 'error');
+			})
+	}
+}
+
+const completarDatosDeLider = async (uid, formValues) => {
+	//agregamos los datos en fireStore
+	await setDoc(doc(db, 'Usuarios', uid), {
+		"rol": 'administrador',
+		"nombre": formValues.name,
+		"email": formValues.email,
+		"password": formValues.password,
+		"fechaNac": '',
+		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/oQKZ628qIJS3YIlV2VjZHW6ZSXQ2%2FfotoPerfilUsuario.jpg?alt=media&token=baf1bfc7-944d-4683-a998-8b730fa9c891',
+		'grado': 'leader',
+		"descripcion": '',
+		"school": '',
+		"unidad": '',
+		"titulo": '',
+		"linkedin": '',
+		"facebook": '',
+		"Github": '',
+	})
+	console.log('Se agrego la bd');
 }
 
 const completarDatosGoogle = async (uid, name, email) => {

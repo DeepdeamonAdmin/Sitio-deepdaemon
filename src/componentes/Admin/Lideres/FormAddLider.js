@@ -7,7 +7,7 @@ import { useForm } from '../../../hooks/useForm';
 
 import validator from 'validator';
 
-import { startRegisterWithEmailPassword } from '../../../actions/auth';
+import { registrarLider } from '../../../actions/auth';
 import { removeError, setError } from '../../../actions/ui';
 
 //importar todas las imagenes de la galeria
@@ -36,7 +36,7 @@ const handleRegistrer = (e) => {
   
   e.preventDefault();
   if ( isFormValid() ) {
-    dispatch( startRegisterWithEmailPassword(formValues) );
+    dispatch( registrarLider(formValues) );
   }
 
 }

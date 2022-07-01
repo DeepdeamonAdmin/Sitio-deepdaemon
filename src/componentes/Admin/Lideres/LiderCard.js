@@ -17,14 +17,14 @@ export const LiderCard = (item) => {
             <div className="row no-gutters">
                 <div className="col-md-4"> 
                     <img 
-                    src={`../../../../media/team/user.png`}
+                    src={item.urlImg}
                     alt="member" 
                     className = "card-img"
                     />
                 </div>  
                 <div className="col-md-5">
                     <div className="card-body">
-                        <h5 className="card-title"> {item.name} </h5>
+                        <h5 className="card-title"> {item.nombre} </h5>
                         <p className="card-text"> {item.email} </p>
                     </div>               
                 </div>

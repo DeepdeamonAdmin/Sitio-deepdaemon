@@ -13,21 +13,10 @@ export const MemberList = () => {
 				{
 					usuarios.map(usuario => (
 						//Imprimir todos los usuarios
-						<div className='d-flex flex-row card animate__animated animate__fadeIn border-dark mb-3' style={{ MaxWidth: 350, MaxHeight: 150 }}>
-							<img
-								className='card-img'
-								src={usuario.urlImg}
-								alt='member'
-								style={{
-									height: '200px',
-									width: '200px'
-								}}
-							/>
-
-							<div className="card-body text-dark">
-								<h5 className="card-title"> {usuario.nombre} </h5>
-							</div>
-						</div>
+						<MemberCard
+							key={usuario.id}
+							{...usuario}
+						/>
 					)
 					)}
 			</div>

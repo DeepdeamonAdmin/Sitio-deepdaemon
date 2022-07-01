@@ -17,7 +17,7 @@ export const MemberCard = (item) => {
             <div className="row no-gutters">
                 <div className="col-md-4"> 
                     <img 
-                    src={`../../../../media/team/user.png`}
+                    src={item.urlImg}
                     alt="member" 
                     className = "card-img"
                     />
