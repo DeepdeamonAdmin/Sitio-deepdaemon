@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Admin } from '../componentes/Admin/Admin';
-import { GaleryScreen } from '../componentes/Admin/Galeria/GaleryScreen';
+import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
 import { MembersScreen } from '../componentes/Admin/Miembros/MembersScreen';
 import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { AlumnoScreen } from '../componentes/Admin/Alumnos/AlumnoScreen';
@@ -26,7 +26,7 @@ export const AdminDashBoard = () => {
 					<Route path="release" element={<ReleaseScreen />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />
 					<Route path="lideres" element={<LiderScreen />} />
-					<Route path="galery" element={<GaleryScreen />} />
+					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
 					<Route path="other" element={<OtherScreen />} />
 

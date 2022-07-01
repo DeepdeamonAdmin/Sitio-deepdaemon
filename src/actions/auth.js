@@ -76,7 +76,7 @@ export const registroDesdeLider = (formValues) => {
 				completarDatosDesdeForm(user.uid, formValues);
 
 				dispatch(
-					uiCloseModal
+					uiCloseModal()
 					// login(user.uid, user.displayName)
 				);
 			})
