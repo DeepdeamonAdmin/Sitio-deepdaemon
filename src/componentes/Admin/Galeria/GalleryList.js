@@ -7,8 +7,8 @@ export default function GalleryList() {
 		<>
 			{
 				usuarios.map(usuario => (
-					usuario.urlImg != "" &&
-					<div className="card w-50 p-2 border-primary mb-3 view overlay zoom" key={usuario.id}>
+					usuario.urlImg !== "" &&
+					<div className="card p-2 border-primary mb-3" key={usuario.id} style={{ width: 12 + "rem" }}>
 						<img
 							className='card-img'
 							src={usuario.urlImg}

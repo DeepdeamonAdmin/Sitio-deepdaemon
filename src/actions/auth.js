@@ -9,7 +9,6 @@ import {
 } from 'firebase/auth';
 
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-import { useDispatch } from 'react-redux';
 
 import { db } from "../firebase/firebase-config";
 import { googleAuthProvider } from '../firebase/firebase-config';
