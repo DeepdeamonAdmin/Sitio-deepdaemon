@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { registroDesdeLider } from '../../../actions/auth';
 import { useForm } from '../../../hooks/useForm';
@@ -7,8 +8,14 @@ import { getCareer } from '../../../selectors/get/getCareer';
 import { getSchool } from '../../../selectors/get/getSchool';
 
 
-export const FormAddAlumno = () => {
+export const FormEditAlumno = (nombre) => {
+	const { usuarios } = useSelector(state => state.user);
 
+	const usuario = usuarios.filter(alumno => {
+		return alumno.nombre === nombre.nombre.item
+	})
+	const alumno = usuario[0]
+	console.log(alumno);
 	const dispatch = useDispatch();
 
 	const [formValues, handleInputChange] = useForm({
@@ -29,8 +36,8 @@ export const FormAddAlumno = () => {
 		idCareer: ''
 	});
 
-	const { name, lastname, password, linkedin, email, shortDesc, longDesc,
-		photo, start, end } = formValues;
+	// const { name, lastname, password, linkedin, email, shortDesc, longDesc,
+	// 	photo, start, end } = formValues;
 
 
 	//envio a la api
@@ -49,7 +56,7 @@ export const FormAddAlumno = () => {
 	return (
 		<div className="container">
 			<div className="app-title">
-				<h2>Agregar Alumno </h2>
+				<h2>Editar Alumno </h2>
 				<hr />
 			</div>
 			<form onSubmit={handleSubmit}>
@@ -61,18 +68,7 @@ export const FormAddAlumno = () => {
 							type='text'
 							name='name'
 							placeholder='Name'
-							value={name}
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div className="col mb-3">
-						<label> Lastname </label>
-						<input
-							className="form-control"
-							type='text'
-							name='lastname'
-							placeholder='Lastname'
-							value={lastname}
+							// value={alumno.nombre}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -85,7 +81,7 @@ export const FormAddAlumno = () => {
 							type='email'
 							name='email'
 							placeholder='Email'
-							value={email}
+							// value={alumno.email}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -96,7 +92,7 @@ export const FormAddAlumno = () => {
 							type='password'
 							name='password'
 							placeholder='Password'
-							value={password}
+							// value={password}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -109,7 +105,7 @@ export const FormAddAlumno = () => {
 							type='url'
 							name='linkedin'
 							placeholder='Likedin'
-							value={linkedin}
+							// value={linkedin}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -119,7 +115,7 @@ export const FormAddAlumno = () => {
 							className="custom-file-input"
 							type='file'
 							name='photo'
-							value={photo}
+							// value={photo}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -132,7 +128,7 @@ export const FormAddAlumno = () => {
 							rows='3' cols='40'
 							name='shortDesc'
 							placeholder='Short Desciption'
-							value={shortDesc}
+							// value={shortDesc}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -145,7 +141,7 @@ export const FormAddAlumno = () => {
 							rows='10' cols='40'
 							name='longDesc'
 							placeholder='Desciption'
-							value={longDesc}
+							// value={longDesc}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -226,7 +222,7 @@ export const FormAddAlumno = () => {
 							type='date'
 							min='1900-01-01'
 							name='start'
-							value={start}
+							// value={start}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -237,7 +233,7 @@ export const FormAddAlumno = () => {
 							type='date'
 							max='2030-01-01'
 							name='end'
-							value={end}
+							// value={end}
 							onChange={handleInputChange}
 						/>
 					</div>
