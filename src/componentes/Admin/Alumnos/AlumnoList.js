@@ -1,28 +1,25 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useGet } from '../../../hooks/useGet'
 import { getMember } from '../../../selectors/get/getMember';
 import { AlumnoCard } from './AlumnoCard';
 
 export const AlumnoList = () => {
-    const { data:member, loading } = useGet(getMember);
-    
-    
-    return (
-        <>
-            { loading && <p className="animate__animated animate__flash">Loading</p> }
-        
-            <div className="card-columns animate__animated animate__fadeIn">
-                {
-                    member.map(item => (
-                        item.status === "current" && (
+    const { usuarios } = useSelector(state => state.user);
+	return (
+		<>
+			<div className="card-columns cards-cols animate__animated animate__fadeIn">
+				{
+                    //Solo los usuarios con el grado de current
+                    usuarios.filter(usuario => usuario.grado === 'current').map(usuario => (
+						
                             <AlumnoCard
-                                key={item.id}
-                                {...item}
+                                key={usuario.id}
+                                {...usuario}
                             />
-                        )
-                    ))
-                }
-            </div>
-        </>
-    )
+					)
+					)}
+			</div>
+		</>
+	)
 }
