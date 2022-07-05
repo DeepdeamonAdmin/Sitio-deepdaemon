@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteMember } from '../../../actions/delete';
-
+import { ModalAddAlumno } from './ModalAddAlumno';
 
 
 export const AlumnoCard = (item) => {
@@ -30,11 +30,16 @@ export const AlumnoCard = (item) => {
                 </div>
                 <div className="col-md-1">
                     <p>
-                        <Link
+                        <Link to={`/admin/alumnos/editar/${item.id}`}>
+                            <button className="btn btn-primary">
+                                Editar
+                            </button>
+                        </Link>
+                        {/* <Link
                             to={ `/admin/alumnos` }
                             className ="btn btn-primary btn-sm">
                                 Edit
-                        </Link>
+                        </Link> */}
                     </p>
                     
                     <p>
