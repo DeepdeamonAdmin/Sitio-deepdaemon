@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteMember } from '../../../actions/delete';
 import { uiOpenModalEdit } from '../../../actions/ui';
@@ -33,14 +34,13 @@ export const AlumnoCard = (item) => {
 				<div className="col-md-1">
 					<p>
 
-						<button className="btn btn-primary" onClick={() => dispatch(uiOpenModalEdit())}>
+						{/* <button className="btn btn-primary" onClick={() => dispatch(uiOpenModalEdit())}>
 							Editar
-						</button>
-						{/* <Link
-							to={`/admin/alumnos`}
-							className="btn btn-primary btn-sm">
-							Edit
-						</Link> */}
+						</button> */}
+
+						<Link to={`editar/${item.id}`} className="btn btn-primary">
+							Editar
+						</Link>
 					</p>
 
 					<p>

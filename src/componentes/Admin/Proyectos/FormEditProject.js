@@ -10,7 +10,7 @@ import { editProject } from '../../../actions/edit';
 export const FormEditProject = ({ history }) => {
     
     const { idProject, params} = useParams();
-    console.log(typeof(params));
+    //console.log(typeof(params));
     
 	//Traemos la información de tech
 	const { data:dataTech } = useGet(getTech);
