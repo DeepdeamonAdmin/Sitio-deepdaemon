@@ -1,51 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
-import { registroDesdeLider } from '../../../actions/auth'
-import { startSaveData, startUploadingImage } from '../../../actions/gallery'
+import { startsNewImage, startUploadingImage } from '../../../actions/gallery'
 import { useForm } from '../../../hooks/useForm'
 
 export const FormAddGalery = () => {
 	const dispatch = useDispatch()
-	const [formValues, handleInputChange] = useForm({
-		name: '',
-		urlImg: ''
+	const [formValues, handleInputChange, reset] = useForm({
+		name: ''
 	})
-	const { name, urlImg } = formValues
-
-	const handlePictureClick = () => {
-		document.querySelector('#fileSelector').click();
-	}
+	const { name } = formValues
 
 	const handleFileChange = (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			const typeFile = file.name.split('.')[1]
-			const fileName = name + '.' + typeFile
-			const auxFile = new File([file], fileName)
-			dispatch(startUploadingImage(auxFile));
+			if (name == '') {
+				dispatch(startUploadingImage(file));
+			} else {
+				const typeFile = file.name.split('.')[1]
+				const fileName = name + '.' + typeFile
+				const auxFile = new File([file], fileName)
+				dispatch(startUploadingImage(auxFile));
+			}
+
 		}
 	}
 
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	const file = e.target.files[0];
-
-
-	// 	if (file) {
-	// 		dispatch(startUploadingImage(file));
-	// 		dispatch()
-	// 	}
-
-	// 	dispatch(registroDesdeLider(formValues));
-
-	// }
-
 	const handleSave = () => {
-		dispatch(startSaveData());
+		dispatch(startsNewImage(formValues));
+		reset();
 	}
 
 	return (
-		<form>
+		<div>
 			<div className="form-row">
 				<div className="col-md-4 mb-3">
 					<label >Nombre de imagen</label>
@@ -71,6 +57,6 @@ export const FormAddGalery = () => {
 					</button>
 				</div>
 			</div>
-		</form>
+		</div>
 	)
 }

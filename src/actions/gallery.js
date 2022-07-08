@@ -1,13 +1,42 @@
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { fileUpload } from '../helpers/fileUpload';
 import { types } from "../types/types";
 import { uiCloseModal } from "./ui";
 
-export const startUploadingImage = (file) => {
+
+export const startsNewImage = (formValues) => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
+		const { img } = getState().gallery;
+
+		const newImage = {
+			name: formValues.name,
+			photo: img,
+		}
+
+		const docRef = await addDoc(collection(db, `Gallery/${uid}/Imagenes`), newImage);
+
+		if (docRef) {
+			Swal.fire('Imagen salvada', 'Éxito');
+			dispatch(addNewtoGallery(docRef.id, newImage));
+			dispatch(uiCloseModal())
+		} else {
+			Swal.fire('Error al enviar imagen');
+		}
+	}
+}
+
+export const addNewtoGallery = (id, image) => ({
+	type: types.galleryAddNew,
+	payload: {
+		id, ...image
+	}
+})
+
+export const startUploadingImage = (file) => {
+	return async (dispatch) => {
 
 		Swal.fire({
 			title: 'Uploading...',
@@ -17,33 +46,16 @@ export const startUploadingImage = (file) => {
 				Swal.showLoading();
 			}
 		});
-		const name = `${uid}` + file.name
-		const photo = await fileUpload(name, file);
-		const data = { name, photo }
-		dispatch(startSaveData(data));
+
+		const ruta = ''
+		const fileUrl = await fileUpload(ruta, file);
+		dispatch(loadImg(fileUrl));
 		Swal.close();
 	}
 }
 
+export const loadImg = (url) => ({
+	type: types.galleryAddNewPhoto,
+	payload: url
+});
 
-export const startSaveData = (data) => {
-	return async (dispatch, getState) => {
-
-		const { uid } = getState().auth;
-
-		const dataToFirestore = { ...data };
-
-		await updateDoc(doc(db, 'Gallery', uid), dataToFirestore);
-
-		dispatch(
-			refreshData(dataToFirestore),
-			uiCloseModal()
-		);
-		Swal.fire('Saved Image:', data.name, 'success');
-	}
-}
-
-const refreshData = (data) => ({
-	type: types.galleryLoad,
-	payload: { ...data }
-})

@@ -15,7 +15,6 @@ export const FormEditAlumno = (nombre) => {
 		return alumno.nombre === nombre.nombre.item
 	})
 	const alumno = usuario[0]
-	console.log(alumno);
 	const dispatch = useDispatch();
 
 	const [formValues, handleInputChange] = useForm({

@@ -70,9 +70,10 @@ export const types = {
 	publicationsLoad: '[Publication] Load Publications',
 
 	// Para la galería
-	galleryAddNew: '[Images] New Image',
+	galleryAddNew: '[Images] New Image', //Agregando imagen con nombre
+	galleryAddNewPhoto: '[Images] New Photo', //Solamente imagen
 	galleryLoad: '[Images] Load Image',
+	galleryAllLoad: '[Images] All Load Images',
 	galleryDelete: '[Images] Delete Image',
-	galleryGet: '[Images] Get Image',
 	galleryUpdate: '[Images] Update Image',
 }

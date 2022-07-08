@@ -2,8 +2,8 @@ import { types } from "../types/types";
 
 const initialState = {
 	name: "",
-	photo: '',
-	imagenes: []
+	imagenes: [],
+	imagenesAll: []
 }
 
 export const galleryReducer = (state = initialState, action) => {
@@ -13,24 +13,20 @@ export const galleryReducer = (state = initialState, action) => {
 				...state,
 				imagenes: [action.payload, ...state.imagenes]
 			}
+		case types.galleryAddNewPhoto:
+			return {
+				...state,
+				img: action.payload
+			}
 		case types.galleryLoad:
 			return {
 				...state,
-				imagenes: [action.payload]
+				imagenes: [...action.payload]
 			}
-		case types.galleryGet:
+		case types.galleryAllLoad:
 			return {
 				...state,
-				datos: {
-					...action.payload
-				}
-			}
-		case types.galleryUpdate:
-			return {
-				...state,
-				datos: {
-					...action.payload
-				}
+				imagenesAll: [...action.payload]
 			}
 		default:
 			return state
