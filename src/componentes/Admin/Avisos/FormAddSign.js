@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from '../../../hooks/useForm';
 
+
 export default function FormAddSign() {
 	const [formValues, handleInputChange] = useForm({
 		name: '',
@@ -9,11 +10,11 @@ export default function FormAddSign() {
 	});
 
 	const { name, descr, icon } = formValues;
+
 	const handleSubmit = (e) => {
-		// e.preventDefault();
-		// dispatch( registerTech(formValues) );
-		console.log(e);
-	}
+        e.preventDefault();
+    }
+
 	return (
 		<div className="section">
 			<h1>Formulario de avisos</h1>
