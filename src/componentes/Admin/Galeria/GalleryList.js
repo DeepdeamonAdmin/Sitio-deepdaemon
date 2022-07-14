@@ -2,22 +2,23 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 export default function GalleryList() {
-	const { usuarios } = useSelector(state => state.user);
+	const { imagenes } = useSelector(state => state.gallery);
 	return (
 		<>
 			{
-				usuarios.map(usuario => (
-					usuario.urlImg !== "" &&
-					<div className="card p-2 border-primary mb-3" key={usuario.id} style={{ width: 12 + "rem" }}>
+				imagenes.map(imagen => (
+
+					<div className="card p-2 border-primary mb-3" key={imagen.id} style={{ width: 12 + "rem" }}>
 						<img
 							className='card-img'
-							src={usuario.urlImg}
-							alt='member'
+							src={imagen.photo}
+							alt={'imagen'}
 							style={{
 								height: '200px',
 								width: '200px'
 							}}
 						/>
+						<span>{imagen.name}</span>
 					</div>
 				))
 			}

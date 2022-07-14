@@ -2,6 +2,8 @@ import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { fileUpload } from '../helpers/fileUpload';
+import { loadAllWorks } from "../helpers/loadAllWorks";
+import { loadWorks } from "../helpers/loadWorks";
 import { types } from "../types/types";
 import { uiCloseModal } from "./ui";
 
@@ -59,3 +61,40 @@ export const loadImg = (url) => ({
 	payload: url
 });
 
+export const startLoadingGalleryAll = () => {
+	return async (dispatch) => {
+		console.log('entra');
+		const ruta = 'Gallery'
+		const gallery = await loadAllWorks(ruta)
+		console.log(gallery);
+		if (gallery) {
+			dispatch(setAllGallery(gallery))
+		} else {
+			Swal.fire('Error BD no identificada');
+		}
+	}
+}
+
+export const setAllGallery = (gallery) => ({
+	type: types.galleryAllLoad,
+	payload: gallery
+});
+
+// export const startLoadingGallery = () => {
+// 	return async (dispatch, getState) => {
+// 		const { uid } = getState().auth
+// 		const ruta = `Gallery${uid}/Imagenes`
+// 		const imagenes = await loadWorks(ruta)
+// 		if (imagenes) {
+// 			dispatch(setAllImages(imagenes))
+// 		} else {
+// 			Swal.fire('Error BD no identificada');
+// 		}
+// 	}
+
+// }
+
+// export const setAllImages = (imagenes) => ({
+// 	type: types.galleryAllLoad,
+// 	payload: imagenes
+// });
