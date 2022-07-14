@@ -13,6 +13,9 @@ import { FormEditProject } from '../componentes/Admin/Proyectos/FormEditProject'
 import { FormEditarAlumno } from '../componentes/Admin/Alumnos/FormEditarAlumno';
 import { RutaError } from '../componentes/ui/RutaError';
 import AvisosScreen from '../componentes/Admin/Avisos/AvisosScreen';
+import InstitucionesScreen from '../componentes/Admin/Instituciones/InstitucionesScreen';
+import CarrerasScreen from '../componentes/Admin/Carreras/CarrerasScreen';
+import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
 
 export const AdminDashBoard = () => {
 	return (
@@ -30,8 +33,10 @@ export const AdminDashBoard = () => {
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
-					<Route path="other" element={<OtherScreen />} />
-
+					{/* <Route path="other" element={<OtherScreen />} /> */}
+					<Route path="Instituciones" element={<InstitucionesScreen />} />
+					<Route path="Carreras" element={<CarrerasScreen />} />
+					<Route path="Tecnologias" element={<TechScreen />} />
 
 					<Route path="*" element={<RutaError />} />
 				</Routes>

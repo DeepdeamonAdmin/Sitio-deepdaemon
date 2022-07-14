@@ -76,4 +76,14 @@ export const types = {
 	galleryAllLoad: '[Images] All Load Images',
 	galleryDelete: '[Images] Delete Image',
 	galleryUpdate: '[Images] Update Image',
+
+
+	// Para las instituciones
+	institucionAddNew: '[instituciones] new institution',
+	institucionAllLoad: '[instituciones] All Load Institution',
+	institucionLoad: '[instituciones] Load Institution',
+	institucionDelete: '[instituciones] Delete institution',
+	institucionUpdate: '[instituciones] Update institution',
+
+
 }

@@ -87,13 +87,37 @@ export const NavBarAdmin = () => {
 					>
 						Avisos
 					</NavLink>
-					<NavLink
+					{/* <NavLink
 						activeClassName="active"
 						className="nav-item nav-link"
 						exact
 						to="/admin/other"
 					>
 						Otros
+					</NavLink> */}
+					<NavLink
+						activeClassName="active"
+						className="nav-item nav-link"
+						exact
+						to="/admin/Instituciones"
+					>
+						Instituciones
+					</NavLink>
+					<NavLink
+						activeClassName="active"
+						className="nav-item nav-link"
+						exact
+						to="/admin/Carreras"
+					>
+						Carreras
+					</NavLink>
+					<NavLink
+						activeClassName="active"
+						className="nav-item nav-link"
+						exact
+						to="/admin/Tecnologias"
+					>
+						Tecnologías
 					</NavLink>
 				</div>
 			</div>

@@ -4,6 +4,7 @@ import { authReducer } from "../reducers/authReducer";
 import { deleteReducer } from "../reducers/deleteReducer";
 import { editReducer } from "../reducers/editReducer";
 import { galleryReducer } from "../reducers/galleryReducer.";
+import { institucionReducer } from "../reducers/institucionReducer";
 import { projectsReduccer } from "../reducers/projectsReduccer";
 import { publicationsReduccer } from "../reducers/publicationsReduccer";
 import { registerReducer } from "../reducers/registerReducer";
@@ -27,8 +28,7 @@ const reducers = combineReducers({
 	projects: projectsReduccer,
 	publications: publicationsReduccer,
 	gallery: galleryReducer,
-
-
+	institutions: institucionReducer,
 })
 
 export const store = createStore(

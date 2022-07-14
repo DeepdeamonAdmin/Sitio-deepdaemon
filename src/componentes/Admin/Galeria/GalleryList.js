@@ -7,7 +7,6 @@ export default function GalleryList() {
 		<>
 			{
 				imagenes.map(imagen => (
-
 					<div className="card p-2 border-primary mb-3" key={imagen.id} style={{ width: 12 + "rem" }}>
 						<img
 							className='card-img'
