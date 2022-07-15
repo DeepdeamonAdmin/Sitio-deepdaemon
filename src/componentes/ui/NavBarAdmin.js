@@ -129,7 +129,7 @@ export const NavBarAdmin = () => {
 						onClick={handleLogout}
 
 					>
-						Logout
+						Salir
 					</button>
 				</ul>
 			</div>
