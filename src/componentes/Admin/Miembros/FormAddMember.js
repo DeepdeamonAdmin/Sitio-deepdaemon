@@ -54,23 +54,23 @@ export const FormAddMember = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="row">
 					<div className="col mb-3">
-						<label> Name </label>
+						<label> Nombre </label>
 						<input
 							className="form-control"
 							type='text'
 							name='name'
-							placeholder='Name'
+							placeholder='Nombre'
 							value={name}
 							onChange={handleInputChange}
 						/>
 					</div>
 					<div className="col mb-3">
-						<label> Lastname </label>
+						<label> Apellido </label>
 						<input
 							className="form-control"
 							type='text'
 							name='lastname'
-							placeholder='Lastname'
+							placeholder='Apellido'
 							value={lastname}
 							onChange={handleInputChange}
 						/>
@@ -89,12 +89,12 @@ export const FormAddMember = () => {
 						/>
 					</div>
 					<div className="col mb-3">
-						<label> Password </label>
+						<label> Contraseña </label>
 						<input
 							className="form-control"
 							type='password'
 							name='password'
-							placeholder='Password'
+							placeholder='Contraseña'
 							value={password}
 							onChange={handleInputChange}
 						/>
@@ -125,12 +125,12 @@ export const FormAddMember = () => {
 				</div>
 				<div className="row">
 					<div className="col mb-3">
-						<label>Short Description </label>
+						<label>Descripción breve </label>
 						<textarea
 							className="form-control"
 							rows='3' cols='40'
 							name='shortDesc'
-							placeholder='Short Desciption'
+							placeholder='Descripción breve'
 							value={shortDesc}
 							onChange={handleInputChange}
 						/>
@@ -138,12 +138,12 @@ export const FormAddMember = () => {
 				</div>
 				<div className="row">
 					<div className="col mb-3">
-						<label>Description </label>
+						<label>Descripción </label>
 						<textarea
 							className="form-control"
 							rows='10' cols='40'
 							name='longDesc'
-							placeholder='Desciption'
+							placeholder='Descripción'
 							value={longDesc}
 							onChange={handleInputChange}
 						/>
@@ -151,7 +151,7 @@ export const FormAddMember = () => {
 				</div>
 				<div className="row">
 					<div className="col-md-4 mb-3">
-						<label> Status </label>
+						<label> Estado </label>
 						<select
 							className="form-control"
 							name='status'
@@ -192,7 +192,7 @@ export const FormAddMember = () => {
 				</div>
 				<div className="row">
 					<div className="col mb-2">
-						<label> School </label>
+						<label> Escuela </label>
 						<select
 							className="form-control"
 							name='idSchool'
@@ -206,7 +206,7 @@ export const FormAddMember = () => {
 						</select>
 					</div>
 					<div className="col mb-2">
-						<label> Career </label>
+						<label> Carrera </label>
 						<select
 							className="form-control"
 							name='idCareer'

@@ -33,7 +33,7 @@ export const MemberCard = (item) => {
                         <Link
                             to={ `/admin/members` }
                             className ="btn btn-primary btn-sm">
-                                Edit
+                                Editar
                         </Link>
                     </p>
                     
@@ -41,7 +41,7 @@ export const MemberCard = (item) => {
                         <button 
                             type="button" 
                             className="btn btn-success btn-sm"
-                            onClick={ handleDelete }>Delete</button>
+                            onClick={ handleDelete }>Eliminar</button>
                     </p>
                     <p>
                         <button 

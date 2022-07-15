@@ -47,7 +47,7 @@ export const AlumnoCard = (item) => {
 						<button
 							type="button"
 							className="btn btn-success btn-sm"
-							onClick={handleDelete}>Delete</button>
+							onClick={handleDelete}>Eliminar</button>
 					</p>
 					<p>
 						<button
