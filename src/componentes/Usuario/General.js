@@ -19,8 +19,33 @@ import { TeamScreen } from './TeamScreen';
 import { PublicationScreen } from './PublicationScreen';
 import FormCorreo from './FormCorreo';
 
+import { useEffect, useState } from 'react';
+import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../firebase/firebase-config';
+
 
 export const General = ({ id }) => {
+
+	//Configurar hooks
+	const [avisos, setAvisos] = useState([]);
+	//Referenciar db de firebase
+	const avisosCollection = collection(db, 'Avisos');
+	//Función para obtener todos los avisos
+	const getAvisos = async () => {
+		const datos = await getDocs(avisosCollection);
+		//console.log(datos.docs)
+		setAvisos(
+			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
+		);
+		console.log(avisos);
+	}
+	//Función para eliminar un aviso
+
+	//Usar useEffect
+	useEffect(() => {
+		getAvisos();
+	}, [])
+
 	return (
 		<div className="">
 			<div className='d-flex flex-row dd_header'>
@@ -41,29 +66,18 @@ export const General = ({ id }) => {
 				</iframe>
 			</div>
 			<h1>ANUNCIOS</h1>
+
 			<Container className='section'>
 				<Carousel className="w-100">
-					<Carousel.Item>
-						<Image src={azul} className="w-100" alt="logo" />
-						<Carousel.Caption>
-							<h3>PRIMER AVISO</h3>
-							<p>Información del primer aviso</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<Image src={bg} className="w-100" alt="logo" />
-						<Carousel.Caption>
-							<h3>SEGUNDO AVISO</h3>
-							<p>Información de segundo aviso</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<Image src={azul} className="w-100" alt="logo" />
-						<Carousel.Caption>
-							<h3>TERCER AVISO</h3>
-							<p>Información de tercer aviso</p>
-						</Carousel.Caption>
-					</Carousel.Item>
+					{avisos.map(aviso => (
+						<Carousel.Item key={aviso.id}>
+							<Image src={aviso.photo} className="w-100" />
+							<Carousel.Caption>
+								<h3>{aviso.name}</h3>
+								<p>{aviso.desc}</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+					))}
 				</Carousel>
 			</Container>
 

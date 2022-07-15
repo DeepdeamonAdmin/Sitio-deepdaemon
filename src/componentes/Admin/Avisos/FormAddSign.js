@@ -1,68 +1,73 @@
 import React from 'react'
-import { useForm } from '../../../hooks/useForm';
-
+import { useDispatch } from 'react-redux'
+import { startsNewImage, startUploadingImage } from '../../../actions/avisos'
+import { useForm } from '../../../hooks/useForm'
 
 export default function FormAddSign() {
-	const [formValues, handleInputChange] = useForm({
+	const dispatch = useDispatch()
+	const [formValues, handleInputChange, reset] = useForm({
 		name: '',
-		descr: '',
-		icon: '',
-	});
+		desc: ''
+	})
+	const { name, desc } = formValues
 
-	const { name, descr, icon } = formValues;
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			if (name == '') {
+				dispatch(startUploadingImage(file));
+			} else {
+				const typeFile = file.name.split('.')[1]
+				const fileName = name + '.' + typeFile
+				const auxFile = new File([file], fileName)
+				dispatch(startUploadingImage(auxFile));
+			}
 
-	const handleSubmit = (e) => {
-        e.preventDefault();
-    }
+		}
+	}
+
+	const handleSave = () => {
+		dispatch(startsNewImage(formValues));
+		reset();
+	}
 
 	return (
-		<div className="section">
-			<h1>Formulario de avisos</h1>
-			<hr />
-			<form onSubmit={handleSubmit}>
-				<div className="col mb-3">
-					<label>Titulo </label>
+		<div>
+			<div className='centro'>
+    			<h2> Crear anuncio </h2>
+			</div>
+			<hr/>
+			<div className="form-row">
+				<div className="col-md-6 mb-3">
+					<label >Titulo</label>
+					<input type="text" className="form-control" placeholder="Imagen" onChange={handleInputChange} name="name" required />
+				</div>
+				<div className="col-md-6 mb-3">
+					<label >Descripción</label>
+					<textarea className="form-control" rows="3" onChange={handleInputChange} name="desc" required></textarea>
+				</div>
+			</div>
+			<div className="form-row">
+				<div className="col-md-4 mb-3">
+					<label for="fileSelector">Seleccionar imagen:</label>
 					<input
-						className="form-control"
-						type='text'
-						name='name'
-						placeholder='Name'
-						value={name}
-						onChange={handleInputChange}
+						id="fileSelector"
+						type="file"
+						name="file"
+						accept="image/png, image/jpeg"
+						onChange={handleFileChange}
 					/>
 				</div>
-				<div className="col mb-3">
-					<label> Información </label>
-					<textarea
-						className="form-control"
-						rows='5' cols='40'
-						name='descr'
-						placeholder='Desciption'
-						value={descr}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label>Seleccione una foto </label>
-					<input
-						className="form-control"
-						type='file'
-						name='icon'
-						value={icon}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-
+			</div>
+			<div className="form-row">
+				<div className="col-md-6 mb-3">
 					<button
-						className="btn2 btn-primary btn-large btn-block"
-						type="submit"
-					>
-						Agregar
+						className="btn btn-primary"
+						onClick={handleSave}>
+						Subir imagen
 					</button>
-
 				</div>
-			</form>
+			</div>
 		</div>
 	)
 }

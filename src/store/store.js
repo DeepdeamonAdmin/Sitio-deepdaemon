@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux"; // para autenticación
 import thunk from 'redux-thunk'; //uso de middleware
 import { authReducer } from "../reducers/authReducer";
+import { avisoReducer } from "../reducers/avisoReducer";
 import { deleteReducer } from "../reducers/deleteReducer";
 import { editReducer } from "../reducers/editReducer";
 import { galleryReducer } from "../reducers/galleryReducer.";
@@ -25,6 +26,7 @@ const reducers = combineReducers({
 	edit: editReducer,
 	//para perfil individual
 	user: userReducer,
+	aviso: avisoReducer,
 	projects: projectsReduccer,
 	publications: publicationsReduccer,
 	gallery: galleryReducer,

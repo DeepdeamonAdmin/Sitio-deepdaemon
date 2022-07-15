@@ -1,60 +1,50 @@
 import React from 'react'
 import SignCard from './SignCard'
+import { useSelector } from 'react-redux'
 
-import azul from "../../../assets/azul.jpg";
-import verde from "../../../assets/verde.jpg";
+import { useEffect, useState } from 'react';
+import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../../firebase/firebase-config';
 
 export default function AvisosList() {
 
-	const handleDelete = (e) => {
-
+	//Configurar hooks
+	const [avisos, setAvisos] = useState([]);
+	//Referenciar db de firebase
+	const avisosCollection = collection(db, 'Avisos');
+	//Función para obtener todos los avisos
+	const getAvisos = async () => {
+		const datos = await getDocs(avisosCollection);
+		//console.log(datos.docs)
+		setAvisos(
+			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
+		);
 	}
-	return (
-		<div className="section card-columns animate__animated animate__fadeIn">
-			{
-				// member.map(item => (
+	
+	//Función para eliminar un aviso
+	const deleteAviso = async (id) => {
+		const avisoDoc = doc(db, 'Avisos', id);
+		await deleteDoc(avisoDoc);
+		getAvisos();
+	}
+	//Usar useEffect
+	useEffect(() => {
+		getAvisos();
+	}, [])
 
-				// 	//Verificar si status es igual a "leader"
-				// 	item.status === "leader" && (
-				// 		<SignCard
-				// 			key={item.id}
-				// 			{...item}
-				// 		/>
-				// 	)
-				// ))
-				<div className=''>
-					<div className="card w-50 p-2 d-flex flex-row">
-						<img className="card-img-top " src={azul} alt="Card image cap" />
-						<p>
-							<button
-								type="button"
-								className="btn btn-success btn-sm"
-								onClick={handleDelete}>Delete</button>
-						</p>
-						<p>
-							<button
-								type="button"
-								className="btn btn-secondary btn-sm"
-							>Información</button>
-						</p>
-					</div>
-					<div className="card w-50 p-2 d-flex flex-row">
-						<img className="card-img-top" src={verde} alt="Card image cap" />
-						<p>
-							<button
-								type="button"
-								className="btn btn-success btn-sm"
-								onClick={handleDelete}>Delete</button>
-						</p>
-						<p>
-							<button
-								type="button"
-								className="btn btn-secondary btn-sm"
-							>Información</button>
-						</p>
-					</div>
-				</div>
-			}
-		</div>
+	return (
+		<>
+			<div className="card-columns cards-cols animate__animated animate__fadeIn px-5">
+				{
+					avisos.map(aviso => (
+						<SignCard
+							key={aviso.id}
+							{...aviso}
+							
+						/>
+					))
+				}
+			</div>
+		</>
 	)
 }

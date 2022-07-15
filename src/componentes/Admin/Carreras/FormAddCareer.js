@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { registerCareer } from '../../../actions/register';
+import { startsNewCareer } from '../../../actions/Careers';
 import { useForm } from '../../../hooks/useForm';
 
 const FormAddCareer = () => {
@@ -14,11 +14,9 @@ const FormAddCareer = () => {
 
 	const { name, } = formValues;
 
-	//envio a la api
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(registerCareer(formValues));
-		console.log(formValues);
+		dispatch(startsNewCareer(formValues))
 	}
 
 	return (

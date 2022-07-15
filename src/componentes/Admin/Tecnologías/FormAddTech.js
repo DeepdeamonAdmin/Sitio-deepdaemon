@@ -1,25 +1,24 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { registerTech } from '../../../actions/register';
+import { startsNewTech } from '../../../actions/tecnologias';
 import { useForm } from '../../../hooks/useForm';
 
 const FormAddTech = () => {
 
 	const dispatch = useDispatch();
+
 	const [formValues, handleInputChange] = useForm({
-		name: '',
-		descr: '',
-		icon: '',
+		name: ''
 	});
 
-	const { name, descr, icon } = formValues;
+	const { name } = formValues;
 
 
 	//envio a la api
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(registerTech(formValues));
-		console.log(formValues);
+		dispatch(startsNewTech(formValues));
 	}
 
 	return (
@@ -34,27 +33,6 @@ const FormAddTech = () => {
 						name='name'
 						placeholder='Nombre'
 						value={name}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label> Descripción </label>
-					<textarea
-						className="form-control"
-						rows='10' cols='40'
-						name='descr'
-						placeholder='Descripción'
-						value={descr}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label>Seleccione una foto </label>
-					<input
-						className="form-control"
-						type='file'
-						name='icon'
-						value={icon}
 						onChange={handleInputChange}
 					/>
 				</div>

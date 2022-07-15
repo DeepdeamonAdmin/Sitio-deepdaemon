@@ -1,15 +1,32 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useEffect, useState } from 'react';
+import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../../firebase/firebase-config';
 
-const SignCard = () => {
+
+const SignCard = (item) => {
 
 	const dispatch = useDispatch();
 
-	const handleDelete = (e) => {
-		// e.preventDefault();
-		// dispatch( deleteMember(item.id) );
-		console.log(e);
+	//Configurar hooks
+	const [avisos, setAvisos] = useState([]);
+	//Referenciar db de firebase
+	const avisosCollection = collection(db, 'Avisos');
+	//Función para obtener todos los avisos
+	const getAvisos = async () => {
+		const datos = await getDocs(avisosCollection);
+		//console.log(datos.docs)
+		setAvisos(
+			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
+		);
+	}
+
+	const deleteAviso = async (id) => {
+		const avisoDoc = doc(db, 'Avisos', id);
+		await deleteDoc(avisoDoc);
+		getAvisos();
 	}
 
 	return (
@@ -17,37 +34,23 @@ const SignCard = () => {
 			<div className="row no-gutters">
 				<div className="col-md-4">
 					<img
-						src={`../../../../media/team/user.png`}
-						alt="member"
+						src={item.photo}
 						className="card-img"
 					/>
 				</div>
-				{/* <div className="col-md-5">
+				<div className="col-md-5">
 					<div className="card-body">
 						<h5 className="card-title"> {item.name} </h5>
-						<p className="card-text"> {item.email} </p>
+						<p className="card-text"> {item.desc} </p>
 					</div>
-				</div> */}
+				</div> 
 				<div className="col-md-1">
-					{/* <p>
-						<Link
-							to={`/admin/lideres`}
-							className="btn btn-primary btn-sm">
-							Edit
-						</Link>
-					</p> */}
 
 					<p>
 						<button
 							type="button"
 							className="btn btn-success btn-sm"
-							onClick={handleDelete}>Delete</button>
-					</p>
-					<p>
-						<button
-							type="button"
-							className="btn btn-secondary btn-sm"
-						>Información</button>
+							onClick={() => {deleteAviso(item.id)}}>Borrar</button>
 					</p>
 				</div>
 

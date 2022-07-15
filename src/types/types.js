@@ -85,5 +85,26 @@ export const types = {
 	institucionDelete: '[instituciones] Delete institution',
 	institucionUpdate: '[instituciones] Update institution',
 
+	// Para las carreras
+	careerAddNew: '[Carreras] New Career',
+	careerAllLoad: '[Carreras] All Load Career',
+	careerLoad: '[Carreras] Load Career',
+	careerDelete: '[Carreras] Delete Career',
+	careerUpdate: '[Carreras] Update Career',
+
+	// Para las tecnolofias
+	techAddNew: '[Carreras] New Tech',
+	techAllLoad: '[Carreras] All Load Tech',
+	techLoad: '[Carreras] Load Tech',
+	techDelete: '[Carreras] Delete Tech',
+	techUpdate: '[Carreras] Update Tech',
+
+	// Para los avisos
+	avisoAddNew: '[Images] New Image', //Agregando imagen con nombre
+	avisoAddNewPhoto: '[Images] New Photo', //Solamente imagen
+	avisoLoad: '[Images] Load Image',
+	avisoAllLoad: '[Images] All Load Images',
+	avisoDelete: '[Images] Delete Image',
+	avisoUpdate: '[Images] Update Image',
 
 }
