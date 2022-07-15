@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteMember } from '../../../actions/delete';
-import { uiOpenModalEdit } from '../../../actions/ui';
 import { ModalEditarAlumno } from './ModalEditarAlumno';
 
 

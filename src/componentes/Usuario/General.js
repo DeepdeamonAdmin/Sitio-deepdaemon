@@ -4,9 +4,7 @@ import React from 'react'
 //imagenes fijas
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
-import azul from "../../assets/azul.jpg";
 import QR from "../../assets/qrcontacto.png";
-import bg from "../../styles/assets/img/bg/header_bg.png"
 
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa 
 import "../../styles/DeepDaemon.css";
@@ -14,13 +12,11 @@ import { Container, Nav, Carousel } from 'react-bootstrap';
 import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
 import { LeaderScreen } from './LeaderScreen';
-import { ProjectScreen } from './ProjectScreen';
 import { TeamScreen } from './TeamScreen';
-import { PublicationScreen } from './PublicationScreen';
 import FormCorreo from './FormCorreo';
 
 import { useEffect, useState } from 'react';
-import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, } from 'firebase/firestore';
 import { db } from '../../firebase/firebase-config';
 
 
@@ -37,7 +33,6 @@ export const General = ({ id }) => {
 		setAvisos(
 			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
 		);
-		console.log(avisos);
 	}
 	//Función para eliminar un aviso
 

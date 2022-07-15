@@ -2,26 +2,22 @@ import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { fileUpload } from '../helpers/fileUpload';
-import { loadAllWorks } from "../helpers/loadAllWorks";
 import { loadWorks } from "../helpers/loadWorks";
 import { types } from "../types/types";
 import { uiCloseModal } from "./ui";
 
 // import { fileUpload } from '../helpers/fileUpload';
-import { loadUser } from '../helpers/loadAviso';
 import { loadAllUsers } from '../helpers/loadAllUsers';
-import { doc, updateDoc } from "firebase/firestore";
 
 
 export const startsNewImage = (formValues) => {
 	return async (dispatch, getState) => {
-		const { uid } = getState().auth;
 		const { img } = getState().gallery;
 
 		const newImage = {
 			name: formValues.name,
 			desc: formValues.desc,
-			
+
 			photo: img,
 		}
 
@@ -90,21 +86,21 @@ export const setAllImages = (imagenes) => ({
 
 //Obtener todos los uasuarios 
 export const startLoadinUsersAll = () => {
-    return async(dispatch ) => {
-        const ruta = '/Avisos'
-        const avisos = await loadAllUsers( ruta );      
-        //verificamos que obtenimos el documento 
-        if (avisos) {
-            dispatch( setUsers(avisos) );  
-        } else {
-            Swal.fire('Error BD no identificada');
-        }
-    }
+	return async (dispatch) => {
+		const ruta = '/Avisos'
+		const avisos = await loadAllUsers(ruta);
+		//verificamos que obtenimos el documento 
+		if (avisos) {
+			dispatch(setUsers(avisos));
+		} else {
+			Swal.fire('Error BD no identificada');
+		}
+	}
 }
 
 //mandar a redux los usuarios
-export const setUsers = ( avisos ) => ({
-    type: types.usersLoad,
-    payload: avisos
+export const setUsers = (avisos) => ({
+	type: types.usersLoad,
+	payload: avisos
 });
 
