@@ -94,6 +94,28 @@ return (
         </div>
         <div className='row'>
           <div className='mb-2 col-sm-7'>
+            <label className='form-label'>Pais* </label>
+            <input 
+              type='label' 
+              className='form-control' 
+              name='Pais' 
+              required 
+            />          
+          </div>
+        </div>
+        <div className='row'>
+          <div className='mb-2 col-sm-7'>
+            <label className='form-label'>Ubicación* </label>
+            <input 
+              type='label' 
+              className='form-control' 
+              name='Ubicacion' 
+              required 
+            />          
+          </div>
+        </div>
+        <div className='row'>
+          <div className='mb-2 col-sm-7'>
             <label className='form-label'>Contraseña* </label>
             <input 
               type='password' 
