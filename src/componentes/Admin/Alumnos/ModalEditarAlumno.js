@@ -20,7 +20,7 @@ export const ModalEditarAlumno = (nombre) => {
 			className="modal"
 			overlayClassName="modal-fondo"
 		>
-			<FormEditAlumno nombre={nombre} />
+			{/* <FormEditAlumno nombre={nombre} /> */}
 		</Modal >
 	)
 }

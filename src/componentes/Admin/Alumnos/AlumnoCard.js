@@ -2,9 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteMember } from '../../../actions/delete';
-import { ModalEditarAlumno } from './ModalEditarAlumno';
-
-
 
 export const AlumnoCard = (item) => {
 	const dispatch = useDispatch();
@@ -16,7 +13,7 @@ export const AlumnoCard = (item) => {
 	return (
 		<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
 			<div className="row no-gutters">
-				<ModalEditarAlumno item={item.nombre} />
+				{/* <ModalEditarAlumno item={item.nombre} /> */}
 				<div className="col-md-4">
 					<img
 						src={item.urlImg}

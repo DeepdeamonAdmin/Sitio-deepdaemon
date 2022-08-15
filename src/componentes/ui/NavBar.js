@@ -83,14 +83,14 @@ export const NavBar = () => {
 							className="btn btn-outline-secondary nav-item nav-link"
 
 						>
-							Registrer
+							Registrar
 						</NavLink>
 						<NavLink
 							to='/login'
 							className="btn btn-outline-secondary nav-item nav-link"
 
 						>
-							Login
+							Iniciar Sesión
 						</NavLink>
 					</ul>
 				</div>

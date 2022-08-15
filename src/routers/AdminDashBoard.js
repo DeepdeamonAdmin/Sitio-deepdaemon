@@ -16,6 +16,8 @@ import AvisosScreen from '../componentes/Admin/Avisos/AvisosScreen';
 import InstitucionesScreen from '../componentes/Admin/Instituciones/InstitucionesScreen';
 import CarrerasScreen from '../componentes/Admin/Carreras/CarrerasScreen';
 import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
+import FormEditLider from '../componentes/Admin/Lideres/FormEditLider';
+
 
 export const AdminDashBoard = () => {
 	return (
@@ -31,6 +33,7 @@ export const AdminDashBoard = () => {
 					<Route path="alumnos" element={<AlumnoScreen />} />
 					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="lideres" element={<LiderScreen />} />
+					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
 					{/* <Route path="other" element={<OtherScreen />} /> */}

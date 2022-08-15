@@ -11,22 +11,20 @@ import { getSchool } from '../../../selectors/get/getSchool';
 
 export const FormEditarAlumno = (props) => {
 
-    //Obtener el id del alumno
-    const { idAlumno } = useParams();
-    console.log(idAlumno);
+	//Obtener el id del alumno
+	const { idAlumno } = useParams();
 
-    //Traer todos los alumnos
-    const { usuarios } = useSelector(state => state.user);
-    
-    const dispatch = useDispatch();
+	//Traer todos los alumnos
+	const { usuarios } = useSelector(state => state.user);
 
-    //Obtener el alumno seleccionado
-    const alumno = usuarios.filter(alumno => {
-        return alumno.id === idAlumno
-    })
-    console.log(alumno);
+	const dispatch = useDispatch();
 
-    const [formValues, handleInputChange] = useForm({
+	//Obtener el alumno seleccionado
+	const alumno = usuarios.filter(alumno => {
+		return alumno.id === idAlumno
+	})
+
+	const [formValues, handleInputChange] = useForm({
 		name: '',
 		lastname: '',
 		password: '',
@@ -72,7 +70,7 @@ export const FormEditarAlumno = (props) => {
 							type='text'
 							name='name'
 							placeholder='Name'
-                            value={alumno[0].nombre}
+							value={alumno[0].nombre}
 							onChange={handleInputChange}
 						/>
 					</div>
