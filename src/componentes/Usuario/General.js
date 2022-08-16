@@ -4,6 +4,7 @@ import React from 'react'
 //imagenes fijas
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
+import cic from "../../styles/assets/img/sitio/cic.png";
 import QR from "../../assets/qrcontacto.png";
 
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa 
@@ -45,8 +46,10 @@ export const General = ({ id }) => {
 		<div className="">
 			<div className='d-flex flex-row dd_header'>
 				<div className='' id='Home'>
+					<img src={cic} className="ddcic" alt="cic" />
 					<img src={logo} className="ddlogo" alt="logo" />
-					<h1>DeepDaemon</h1>
+					<h1>Laboratorio de Ciencias </h1>
+					<h1>Cognitivas Computacionales</h1>
 					<hr />
 					<h2>Comunidad de conocimiento</h2>
 				</div>

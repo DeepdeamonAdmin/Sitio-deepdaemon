@@ -12,7 +12,7 @@ export const NavBar = () => {
 			<NavLink to="Home">
 				<img src={logo} style={{ width: "30px" }} alt="logo" />
 			</NavLink>
-			<NavLink to="/" className="navbar-brand"> DeepDaemon </NavLink>
+			<NavLink to="/" className="navbar-brand"> Laboratorio de Ciencias Cognitivas Computacionales </NavLink>
 
 			<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div className="navbar-nav">
