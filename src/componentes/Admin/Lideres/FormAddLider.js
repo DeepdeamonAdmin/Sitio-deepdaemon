@@ -28,6 +28,7 @@ const [formValues, handleInputChange ] = useForm({
   email: '',
   password: '',
   password2: '',  
+  display: 'Y',
 });
 
 const {name, email, password, password2 } = formValues;

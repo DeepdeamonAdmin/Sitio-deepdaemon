@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { TeamDetaills } from './TeamDetaills';
 import { useGet } from '../../hooks/useGet';
 import { getMemberStatus } from '../../selectors/get/getMemberStatus';
 import { LeaderDetaills } from './LeaderDetaills';
@@ -8,36 +10,34 @@ import { ModalInfoProject } from './ModalInfoProject';
 
 export const LeaderScreen = () => {
 
-	const status = 'leader';
-
-	const { data: leaders, loading } = useGet(getMemberStatus, status);
-
+	const { usuarios } = useSelector(state => state.user);
 
 	return (
 		<>
-			{loading && <p className="animate__animated animate__flash">Loading</p>}
 			<div className="card-columns cards-cols animate__animated animate__fadeIn">
 				{
-					leaders.map(leader => (
-						<div className="d-flex flex-row card animate__animated animate__fadeIn border-success mb-3" style={{ MaxWidth: 380, MaxHeight: 150 }}>
-							{/* {console.log(leader)} */}
-							<img
-								className="card-img"
-								style={{
-									height: "150px",
-									width: "150px"
-								}}
-								src={`../../../../media/team/user.png`}
-								// leader.photo_filename
-								alt="member"
-							/>
-							<div className="card-body text-success">
-								<h5 className="card-title"> {leader.name} {leader.lastname} </h5>
-								<LeaderDetaills color={"success"} leader={leader} />
-								{/* <ModalInfoProject item={leader} key={leader.id} /> */}
-							</div>
-						</div>
+					usuarios.map(usuario => (
+						//Imprimir solamente los usuarios leader	
+						(usuario.grado === "leader" && usuario.display === "Y") && (
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-green mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }}>
 
+								<img
+									className="card-img"
+									src={usuario.urlImg}
+									alt="member"
+									style={{
+										height: "200px",
+										width: '200px'
+									}}
+								/>
+
+								<div className="card-body text-dark">
+									<h5 className="card-title"> {usuario.nombre} </h5>
+
+									<TeamDetaills color={"dark"} usuario={usuario} />
+								</div>
+							</div>
+						)
 					))
 				}
 			</div>
