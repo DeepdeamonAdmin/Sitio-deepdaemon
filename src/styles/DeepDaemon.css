@@ -2,6 +2,12 @@
     text-align: center;
     /*min-width: 600px;*/
   }
+
+  .ddcic {
+    /*animation: App-logo-spin infinite 20s linear;*/
+    height: 10vmin;
+    pointer-events: none;
+  }
   
   .ddlogo {
     /*animation: App-logo-spin infinite 20s linear;*/
