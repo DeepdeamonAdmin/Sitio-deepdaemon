@@ -65,7 +65,7 @@ export const General = ({ id }) => {
 			</div>
 			<h1>ANUNCIOS</h1>
 
-			<Container className='section'>
+			<div className="d-flex flex-row">
 				<Carousel className="w-100">
 					{avisos.map(aviso => (
 						<Carousel.Item key={aviso.id}>
@@ -77,7 +77,7 @@ export const General = ({ id }) => {
 						</Carousel.Item>
 					))}
 				</Carousel>
-			</Container>
+			</div>
 
 
 			<Container className="section" id='Nosotros'>

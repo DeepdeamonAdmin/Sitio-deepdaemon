@@ -14,7 +14,7 @@ export const LeaderScreen = () => {
 
 	return (
 		<>
-			<div className="card-columns cards-cols animate__animated animate__fadeIn">
+			<div className="d-flex flex-col animate__animated animate__fadeIn">
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
@@ -24,10 +24,9 @@ export const LeaderScreen = () => {
 								<img
 									className="card-img"
 									src={usuario.urlImg}
-									alt="member"
+									alt="leader"
 									style={{
-										height: "200px",
-										width: '200px'
+										width: '300px'
 									}}
 								/>
 
