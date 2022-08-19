@@ -193,13 +193,10 @@ const completarDatosGoogle = async (uid, name, email) => {
 
 export const startLoginEmailPassword = (email, password) => {
 	return (dispatch) => {
-
 		const auth = getAuth();
 		dispatch(startLoading());
-
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
-
 				dispatch(login(user.uid, user.displayName));
 
 				dispatch(finishLoading());

@@ -11,7 +11,6 @@ export const Perfil = () => {
 
 	const { datos: datoUser } = useSelector(state => state.user);
 	const [formValues, handleInputChange] = useForm(datoUser);
-	console.log(datoUser);
 
 	const { nombre, email, fechaNac, urlImg, grado,
 		descripcion, school, unidad, titulo, linkedin, facebook, Github } = formValues;
