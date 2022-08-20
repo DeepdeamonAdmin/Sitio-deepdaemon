@@ -55,7 +55,7 @@ export const FormAddAlumno = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="row">
 					<div className="col mb-3">
-						<label> Name </label>
+						<label> Nombre </label>
 						<input
 							className="form-control"
 							type='text'
@@ -66,7 +66,7 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 					<div className="col mb-3">
-						<label> Lastname </label>
+						<label> Apellidos </label>
 						<input
 							className="form-control"
 							type='text'
@@ -90,7 +90,7 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 					<div className="col mb-3">
-						<label> Password </label>
+						<label> Contraseña </label>
 						<input
 							className="form-control"
 							type='password'
@@ -126,7 +126,7 @@ export const FormAddAlumno = () => {
 				</div>
 				<div className="row">
 					<div className="col mb-3">
-						<label>Short Description </label>
+						<label>Descripción corta </label>
 						<textarea
 							className="form-control"
 							rows='3' cols='40'
@@ -139,7 +139,7 @@ export const FormAddAlumno = () => {
 				</div>
 				<div className="row">
 					<div className="col mb-3">
-						<label>Description </label>
+						<label>Descripción </label>
 						<textarea
 							className="form-control"
 							rows='10' cols='40'
@@ -190,7 +190,7 @@ export const FormAddAlumno = () => {
 				</div>
 				<div className="row">
 					<div className="col mb-2">
-						<label> School </label>
+						<label> Escuela </label>
 						<select
 							className="form-control"
 							name='idSchool'
@@ -204,7 +204,7 @@ export const FormAddAlumno = () => {
 						</select>
 					</div>
 					<div className="col mb-2">
-						<label> Career </label>
+						<label> Carrera </label>
 						<select
 							className="form-control"
 							name='idCareer'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -7,8 +7,9 @@ import { useGet } from '../../../hooks/useGet';
 import { getCareer } from '../../../selectors/get/getCareer';
 import { getSchool } from '../../../selectors/get/getSchool';
 import fotoPerfil from '../../../assets/Usuario.jpg'
-import { editLider } from '../../../actions/edit';
+import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
+import { startUploading } from '../../../actions/user';
 
 export default function FormEditLider() {
 
@@ -21,6 +22,12 @@ export default function FormEditLider() {
 	const lider = liderO[0]
 	const [formValues, handleInputChange] = useForm(lider);
 	const [password2, setPassword2] = useState('')
+	const [oldPassword, setOldPassword] = useState('')
+
+	useEffect(() => {
+		setOldPassword(lider.password)
+	}, [usuarios]);
+
 	const {
 		Github,
 		descripcion,
@@ -37,22 +44,22 @@ export default function FormEditLider() {
 
 	const handleSave = (e) => {
 		e.preventDefault();
-		// if (password == password2) 
-		dispatch(editLider(formValues));
-		// else Swal.fire('Contraseñas no corresponden')
+		if (password == password2) dispatch(editUser(formValues, oldPassword));
+		else Swal.fire('Contraseñas no corresponden')
 	}
 	//Traemos la informacion de Career
 	const { data: dataCareer } = useGet(getCareer);
 	//Traemos la informacion de School
 	const { data: dataSchool } = useGet(getSchool);
+
 	const handlePictureClick = () => {
 		document.querySelector('#fileSelector').click();
-
 	}
+
 	const handleFileChange = (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			// dispatch(sstartUploading(file));
+			dispatch(startEditingPicture(formValues, file));
 		}
 	}
 	return (
@@ -185,10 +192,10 @@ export default function FormEditLider() {
 			</div>
 
 			<button
-				className="btn2 btn-primary btn-large btn-block mb-4"
+				className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"
 				onClick={handleSave}
 			>
-				Agregar
+				Editar información
 			</button>
 		</div>
 	)
