@@ -17,7 +17,7 @@ export const TeamScreen = ({ status }) => {
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios del grado que selecciono
-						(usuario.grado === status) && (
+						(usuario.grado === status && usuario.display === "Y") && (
 							<div className="d-flex flex-row card animate__animated animate__fadeIn border-dark mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }}>
 
 								<img

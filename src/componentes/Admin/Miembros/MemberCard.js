@@ -30,11 +30,9 @@ export const MemberCard = (item) => {
                 </div>
                 <div className="col-md-1">
                     <p>
-                        <Link
-                            to={ `/admin/members` }
-                            className ="btn btn-primary btn-sm">
-                                Editar
-                        </Link>
+                        <Link to={`../alumnos/editar/${item.id}`} className="btn btn-primary">
+							Editar
+						</Link>
                     </p>
                     
                     <p>
