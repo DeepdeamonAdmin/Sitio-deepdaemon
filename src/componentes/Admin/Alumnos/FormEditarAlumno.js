@@ -33,8 +33,9 @@ export const FormEditarAlumno = (props) => {
 
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
-	//console.log(alumno[0]); //dhernandez
+	// console.log(alumno[0]); //dhernandez
 	const [formValues, handleInputChange] = useForm({
+		id: alumno[0].id,
 		name: alumno[0].nombre,
 		email: alumno[0].email,
 		password: alumno[0].password,

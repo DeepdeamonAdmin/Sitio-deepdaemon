@@ -30,13 +30,11 @@ export const editProject = (formValues) => {
 }
 
 export const editUser = (formValues, oldPassword) => {
-	console.log(formValues);
 	return async (dispatch) => {
 		const auth = getAuth()
 		signInWithEmailAndPassword(auth, formValues.email, oldPassword)
 			.then(({ user }) => {
 				updatePassword(user, formValues.password).then(() => {
-
 					if (!formValues.foto_perfil) delete formValues.foto_perfil;
 
 					const dataToFirestore = { ...formValues }
@@ -45,7 +43,7 @@ export const editUser = (formValues, oldPassword) => {
 					dispatch(refreshData(dataToFirestore))
 					Swal.fire('Informacion actualizada:', formValues.title, 'success')
 
-					signOut(user);
+					// signOut(user);
 				}).catch((error) => {
 					console.log(error);
 				});
