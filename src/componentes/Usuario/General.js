@@ -160,7 +160,8 @@ export const General = ({ id }) => {
 			<Container fluid className="section portfolio" id='Lideres'>
 				<h1>Los líderes</h1>
 				<hr />
-				<LeaderScreen />
+
+				<LeaderScreen  align="center"/>
 			</Container>
 
 			<Container fluid className="team_separator">
@@ -189,6 +190,8 @@ export const General = ({ id }) => {
 							estamos buscando.
 						</p>
 						<div className='text-center'>
+							<Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
+							<br />
 							<Button variant="secondary ">Contáctanos</Button>
 						</div>
 					</Col>
@@ -224,7 +227,6 @@ export const General = ({ id }) => {
 					<br />
 					Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
 				</p>
-				<Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
 				<p>
 					<FormCorreo />
 					<span className="icon icon-envelop" />

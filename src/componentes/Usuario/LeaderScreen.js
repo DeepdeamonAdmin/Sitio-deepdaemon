@@ -5,6 +5,8 @@ import { useGet } from '../../hooks/useGet';
 import { getMemberStatus } from '../../selectors/get/getMemberStatus';
 import { LeaderDetaills } from './LeaderDetaills';
 import { ModalInfoProject } from './ModalInfoProject';
+import { ModalCrearCuenta } from './ModalCrearCuenta';
+import { VerMas } from '../ui/VerMas';
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
 
@@ -14,7 +16,7 @@ export const LeaderScreen = () => {
 
 	return (
 		<>
-			<div className="d-flex flex-col animate__animated animate__fadeIn">
+			<div className="card-columns cards-cols animate__animated animate__fadeIn">
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
@@ -33,7 +35,9 @@ export const LeaderScreen = () => {
 								<div className="card-body text-dark">
 									<h5 className="card-title"> {usuario.nombre} </h5>
 
-									<TeamDetaills color={"dark"} usuario={usuario} />
+									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
+									<ModalCrearCuenta />
+									<VerMas />
 								</div>
 							</div>
 						)
