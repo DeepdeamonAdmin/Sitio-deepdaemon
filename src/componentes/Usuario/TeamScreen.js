@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useGet } from '../../hooks/useGet';
 import { getMemberStatus } from '../../selectors/get/getMemberStatus';
 import { TeamDetaills } from './TeamDetaills';
+import { ModalCrearCuenta } from './ModalCrearCuenta';
+import { VerMas } from '../ui/VerMas';
 // import {  } from './ProjectDetaills';
 
 
@@ -33,7 +35,8 @@ export const TeamScreen = ({ status }) => {
 								<div className="card-body text-dark">
 									<h5 className="card-title"> {usuario.nombre} </h5>
 
-									<TeamDetaills color={"dark"} usuario={usuario} />
+									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
+									<VerMas />
 								</div>
 							</div>
 						)
