@@ -50,6 +50,7 @@ const completarDatos = async (uid, formvalues) => {
 		"password": formvalues.password,
 		"password2": formvalues.password2,
 		'urlImg': '',
+		'display': 'Y',
 		'grado': '',
 		"descripcion": '',
 		"school": '',
@@ -88,6 +89,7 @@ const completarDatosDesdeForm = async (uid, formValues) => {
 	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
 		"rol": 'other',
+		'display': 'Y',
 		"name": formValues.name,
 		'lastname': formValues.lastname,
 		'password': formValues.password,
@@ -137,6 +139,7 @@ const completarDatosDeLider = async (uid, formValues) => {
 		"password": formValues.password,
 		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/oQKZ628qIJS3YIlV2VjZHW6ZSXQ2%2FfotoPerfilUsuario.jpg?alt=media&token=baf1bfc7-944d-4683-a998-8b730fa9c891',
 		'grado': 'leader',
+		'display': 'Y',
 		"descripcion": '',
 		"school": '',
 		"titulo": '',
@@ -170,6 +173,7 @@ const completarDatosGoogle = async (uid, name, email) => {
 				"password2": '',
 				"fechaNac": '',
 				'urlImg': '',
+				'display': 'Y',
 				'grado': '',
 				"descripcion": '',
 				"school": '',
