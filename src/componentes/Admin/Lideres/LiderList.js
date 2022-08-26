@@ -12,7 +12,7 @@ export const LiderList = () => {
 			<div className="card-columns cards-cols animate__animated animate__fadeIn">
 				{
 					//Solo los usuarios con el grado de leader
-					usuarios.filter(usuario => usuario.grado === 'leader').map(usuario => (
+					usuarios.filter(usuario => usuario.grado === 'leader' && usuario.display === 'Y' ).map(usuario => (
 
 						<LiderCard
 							key={usuario.id}

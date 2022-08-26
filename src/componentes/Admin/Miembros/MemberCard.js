@@ -3,14 +3,22 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteMember } from '../../../actions/delete';
 
-
+import { useEffect, useState } from 'react';
+import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { useNavigate, useParams } from "react-router-dom";
+import { db } from "../../../firebase/firebase-config";
+import Swal from "sweetalert2";
 
 export const MemberCard = (item) => {
     const dispatch = useDispatch();
 
     const handleDelete = (e) => {
         e.preventDefault();
-		dispatch( deleteMember(item.id) );
+        const memberRef = doc(db, 'Usuarios', item.id);
+        const data = {display: 'N'};
+        updateDoc (memberRef, data);
+        //mostrar mensaje de confirmacion
+        Swal.fire('Usuario eliminado', 'Éxito');
     }
     return (
         <div className="card ms-3 animate__animated animate__fadeIn" style={ { maxWidth: 540 } }>
