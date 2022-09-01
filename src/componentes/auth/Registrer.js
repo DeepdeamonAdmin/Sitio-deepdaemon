@@ -6,7 +6,18 @@ import { startRegisterWithEmailPassword } from '../../actions/auth';
 import { removeError, setError } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef } from 'react';
+
 export const Registrer = () => {
+
+  const recaptchaRef = useRef(null);
+
+  const onChange = () => {
+    if(recaptchaRef.current.getValue()){
+      console.log("Captcha Resuelto");
+    }
+  }
 
   //Funcion de registro de usuarios
   const dispatch = useDispatch();
@@ -28,7 +39,9 @@ export const Registrer = () => {
     
     e.preventDefault();
     if ( isFormValid() ) {
-      dispatch( startRegisterWithEmailPassword(formValues) );
+      if(recaptchaRef.current.getValue()){
+        dispatch( startRegisterWithEmailPassword(formValues) );
+      }
     }
 
   }
@@ -105,7 +118,7 @@ return (
         </div>
         <div className='row'>
           <div className='mb-2 col-sm-7'>
-            <label className='form-label'>Ubicación* </label>
+            <label className='form-label'>Ocupación* </label>
             <input 
               type='label' 
               className='form-control' 
@@ -133,7 +146,14 @@ return (
               name='password2' 
               required
               onChange={ handleInputChange }
-            />          
+            />   
+
+            <ReCAPTCHA
+              ref = {recaptchaRef}
+              sitekey="6LdCNashAAAAAN53p0HWkIi1-UJa84RVyxV-nMgF"
+              onChange = { onChange }
+            />,
+
             <button 
               type="submit"
               className="btn btn-primary btn-registro"
@@ -142,7 +162,7 @@ return (
                   Registrar
             </button>     
           </div>
-          <script src="https://www.google.com/recaptcha/api.js?render=6LdS-QMgAAAAAKZa0X39DZQjBIp2NhckXDwksoa-"></script>    
+
         </div>
       </form>
     </div>
