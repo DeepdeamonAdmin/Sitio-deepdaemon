@@ -11,7 +11,16 @@ import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
 import { startUploading } from '../../../actions/user';
 
+import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { useNavigate } from "react-router-dom";
+import { db } from "../../../firebase/firebase-config";
+
+import { ModalFoto } from './ModalFoto';
+import { FotosGallery } from '../../ui/FotosGallery';
+
 export const FormEditarAlumno = (props) => {
+
+	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 	const { usuarios } = useSelector(state => state.user)
@@ -44,9 +53,34 @@ export const FormEditarAlumno = (props) => {
 
 
 	const handleSave = (e) => {
+
 		e.preventDefault();
-		if (password == password2) dispatch(editUser(formValues, oldPassword));
-		else Swal.fire('Contraseñas no corresponden')
+		const memberRef = doc(db, 'Usuarios', alumno.id);
+        const data = {
+			Github,
+			descripcion,
+			email,
+			urlImg,
+			linkedin,
+			nombre,
+			password,
+			school,
+			titulo,
+			unidad,
+			display,
+		};
+        updateDoc (memberRef, data);
+        //mostrar mensaje de confirmacion
+        Swal.fire('Usuario editado', 'Éxito');
+		//ir a admin/alumnos para ver los cambios
+		navigate(`/admin/alumnos`);
+		
+
+		//if (password == password2) 
+		//	dispatch(editUser(formValues, oldPassword));
+		//else Swal.fire('Contraseñas no corresponden')
+
+		//dispatch(editUser(formValues, oldPassword));
 	}
 	//Traemos la informacion de Career
 	const { data: dataCareer } = useGet(getCareer);
@@ -71,8 +105,10 @@ export const FormEditarAlumno = (props) => {
 			</div>
 			<div className="row">
 				<div className='col mb-3'>
-					<div onClick={handlePictureClick}>
+					<div className="card">
 						<img className='foto' src={urlImg || fotoPerfil} alt="Foto de Perfil" />
+						<ModalFoto id={alumno.id} />
+						<FotosGallery /> 
 					</div>
 				</div>
 				{/* <div className="col custom-file"> */}
@@ -110,18 +146,18 @@ export const FormEditarAlumno = (props) => {
 						onChange={handleInputChange}
 					/>
 				</div>
-				<div className="col mb-3">
+				<div className="col mb-3" style={{ display: 'none' }}>
 					<label> Contraseña </label>
 					<input
 						className="form-control"
-						type='password'
+						type='text'
 						name='password'
 						placeholder='Contraseña'
 						value={password}
 						onChange={handleInputChange}
 					/>
 				</div>
-				<div className="col mb-3">
+				<div className="col mb-3" style={{ display: 'none' }}>
 					<label> Confirmar contraseña </label>
 					<input
 						className="form-control"
@@ -129,7 +165,7 @@ export const FormEditarAlumno = (props) => {
 						name='password2'
 						required
 						placeholder='Contraseña'
-						value={password2}
+						value={password}
 						onChange={(e) => setPassword2(e.target.value)}
 					/>
 				</div>

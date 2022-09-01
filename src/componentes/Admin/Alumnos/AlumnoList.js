@@ -8,8 +8,8 @@ export const AlumnoList = () => {
 		<>
 			<div className="card-columns cards-cols animate__animated animate__fadeIn px-5">
 				{
-					//Solo los usuarios con el grado de current y display = Y
-					usuarios.filter(usuario => usuario.grado === 'current' && usuario.display === 'Y' ).map(usuario => (
+					//Solo los usuarios con el grado de current o graduate
+					usuarios.filter(usuario => usuario.grado === 'current' || usuario.grado === 'graduate').map(usuario => (
 						<AlumnoCard
 							key={usuario.id}
 							{...usuario}

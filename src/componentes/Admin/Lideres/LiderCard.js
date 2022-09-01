@@ -38,9 +38,7 @@ export const LiderCard = (item) => {
 				</div>
 				<div className="col-md-1">
 					<p>
-						<Link
-							to={`editar/${item.id}`}
-							className="btn btn-primary btn-sm">
+						<Link to={`../alumnos/editar/${item.id}`} className="btn btn-primary">
 							Editar
 						</Link>
 					</p>
