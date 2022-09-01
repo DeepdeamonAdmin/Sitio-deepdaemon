@@ -7,13 +7,18 @@ import { db } from '../../../firebase/firebase-config';
 import { getDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { uiCloseModal } from '../../../actions/ui';
+import { refreshData, startLoadinUsersAll } from '../../../actions/user';
+
 
 export default function GalleryListModal(id) {
 
-   //console.log(id.id.id);
-   const idAlumno = id.id.id
-
+	//console.log(id.id.id);
+	const idAlumno = id.id.id
+	const dispatch = useDispatch();
 	const { uid } = useSelector(state => state.auth)
+	const navigate = useNavigate();
 	// console.log(uid);
 	const [gallery, setGallery] = useState([])
 
@@ -26,28 +31,30 @@ export default function GalleryListModal(id) {
 		);
 	}
 
-    const handleClick = (e) => {
-        e.preventDefault();
+	const handleClick = (e) => {
+		e.preventDefault();
 
-        //Copiar el link de la imagen
-        const urlImg = e.target.src;
+		//Copiar el link de la imagen
+		const urlImg = e.target.src;
 
 		const memberRef = doc(db, 'Usuarios', idAlumno);
 
-        const data = {
+		const data = {
 			urlImg,
 		};
-        updateDoc (memberRef, data);
-        //mostrar mensaje de confirmacion
-        Swal.fire('Usuario editado', 'Éxito');
+		updateDoc(memberRef, data);
+		//mostrar mensaje de confirmacion
+		Swal.fire('Usuario editado', 'Éxito');
 
-        //cerrar modal
-        //dispatch( uiCloseModal() );
-    }
+		//cerrar modal
+		dispatch(startLoadinUsersAll())
+		dispatch(uiCloseModal())
+		navigate(`/admin/alumnos`);
+	}
 
 	useEffect(() => {
 		getGallery()
-	})
+	}, [])
 	return (
 		<>
 			{
@@ -61,7 +68,7 @@ export default function GalleryListModal(id) {
 								height: '200px',
 								width: '200px'
 							}}
-                            onClick={handleClick}
+							onClick={handleClick}
 						/>
 						<span>{imagen.name}</span>
 					</div>

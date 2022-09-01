@@ -15,6 +15,7 @@ import { googleAuthProvider } from '../firebase/firebase-config';
 
 import { types } from '../types/types';
 import { startLoading, finishLoading, uiCloseModal } from './ui';
+import { refreshData } from './user';
 
 // const dispatch = useDispatch();
 //Registrar usuario por correo

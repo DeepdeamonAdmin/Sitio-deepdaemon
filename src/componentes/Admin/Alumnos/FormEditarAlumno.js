@@ -9,7 +9,7 @@ import { getSchool } from '../../../selectors/get/getSchool';
 import fotoPerfil from '../../../assets/Usuario.jpg'
 import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
-import { startUploading } from '../../../actions/user';
+import { startLoadinUsersAll, startUploading } from '../../../actions/user';
 
 import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ export const FormEditarAlumno = (props) => {
 
 		e.preventDefault();
 		const memberRef = doc(db, 'Usuarios', alumno.id);
-        const data = {
+		const data = {
 			Github,
 			descripcion,
 			email,
@@ -69,12 +69,13 @@ export const FormEditarAlumno = (props) => {
 			unidad,
 			display,
 		};
-        updateDoc (memberRef, data);
-        //mostrar mensaje de confirmacion
-        Swal.fire('Usuario editado', 'Éxito');
+		updateDoc(memberRef, data);
+		//mostrar mensaje de confirmacion
+		Swal.fire('Usuario editado', 'Éxito');
+		dispatch(startLoadinUsersAll())
 		//ir a admin/alumnos para ver los cambios
 		navigate(`/admin/alumnos`);
-		
+
 
 		//if (password == password2) 
 		//	dispatch(editUser(formValues, oldPassword));
@@ -108,7 +109,7 @@ export const FormEditarAlumno = (props) => {
 					<div className="card">
 						<img className='foto' src={urlImg || fotoPerfil} alt="Foto de Perfil" />
 						<ModalFoto id={alumno.id} />
-						<FotosGallery /> 
+						<FotosGallery />
 					</div>
 				</div>
 				{/* <div className="col custom-file"> */}

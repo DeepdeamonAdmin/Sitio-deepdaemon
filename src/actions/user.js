@@ -67,7 +67,7 @@ export const startSaveData = (data) => {
 	}
 }
 
-const refreshData = (data) => ({
+export const refreshData = (data) => ({
 	type: types.userUpdate,
 	payload: { ...data }
 })
