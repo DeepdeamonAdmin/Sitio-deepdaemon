@@ -50,7 +50,7 @@ const completarDatos = async (uid, formvalues) => {
 		"email": formvalues.email,
 		"password": formvalues.password,
 		"password2": formvalues.password2,
-		'urlImg': '',
+		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/user.png?alt=media&token=d78d67df-1b61-4b47-8eb1-1a18ae83e340',
 		'display': 'Y',
 		'grado': 'current',
 		"descripcion": '',
