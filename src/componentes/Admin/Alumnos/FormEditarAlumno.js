@@ -46,6 +46,7 @@ export const FormEditarAlumno = (props) => {
 		nombre,
 		password,
 		school,
+		grado,
 		titulo,
 		unidad,
 		display,
@@ -65,6 +66,7 @@ export const FormEditarAlumno = (props) => {
 			nombre,
 			password,
 			school,
+			grado,
 			titulo,
 			unidad,
 			display,
@@ -134,7 +136,22 @@ export const FormEditarAlumno = (props) => {
 						onChange={handleInputChange}
 					/>
 				</div>
+				{alumno.rol === 'other' && (
+				<div className="col mb-3">
+					<label> Estado actual </label>
+					<select
+						className="form-control"
+						name='grado'
+						value={grado}
+						onChange={handleInputChange}
+					>
+						<option value='current'>En curso</option>
+						<option value='graduate'>Graduado</option>
+					</select>
+				</div>
+				)}
 			</div>
+			
 			<div className="row">
 				<div className="col mb-3">
 					<label> Email: </label>

@@ -29,14 +29,14 @@ export const NavBarAdmin = () => {
 			<div className="navbar-collapse">
 				<div className="navbar-nav">
 
-					<NavLink
+					{/* <NavLink
 						activeClassName="active"
 						className="nav-item nav-link"
 						exact
 						to="/admin/members"
 					>
 						Colaboradores
-					</NavLink>
+					</NavLink> */}
 
 					<NavLink
 						activeClassName="active"
