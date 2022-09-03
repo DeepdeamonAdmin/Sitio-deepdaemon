@@ -52,7 +52,7 @@ const completarDatos = async (uid, formvalues) => {
 		"password2": formvalues.password2,
 		'urlImg': '',
 		'display': 'Y',
-		'grado': '',
+		'grado': 'current',
 		"descripcion": '',
 		"school": '',
 		"titulo": '',
