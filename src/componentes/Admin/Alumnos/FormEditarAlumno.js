@@ -52,6 +52,11 @@ export const FormEditarAlumno = (props) => {
 		display,
 	} = formValues;
 
+	const handleContra = (e) => {
+		if (password == password2) dispatch(editUser(formValues, oldPassword));
+		else Swal.fire('Contraseñas no corresponden')
+	}
+
 
 	const handleSave = (e) => {
 
@@ -103,7 +108,12 @@ export const FormEditarAlumno = (props) => {
 	return (
 		<div className="container">
 			<div className="app-title">
-				<h2>Editar Alumno </h2>
+				{alumno.rol === 'other' && (
+					<h2>Editar Alumno </h2>
+				)}
+				{alumno.rol === 'administrador' && (
+					<h2>Editar Líder </h2>
+				)}
 				<hr />
 			</div>
 			<div className="row">
@@ -136,19 +146,59 @@ export const FormEditarAlumno = (props) => {
 						onChange={handleInputChange}
 					/>
 				</div>
-				{alumno.rol === 'other' && (
-				<div className="col mb-3">
-					<label> Estado actual </label>
-					<select
-						className="form-control"
-						name='grado'
-						value={grado}
-						onChange={handleInputChange}
-					>
-						<option value='current'>En curso</option>
-						<option value='graduate'>Graduado</option>
-					</select>
+
+				<div className='col mb-3'>
+					<div className="card">
+
+						<div className="col mb-3">
+							<label> Contraseña </label>
+							<input
+								className="form-control"
+								type='password'
+								name='password'
+								placeholder='Contraseña'
+								value={password}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div className="col mb-3">
+							<label> Confirmar contraseña </label>
+							<input
+								className="form-control"
+								type='password'
+								name='password2'
+								required
+								placeholder='Contraseña'
+								value={password2}
+								onChange={(e) => setPassword2(e.target.value)}
+							/>
+						</div>
+						<button
+							className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"
+							onClick={handleContra}
+						>
+							Cambiar
+						</button>
+
+					</div>
 				</div>
+
+			</div>
+
+			<div className="row">
+				{alumno.rol === 'other' && (
+					<div className="col mb-3">
+						<label> Estado actual </label>
+						<select
+							className="form-control"
+							name='grado'
+							value={grado}
+							onChange={handleInputChange}
+						>
+							<option value='current'>En curso</option>
+							<option value='graduate'>Graduado</option>
+						</select>
+					</div>
 				)}
 			</div>
 			
