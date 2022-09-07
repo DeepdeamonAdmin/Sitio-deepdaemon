@@ -35,7 +35,6 @@ export const FormEditarAlumno = (props) => {
 
 	useEffect(() => {
 		setOldPassword(alumno.password)
-		console.log(alumno);
 	}, [usuarios]);
 
 	const {
