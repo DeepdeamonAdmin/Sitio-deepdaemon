@@ -314,7 +314,7 @@ export const FormEditarAlumno = (props) => {
 				className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"
 				onClick={handleSave}
 			>
-				Editar información
+				Guardar
 			</button>
 		</div>
 	)
