@@ -48,7 +48,6 @@ export const FormEditarAlumno = (props) => {
 		school,
 		grado,
 		titulo,
-		unidad,
 		display,
 	} = formValues;
 
@@ -73,7 +72,6 @@ export const FormEditarAlumno = (props) => {
 			school,
 			grado,
 			titulo,
-			unidad,
 			display,
 		};
 		updateDoc(memberRef, data);
@@ -201,7 +199,7 @@ export const FormEditarAlumno = (props) => {
 					</div>
 				)}
 			</div>
-			
+
 			<div className="row">
 				<div className="col mb-3">
 					<label> Email: </label>
