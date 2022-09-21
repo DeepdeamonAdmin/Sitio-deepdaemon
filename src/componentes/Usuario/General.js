@@ -45,7 +45,9 @@ export const General = ({ id }) => {
 	return (
 		<div className="">
 			<div className='d-flex flex-row dd_header'>
-				<div className='' id='Home'>
+				<Row className='d-flex flex-row'>
+
+				<div className='col-sm' id='Home'>
 					<img src={cic} className="ddcic" alt="cic" />
 					<img src={logo} className="ddlogo" alt="logo" />
 					<h1>Laboratorio de Ciencias </h1>
@@ -53,23 +55,26 @@ export const General = ({ id }) => {
 					<hr />
 					<h2>Comunidad de conocimiento</h2>
 				</div>
-				<iframe
-					width="560"
-					height="315"
-					src="https://www.youtube.com/embed/OG0w_4qDiy8"
-					title="YouTube video player"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen>
-				</iframe>
+				<div class="contenedor-responsivo col-sm">
+					<iframe 
+						class="iframe-responsivo" 
+						src="https://www.youtube.com/embed/OG0w_4qDiy8" 
+						title="YouTube video player"
+						gesture="media"  
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+						allowfullscreen>
+					</iframe>
+				</div>
+				</Row>
 			</div>
 			<h1>ANUNCIOS</h1>
 
-			<Container className="w-100">
-				<Carousel className="w-100">
+			<Container >
+				<Carousel >
 					{avisos.map(aviso => (
 						<Carousel.Item key={aviso.id}>
-							<Image src={aviso.photo} className="w-100" />
+							<Image src={aviso.photo} 
+							style={{width:"100%", height: "800px"}}/>
 							<Carousel.Caption>
 								<h3>{aviso.name}</h3>
 								<p>{aviso.desc}</p>
@@ -157,12 +162,13 @@ export const General = ({ id }) => {
 				</Tab.Container>
 			</Container> */}
 
-			<Container fluid className="section portfolio" id='Lideres'>
+			<div className="Container section" id='Lideres'>
 				<h1>Los líderes</h1>
 				<hr />
-
-				<LeaderScreen  align="center"/>
-			</Container>
+				<div className="row">
+					<LeaderScreen />
+				</div>
+			</div>
 
 			<Container fluid className="team_separator">
 				<Container className="section white">

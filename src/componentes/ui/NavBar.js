@@ -9,10 +9,10 @@ export const NavBar = () => {
 
 	return (
 		<nav className="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
-			<NavLink to="Home">
+			<NavLink to="/">
 				<img src={logo} style={{ width: "30px" }} alt="logo" />
 			</NavLink>
-			<NavLink to="/" className="navbar-brand"> Laboratorio de Ciencias Cognitivas Computacionales </NavLink>
+			<NavLink to="/" className="navbar-brand mb-0"> Lab. CCC </NavLink>
 
 			<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div className="navbar-nav">

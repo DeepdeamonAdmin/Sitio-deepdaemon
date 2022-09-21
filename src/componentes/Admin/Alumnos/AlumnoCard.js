@@ -27,10 +27,13 @@ export const AlumnoCard = (item) => {
 			<div className="row no-gutters">
 				{/* <ModalEditarAlumno item={item.nombre} /> */}
 				<div className="col-md-4">
-					<img
-						src={item.urlImg}
-						alt="member"
-						className="card-img"
+					<img src={item.urlImg} 
+						className="card-img" 
+						alt="..."  
+						style={{
+							height: "200px",
+							width: '200px'
+						}}
 					/>
 				</div>
 				<div className="col-md-5">

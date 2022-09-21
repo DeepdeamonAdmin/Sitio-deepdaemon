@@ -21,14 +21,15 @@ export const LeaderScreen = () => {
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
 						(usuario.grado === "leader" && usuario.display === "Y") && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-green mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }}>
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-green mb-4" style={{ MaxWidth: 350, MaxHeight: 150 }}>
 
 								<img
 									className="card-img"
 									src={usuario.urlImg}
 									alt="leader"
 									style={{
-										width: '300px'
+										height: "200px",
+										width: '200px'
 									}}
 								/>
 
