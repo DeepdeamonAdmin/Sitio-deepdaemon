@@ -27,7 +27,7 @@ export const TeamScreen = ({ status }) => {
 									src={usuario.urlImg}
 									alt="member"
 									style={{
-										height: "200px",
+										height: "300px",
 										width: '200px'
 									}}
 								/>

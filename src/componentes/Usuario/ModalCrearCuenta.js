@@ -55,11 +55,16 @@ export const ModalCrearCuenta = () => {
                 <img src={logo} className="ddcic" alt="logo" />
             </div>
 
-            <div className="text-center">
-                <a href="/registrer" className="btn btn-primary">
+            <row className="d-flex justify-content-center">
+            <a href="/registrer" className="btn btn-primary">
                     Crear Cuenta
                 </a>
-            </div>
+                <div className="col-1"></div>
+                <a href="/login" className="btn btn-primary">
+                    Iniciar sesión
+                </a>
+            </row>
+
 
 		</Modal>
 
