@@ -14,6 +14,7 @@ import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
 import { LeaderScreen } from './LeaderScreen';
 import { TeamScreen } from './TeamScreen';
+import { ProjectScreen } from './ProjectScreen'
 import FormCorreo from './FormCorreo';
 
 import { useEffect, useState } from 'react';
@@ -142,25 +143,24 @@ export const General = ({ id }) => {
 				</Container>
 			</Container>
 
-			{/* <Container fluid className="section portfolio" id='Publicaciones'>
-				<h1> Publicaciones </h1>
-
-				<Tab.Container defaultActiveKey="inDevelop">
+			<Container fluid className="section portfolio" id='Proyectos'>
+				<h1> Proyectos </h1>
+				<Tab.Container defaultActiveKey="indevelop">
 					<Nav className="projects">
-						<Nav.Item><Nav.Link eventKey="inDevelop"><h1>Novedades</h1></Nav.Link></Nav.Item>
+						<Nav.Item><Nav.Link eventKey="indevelop"><h1>Novedades</h1></Nav.Link></Nav.Item>
 						<Nav.Item><Nav.Link eventKey="completed"><h1>Destacado</h1></Nav.Link></Nav.Item>
 					</Nav>
 					<hr />
 					<Tab.Content>
-						<Tab.Pane eventKey="inDevelop">
-							<PublicationScreen />
+						<Tab.Pane eventKey="indevelop">
+							<ProjectScreen status='indevelop'/>
 						</Tab.Pane>
 						<Tab.Pane eventKey="completed">
-							<PublicationScreen />
+							<ProjectScreen status='completed'/>
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-			</Container> */}
+			</Container>
 
 			<div className="Container section" id='Lideres'>
 				<h1>Los líderes</h1>

@@ -7,6 +7,7 @@ import { uiCloseModal } from '../../actions/ui';
 import { customStyles } from '../../helpers/modalCustomStyles';
 import cic from "../../styles/assets/img/sitio/cic.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
+import { NavLink } from 'react-router-dom';
 
 // //configuracion Modal
 Modal.setAppElement('#app');
@@ -56,13 +57,13 @@ export const ModalCrearCuenta = () => {
             </div>
 
             <row className="d-flex justify-content-center">
-            <a href="/registrer" className="btn btn-primary">
-                    Crear Cuenta
-                </a>
+                <NavLink to="/registrer">
+                    <button className="btn btn-primary"> Crear Cuenta </button>
+                </NavLink>
                 <div className="col-1"></div>
-                <a href="/login" className="btn btn-primary">
-                    Iniciar sesión
-                </a>
+                <NavLink to="/login">
+                    <button className="btn btn-primary"> Iniciar Sesión </button>
+                </NavLink>
             </row>
 
 
