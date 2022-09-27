@@ -24,7 +24,6 @@ export default function GalleryList() {
 		const imagenDoc = doc(db, `Gallery/${uid}/Imagenes`, id);
 		await deleteDoc(imagenDoc);
 		Swal.fire('Imagen eliminada', 'Éxito');
-		getGallery();
 	}
 
 	useEffect(() => {
