@@ -1,10 +1,13 @@
 import React from 'react';
+import {db} from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { registroDesdeLider } from '../../../actions/auth';
 import { useForm } from '../../../hooks/useForm';
 import { useGet } from '../../../hooks/useGet';
 import { getCareer } from '../../../selectors/get/getCareer';
 import { getSchool } from '../../../selectors/get/getSchool';
+import { async } from '@firebase/util';
 
 
 export const FormAddAlumno = () => {
@@ -45,6 +48,36 @@ export const FormAddAlumno = () => {
 	const { data: dataCareer } = useGet(getCareer);
 	//Traemos la informacion de School
 	const { data: dataSchool } = useGet(getSchool);
+
+	const [escuela, listEscuela] = React.useState([])
+	React.useEffect(() => {
+		const obtenerEscuela = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Escuela"));
+				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				listEscuela(arrayData)
+				
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerEscuela()
+	}, [])
+
+	const [carrera, listCarrera] = React.useState([])
+	React.useEffect(() => {
+		const obtenerCarrera = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Carrera"));
+				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				listCarrera(arrayData)
+				
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerCarrera()
+	}, [])
 
 	return (
 		<div className="container">
@@ -197,9 +230,13 @@ export const FormAddAlumno = () => {
 							onChange={handleInputChange}
 						>
 							{
-								dataSchool.map(item => (
+								/*dataSchool.map(item => (
+									<option key={item.id} value={item.id}> {item.name} </option>
+								))*/
+								escuela.map(item => (
 									<option key={item.id} value={item.id}> {item.name} </option>
 								))
+								
 							}
 						</select>
 					</div>
@@ -211,7 +248,10 @@ export const FormAddAlumno = () => {
 							onChange={handleInputChange}
 						>
 							{
-								dataCareer.map(item => (
+								/*dataCareer.map(item => (
+									<option key={item.id} value={item.id}> {item.name} </option>
+								))*/
+								carrera.map(item => (
 									<option key={item.id} value={item.id}> {item.name} </option>
 								))
 							}
