@@ -16,7 +16,7 @@ export const VerMas = () => {
 
     return (
         <button
-            className="btn btn-dark"
+            className="btn btn-success"
             onClick={ handleClickNew }
         >
             Ver más..

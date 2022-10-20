@@ -16,29 +16,27 @@ export const LeaderScreen = () => {
 
 	return (
 		<>
-			<div className="card-columns cards-cols animate__animated animate__fadeIn">
+			<div className="container card-columns">
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
 						(usuario.grado === "leader" && usuario.display === "Y") && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-green mb-4" style={{ MaxWidth: 350, MaxHeight: 150 }}>
+							<div className= "row mb-4">
+								<div className="col ml-3">
+									<img
+										className="img-fluid"
+										src={usuario.urlImg}
+										alt="leader"
+										
+									/>
+								</div>
 
-								<img
-									className="card-img"
-									src={usuario.urlImg}
-									alt="leader"
-									style={{
-										height: "300px",
-										width: '200px'
-									}}
-								/>
-
-								<div className="card-body text-dark">
-									<h5 className="card-title"> {usuario.nombre} </h5>
+								<div className="col">
+									<h5 className=""> {usuario.nombre} </h5>
 
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
 									<ModalCrearCuenta />
-									<VerMas />
+									<VerMas/>
 								</div>
 							</div>
 						)

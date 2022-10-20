@@ -45,6 +45,7 @@ export const General = ({ id }) => {
 
 	return (
 		<div className="">
+			
 			<div className='d-flex flex-row dd_header'>
 				<Row className='d-flex flex-row'>
 
@@ -56,9 +57,9 @@ export const General = ({ id }) => {
 					<hr />
 					<h2>Comunidad de conocimiento</h2>
 				</div>
-				<div class="contenedor-responsivo col-sm">
+				<div class="col-sm">
 					<iframe 
-						class="iframe-responsivo" 
+						className='embed-responsive'
 						src="https://www.youtube.com/embed/OG0w_4qDiy8" 
 						title="YouTube video player"
 						gesture="media"  
@@ -162,7 +163,7 @@ export const General = ({ id }) => {
 				</Tab.Container>
 			</Container>
 
-			<div className="Container section" id='Lideres'>
+			<div className="Container" id='Lideres'>
 				<h1>Los líderes</h1>
 				<hr />
 				<div className="row">
@@ -215,10 +216,18 @@ export const General = ({ id }) => {
 					<hr />
 					<Tab.Content>
 						<Tab.Pane eventKey="current">
-							<TeamScreen status='current' />
+							<div className="Container section">
+								<div className="row">
+									<TeamScreen status='current' />
+								</div>
+							</div>
 						</Tab.Pane>
 						<Tab.Pane eventKey="graduate">
-							<TeamScreen status='graduate' />
+							<div className="Container section">
+								<div className="row">
+									<TeamScreen status='graduate' />
+								</div>
+							</div>
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
