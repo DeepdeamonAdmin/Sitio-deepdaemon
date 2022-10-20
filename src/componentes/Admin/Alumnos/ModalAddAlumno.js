@@ -7,11 +7,11 @@ import { uiCloseModal } from '../../../actions/ui';
 import { customStyles } from '../../../helpers/modalCustomStyles';
 import { FormAddAlumno } from './FormAddAlumno';
 
+
 // //configuracion Modal
 Modal.setAppElement('#app');
 
 export const ModalAddAlumno = () => {
-
 	const { modalOpen } = useSelector(state => state.ui);
 	const dispatch = useDispatch();
 
@@ -21,6 +21,7 @@ export const ModalAddAlumno = () => {
 	}
 
 	return (
+		
 		<Modal
 			isOpen={modalOpen}
 			onRequestClose={closeModal}

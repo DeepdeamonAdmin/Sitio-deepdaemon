@@ -11,9 +11,7 @@ import { async } from '@firebase/util';
 
 
 export const FormAddAlumno = () => {
-
 	const dispatch = useDispatch();
-
 	const [formValues, handleInputChange] = useForm({
 		name: '',
 		lastname: '',
@@ -79,6 +77,7 @@ export const FormAddAlumno = () => {
 		obtenerCarrera()
 	}, [])
 
+	
 	return (
 		<div className="container">
 			<div className="app-title">

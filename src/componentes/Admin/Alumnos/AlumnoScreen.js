@@ -6,6 +6,7 @@ import { AlumnoList } from './AlumnoList';
 import { GraduatedList } from './GraduatedList';
 
 
+
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
 
 export const AlumnoScreen = () => {

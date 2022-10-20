@@ -10,12 +10,12 @@ import {
 
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
-import { db } from "../firebase/firebase-config";
+import { db, app2 } from "../firebase/firebase-config";
 import { googleAuthProvider } from '../firebase/firebase-config';
 
 import { types } from '../types/types';
 import { startLoading, finishLoading, uiCloseModal } from './ui';
-import { refreshData } from './user';
+//import { refreshData } from './user';
 
 // const dispatch = useDispatch();
 //Registrar usuario por correo
@@ -65,24 +65,26 @@ const completarDatos = async (uid, formvalues) => {
 }
 
 export const registroDesdeLider = (formValues) => {
-
-	return (dispatch) => {
 		const auth = getAuth();
-		createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
+	return (dispatch) => {
+		const auth2 = getAuth(app2);
+		createUserWithEmailAndPassword(auth2, formValues.email, formValues.password)
 			.then(async ({ user }) => {
-				await updateProfile(user, { displayName: formValues.name });
+				await updateProfile(user, { displayName: formValues.name }).then(
+					auth2.signOut()
+				);
 
 				completarDatosDesdeForm(user.uid, formValues);
 
 				dispatch(
-					uiCloseModal()
-					// login(user.uid, user.displayName)
+					uiCloseModal(),
 				);
 			})
 			.catch(e => {
 				console.log(e);
 				Swal.fire('Error', e.message, 'error');
 			})
+			console.log(auth.currentUser.displayName)
 	}
 }
 

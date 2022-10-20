@@ -21,6 +21,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const app2 = initializeApp(firebaseConfig, "Secondary"); 
 //const analytics = getAnalytics(app)
  
 const db = getFirestore(app);
@@ -28,6 +29,7 @@ const db = getFirestore(app);
 const googleAuthProvider = new GoogleAuthProvider();
 
 export {
+  app2,
     db,
     googleAuthProvider,
 }
