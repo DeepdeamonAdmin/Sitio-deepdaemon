@@ -1,4 +1,202 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+//import { startNewProject, startUploadingProject } from '../../actions/projects';
+import { startNewProject, startUploadingProject } from '../../../../src/actions/projects';
+//import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../../../src/hooks/useForm';
+import {
+	getAuth, reload,
+} from 'firebase/auth';
+import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+import { FotosGallery } from '../../ui/FotosGallery';
+export const FormAddProject = () => {
+
+
+	const dispatch = useDispatch();
+	const auth = getAuth();
+	const dN = auth.currentUser.displayName;
+
+	const [formValues, handleInputChange, reset] = useForm({
+		name: '',
+		correo: '',
+		descripcion: '',
+		results: '',
+		nameTech: '',
+		urlImg:'',
+		estado: 'indevelop',
+		display: 'Yes',
+		publisher: dN
+	});
+
+	const { name, correo, descripcion, impact, nameTech, urlImg, estado, display, publisher } = formValues;
+
+	
+	const navigate = useNavigate();
+	const handleEnvProyect = () => {
+		dispatch(startNewProject(formValues));
+		reset();
+		navigate('/admin/projects');
+		//reload();
+		//dispatch(navigateToProjectsScreen())
+	}
+
+	const [datos, setDatos] = useState('');
+
+	const MgAFAP = (datosMg) => {
+		setDatos(datosMg);
+	}
+	const handleFileChange = (e) => {
+		console.log(e.target.value)
+		//const file = e.target.value;
+		//console.log("file"+file)
+		//urlImg = file;
+	}
+
+	// const navigate = useNavigate();
+
+	// const navigateToProjectsScreen = () => {
+	// 	navigate('.projects');
+	// };
+
+	return (
+		<div className="container">
+			<div className="app-title">
+				<h2>Agregar Proyecto </h2>
+				<hr />
+			</div>
+
+			<div className="row">
+				<div className="col mb-3">
+					<label> Name </label>
+					<input
+						className="form-control"
+						type='text'
+						name='name'
+						placeholder='Nombre'
+						value={name}
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="col mb-3">
+					<label> Contacto</label>
+					<input
+						className="form-control"
+						type='text'
+						name='name'
+						placeholder='Correo de contacto'
+						value={correo}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+
+			<div className="col mb-3">
+				<label>Description</label>
+				<textarea
+					className="form-control"
+					rows='3' cols='40'
+					name='descripcion'
+					placeholder=' Desciption'
+					value={descripcion}
+					onChange={handleInputChange}
+				/>
+			</div>
+			<div className="col mb-3">
+				<label> Tech </label>
+				<input
+					className="form-control"
+					type='text'
+					name='nameTech'
+					placeholder='Nombre Tecnología'
+					value={nameTech}
+					onChange={handleInputChange}
+				/>
+			</div>
+			<div className="col mb-3">
+				<label> Impacto </label>
+				<textarea
+					className="form-control"
+					rows='6'
+					name='impact'
+					placeholder='Impacto'
+					value={impact}
+					onChange={handleInputChange}
+				/>
+			</div>
+			<div className="row">
+				<div className="col mb-6">
+					<label> Imagen desde Galeria </label>
+					<div className="card">
+						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<FotosGalleryChoose />
+					</div>
+					 {/* <input
+						className="form-control"
+						type='text'
+						name='imagen'
+						placeholder='imagen'
+						value={urlImg}
+						//onChange={handleFileChange}
+					/> 				 */}
+						{/* <input
+						className='form-control'
+						type="file"
+						name="file"
+						onChange={handleFileChange}
+					/>  */}
+
+				</div>
+
+				{/* <input
+					id='fileSelector'
+					className="custom-file-input"
+					type='file'
+					name='file'
+					style={{ display: 'none' }}
+					onChange={handleFileChange}
+				/> */}
+				<div className="col mb-3">
+					<label>Status </label>
+					<select
+						className="form-control"
+						name='estado'
+						value={estado}
+						onChange={handleInputChange}
+					>
+						<option value='indevelop' > Indevelop </option>
+						<option value='completed' > Completed </option>
+					</select>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col mb-3">
+					<label>Mostrar en página principal</label>
+					<select
+						className="form-control"
+						name='display'
+						value={display}
+						onChange={handleInputChange}
+					>
+						<option value='Si' > Si </option>
+						<option value='No' > No </option>
+					</select>
+				</div>
+			</div>
+			<button
+				className="btn2 btn-primary btn-large btn-block"
+				onClick={handleEnvProyect}
+			>
+				Agregar
+			</button>
+
+		</div>
+	)
+}
+
+/*import React from 'react'
 import { useDispatch } from 'react-redux';
 import { registerProject } from '../../../actions/register';
 import { useForm } from '../../../hooks/useForm';
@@ -8,20 +206,20 @@ import { getTech } from '../../../selectors/get/getTech';
 export const FormAddProject = () => {
 
 
-    const dispatch = useDispatch();
-    const [ formValues, handleInputChange ] = useForm({
+	const dispatch = useDispatch();
+	const [ formValues, handleInputChange ] = useForm({
 		name: '',
-        desc: '',
+		desc: '',
 		status: '',
-        impact: '',
-        frontImg:'',
-        modalMedia:'',
-        modalType:'',
-        link:'',
+		impact: '',
+		frontImg:'',
+		modalMedia:'',
+		modalType:'',
+		link:'',
 		idTech: ''
 	});
 
-    const {name, desc, impact, frontImg, modalMedia, link } = formValues;
+	const {name, desc, impact, frontImg, modalMedia, link } = formValues;
 
 	
 	// const [file, setFile] = useState(null);
@@ -44,20 +242,20 @@ export const FormAddProject = () => {
 	// };
 	
 
-    //envio a la api
-    const handleSubmit = (e) => {
-        e.preventDefault();
+	//envio a la api
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		dispatch( registerProject(formValues) );
 		console.log(formValues);
-    }
+	}
 
 	//Traemos la información de tech
 	const { data } = useGet(getTech);
 
-    return (
-        <div className="container">
+	return (
+		<div className="container">
 			<div className="app-title">
-            		<h2>Agregar Proyecto </h2>
+					<h2>Agregar Proyecto </h2>
 				<hr/>
 			</div>
 			<form onSubmit={ handleSubmit }>
@@ -179,5 +377,6 @@ export const FormAddProject = () => {
 				
 			</form>
 		</div>
-    )
+	)
 }
+*/

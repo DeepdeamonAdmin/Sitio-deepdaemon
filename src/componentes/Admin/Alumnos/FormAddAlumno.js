@@ -47,13 +47,13 @@ export const FormAddAlumno = () => {
 	//Traemos la informacion de School
 	const { data: dataSchool } = useGet(getSchool);
 
-	const [escuela, listEscuela] = React.useState([])
+	const [escuela, setEscuela] = React.useState([])
 	React.useEffect(() => {
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-				listEscuela(arrayData)
+				setEscuela(arrayData)
 				
 			} catch (error) {
 				console.log(error)
@@ -62,13 +62,13 @@ export const FormAddAlumno = () => {
 		obtenerEscuela()
 	}, [])
 
-	const [carrera, listCarrera] = React.useState([])
+	const [carrera, setCarrera] = React.useState([])
 	React.useEffect(() => {
 		const obtenerCarrera = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Carrera"));
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-				listCarrera(arrayData)
+				setCarrera(arrayData)
 				
 			} catch (error) {
 				console.log(error)

@@ -17,6 +17,7 @@ import InstitucionesScreen from '../componentes/Admin/Instituciones/Institucione
 import CarrerasScreen from '../componentes/Admin/Carreras/CarrerasScreen';
 import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
 import FormEditLider from '../componentes/Admin/Lideres/FormEditLider';
+import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 
 
 export const AdminDashBoard = () => {
@@ -28,6 +29,7 @@ export const AdminDashBoard = () => {
 					<Route path="/" element={<Admin />} />
 					<Route path="members" element={<MembersScreen />} />
 					<Route path="projects" element={<ProjectsScreen />} />
+					<Route path="projects/agregar" element={<FormAddProject />} />
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
 					<Route path="release" element={<ReleaseScreen />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />

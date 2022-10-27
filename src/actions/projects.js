@@ -7,6 +7,8 @@ import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadWorks } from '../helpers/loadWorks';
 import { loadAllWorks } from '../helpers/loadAllWorks';
+import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
+import { uiCloseModal } from './ui';
 
 
 export const startNewProject = (formValues) => {
@@ -17,21 +19,24 @@ export const startNewProject = (formValues) => {
 
 		const newProject = {
 			name: formValues.name,
+			correo: formValues.correo,
 			descripcion: formValues.descripcion,
-			impact: formValues.impact,
-			urlImg: img || 'project.jpg',
-			urlModalMedia: '',
-			link: formValues.link,
+			results: formValues.results,
+			urlImg: img || formValues.urlImg,
 			nameTech: formValues.nameTech,
-			estado: formValues.estado
+			estado: formValues.estado,
+			display: formValues.display,
+			publisher: formValues.publisher
 		}
 
-		const docRef = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProject);
-
+		//const docRef = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProject);
+		const docRef = await addDoc(collection(db, "Proyectos"), newProject);
+		
 		if (docRef) {
 			Swal.fire('Reporte Enviado');
 			dispatch(activeProject(docRef.id, newProject));
 			dispatch(addNewProject(docRef.id, newProject));
+			dispatch(uiCloseModal())
 		} else {
 			Swal.fire('Error al enviar Reporte');
 		}

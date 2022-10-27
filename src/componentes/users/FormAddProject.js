@@ -1,4 +1,62 @@
 import React from 'react'
+import { useGet } from '../../../src/hooks/useGet'
+import { getProject } from '../../../src/selectors/get/getProject';
+import ProjectCardUser from '../../../src/componentes/users/ProjectCardUser';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {db} from '../../../src/firebase/firebase-config'
+import { collection, getDocs, where, get, query } from "firebase/firestore";
+import {
+	getAuth,
+} from 'firebase/auth';
+
+export const FormAddProject = () => {
+
+    //const dispatch = useDispatch();
+
+    //const { projects } = useSelector( state => state.projects );
+    
+    //const { data:project, loading } = useGet(getProject);
+    const auth = getAuth();
+    const dN = auth.currentUser.displayName;
+	
+    const [projects, setProjects] = React.useState([])
+	React.useEffect(() => {
+		const getProjects = async () => {
+			try {
+                const ref = collection(db, "Proyectos")
+				const q = query(ref)
+                const Data = await getDocs(q);
+				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				setProjects(arrayData)
+				
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		getProjects()
+	}, [])
+    
+    return (
+        <>
+            {/* { loading && <p className="animate__animated animate__flash">Loading</p> } */}
+        
+            <div className="card-columns animate__animated animate__fadeIn">
+                {
+                    projects.map(item => (
+                        <ProjectCardUser
+                            key={item.id}
+                            {...item}
+                        />
+                    ))
+                }
+            </div>
+        </>
+    )
+}
+
+/*
+import React from 'react'
 import { useDispatch } from 'react-redux';
 import { startNewProject, startUploadingProject } from '../../actions/projects';
 import { useForm } from '../../hooks/useForm';
@@ -128,4 +186,4 @@ export const FormAddProject = () => {
 
 		</div>
 	)
-}
+}*/

@@ -4,17 +4,39 @@ import { getProjectStatus } from '../../selectors/get/getProjectStatus';
 import { ProjectDetaills } from './ProjectDetaills';
 import { ModalInfoProject } from './ModalInfoProject';
 import { useSelector, useDispatch } from 'react-redux';
+import {db} from '../../firebase/firebase-config';
+import { collection, getDocs, where, get, query } from "firebase/firestore";
+import {
+	getAuth,
+} from 'firebase/auth';
 
 export const ProjectScreen = ({ status }) => {
 
-	const { projectsAll } = useSelector(state => state.projects);
-
+	//const { projectsAll } = useSelector(state => state.projects);
+	//console.log(projectsAll)
+	const [projects, setProjects] = React.useState([])
+	React.useEffect(() => {
+		const getProjects = async () => {
+			try {
+                const ref = collection(db, "Proyectos")
+				const q = query(ref, where("estado", "==", status))
+                console.log(q)
+                const Data = await getDocs(q);
+				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				setProjects(arrayData)
+				
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		getProjects()
+	}, [])
 	return (
 		<div className="card-columns cards-cols animate__animated animate__fadeIn">
 			{
-				projectsAll.map(project => (
+				projects.map(project => (
 					//imprimir solamente si el estado es igual al seleccionado
-					(project.estado === status && project.display === "Y") && (
+					(project.display === "Yes") && (
 						<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }} >
 							<img
 								className="card-img"
