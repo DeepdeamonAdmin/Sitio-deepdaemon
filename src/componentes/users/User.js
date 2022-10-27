@@ -4,6 +4,7 @@ import fotoPerfil from '../../assets/Usuario.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { activeData, startSaveData, startUploading } from '../../actions/user';
 import { useForm } from '../../hooks/useForm';
+import { General } from '../Usuario/General';
 export const User = () => {
 
   const dispatch = useDispatch();
@@ -42,6 +43,8 @@ export const User = () => {
   return (
     //Ajustes y perfil de usuario
     <div>
+      <General/>
+     {/*
       <h1>Ajustes y perfil de usuario</h1>
 
       <div className="container">
@@ -103,7 +106,7 @@ export const User = () => {
 
         </div>
       </div>
-
+    */}
     </div>
   )
 }

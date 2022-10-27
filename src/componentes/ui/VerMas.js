@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { uiOpenModal } from '../../actions/ui';
 
 import './Ui.css';
@@ -13,11 +13,14 @@ export const VerMas = () => {
         dispatch( uiOpenModal() );
     }
 
+    const { datos }  = useSelector( state => state.user );
+    
+
 
     return (
         <button
             className="btn btn-success"
-            onClick={ handleClickNew }
+            onClick={datos ? console.log("Usuario Activo"):  handleClickNew }
         >
             Ver más..
         </button>
