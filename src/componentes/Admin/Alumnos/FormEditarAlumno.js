@@ -11,7 +11,7 @@ import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
 import { startLoadinUsersAll, startUploading } from '../../../actions/user';
 
-import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
 

@@ -154,10 +154,10 @@ export const General = ({ id }) => {
 					<hr />
 					<Tab.Content>
 						<Tab.Pane eventKey="indevelop">
-							<ProjectScreen status='indevelop'/>
+							<ProjectScreen status1='indevelop' status2='registered'/>
 						</Tab.Pane>
 						<Tab.Pane eventKey="completed">
-							<ProjectScreen status='completed'/>
+							<ProjectScreen status1='completed' status2=''/>
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>

@@ -9,6 +9,7 @@ import { loadWorks } from '../helpers/loadWorks';
 import { loadAllWorks } from '../helpers/loadAllWorks';
 import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { uiCloseModal } from './ui';
+import { loadProject } from '../helpers/loadProject';
 
 
 export const startNewProject = (formValues) => {
@@ -26,6 +27,7 @@ export const startNewProject = (formValues) => {
 			nameTech: formValues.nameTech,
 			estado: formValues.estado,
 			display: formValues.display,
+			url: formValues.url,
 			publisher: formValues.publisher
 		}
 
@@ -33,7 +35,7 @@ export const startNewProject = (formValues) => {
 		const docRef = await addDoc(collection(db, "Proyectos"), newProject);
 		
 		if (docRef) {
-			Swal.fire('Reporte Enviado');
+			Swal.fire('Proyecto agregado');
 			dispatch(activeProject(docRef.id, newProject));
 			dispatch(addNewProject(docRef.id, newProject));
 			dispatch(uiCloseModal())
@@ -43,6 +45,29 @@ export const startNewProject = (formValues) => {
 	}
 }
 
+export const AddProjectTesis = (item) => {
+	return async (dispatch, getState) => {
+
+		const { uid } = getState().auth;
+		//const { img } = getState().projects;
+
+		const newProject = {
+			name: item.name
+		}
+
+		const docRef = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProject);
+		//const docRef = await addDoc(collection(db, "Proyectos"), newProject);
+		
+		if (docRef) {
+			Swal.fire('Proyecto agregado');
+			//dispatch(activeProject(docRef.id, newProject));
+			//dispatch(addNewProject(docRef.id, newProject));
+			dispatch(uiCloseModal())
+		} else {
+			Swal.fire('Error al enviar Reporte');
+		}
+	}
+}
 
 export const activeProject = (id, project) => ({
 	type: types.projectActive,
@@ -122,3 +147,4 @@ export const setAllProjects = (projects) => ({
 	type: types.projectsAllLoad,
 	payload: projects
 });
+

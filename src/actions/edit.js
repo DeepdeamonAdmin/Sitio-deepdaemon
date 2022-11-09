@@ -1,4 +1,4 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, setDoc, update } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { putProject } from "../selectors/put/putProject";
@@ -6,27 +6,17 @@ import { types } from "../types/types";
 import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
 import { fileUpload } from "../helpers/fileUpload";
 
-export const editProject = (formValues) => {
-	//Datos project
-	const { id, name, desc, impact, frontImg, modalMedia, modalType, link, idTech } = formValues;
-	//datos tabla project y relacion tech_project
-	const dataProject = {
-		id: id,
-		name: name,
-		descr: desc,
-		impact: impact,
-		front_img: frontImg || 'project_front.jpg',
-		modal_media: modalMedia || 'project_modal.jpg',
-		modal_type: modalType || 'image',
-		link: link,
-		idTech: idTech || '1',
-	}
-	return (dispatch) => {
-		//Enviar datos a project
-		putProject(dataProject);
-		dispatch(valEditProject(id))
-	}
+export const editProject = (idProject, formValues) => {
+	return async (dispatch, getState) => {
+		
+		console.log(formValues)
+		const dataToFirestore = { ...formValues }
+		const projectUpdate = updateDoc(doc(db, 'Proyectos', idProject), dataToFirestore)
 
+		dispatch(refreshData(dataToFirestore))
+		Swal.fire('Informacion actualizada:', formValues.name, 'success')
+		
+	}
 }
 
 export const editUser = (formValues, oldPassword) => {
@@ -77,6 +67,8 @@ export const startEditingPicture = (formValues, file) => {
 			});
 	}
 }
+
+
 
 const refreshData = (data) => ({
 	type: types.userUpdate,

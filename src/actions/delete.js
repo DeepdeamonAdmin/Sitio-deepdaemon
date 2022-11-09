@@ -7,15 +7,31 @@ import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc } from 'firebase
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../firebase/firebase-config";
 
-export const deleteProject = (id) => {
+export const deleteProjectAdmin = (id) => {
 
     return async(dispatch) => {
-        //Enviar datos a school
-        const dataProject = {
-            id: id
-        };
-        deleteHProject(dataProject);
-        dispatch(valDelProject(id));
+        await deleteDoc(doc(db, "Proyectos", id));
+        // //Enviar datos a school
+        // const dataProject = {
+        //     id: id
+        // };
+        // deleteHProject(dataProject);
+        // dispatch(valDelProject(id));
+    }
+}
+
+export const deleteProjectUser = (id) => {
+    
+    return async(dispatch, getState) => {
+        const { uid } = getState().auth;
+        console.log(uid)
+        await deleteDoc(doc(db, `Usuarios/${uid}/Projects`, id));
+        // //Enviar datos a school
+        // const dataProject = {
+        //     id: id
+        // };
+        // deleteHProject(dataProject);
+        // dispatch(valDelProject(id));
     }
 }
 

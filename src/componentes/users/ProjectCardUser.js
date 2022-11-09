@@ -1,68 +1,37 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 //import { deleteProject } from '../../../actions/delete';
 import { db } from '../../firebase/firebase-config'
-import { collection, getDocs, where, get, query } from "firebase/firestore";
+//import { collection, getDocs, where, get, query } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import {
     getAuth,
 } from 'firebase/auth';
+import {AddProjectTesis} from '../../actions/projects'
 
 const ProjectCard = (item) => {
 
     const dispatch = useDispatch();
-
+    const uid = useParams();
     /*const handleAddProject = (e) => {
         e.preventDefault();
         dispatch( deleteProject(item.id) );
     }*/
 
     const handleAddProject = () => {
-        /*try {
-            const nameProject = item.name;
-            console.log(nameProject);
-            const ref = collection(db, "Proyectos")
-            const q = query(ref, where("name", "==", nameProject))
-            //const Data = getDocs(q);
-            console.log(q)
-            //setProjects(arrayData)
-            const querySnapshot = getDocs(q);
-            const arrayData = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
-            console.log(arrayData)
-            /*querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.data());
-            });
-
-        } catch (error) {
-            console.log(error)
-        }*/
+        dispatch(AddProjectTesis(item));
     }
-
-    /*const [project, setProject] = React.useState([])
-    React.useEffect(() => {
-        const addProject = async () => {
-            try {
-                const nameProject = this.name;
-                const ref = collection(db, "Proyectos")
-                const q = query(ref, where("publisher", "==", dN))
-                const Data = await getDocs(q);
-                const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-                setProject(arrayData)
-            	
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        addProject()
-    }, [])*/
 
     return (
         <div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
             <div className="row no-gutters">
                 <div className="col-md-4">
                     <img
-                        src={`../../../../media/proyectos/project.png`}
+                        //src={`../../../../media/proyectos/project.png`}
+                        src={item.urlImg}
                         alt="project"
                         className="card-img"
                     />

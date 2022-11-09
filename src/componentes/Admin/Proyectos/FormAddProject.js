@@ -2,16 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-//import { startNewProject, startUploadingProject } from '../../actions/projects';
 import { startNewProject, startUploadingProject } from '../../../../src/actions/projects';
-//import { useForm } from '../../hooks/useForm';
 import { useForm } from '../../../../src/hooks/useForm';
-import {
-	getAuth, reload,
-} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
-import { FotosGallery } from '../../ui/FotosGallery';
 export const FormAddProject = () => {
 
 
@@ -28,14 +23,16 @@ export const FormAddProject = () => {
 		urlImg:'',
 		estado: 'indevelop',
 		display: 'Yes',
+		url: '',
 		publisher: dN
 	});
 
-	const { name, correo, descripcion, impact, nameTech, urlImg, estado, display, publisher } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
 
 	
 	const navigate = useNavigate();
 	const handleEnvProyect = () => {
+		formValues.urlImg = datos;
 		dispatch(startNewProject(formValues));
 		reset();
 		navigate('/admin/projects');
@@ -85,7 +82,7 @@ export const FormAddProject = () => {
 					<input
 						className="form-control"
 						type='text'
-						name='name'
+						name='correo'
 						placeholder='Correo de contacto'
 						value={correo}
 						onChange={handleInputChange}
@@ -116,13 +113,13 @@ export const FormAddProject = () => {
 				/>
 			</div>
 			<div className="col mb-3">
-				<label> Impacto </label>
+				<label> Results </label>
 				<textarea
 					className="form-control"
 					rows='6'
-					name='impact'
-					placeholder='Impacto'
-					value={impact}
+					name='results'
+					placeholder='Resultados'
+					value={results}
 					onChange={handleInputChange}
 				/>
 			</div>
@@ -133,31 +130,7 @@ export const FormAddProject = () => {
 						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
-					 {/* <input
-						className="form-control"
-						type='text'
-						name='imagen'
-						placeholder='imagen'
-						value={urlImg}
-						//onChange={handleFileChange}
-					/> 				 */}
-						{/* <input
-						className='form-control'
-						type="file"
-						name="file"
-						onChange={handleFileChange}
-					/>  */}
-
 				</div>
-
-				{/* <input
-					id='fileSelector'
-					className="custom-file-input"
-					type='file'
-					name='file'
-					style={{ display: 'none' }}
-					onChange={handleFileChange}
-				/> */}
 				<div className="col mb-3">
 					<label>Status </label>
 					<select
@@ -166,6 +139,7 @@ export const FormAddProject = () => {
 						value={estado}
 						onChange={handleInputChange}
 					>
+						<option value='registered' > Registered </option>
 						<option value='indevelop' > Indevelop </option>
 						<option value='completed' > Completed </option>
 					</select>
@@ -183,6 +157,17 @@ export const FormAddProject = () => {
 						<option value='Si' > Si </option>
 						<option value='No' > No </option>
 					</select>
+				</div>
+				<div className="col mb-3">
+					<label>URL</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL de video'
+						value={url}
+						onChange={handleInputChange}
+					/>
 				</div>
 			</div>
 			<button

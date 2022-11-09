@@ -56,6 +56,7 @@ export const types = {
 
 	//Para los proyectos
 	//Solo enviar projecto nuevo y cargar los proyectos
+	projectGet:'[Project] Get',
 	projectImgAddNew: '[Project] New Img Project',
 	projectAddNew: '[Project] New Project',
 	projectActive: '[Project] Set Project active',

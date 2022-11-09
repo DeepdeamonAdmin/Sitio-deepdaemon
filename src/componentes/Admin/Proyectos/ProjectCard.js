@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteProject } from '../../../actions/delete';
+import { deleteProjectAdmin } from '../../../actions/delete';
 
 
 const ProjectCard = (item) => {
@@ -10,7 +10,7 @@ const ProjectCard = (item) => {
 
     const handleDelete = (e) => {
         e.preventDefault();
-		dispatch( deleteProject(item.id) );
+		dispatch( deleteProjectAdmin(item.id) );
     }
 
     return (
@@ -18,7 +18,8 @@ const ProjectCard = (item) => {
             <div className="row no-gutters">
                 <div className="col-md-4"> 
                     <img 
-                    src={`../../../../media/proyectos/project.png`}
+                    // src={`../../../../media/proyectos/project.png`}
+                    src={item.urlImg}
                     alt="project" 
                     className = "card-img"
                     />

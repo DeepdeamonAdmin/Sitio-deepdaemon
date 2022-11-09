@@ -10,7 +10,7 @@ import {
 	getAuth,
 } from 'firebase/auth';
 
-export const ProjectScreen = ({ status }) => {
+export const ProjectScreen = ({ status1, status2 }) => {
 
 	//const { projectsAll } = useSelector(state => state.projects);
 	//console.log(projectsAll)
@@ -19,7 +19,7 @@ export const ProjectScreen = ({ status }) => {
 		const getProjects = async () => {
 			try {
                 const ref = collection(db, "Proyectos")
-				const q = query(ref, where("estado", "==", status))
+				const q = query(ref, where("estado", "in", [status1, status2]))
                 console.log(q)
                 const Data = await getDocs(q);
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
@@ -31,6 +31,7 @@ export const ProjectScreen = ({ status }) => {
 		}
 		getProjects()
 	}, [])
+	console.log(projects)
 	return (
 		<div className="card-columns cards-cols animate__animated animate__fadeIn">
 			{
