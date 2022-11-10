@@ -1,16 +1,38 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteProjectAdmin } from '../../../actions/delete';
+import { useNavigate } from 'react-router-dom';
+import { deleteProjectGeneral, deleteProjectAdmin } from '../../../actions/delete';
 
 
 const ProjectCard = (item) => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleDelete = (e) => {
         e.preventDefault();
-		dispatch( deleteProjectAdmin(item.id) );
+        Swal.fire({
+            title: '¿Estás seguro de eliminar el proyecto?',
+            text: "No podrás revertir esto",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Continuar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch( deleteProjectAdmin(item.name) );
+                dispatch( deleteProjectGeneral(item.id) );
+                
+                navigate('/admin/projects');
+            }
+          })
+    }
+
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     return (
@@ -18,7 +40,6 @@ const ProjectCard = (item) => {
             <div className="row no-gutters">
                 <div className="col-md-4"> 
                     <img 
-                    // src={`../../../../media/proyectos/project.png`}
                     src={item.urlImg}
                     alt="project" 
                     className = "card-img"

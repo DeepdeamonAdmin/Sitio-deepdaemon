@@ -36,13 +36,9 @@ export const FormEditAlumno = (nombre) => {
 		idCareer: ''
 	});
 
-	// const { name, lastname, password, linkedin, email, shortDesc, longDesc,
-	// 	photo, start, end } = formValues;
-
 
 	//envio a la api
 	const handleSubmit = (e) => {
-		// console.log(formValues);
 		e.preventDefault();
 		dispatch(registroDesdeLider(formValues));
 

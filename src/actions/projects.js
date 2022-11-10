@@ -7,9 +7,7 @@ import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadWorks } from '../helpers/loadWorks';
 import { loadAllWorks } from '../helpers/loadAllWorks';
-import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { uiCloseModal } from './ui';
-import { loadProject } from '../helpers/loadProject';
 
 
 export const startNewProject = (formValues) => {
@@ -30,17 +28,19 @@ export const startNewProject = (formValues) => {
 			url: formValues.url,
 			publisher: formValues.publisher
 		}
-
-		//const docRef = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProject);
-		const docRef = await addDoc(collection(db, "Proyectos"), newProject);
+		const newProjectInd = {
+			name: formValues.name,
+		}
+		const docRef1 = await addDoc(collection(db, "Proyectos"), newProject);
+		const docRef2 = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProjectInd);
 		
-		if (docRef) {
-			Swal.fire('Proyecto agregado');
-			dispatch(activeProject(docRef.id, newProject));
-			dispatch(addNewProject(docRef.id, newProject));
+		if (docRef1 && docRef2) {
+			Swal.fire('Proyecto agregado', formValues.name,'success');
+			dispatch(activeProject(docRef1.id, newProject));
+			dispatch(addNewProject(docRef1.id, newProject));
 			dispatch(uiCloseModal())
 		} else {
-			Swal.fire('Error al enviar Reporte');
+			Swal.fire('Error al agregar el proyecto');
 		}
 	}
 }
@@ -49,19 +49,14 @@ export const AddProjectTesis = (item) => {
 	return async (dispatch, getState) => {
 
 		const { uid } = getState().auth;
-		//const { img } = getState().projects;
-
 		const newProject = {
 			name: item.name
 		}
 
 		const docRef = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProject);
-		//const docRef = await addDoc(collection(db, "Proyectos"), newProject);
 		
 		if (docRef) {
 			Swal.fire('Proyecto agregado');
-			//dispatch(activeProject(docRef.id, newProject));
-			//dispatch(addNewProject(docRef.id, newProject));
 			dispatch(uiCloseModal())
 		} else {
 			Swal.fire('Error al enviar Reporte');
@@ -116,7 +111,7 @@ export const loadImgProject = (url) => ({
 export const startLoadingProject = () => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
-		const ruta = `Usuarios/${uid}/Projects`;
+		const ruta = "Proyectos";
 		const projects = await loadWorks(ruta);
 		dispatch(setProjects(projects));
 

@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import { uiCloseModal } from '../../../actions/ui';
 import { customStyles } from '../../../helpers/modalCustomStyles';
-import { FormAddProject } from './FormAddProject';
-import { Projects } from '../../../componentes/users/Projects';
 import GalleryListModalProjects from './GalleryListModalProjects';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 export const ModalGalleryAddProjects = ({MgAFAP}) => {
 
@@ -20,6 +19,7 @@ export const ModalGalleryAddProjects = ({MgAFAP}) => {
 
     const GlAMg = (datosGl) => {
         setDatos(datosGl);
+        Swal.fire('Imagen seleccionada')
     }
     const closeModal = () => {
         // TODO: cerrar el modal
