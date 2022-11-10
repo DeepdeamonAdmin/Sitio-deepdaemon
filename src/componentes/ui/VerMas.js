@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { uiOpenModal } from '../../actions/ui';
+import { uiOpenModal} from '../../actions/ui';
 
 import './Ui.css';
 
@@ -20,7 +20,7 @@ export const VerMas = () => {
     return (
         <button
             className="btn btn-success"
-            onClick={datos ? console.log("Usuario Activo"):  handleClickNew }
+            onClick={handleClickNew}
         >
             Ver más..
         </button>

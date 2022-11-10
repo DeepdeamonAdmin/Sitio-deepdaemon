@@ -6,7 +6,8 @@ import { uiCloseModal } from '../../actions/ui';
 import { customStyles } from '../../helpers/modalCustomStyles';
 
 
-export const ModalInfoProject = ({ item }) => {
+
+export const ModalInfoLider = ({ item }) => {
 
 	const { modalOpen } = useSelector(state => state.ui);
 	const dispatch = useDispatch();

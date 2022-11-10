@@ -4,6 +4,7 @@ import { useGet } from '../../hooks/useGet';
 import { getMemberStatus } from '../../selectors/get/getMemberStatus';
 import { TeamDetaills } from './TeamDetaills';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
+import { ModalInfoUser } from './ModalInfoUser';
 import { VerMas } from '../ui/VerMas';
 // import {  } from './ProjectDetaills';
 
@@ -11,6 +12,7 @@ import { VerMas } from '../ui/VerMas';
 export const TeamScreen = ({ status }) => {
 
 	const { usuarios } = useSelector(state => state.user);
+	const { datos }  = useSelector( state => state.u );
 
 	return (
 		<>
@@ -38,6 +40,9 @@ export const TeamScreen = ({ status }) => {
 									<h5 className="card-title"> {usuario.nombre} </h5>
 
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
+									{
+										!datos ? <ModalCrearCuenta /> :<ModalInfoUser usuario={usuario}/>
+									}
 									<VerMas />
 								</div>
 							</div>

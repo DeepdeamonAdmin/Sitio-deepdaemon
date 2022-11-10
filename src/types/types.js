@@ -13,7 +13,10 @@ export const types = {
 
 	uiOpenModal: '[UI] Open modal',
 	uiCloseModal: '[UI] Close modal',
-
+//-----------
+	uiOpenModalInfo: '[UI] Open modal info',
+	uiCloseModalInfo: '[UI] Close modal info',
+//-----------
 	uiOpenModalEdit: '[UI] Open modal edit',
 	uiCloseModalEdit: '[UI] Close modal edit',
 

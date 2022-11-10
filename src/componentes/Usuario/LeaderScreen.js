@@ -6,6 +6,10 @@ import { getMemberStatus } from '../../selectors/get/getMemberStatus';
 import { LeaderDetaills } from './LeaderDetaills';
 import { ModalInfoProject } from './ModalInfoProject';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
+import { ModalInfoLider } from './ModalInfoLider';
+import { ModalInfoUser } from './ModalInfoUser';
+import { ModalInfoLeader } from './ModalInfoLeader';
+
 import { VerMas } from '../ui/VerMas';
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
@@ -13,6 +17,7 @@ import { VerMas } from '../ui/VerMas';
 export const LeaderScreen = () => {
 
 	const { usuarios } = useSelector(state => state.user);
+	const { datos }  = useSelector( state => state.u );
 
 	return (
 		<>
@@ -35,7 +40,10 @@ export const LeaderScreen = () => {
 									<h5 className=""> {usuario.nombre} </h5>
 
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
-									<ModalCrearCuenta />
+									{/*<ModalCrearCuenta />*/}
+									{
+										!datos ? <ModalCrearCuenta /> :<ModalInfoLeader usuario={usuario}/>
+									}
 									<VerMas/>
 								</div>
 							</div>

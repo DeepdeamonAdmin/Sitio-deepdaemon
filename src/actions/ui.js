@@ -19,7 +19,10 @@ export const finishLoading = () => ({
 
 export const uiOpenModal = () => ({ type: types.uiOpenModal });
 export const uiCloseModal = () => ({ type: types.uiCloseModal });
-
+//-----------
+export const uiOpenModalInfo = () => ({ type: types.uiOpenModalInfo });
+export const uiCloseModalInfo = () => ({ type: types.uiCloseModalInfo });
+//-----------
 
 export const uiOpenModalEdit = () => ({ type: types.uiOpenModalEdit });
 export const uiCloseModalEdit = () => ({ type: types.uiCloseModalEdit });
