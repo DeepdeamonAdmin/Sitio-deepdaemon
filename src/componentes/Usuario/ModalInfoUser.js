@@ -4,13 +4,10 @@ import Modal from "react-modal";
 import { uiCloseModal } from "../../actions/ui";
 import { customStyles } from "../../helpers/modalCustomStyles";
 
-export const ModalInfoUser = ({ usuario }) => {
+export const ModalInfoUser = ({usuario }) => {
   const { modalOpen } = useSelector((state) => state.ui);
-  const { datos }  = useSelector( state => state.user );
-  let nombre;
-    if(datos){
-        nombre = datos.nombre
-    }
+ 
+  console.log(usuario);
   const dispatch = useDispatch();
 
   const closeModal = () => {
@@ -27,13 +24,22 @@ export const ModalInfoUser = ({ usuario }) => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      <div className="card-body">
-        <h5 className="card-title">{usuario.nombre} </h5>
-        <h5 className="card-title">{nombre} </h5>
-        <button onClick={closeModal} className="btn btn-light">
-          <span className="fas fa-times-circle"></span>
-        </button>
-      </div>
+				<div className='d-flex flex-col animate__animated animate__fadeIn'>
+					<ul class="list-group list-group-flush">
+						<li className="list-group-item text-white bg-primary ">Descripción: {usuario.descripcion}</li>
+						<li className={"list-group-item text-white bg-primary "}>Titulo: {usuario.titulo}</li>
+						<li className="list-group-item">Grado: {usuario.grado}</li>
+						<li className="list-group-item">Email: {usuario.email}</li>
+						<li className="list-group-item">
+							<a href={usuario.linkedin} class="card-link">LinkedIn</a>
+							<a href={usuario.Github} class="card-link">GitHub</a>
+						</li>
+						<li className="list-group-item">
+							<a href={usuario.facebook} class="card-link">Facebook</a>
+						</li>
+					</ul>
+				</div>
+			
     </Modal>
   );
 };

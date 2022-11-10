@@ -6,6 +6,7 @@ import 'firebase/auth';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider } from 'firebase/auth';
+import { getAuth } from "firebase/auth";
 //import { getAnalytics } from "firebase/analytics";
  
 //Constantes
@@ -27,9 +28,11 @@ const app2 = initializeApp(firebaseConfig, "Secondary");
 const db = getFirestore(app);
  
 const googleAuthProvider = new GoogleAuthProvider();
+const auth = getAuth();
 
 export {
   app2,
     db,
     googleAuthProvider,
+    auth,
 }

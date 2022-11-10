@@ -6,13 +6,15 @@ import { TeamDetaills } from './TeamDetaills';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
 import { ModalInfoUser } from './ModalInfoUser';
 import { VerMas } from '../ui/VerMas';
+import { auth } from '../../firebase/firebase-config';
 // import {  } from './ProjectDetaills';
 
 
 export const TeamScreen = ({ status }) => {
 
+
 	const { usuarios } = useSelector(state => state.user);
-	const { datos }  = useSelector( state => state.u );
+	const user = auth.currentUser;
 
 	return (
 		<>
@@ -39,11 +41,12 @@ export const TeamScreen = ({ status }) => {
 								<div className="col">
 									<h5 className="card-title"> {usuario.nombre} </h5>
 
-									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
-									{
-										!datos ? <ModalCrearCuenta /> :<ModalInfoUser usuario={usuario}/>
-									}
-									<VerMas />
+									{/*Arreglar este perro codigo porque no jala con el modal */}
+									{!user? <ModalCrearCuenta />: <TeamDetaills usuario={usuario} />}
+									{console.log("Activo o nel :"+user)}
+									{/*<ModalInfoUser usuario={usuario}/>*/}
+
+									<VerMas/>
 								</div>
 							</div>
 						)

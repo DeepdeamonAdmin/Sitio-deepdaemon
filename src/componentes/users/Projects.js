@@ -125,11 +125,12 @@ export const Projects = () => {
                                     {project.nameTech}
                                 </td>
                                 <td className='td-project'>
-                                    {project.url}
+                                    <a href={project.url} className="card-link" target="blank">{project.name + " Video"}</a>
+                                    
                                 </td>
                                 <td className='td-project'>
                                     <button
-                                        className='btn-project-delete'
+                                        className="btn btn-outline-secondary nav-item nav-link"
                                         onClick={() => handleDelete(project.name)}
                                     >
                                         Eliminar

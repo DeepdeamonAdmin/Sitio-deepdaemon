@@ -3,6 +3,8 @@ import { types } from "../types/types";
 import Swal from 'sweetalert2';
 import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc, where, query } from 'firebase/firestore';
 import { db } from "../firebase/firebase-config";
+import { startLoading } from './ui';
+import { startLoadingProject } from '../../src/actions/projects';
 
 export const deleteProjectGeneral = (id) => {
 
@@ -14,6 +16,7 @@ export const deleteProjectGeneral = (id) => {
                 icon: 'success',
             })
             dispatch(valDelProject(id));
+            dispatch(startLoadingProject());
         } else {
             Swal.fire('Error al eliminar el proyecto');
         }

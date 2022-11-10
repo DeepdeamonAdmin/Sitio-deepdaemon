@@ -17,7 +17,7 @@ import { VerMas } from '../ui/VerMas';
 export const LeaderScreen = () => {
 
 	const { usuarios } = useSelector(state => state.user);
-	const { datos }  = useSelector( state => state.u );
+	
 
 	return (
 		<>
@@ -41,9 +41,9 @@ export const LeaderScreen = () => {
 
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
 									{/*<ModalCrearCuenta />*/}
-									{
-										!datos ? <ModalCrearCuenta /> :<ModalInfoLeader usuario={usuario}/>
-									}
+									
+									<ModalCrearCuenta />
+									
 									<VerMas/>
 								</div>
 							</div>
