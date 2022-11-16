@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import { uiCloseModal } from '../../../actions/ui';
 import { customStyles } from '../../../helpers/modalCustomStyles';
 import { FormAddProject } from './FormAddProject';
-import { Projects } from '../../../componentes/users/Projects';
+import { Projects } from '../../users/Tesis';
 
 export const ModalAddProject = () => {
 

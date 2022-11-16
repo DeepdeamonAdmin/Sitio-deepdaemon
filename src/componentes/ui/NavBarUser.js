@@ -42,8 +42,8 @@ export const NavBarUser = () => {
             <div className="navbar-nav">
                 <NavLink 
                     className="nav-item nav-link"
-                    to="/user/proyectos">
-                        Proyectos
+                    to="/user/tesis">
+                        Tesis
                 </NavLink>
                 <NavLink 
                     className="nav-item nav-link" 

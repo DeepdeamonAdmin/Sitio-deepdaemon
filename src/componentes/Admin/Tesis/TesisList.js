@@ -1,41 +1,38 @@
 import React from 'react'
-import { useGet } from '../../../hooks/useGet'
-import { getProject } from '../../../selectors/get/getProject';
-import ProjectCard from './ProjectCard';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import TesisCard from './TesisCard';
 import {db} from '../../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
 import {
 	getAuth,
 } from 'firebase/auth';
 
-const ProjectList = () => {
+const TesisList = () => {
 
     //const dispatch = useDispatch();
 
     //const { projects } = useSelector( state => state.projects );
     
     //const { data:project, loading } = useGet(getProject);
+
     const auth = getAuth();
     const dN = auth.currentUser.displayName;
 
-    const [projects, setProjects] = React.useState([])
+    const [tesis, settesis] = React.useState([])
 	React.useEffect(() => {
-		const getProjects = async () => {
+		const gettesis = async () => {
 			try {
-                const ref = collection(db, "Proyectos")
+                const ref = collection(db, "Tesis")
 				//const q = query(ref, where("publisher", "==", dN))
                 //console.log(q)
                 const Data = await getDocs(ref);
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-				setProjects(arrayData)
+				settesis(arrayData)
 				
 			} catch (error) {
 				console.log(error)
 			}
 		}
-		getProjects()
+		gettesis()
 	}, [])
     
     return (
@@ -44,8 +41,8 @@ const ProjectList = () => {
         
             <div className="card-columns animate__animated animate__fadeIn">
                 {
-                    projects.map(item => (
-                        <ProjectCard
+                    tesis.map(item => (
+                        <TesisCard
                             key={item.id}
                             {...item}
                         />
@@ -56,4 +53,4 @@ const ProjectList = () => {
     )
 }
 
-export default ProjectList
+export default TesisList

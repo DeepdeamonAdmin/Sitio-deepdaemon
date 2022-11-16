@@ -1,16 +1,16 @@
 import React from 'react'
-import { useGet } from '../../../hooks/useGet'
-import { getProject } from '../../../selectors/get/getProject';
-import ProjectCard from './ProjectCard';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import {db} from '../../../firebase/firebase-config';
+//import { useGet } from '../../../hooks/useGet'
+//import { getProject } from '../../../selectors/get/getProject';
+import TesisCardUser from './TesisCardUser'
+//import { useSelector } from 'react-redux';
+//import { useDispatch } from 'react-redux';
+import {db} from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
 import {
 	getAuth,
 } from 'firebase/auth';
 
-const ProjectList = () => {
+const TesisListUser = () => {
 
     //const dispatch = useDispatch();
 
@@ -24,10 +24,10 @@ const ProjectList = () => {
 	React.useEffect(() => {
 		const getProjects = async () => {
 			try {
-                const ref = collection(db, "Proyectos")
-				//const q = query(ref, where("publisher", "==", dN))
-                //console.log(q)
-                const Data = await getDocs(ref);
+                const ref = collection(db, "Tesis")
+				const q = query(ref, where("publisher", "==", dN))
+                console.log(q)
+                const Data = await getDocs(q);
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
 				setProjects(arrayData)
 				
@@ -45,7 +45,7 @@ const ProjectList = () => {
             <div className="card-columns animate__animated animate__fadeIn">
                 {
                     projects.map(item => (
-                        <ProjectCard
+                        <TesisCardUser
                             key={item.id}
                             {...item}
                         />
@@ -56,4 +56,4 @@ const ProjectList = () => {
     )
 }
 
-export default ProjectList
+export default TesisListUser

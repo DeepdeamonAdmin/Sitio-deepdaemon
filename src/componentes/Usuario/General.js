@@ -15,6 +15,7 @@ import { Tab } from "react-bootstrap";
 import { LeaderScreen } from './LeaderScreen';
 import { TeamScreen } from './TeamScreen';
 import { ProjectScreen } from './ProjectScreen'
+import { TesisScreen } from './TesisScreen'
 import FormCorreo from './FormCorreo';
 
 import { useEffect, useState } from 'react';
@@ -144,6 +145,14 @@ export const General = ({ id }) => {
 				</Container>
 			</Container>
 
+			<div className="Container" id='Lideres'>
+				<h1>LOS LÍDERES</h1>
+				<hr />
+				<div className="row">
+					<LeaderScreen />
+				</div>
+			</div>
+
 			<Container fluid className="section portfolio" id='Proyectos'>
 				<h1> Proyectos </h1>
 				<Tab.Container defaultActiveKey="indevelop">
@@ -163,13 +172,51 @@ export const General = ({ id }) => {
 				</Tab.Container>
 			</Container>
 
-			<div className="Container" id='Lideres'>
-				<h1>Los líderes</h1>
-				<hr />
-				<div className="row">
-					<LeaderScreen />
-				</div>
-			</div>
+			<Container fluid className="section" id='Equipo'>
+				<h1>Colaboradores</h1>
+				<Tab.Container defaultActiveKey="current">
+					<Nav className="projects">
+						<Nav.Item><Nav.Link eventKey="current"><h1>Las Promesas</h1></Nav.Link></Nav.Item>
+						<Nav.Item><Nav.Link eventKey="graduate"><h1>Los egresados</h1></Nav.Link></Nav.Item>
+					</Nav>
+					<hr />
+					<Tab.Content>
+						<Tab.Pane eventKey="current">
+							<div className="Container section">
+								<div className="row">
+									<TeamScreen status='current' />
+								</div>
+							</div>
+						</Tab.Pane>
+						<Tab.Pane eventKey="graduate">
+							<div className="Container section">
+								<div className="row">
+									<TeamScreen status='graduate' />
+								</div>
+							</div>
+						</Tab.Pane>
+					</Tab.Content>
+				</Tab.Container>
+			</Container>
+
+			<Container fluid className="section portfolio" id='Tesis'>
+				<h1> Tesis </h1>
+				<Tab.Container defaultActiveKey="indevelop">
+					<Nav className="projects">
+						<Nav.Item><Nav.Link eventKey="indevelop"><h1>En desarrollo</h1></Nav.Link></Nav.Item>
+						<Nav.Item><Nav.Link eventKey="completed"><h1>Finalizadas</h1></Nav.Link></Nav.Item>
+					</Nav>
+					<hr />
+					<Tab.Content>
+						<Tab.Pane eventKey="indevelop">
+							<TesisScreen status1='indevelop' status2='registered'/>
+						</Tab.Pane>
+						<Tab.Pane eventKey="completed">
+							<TesisScreen status1='completed' status2=''/>
+						</Tab.Pane>
+					</Tab.Content>
+				</Tab.Container>
+			</Container>
 
 			<Container fluid className="team_separator">
 				<Container className="section white">
@@ -203,34 +250,6 @@ export const General = ({ id }) => {
 						</div>
 					</Col>
 				</Row>
-			</Container>
-
-
-			<Container fluid className="section" id='Equipo'>
-				<h1>Colaboradores</h1>
-				<Tab.Container defaultActiveKey="current">
-					<Nav className="projects">
-						<Nav.Item><Nav.Link eventKey="current"><h1>Las Promesas</h1></Nav.Link></Nav.Item>
-						<Nav.Item><Nav.Link eventKey="graduate"><h1>Los egresados</h1></Nav.Link></Nav.Item>
-					</Nav>
-					<hr />
-					<Tab.Content>
-						<Tab.Pane eventKey="current">
-							<div className="Container section">
-								<div className="row">
-									<TeamScreen status='current' />
-								</div>
-							</div>
-						</Tab.Pane>
-						<Tab.Pane eventKey="graduate">
-							<div className="Container section">
-								<div className="row">
-									<TeamScreen status='graduate' />
-								</div>
-							</div>
-						</Tab.Pane>
-					</Tab.Content>
-				</Tab.Container>
 			</Container>
 
 			<Container fluid className="section contact white" id='Contacto'>

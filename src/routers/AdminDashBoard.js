@@ -4,6 +4,7 @@ import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
 import { MembersScreen } from '../componentes/Admin/Miembros/MembersScreen';
 import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { AlumnoScreen } from '../componentes/Admin/Alumnos/AlumnoScreen';
+import { TesisScreen } from '../componentes/Admin/Tesis/TesisScreen';
 import { ReleaseScreen } from '../componentes/Admin/Publcaciones/ReleaseScreen';
 import { LiderScreen } from '../componentes/Admin/Lideres/LiderScreen';
 import { NavBarAdmin } from '../componentes/ui/NavBarAdmin';
@@ -32,6 +33,7 @@ export const AdminDashBoard = () => {
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
 					<Route path="release" element={<ReleaseScreen />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />
+					<Route path="tesis" element={<TesisScreen />} />
 					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />

@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { NavBarUser } from '../componentes/ui/NavBarUser';
 import { RutaError } from '../componentes/ui/RutaError';
-import { EditInfoProject } from '../componentes/users/EditInfoProject';
-import { FormAddProject } from '../componentes/users/FormAddProject';
+import { EditInfoTesis } from '../componentes/users/EditInfoTesis';
+import { FormAddTesis } from '../componentes/users/FormAddTesis';
 import { FormAddRelease } from '../componentes/users/FormAddRelease';
 import { Perfil } from '../componentes/users/Perfil';
-import { Projects } from '../componentes/users/Projects';
+//import { Projects } from '../componentes/users/Projects';
+import { Tesis } from '../componentes/users/Tesis';
 import { Publications } from '../componentes/users/Publications';
 import { User } from '../componentes/users/User';
 import { Blog } from '../componentes/users/Blog';
@@ -19,14 +20,14 @@ export const UserDashBoard = () => {
         <div>
                 <Routes>
                     <Route  path="/" element={ <User /> } />
-                    <Route path='proyectos' element={ <Projects/> } />
+                    <Route path='tesis' element={ <Tesis/> } />
                     <Route path='publicaciones' element={ <Publications/> } />
                     <Route path='blog' element={ <Blog /> } />
                     <Route path='perfil' element={ <Perfil /> } />
-                    <Route path='addproject' element={ <FormAddProject /> } />
+                    <Route path='addTesis' element={ <FormAddTesis /> } />
                     <Route path='addpublication' element={ <FormAddRelease /> } />
                     <Route path='morepublication/:idPub' element={ <FormAddRelease /> } exact/>
-                    <Route path='moreproject/:idProject' element={ <EditInfoProject /> } exact/>
+                    <Route path='tesis/:idProject/:params' element={ <EditInfoTesis /> } exact/>
                     <Route path="*" element={ <RutaError />} />
                 </Routes>
         </div>

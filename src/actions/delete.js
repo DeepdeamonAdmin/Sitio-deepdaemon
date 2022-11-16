@@ -16,7 +16,6 @@ export const deleteProjectGeneral = (id) => {
                 icon: 'success',
             })
             dispatch(valDelProject(id));
-            dispatch(startLoadingProject());
         } else {
             Swal.fire('Error al eliminar el proyecto');
         }
@@ -76,6 +75,28 @@ export const deleteMember = (id) => {
 
 }
 
+export const deleteTesisUser = (item) => {
+
+    return async (dispatch, getState) => {
+        //const { uid } = getState().auth;
+        // const ref = collection(db, "Tesis");
+        // const q = query(ref, where("publisher", "==", item.name));
+        // const Data = await getDocs(q);
+        // const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        // const projectRef = arrayData[0];
+
+        const deleteProject = await deleteDoc(doc(db, "Tesis", item.id));
+
+        if (!deleteProject) {
+            Swal.fire({
+                title: 'Tesis eliminada',
+                icon: 'success',
+            })
+        } else {
+            Swal.fire('Error al eliminar tesis');
+        }
+    }
+}
 
 const valDelProject = (id) => ({
     type: types.delProject,
