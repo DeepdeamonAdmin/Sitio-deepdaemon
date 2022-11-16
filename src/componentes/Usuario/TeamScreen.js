@@ -41,9 +41,8 @@ export const TeamScreen = ({ status }) => {
 								<div className="col">
 									<h5 className="card-title"> {usuario.nombre} </h5>
 
-									{/*Arreglar este perro codigo porque no jala con el modal */}
-									{!user? <ModalCrearCuenta />: <TeamDetaills usuario={usuario} />}
-									{console.log("Activo o nel :"+user)}
+									{/*!user? <ModalCrearCuenta />: <TeamDetaills usuario={usuario} />*/}
+									{!user&&<ModalCrearCuenta />}
 									{/*<ModalInfoUser usuario={usuario}/>*/}
 
 									<VerMas/>

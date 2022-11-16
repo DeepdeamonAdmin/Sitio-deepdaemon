@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-modal";
-import { uiCloseModal } from "../../actions/ui";
+import { uiCloseModalInfo } from "../../actions/ui";
 import { customStyles } from "../../helpers/modalCustomStyles";
 
 export const ModalInfoUser = ({usuario }) => {
@@ -10,34 +10,22 @@ export const ModalInfoUser = ({usuario }) => {
   console.log(usuario);
   const dispatch = useDispatch();
 
-  const closeModal = () => {
-    dispatch(uiCloseModal());
+  const closeModalInfo = () => {
+    dispatch(uiCloseModalInfo());
   };
 
   return (
     <Modal
       id={usuario.id}
       isOpen={modalOpen}
-      onRequestClose={closeModal}
+      onRequestClose={closeModalInfo}
       style={customStyles}
       closeTimeoutMS={200}
       className="modal"
       overlayClassName="modal-fondo"
     >
-				<div className='d-flex flex-col animate__animated animate__fadeIn'>
-					<ul class="list-group list-group-flush">
-						<li className="list-group-item text-white bg-primary ">Descripción: {usuario.descripcion}</li>
-						<li className={"list-group-item text-white bg-primary "}>Titulo: {usuario.titulo}</li>
-						<li className="list-group-item">Grado: {usuario.grado}</li>
-						<li className="list-group-item">Email: {usuario.email}</li>
-						<li className="list-group-item">
-							<a href={usuario.linkedin} class="card-link">LinkedIn</a>
-							<a href={usuario.Github} class="card-link">GitHub</a>
-						</li>
-						<li className="list-group-item">
-							<a href={usuario.facebook} class="card-link">Facebook</a>
-						</li>
-					</ul>
+				<div className='container'>
+          <h1>{usuario.nombre}</h1>
 				</div>
 			
     </Modal>
