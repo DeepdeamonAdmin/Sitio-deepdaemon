@@ -38,7 +38,7 @@ export const tesisReducer = ( state = initialState, action ) => {
         case  types.tesisAddNew:
             return {
                 ...state,
-                tesis: [ action.payload, ...state.projects ]
+                tesis: [ action.payload, ...state.tesis ]
             }
         case types.tesisImgAddNew:
             return {

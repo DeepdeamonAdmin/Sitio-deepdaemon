@@ -4,7 +4,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { deleteProjectGeneral, deleteProjectAdmin } from '../../../actions/delete';
-
+import { startLoadingProject } from '../../../actions/projects';
 
 const ProjectCard = (item) => {
 
@@ -23,10 +23,10 @@ const ProjectCard = (item) => {
             confirmButtonText: 'Continuar'
           }).then((result) => {
             if (result.isConfirmed) {
-                dispatch( deleteProjectAdmin(item.name) );
+                //dispatch( deleteProjectAdmin(item.name) );
                 dispatch( deleteProjectGeneral(item.id) );
-                
-                navigate('/admin/projects');
+                dispatch(startLoadingProject())
+                //navigate('/admin/projects');
             }
           })
     }

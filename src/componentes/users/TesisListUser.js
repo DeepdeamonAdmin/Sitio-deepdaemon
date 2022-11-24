@@ -9,6 +9,7 @@ import { collection, getDocs, where, get, query } from "firebase/firestore";
 import {
 	getAuth,
 } from 'firebase/auth';
+import { useSelector } from 'react-redux';
 
 const TesisListUser = () => {
 
@@ -20,23 +21,25 @@ const TesisListUser = () => {
     const auth = getAuth();
     const dN = auth.currentUser.displayName;
 
-    const [projects, setProjects] = React.useState([])
-	React.useEffect(() => {
-		const getProjects = async () => {
-			try {
-                const ref = collection(db, "Tesis")
-				//const q = query(ref, where("publisher", "==", dN))
-                //console.log(q)
-                const Data = await getDocs(ref);
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-				setProjects(arrayData)
+    const { tesis } = useSelector(state => state.tesis);
+    console.log(tesis)
+    // const [projects, setProjects] = React.useState([])
+	// React.useEffect(() => {
+	// 	const getProjects = async () => {
+	// 		try {
+    //             const ref = collection(db, "Tesis")
+	// 			//const q = query(ref, where("publisher", "==", dN))
+    //             //console.log(q)
+    //             const Data = await getDocs(ref);
+	// 			const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+	// 			setProjects(arrayData)
 				
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		getProjects()
-	}, [])
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 		}
+	// 	}
+	// 	getProjects()
+	// }, [])
     
     return (
         <>
@@ -44,7 +47,7 @@ const TesisListUser = () => {
         
             <div className="card-columns animate__animated animate__fadeIn">
                 {
-                    projects.map(item => (
+                    tesis.map(item => (
                         <TesisCardUser
                             key={item.id}
                             {...item}

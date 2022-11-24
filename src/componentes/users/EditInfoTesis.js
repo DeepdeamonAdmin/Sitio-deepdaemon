@@ -67,7 +67,7 @@ export const EditInfoTesis= () => {
 				<hr />
 			</div>
 
-			<div className="row">
+			<div className="form-group row">
 				<div className="col mb-3">
 					<label> Name </label>
 					<input
@@ -92,47 +92,17 @@ export const EditInfoTesis= () => {
 				</div>
 			</div>
 
-			<div className="col mb-3">
-				<label>Description</label>
-				<textarea
-					className="form-control"
-					rows='3' cols='40'
-					name='descripcion'
-					placeholder=' Desciption'
-					value={descripcion}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="col mb-3">
-				<label> Tech </label>
-				<input
-					className="form-control"
-					type='text'
-					name='nameTech'
-					placeholder='Nombre Tecnología'
-					value={nameTech}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="col mb-3">
-				<label> Results </label>
-				<textarea
-					className="form-control"
-					rows='6'
-					name='results'
-					placeholder='Resultados'
-					value={results}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="row">
-				<div className="col mb-6">
-					<label> Imagen desde Galeria </label>
-					<div className="card">
-					<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
-						<FotosGalleryChoose />
-					</div>
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label> Tech </label>
+					<input
+						className="form-control"
+						type='text'
+						name='nameTech'
+						placeholder='Nombre Tecnología'
+						value={nameTech}
+						onChange={handleInputChange}
+					/>
 				</div>
 				<div className="col mb-3">
 					<label>Status </label>
@@ -148,7 +118,53 @@ export const EditInfoTesis= () => {
 					</select>
 				</div>
 			</div>
-			<div className="row">
+
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label>Description</label>
+					<textarea
+						className="form-control"
+						rows='6' cols='40'
+						name='descripcion'
+						placeholder=' Desciption'
+						value={descripcion}
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="col mb-3">
+					<label> Results </label>
+					<textarea
+						className="form-control"
+						rows='6'
+						name='results'
+						placeholder='Resultados'
+						value={results}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+
+			<div className="row mb-12">
+				<div className="col mb-3">
+					<label> Imagen desde Galeria </label>
+					<div className="card">
+					<img className='foto' src={urlImg || datos} alt="Imagen" />
+						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
+						<FotosGalleryChoose />
+					</div>
+				</div>
+
+				<div className="col mb-3">
+					<label>URL</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL de video'
+						value={url}
+						onChange={handleInputChange}
+					/>
+				</div>
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -161,24 +177,17 @@ export const EditInfoTesis= () => {
 						<option value='No' > No </option>
 					</select>
 				</div>
-				<div className="col mb-3">
-					<label>URL</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL de video'
-						value={url}
-						onChange={handleInputChange}
-					/>
-				</div>
+
 			</div>
-			<button
-				className="btn2 btn-primary btn-large btn-block"
-				onClick={handleSubmit}
-			>
-				Agregar
-			</button>
+
+			<div class="text-center">
+				<button
+					className="btn btn-primary btn-large"
+					onClick={handleSubmit}
+				>
+					Guardar
+				</button>
+			</div>
 
 		</div>
 	)

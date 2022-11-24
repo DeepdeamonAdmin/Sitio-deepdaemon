@@ -32,9 +32,9 @@ export const startNewProject = (formValues) => {
 			name: formValues.name,
 		}
 		const docRef1 = await addDoc(collection(db, "Proyectos"), newProject);
-		const docRef2 = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProjectInd);
+		//const docRef2 = await addDoc(collection(db, `Usuarios/${uid}/Projects`), newProjectInd);
 		
-		if (docRef1 && docRef2) {
+		if (docRef1) {
 			Swal.fire('Proyecto agregado', formValues.name,'success');
 			dispatch(activeProject(docRef1.id, newProject));
 			dispatch(addNewProject(docRef1.id, newProject));
