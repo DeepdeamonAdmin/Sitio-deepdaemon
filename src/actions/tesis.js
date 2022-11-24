@@ -37,7 +37,7 @@ export const startNewTesis = (formValues) => {
 			dispatch(addNewTesis(docRef1.id, newTesis));
 			dispatch(uiCloseModal())
 		} else {
-			Swal.fire('Error al agregar el proyecto');
+			Swal.fire('Error al agregar tesis');
 		}
 	}
 }

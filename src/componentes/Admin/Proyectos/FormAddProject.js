@@ -20,7 +20,7 @@ export const FormAddProject = () => {
 		descripcion: '',
 		results: '',
 		nameTech: '',
-		urlImg:'',
+		urlImg: '',
 		estado: 'indevelop',
 		display: 'Yes',
 		url: '',
@@ -29,7 +29,7 @@ export const FormAddProject = () => {
 
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
 
-	
+
 	const navigate = useNavigate();
 	const handleEnvProyect = () => {
 		formValues.urlImg = datos;
@@ -53,8 +53,7 @@ export const FormAddProject = () => {
 				<h2>Agregar Proyecto </h2>
 				<hr />
 			</div>
-
-			<div className="row">
+			<div className="form-group row">
 				<div className="col mb-3">
 					<label> Name </label>
 					<input
@@ -78,48 +77,17 @@ export const FormAddProject = () => {
 					/>
 				</div>
 			</div>
-
-			<div className="col mb-3">
-				<label>Description</label>
-				<textarea
-					className="form-control"
-					rows='3' cols='40'
-					name='descripcion'
-					placeholder=' Desciption'
-					value={descripcion}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="col mb-3">
-				<label> Tech </label>
-				<input
-					className="form-control"
-					type='text'
-					name='nameTech'
-					placeholder='Nombre Tecnología'
-					value={nameTech}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="col mb-3">
-				<label> Results </label>
-				<textarea
-					className="form-control"
-					rows='6'
-					name='results'
-					placeholder='Resultados'
-					value={results}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="row">
-				<div className="col mb-6">
-					<label> Imagen desde Galeria </label>
-					<div className="card">
-					<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
-						<FotosGalleryChoose />
-					</div>
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label> Tech </label>
+					<input
+						className="form-control"
+						type='text'
+						name='nameTech'
+						placeholder='Nombre Tecnología'
+						value={nameTech}
+						onChange={handleInputChange}
+					/>
 				</div>
 				<div className="col mb-3">
 					<label>Status </label>
@@ -135,7 +103,52 @@ export const FormAddProject = () => {
 					</select>
 				</div>
 			</div>
-			<div className="row">
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label>Description</label>
+					<textarea
+						className="form-control"
+						rows='6' cols='40'
+						name='descripcion'
+						placeholder=' Desciption'
+						value={descripcion}
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="col mb-3">
+					<label> Results </label>
+					<textarea
+						className="form-control"
+						rows='6'
+						name='results'
+						placeholder='Resultados'
+						value={results}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+
+			<div className="row mb-12">
+				<div className="col mb-3">
+					<label> Imagen desde Galeria </label>
+					<div className="card">
+						<img className='foto' src={urlImg || datos} alt="Imagen" />
+						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<FotosGalleryChoose />
+					</div>
+				</div>
+
+				<div className="col mb-3">
+					<label>URL</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL de video'
+						value={url}
+						onChange={handleInputChange}
+					/>
+				</div>
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -148,24 +161,18 @@ export const FormAddProject = () => {
 						<option value='No' > No </option>
 					</select>
 				</div>
-				<div className="col mb-3">
-					<label>URL</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL de video'
-						value={url}
-						onChange={handleInputChange}
-					/>
-				</div>
+
 			</div>
-			<button
-				className="btn2 btn-primary btn-large btn-block"
-				onClick={handleEnvProyect}
-			>
-				Agregar
-			</button>
+			
+			<div class="text-center">
+				<button
+					className="btn btn-primary btn-large"
+					onClick={handleEnvProyect}
+				>
+					Agregar
+				</button>
+			</div>
+
 
 		</div>
 	)

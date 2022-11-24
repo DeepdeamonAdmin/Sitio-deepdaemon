@@ -8,6 +8,7 @@ import { deleteTesisUser} from '../../../../src/actions/delete';
 //import { deleteProject } from '../../../actions/delete';
 //import { collection, getDocs, where, get, query } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
+import { startLoadingTesis } from '../../../actions/tesis';
 
 const TesisCardUser = (item) => {
 
@@ -32,8 +33,9 @@ const TesisCardUser = (item) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 console.log(item.id)
-                dispatch( deleteTesisUser(item) );                
-                navigate('/admin/tesis');
+                dispatch( deleteTesisUser(item) );    
+                dispatch(startLoadingTesis())            
+                //navigate('/admin/tesis');
             }
           })
     }
