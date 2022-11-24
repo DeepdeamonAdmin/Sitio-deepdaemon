@@ -81,6 +81,7 @@ export const types = {
 	publicationAddNew: '[Publication] New Publication',
 	publicationActive: '[Publication] Set Publication active',
 	publicationsLoad: '[Publication] Load Publications',
+	publicationsAllLoad: '[Publications] All Load Publications',
 
 	// Para la galería
 	galleryAddNew: '[Images] New Image', //Agregando imagen con nombre

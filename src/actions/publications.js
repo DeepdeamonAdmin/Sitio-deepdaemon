@@ -6,53 +6,77 @@ import { db } from "../firebase/firebase-config";
 import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadWorks } from '../helpers/loadWorks';
+import { uiCloseModal } from './ui';
+import { loadAllWorks } from '../helpers/loadAllWorks';
 
 
 export const startNewPublication = ( formValues ) => {
     return async( dispatch, getState ) => {
-        const { postType, descr, nameTech, frontImg, link, autor,
-            title, journal, yearMonth, volume, number, pages, publisher, address,
-            howpublished, booktitle, editor, series, organization, school, note,
-            institution} = formValues;
+        
 
         const { uid } = getState().auth;
         const { img } = getState().publications;
 
         const newPublication = {
-            postType: postType || 'article',
-            descr: descr ||'',
-            nameTech: nameTech || '',
+            postType: formValues.postType || 'article',
+            descr: formValues.descr ||'',
+            nameTech: formValues.nameTech || '',
             frontImg: img || 'img.jpg',
-            link: link ||'',
-            autor: autor ||'',
-            title: title ||'',
-            journal: journal ||'',
-            yearMonth: yearMonth || '',
-            volume: volume ||'',
-            numbert: number ||'',
-            pages: pages ||'',
-            publisher: publisher ||'',
-            address: address ||'',
-            howpublished: howpublished ||'',
-            booktitle: booktitle || '',
-            editor: editor || '',
-            series: series || '',
-            organization: organization || '',
-            school: school || '',
-            note: note || '',
-            institution: institution || ''
+            link: formValues.link ||'',
+            autor: formValues.autor ||'',
+            title: formValues.title ||'',
+            journal: formValues.journal ||'',
+            yearMonth: formValues.yearMonth || '',
+            volume: formValues.volume ||'',
+            numbert: formValues.number ||'',
+            pages: formValues.pages ||'',
+            publisher: formValues.publisher ||'',
+            address: formValues.address ||'',
+            howpublished: formValues.howpublished ||'',
+            booktitle: formValues.booktitle || '',
+            editor: formValues.editor || '',
+            series: formValues.series || '',
+            organization: formValues.organization || '',
+            school: formValues.school || '',
+            note: formValues.note || '',
+            institution: formValues.institution || '',
+            display: formValues.display || 'No'
         }
+        const newPublicationInd = {
+			postType: formValues.postType,
+		}
     
-        const docRef = await addDoc(collection(db, `Usuarios/${uid}/Publications`), newPublication );
+        const docRef1 = await addDoc(collection(db, `Publicaciones`), newPublication );
+        const docRef2 = await addDoc(collection(db, `Usuarios/${uid}/Publications`), newPublicationInd );
     
-        if(docRef){
+        if(docRef1 && docRef2 ){
             Swal.fire('Reporte Enviado');
-            dispatch( activePublication( docRef.id, newPublication ) ); 
-            dispatch( addNewPublication( docRef.id, newPublication ) ); 
+            dispatch( activePublication( docRef1.id, newPublication ) ); 
+            dispatch( addNewPublication( docRef1.id, newPublication ) );
+            dispatch(uiCloseModal()) 
         }else{
             Swal.fire('Error al enviar Reporte');
         }
     }
+}
+
+export const AddPublicationP = (item) => {
+	return async (dispatch, getState) => {
+
+		const { uid } = getState().auth;
+		const newPublication = {
+			postType: item.postType
+		}
+
+		const docRef = await addDoc(collection(db, `Usuarios/${uid}/Publications`), newPublication);
+		
+		if (docRef) {
+			Swal.fire('Publicacion agregada');
+			dispatch(uiCloseModal())
+		} else {
+			 Swal.fire('Error al enviar Reporte');
+		}
+	}
 }
 
 
@@ -103,7 +127,7 @@ export const loadImgPublication= ( url ) => ({
 export const startLoadingPublication = () => {
     return async( dispatch, getState ) => {
         const { uid } = getState().auth;
-        const ruta =`Usuarios/${uid}/Publications`;
+        const ruta =`Publicaciones`;
         const publications = await loadWorks( ruta );
         dispatch( setPublications( publications ));
         
@@ -113,4 +137,22 @@ export const startLoadingPublication = () => {
 export const setPublications = ( publications ) => ({
     type: types.publicationsLoad,
     payload: publications
+})
+
+export const startLoadinPublicationsAll = () => {
+	return async (dispatch) => {
+		const ruta = 'Publications'
+		const publications = await loadAllWorks(ruta);
+		if (publications) {
+			dispatch(setAllPublications(publications));
+		} else {
+			Swal.fire('Error BD no identificada');
+		}
+	}
+}
+
+//mandar a redux los usuarios
+export const setAllPublications = (publications) => ({
+	type: types.publicationsAllLoad,
+	payload: publications
 });

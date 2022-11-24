@@ -4,6 +4,8 @@ import { registerRelease } from '../../../actions/register';
 import { useForm } from '../../../hooks/useForm';
 import { useGet } from '../../../hooks/useGet';
 import { getTech } from '../../../selectors/get/getTech';
+import { useNavigate } from 'react-router-dom';
+import { startNewPublication, startUploadingPublication } from '../../../actions/publications';
 
 export const FormAddRelease = () => {
 
@@ -29,7 +31,7 @@ export const FormAddRelease = () => {
 	const cambio = (e) => {
 		//Guardar el valor en una variable
 		let valor = e.target.value;
-		if(valor == "article"){
+		if(valor === "article"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = false;
@@ -48,7 +50,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "book"){
+		else if(valor === "book"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -67,7 +69,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "booklet"){
+		else if(valor === "booklet"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -86,7 +88,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "conference"){
+		else if(valor === "conference"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = false;
@@ -105,7 +107,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "inbook"){
+		else if(valor === "inbook"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -124,7 +126,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "incollection"){
+		else if(valor === "incollection"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -143,7 +145,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "inproceedings"){
+		else if(valor === "inproceedings"){
 			a0.disabled = true;
 			a1.disabled = true;
 			a2.disabled = true;
@@ -162,7 +164,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "manual"){
+		else if(valor === "manual"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -181,7 +183,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "mastersthesis" || valor == "phdthesis"){
+		else if(valor === "mastersthesis" || valor === "phdthesis"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -200,7 +202,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "proceedings"){
+		else if(valor === "proceedings"){
 			a0.disabled = true;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -219,7 +221,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
-		else if(valor == "techreport"){
+		else if(valor === "techreport"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -238,7 +240,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = false;
 		}
-		else if(valor == "misc"){
+		else if(valor === "misc"){
 			a0.disabled = false;
 			a1.disabled = false;
 			a2.disabled = true;
@@ -280,7 +282,7 @@ export const FormAddRelease = () => {
 	
 	
     const dispatch = useDispatch();
-    const [ formValues, handleInputChange ] = useForm({
+    const [ formValues, handleInputChange , reset] = useForm({
 		postType: '',
         descr: '',
         frontImg: '',
@@ -303,31 +305,43 @@ export const FormAddRelease = () => {
         organization: '',
         school: '',
         note: '',
-        institution: ''
+        institution: '',
+		display : 'Yes'
 	});
 
     const { descr, frontImg, modalMedia, link, autor, title, 
             journal, yearMonth, volume, number, pages, publisher,
             address, howpublished, booktitle, editor, series, 
-            organization, school, note, institution } = formValues;
+            organization, school, note, institution, display } = formValues;
 
+	const handleFileChange = (e) => {
+	const file = e.target.files[0];
+		if ( file ) {
+		  dispatch( startUploadingPublication( file ) );
+		}
+	}		
     //envio a la api
+	const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
-		dispatch( registerRelease(formValues) );
+		dispatch( startNewPublication(formValues));
+		reset();
+		navigate('/admin/publications');
     }
 
 	//Traemos la información de tech
 	const { data } = useGet(getTech);
 
+
+
     return (
         <div className="container">
 					<h2>Agregar Publicacion </h2>
 				<hr/>
-			<form onSubmit={ handleSubmit }>
+			
 				<div className="row">
 					<div className="col-md-2 mb-3">
-						<label> Tipe </label>
+						<label> Type </label>
 						<select
 							className="form-control"
 							name='postType'
@@ -371,7 +385,7 @@ export const FormAddRelease = () => {
 							/>
 					</div>
 					<div className="col-md-2 mb-3">
-						<label> Tipe </label>
+						<label> Type </label>
 					<select
 						className="form-control"
 						name='modalType'
@@ -652,15 +666,28 @@ export const FormAddRelease = () => {
 							disabled = {true}
 						/>
 					</div>
+					<div className="col mb-3">
+					<label>Mostrar en página principal</label>
+					<select
+						className="form-control"
+						name='display'
+						value={display}
+						onChange={handleInputChange}
+						required = 'true'
+					>
+						<option value='Si' > Si </option>
+						<option value='No' > No </option>
+					</select>
+				</div>
 				</div>
 				<button
 					className="btn2 btn-primary btn-large btn-block"
-					type="submit"					
+					onClick={handleSubmit}					
 				>
 					Agregar
 				</button>
 				
-			</form>
+			
 		</div>
     )
 }

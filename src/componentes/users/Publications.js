@@ -2,6 +2,8 @@ import React from 'react';
 import './users.css'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AddNewFab } from './AddNewFab';
+import { ModalAddrelease } from './ModalAddrelease';
 
 export const Publications = () => {
 
@@ -26,12 +28,8 @@ export const Publications = () => {
                         Descripcion
                     </td>
                     <td colSpan={2} className='td-project'>
-                        <Link
-                            to ='/user/addpublication'
-                            className="btn btn-outline-secondary nav-item nav-link"
-                        >
-                            Agregar Publicacion
-                        </Link>
+                    <ModalAddrelease />
+                    <AddNewFab /> 
                     </td>
                 </tr>
                 {
