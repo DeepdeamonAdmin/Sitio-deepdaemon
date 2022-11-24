@@ -19,12 +19,12 @@ export const FormEditProject = ({ history }) => {
 	//Traemos la información de firebase
 	const dispatch = useDispatch();
 	const { projects } = useSelector(state => state.projects);
-
+	console.log(idProject)
 	const pojectO = projects.filter(p => {
 		return p.id === idProject
 	})
 	const project = pojectO[0]
-
+	console.log(project);
 	const [formValues, handleInputChange] = useForm(project)
 
 

@@ -25,9 +25,9 @@ const TesisListUser = () => {
 		const getProjects = async () => {
 			try {
                 const ref = collection(db, "Tesis")
-				const q = query(ref, where("publisher", "==", dN))
-                console.log(q)
-                const Data = await getDocs(q);
+				//const q = query(ref, where("publisher", "==", dN))
+                //console.log(q)
+                const Data = await getDocs(ref);
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
 				setProjects(arrayData)
 				

@@ -12,13 +12,15 @@ export const TesisScreen = () => {
                         <h1> Tesis </h1>
                     </div>
                 </div>
-                {/* <div className="row">
+                <div className="row">
                     <div className="col-md-2 mb-2">
-                        <Link to={`agregar`} className="btn btn-primary fab">
+                        {/* <ModalAddProject />
+                        <AddNewFab />  */}
+                        <Link to='/admin/addtesis' className="btn btn-primary fab">
                         <i className="fas fa-plus"></i>
 						</Link>
                     </div>    
-                </div> */}
+                </div>
             </div>
             <div>
                 <TesisList />

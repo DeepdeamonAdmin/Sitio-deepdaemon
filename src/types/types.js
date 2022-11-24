@@ -66,6 +66,14 @@ export const types = {
 	projectsLoad: '[Project] Load Projects',
 	projectsAllLoad: '[Projects] All Load Projects',
 
+		//Para las tesis
+	//Solo enviar tesis nuevo y cargar las tesis
+	tesisGet:'[Tesis] Get',
+	tesisImgAddNew: '[Tesis] New Img Tesis',
+	tesisAddNew: '[Tesis] New Tesis',
+	tesisActive: '[Tesis] Set Tesis active',
+	tesisLoad: '[Tesis] Load Tesis',
+	tesisAllLoad: '[Tesis] All Load Tesis',
 
 	//Para las publicaciones
 	//solo enviar publicaion nueva y cargas las publicaciones

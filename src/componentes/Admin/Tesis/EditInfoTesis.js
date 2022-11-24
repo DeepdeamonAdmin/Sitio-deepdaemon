@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 //import { startNewProject, startUploadingProject } from '../../actions/projects';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
 import { useState } from 'react';
-import { ModalGalleryAddTesis } from '../../../src/componentes/users/ModalGalleryAddTesis';
-import { FotosGalleryChoose } from '../ui/FotosGalleryChoose';
-import { editTesis } from '../../actions/edit';
+import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+import { editTesis } from '../../../actions/edit';
 
 export const EditInfoTesis= () => {
 
@@ -30,19 +30,6 @@ export const EditInfoTesis= () => {
 	const tesisObj = tesisO[0]
 
 	console.log(tesisObj);
-
-	// const [formValues, handleInputChange, reset] = useForm({
-	// 	name: '',
-	// 	correo: '',
-	// 	descripcion: '',
-	// 	results: '',
-	// 	nameTech: '',
-	// 	urlImg:'',
-	// 	estado: 'indevelop',
-	// 	display: 'Yes',
-	// 	url: '',
-	// 	publisher: dN
-	// });
 
 	const [formValues, handleInputChange] = useForm(tesisObj)
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;

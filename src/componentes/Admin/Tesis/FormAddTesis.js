@@ -1,69 +1,56 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-//import { startNewProject, startUploadingProject } from '../../actions/projects';
-import { useForm } from '../../hooks/useForm';
-import { getAuth } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { ModalGalleryAddTesis } from '../../../src/componentes/users/ModalGalleryAddTesis';
-import { FotosGalleryChoose } from '../ui/FotosGalleryChoose';
-import { editTesis } from '../../actions/edit';
+import { startNewTesis } from '../../../../src/actions/tesis';
+import { useForm } from '../../../hooks/useForm';
+import { getAuth } from 'firebase/auth';
+import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 
-export const EditInfoTesis= () => {
+export const FormAddTesis = () => {
 
-	/*
-    const { projects } = useSelector( state => state.projects );
-	const { idProject } = useParams();
-    const dataProject = projects.filter(project=> project.id === idProject);*/
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const auth = getAuth();
 	const dN = auth.currentUser.displayName;
-	const {idTesis} = useParams();
-	
-	const { tesis } = useSelector(state => state.tesis);
-	console.log(idTesis)
-	const tesisO = tesis.filter(t => {
-		return t.id === idTesis
-	})
 
-	const tesisObj = tesisO[0]
+	const [formValues, handleInputChange, reset] = useForm({
+		name: '',
+		correo: '',
+		descripcion: '',
+		results: '',
+		nameTech: '',
+		urlImg:'',
+		estado: 'indevelop',
+		display: 'Yes',
+		url: '',
+		publisher: dN
+	});
 
-	console.log(tesisObj);
-
-	// const [formValues, handleInputChange, reset] = useForm({
-	// 	name: '',
-	// 	correo: '',
-	// 	descripcion: '',
-	// 	results: '',
-	// 	nameTech: '',
-	// 	urlImg:'',
-	// 	estado: 'indevelop',
-	// 	display: 'Yes',
-	// 	url: '',
-	// 	publisher: dN
-	// });
-
-	const [formValues, handleInputChange] = useForm(tesisObj)
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
 
-	const handleSubmit = () => {
-		if (datos != "") {
-			formValues.urlImg = datos;
-		}
-
-		dispatch(editTesis(idTesis, formValues));
+	
+	const navigate = useNavigate();
+	const handleEnvTesis = () => {
+		formValues.urlImg = datos;
+		dispatch(startNewTesis(formValues));
+		reset();
+		navigate('/admin/Tesis');
 	}
+
 	const [datos, setDatos] = useState('');
 
 	const MgAFAP = (datosMg) => {
-		formValues.urlImg = "";
-		setDatos(datosMg);
+	 	setDatos(datosMg);
 	}
-    return (
+	// const handleFileChange = (e) => {
+	// 	console.log(e.target.value)
+	// }
+
+	return (
 		<div className="container">
 			<div className="app-title">
-				<h2>Editar Tesis </h2>
+				<h2>Agregar Tesis </h2>
 				<hr />
 			</div>
 
@@ -175,7 +162,7 @@ export const EditInfoTesis= () => {
 			</div>
 			<button
 				className="btn2 btn-primary btn-large btn-block"
-				onClick={handleSubmit}
+				onClick={handleEnvTesis}
 			>
 				Agregar
 			</button>

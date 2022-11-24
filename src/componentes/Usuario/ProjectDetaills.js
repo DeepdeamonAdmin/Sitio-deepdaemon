@@ -23,10 +23,22 @@ export const ProjectDetaills = ({ color, project }) => {
 			{showInf &&
 				<div className='d-flex flex-col animate__animated animate__fadeIn'>
 					<ul className="list-group list-group-flush">
+						{/* <li className="list-group-item">Resultados: {project.results}</li> */}
+						{/* <li className="list-group-item"><a href={project.link} class="card-link">GitHub</a></li> */}
+						<iframe
+							className='embed-responsive'
+							//src="https://www.youtube.com/embed/OG0w_4qDiy8"
+							src={project.url}
+							title="YouTube video player"
+							gesture="media"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen>
+						</iframe>
 						<li className={`list-group-item text-white bg-${color}`}>Descripción: {project.descripcion}</li>
-						<li className="list-group-item">Impacto: {project.impact}</li>
-						<li className="list-group-item"><a href={project.link} class="card-link">GitHub</a></li>
 					</ul>
+					{/* <div class="col-sm"> */}
+
+					{/* </div> */}
 				</div>
 			}
 		</>

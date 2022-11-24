@@ -19,6 +19,7 @@ import { UserDashBoard } from './UserDashBoard';
 import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
 import { login } from '../actions/auth';
 import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
+import { startLoadingTesis, startLoadinTesisAll } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
 
 
@@ -40,6 +41,7 @@ export const AppRouter = () => {
 
         dispatch( startLoadinUsersAll() );
         dispatch( startLoadinProjectsAll() );
+        dispatch( startLoadinTesisAll() );
         
         onAuthStateChanged(auth, ( user ) => {
 
@@ -50,6 +52,8 @@ export const AppRouter = () => {
                 dispatch( startLoadingProject() );
                 dispatch( startLoadingPublication() );
                 dispatch( startLoadinProjectsAll() );
+                dispatch( startLoadingTesis() );
+                dispatch( startLoadinTesisAll() );
                 
 
             } else {

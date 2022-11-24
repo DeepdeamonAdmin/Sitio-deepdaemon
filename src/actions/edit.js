@@ -4,15 +4,28 @@ import { db } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
 import {startLoadingProject} from "../../src/actions/projects"
-
+import {startLoadingTesis} from "../../src/actions/tesis"
 export const editProject = (idProject, formValues) => {
 	return async (dispatch, getState) => {
 		
 		const dataToFirestore = { ...formValues }
 		const projectUpdate = updateDoc(doc(db, 'Proyectos', idProject), dataToFirestore)
 
-		dispatch(refreshData(dataToFirestore))
+		//dispatch(refreshData(dataToFirestore))
 		dispatch(startLoadingProject())
+		Swal.fire('Informacion actualizada:', formValues.name, 'success')
+		
+	}
+}
+
+export const editTesis = (idTesis, formValues) => {
+	return async (dispatch, getState) => {
+		
+		const dataToFirestore = { ...formValues }
+		const projectUpdate = updateDoc(doc(db, 'Tesis', idTesis), dataToFirestore)
+
+		//dispatch(refreshData(dataToFirestore))
+		dispatch(startLoadingTesis())
 		Swal.fire('Informacion actualizada:', formValues.name, 'success')
 		
 	}

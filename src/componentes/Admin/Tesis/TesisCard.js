@@ -58,7 +58,7 @@ const TesisCardUser = (item) => {
                 <div className="col-md-1">
                 <p>
                         <Link 
-                            to={ `/user/tesis/${item.id }/${item}` }
+                            to={ `/admin/tesis/${item.id }/${item}` }
                             className ="btn btn-primary btn-sm">
                                 Edit
                         </Link>

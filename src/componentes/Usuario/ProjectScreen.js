@@ -46,8 +46,8 @@ export const ProjectScreen = ({ status1, status2 }) => {
 								style={{
 									objectFit: 'cover',
 									objectPosition: 'center',
-									height: "200px",
-									width: '200px'
+									height: "150px",
+									width: '150px'
 								}}
 								alt="member"
 							/>
@@ -56,7 +56,6 @@ export const ProjectScreen = ({ status1, status2 }) => {
 								{/* {<ModalInfoProject item={project} key={project.id} id={project.id} />} */}
 								<ProjectDetaills color={"primary"} project={project} />
 							</div>
-
 						</div>
 					)
 				))
