@@ -44,8 +44,7 @@ export const TeamScreen = ({ status }) => {
 									{/*!user? <ModalCrearCuenta />: <TeamDetaills usuario={usuario} />*/}
 									{!user&&<ModalCrearCuenta />}
 									{/*<ModalInfoUser usuario={usuario}/>*/}
-
-									<VerMas/>
+									<VerMas usuario={usuario}/>
 								</div>
 							</div>
 						)

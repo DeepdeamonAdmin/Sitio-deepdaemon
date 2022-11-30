@@ -6,9 +6,7 @@ import { ModalInfoProject } from './ModalInfoProject';
 import { useSelector, useDispatch } from 'react-redux';
 import {db} from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
-import {
-	getAuth,
-} from 'firebase/auth';
+import {getAuth,} from 'firebase/auth';
 
 export const ProjectScreen = ({ status1, status2 }) => {
 

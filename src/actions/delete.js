@@ -75,6 +75,28 @@ export const deleteMember = (id) => {
 
 }
 
+export const deletePublicacion = (item) => {
+
+    return async (dispatch, getState) => {
+        //const { uid } = getState().auth;
+        // const ref = collection(db, "Tesis");
+        // const q = query(ref, where("publisher", "==", item.name));
+        // const Data = await getDocs(q);
+        // const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        // const projectRef = arrayData[0];
+
+        const deletePublication = await deleteDoc(doc(db, "Publicaciones", item.id));
+
+        if (!deletePublication) {
+            Swal.fire({
+                title: 'Publicacion eliminada',
+                icon: 'success',
+            })
+        } else {
+            Swal.fire('Error al eliminar publicacion');
+        }
+    }
+}
 export const deleteTesisUser = (item) => {
 
     return async (dispatch, getState) => {

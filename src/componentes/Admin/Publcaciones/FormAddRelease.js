@@ -278,6 +278,7 @@ export const FormAddRelease = () => {
 			a15.disabled = true;
 			a16.disabled = true;
 		}
+		handleInputChange();
 	}
 	
 	
@@ -309,7 +310,7 @@ export const FormAddRelease = () => {
 		display : 'Yes'
 	});
 
-    const { descr, frontImg, modalMedia, link, autor, title, 
+    const { descr, frontImg, modalMedia, link, autor, title, postType,
             journal, yearMonth, volume, number, pages, publisher,
             address, howpublished, booktitle, editor, series, 
             organization, school, note, institution, display } = formValues;

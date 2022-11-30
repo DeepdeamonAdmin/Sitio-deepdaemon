@@ -9,8 +9,6 @@ import { ModalCrearCuenta } from './ModalCrearCuenta';
 import { ModalInfoLider } from './ModalInfoLider';
 import { ModalInfoUser } from './ModalInfoUser';
 import { ModalInfoLeader } from './ModalInfoLeader';
-
-
 import { VerMas } from '../ui/VerMas';
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
@@ -43,7 +41,7 @@ export const LeaderScreen = () => {
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
 									
 									<ModalCrearCuenta />
-									<VerMas/>
+									<VerMas usuario = {usuario}/>
 								</div>
 							</div>
 						)

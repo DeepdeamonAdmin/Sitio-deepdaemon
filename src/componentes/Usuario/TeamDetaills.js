@@ -7,37 +7,52 @@ export const TeamDetaills = ({usuario }) => {
 	const dispatch = useDispatch();
 	const [currentModal, setCurrentModal] = useState(null)
 	const [showInf, setShowInfo] = useState(false)
+	const usuarioF = usuario.usuario;
 
 	const handleClickNew = () => {
 		// dispatch(uiOpenModal());
-		console.log(usuario);
+		console.log(usuarioF);
 		setShowInfo(!showInf)
 	}
 
 	return (
 		<>
+			
 			<button
 				className={"btn btn-primary"}
 				onClick={handleClickNew}>
 				{!showInf ? "Ver más.." : "Ver menos"}
 			</button>
-			{showInf &&
-				<div className='d-flex flex-col animate__animated animate__fadeIn'>
+			{
+				showInf && 
+					<div className='d-flex flex-col animate__animated animate__fadeIn'>
+						<ul class="list-group list-group-flush">
+							<li className="list-group-item text-white bg-primary "><b>Sobre mi:</b><i>{usuarioF.descripcion}</i></li>
+							<li className="list-group-item">Titulo de Tesis: {usuarioF.titulo}</li>
+							<li className="list-group-item">Email: {usuarioF.email}</li>
+						</ul>
+					</div>
+
+			/*(showInf)&&
+				(usuarioF.grado ==='leader'?
+					<div className='d-flex flex-col animate__animated animate__fadeIn'>
 					<ul class="list-group list-group-flush">
-					<li className="list-group-item text-white bg-primary ">Descripción: {usuario.descripcion}</li>
-						<li className={"list-group-item text-white bg-primary "}>Titulo: {usuario.titulo}</li>
-						<li className="list-group-item">Grado: {usuario.grado}</li>
-						<li className="list-group-item">Email: {usuario.email}</li>
-						<li className="list-group-item">
-							<a href={usuario.linkedin} class="card-link">LinkedIn</a>
-							<a href={usuario.Github} class="card-link">GitHub</a>
-						</li>
-						<li className="list-group-item">
-							<a href={usuario.facebook} class="card-link">Facebook</a>
-						</li>
-					</ul>
-				</div>
-			}
+							<li className="list-group-item text-white bg-primary "><b>Sobre mi:</b><i>{usuarioF.descripcion}</i></li>
+							<li className="list-group-item">Email: {usuarioF.email}</li>
+						</ul>
+					</div>
+				:
+					<div className='d-flex flex-col animate__animated animate__fadeIn'>
+						<ul class="list-group list-group-flush">
+							<li className="list-group-item text-white bg-primary "><b>Sobre mi:</b><i>{usuarioF.descripcion}</i></li>
+							<li className="list-group-item">Titulo de Tesis: {usuarioF.titulo}</li>
+							<li className="list-group-item">Email: {usuarioF.email}</li>
+						</ul>
+					</div>
+				)
+				
+				
+			*/}
 		</>
 	)
 }

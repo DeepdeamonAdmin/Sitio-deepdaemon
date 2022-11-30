@@ -308,7 +308,7 @@ export const FormAddRelease = () => {
 		display : 'Yes'
 	});
 
-    const { descr, frontImg, modalMedia, link, autor, title, 
+    const { postType,descr, frontImg, modalMedia, link, autor, title, 
             journal, yearMonth, volume, number, pages, publisher,
             address, howpublished, booktitle, editor, series, 
             organization, school, note, institution, display } = formValues;
@@ -344,6 +344,7 @@ export const FormAddRelease = () => {
 						<select
 							className="form-control"
 							name='postType'
+							value={postType}
 							onChange={ (e) => cambio(e) }
 						>
 							<option value = 'article' > article </option>
@@ -415,6 +416,7 @@ export const FormAddRelease = () => {
 							className="form-control"
 							name='idTech'
 							onChange={ handleInputChange }
+							
 						>
 							{
 								data.map(item =>(

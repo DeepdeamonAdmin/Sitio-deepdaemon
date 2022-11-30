@@ -18,7 +18,7 @@ export const startNewPublication = ( formValues ) => {
         const { img } = getState().publications;
 
         const newPublication = {
-            postType: formValues.postType || 'article',
+            postType: formValues.postType || '',
             descr: formValues.descr ||'',
             nameTech: formValues.nameTech || '',
             frontImg: img || 'img.jpg',
