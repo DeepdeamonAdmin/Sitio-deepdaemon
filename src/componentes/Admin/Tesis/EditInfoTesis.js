@@ -1,4 +1,5 @@
 import React from 'react'
+import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -10,44 +11,72 @@ import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGal
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { editTesis } from '../../../actions/edit';
 
-export const EditInfoTesis= () => {
+export const EditInfoTesis = () => {
 
 	/*
-    const { projects } = useSelector( state => state.projects );
+	const { projects } = useSelector( state => state.projects );
 	const { idProject } = useParams();
-    const dataProject = projects.filter(project=> project.id === idProject);*/
-    const dispatch = useDispatch();
-	const auth = getAuth();
-	const dN = auth.currentUser.displayName;
-	const {idTesis} = useParams();
-	
+	const dataProject = projects.filter(project=> project.id === idProject);*/
+	//const auth = getAuth();
+	//const dN = auth.currentUser.displayName;
+
+	//Traemos la información de los usuarios de firebase
+	const { usuarios } = useSelector(state => state.user);
+
+	//Traemos la información de la tesis de firebase
+	const dispatch = useDispatch();
+	const { idTesis } = useParams();
 	const { tesis } = useSelector(state => state.tesis);
 	console.log(idTesis)
 	const tesisO = tesis.filter(t => {
 		return t.id === idTesis
 	})
-
 	const tesisObj = tesisO[0]
 
-	console.log(tesisObj);
-
+	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(tesisObj)
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, autores } = formValues;
 
-	const handleSubmit = () => {
-		if (datos != "") {
-			formValues.urlImg = datos;
-		}
-
-		dispatch(editTesis(idTesis, formValues));
-	}
+	//Galeria
 	const [datos, setDatos] = useState('');
-
 	const MgAFAP = (datosMg) => {
 		formValues.urlImg = "";
 		setDatos(datosMg);
 	}
-    return (
+
+	//Checkbox autores
+	const selectedAuthor = []
+	autores.map((u) => (
+		selectedAuthor.push({ value: u.idAutor, label: u.nombreAutor })
+	))
+
+	const options = []
+	usuarios.map((u) => (
+		options.push({ value: u.id, label: u.nombre })
+	))
+
+	const [state, setState] = useState({
+		selectedOption: selectedAuthor
+	})
+
+	const handleChange = selectedOption => {
+		setState({ selectedOption });
+		console.log(selectedOption)
+	}
+
+	//envio a la api
+	const handleSubmit = () => {
+		if (datos != "") {
+			formValues.urlImg = datos;
+		}
+		const selectedAuthor = []
+		state.selectedOption.map((u) => (
+			selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+		))
+		formValues.autores = selectedAuthor;
+		dispatch(editTesis(idTesis, formValues));
+	}
+	return (
 		<div className="container">
 			<div className="app-title">
 				<h2>Editar Tesis </h2>
@@ -131,11 +160,26 @@ export const EditInfoTesis= () => {
 				</div>
 			</div>
 
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label>Agregar autores</label>
+					<Select
+						isMulti
+						name="usuarios"
+						options={options}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={state.selectedOption}
+						onChange={handleChange}
+					/>
+				</div>
+			</div>
+
 			<div className="row mb-12">
 				<div className="col mb-3">
 					<label> Imagen desde Galeria </label>
 					<div className="card">
-					<img className='foto' src={urlImg || datos} alt="Imagen" />
+						<img className='foto' src={urlImg || datos} alt="Imagen" />
 						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>

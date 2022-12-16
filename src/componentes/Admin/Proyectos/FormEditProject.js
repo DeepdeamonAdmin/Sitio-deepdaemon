@@ -1,34 +1,62 @@
 import React from 'react';
+import Select from 'react-select'
 import { useState } from 'react';
 import { db } from "../../../firebase/firebase-config";
 import { useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
-
 import { editProject } from '../../../actions/edit';
 import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 
 export const FormEditProject = ({ history }) => {
 
-	const auth = getAuth();
-	const dN = auth.currentUser.displayName;
-	const { idProject, params } = useParams();
+	//const dN = auth.currentUser.displayName;
+	//const auth = getAuth();
 
-	//Traemos la información de firebase
+	//Traemos la información de los usuarios de firebase
+	const { usuarios } = useSelector(state => state.user);
+
+	//Traemos la información del proyecto de firebase
+	const { idProject } = useParams();
 	const dispatch = useDispatch();
 	const { projects } = useSelector(state => state.projects);
-	console.log(idProject)
 	const pojectO = projects.filter(p => {
 		return p.id === idProject
 	})
 	const project = pojectO[0]
-	console.log(project);
+
+	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(project)
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, autores } = formValues;
 
+	//Galeria
+	const [datos, setDatos] = useState('');
+	const MgAFAP = (datosMg) => {
+		formValues.urlImg = "";
+		setDatos(datosMg);
+	}
 
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
+	//Checkbox autores
+	const selectedAuthor = []
+	autores.map((u) => (
+		selectedAuthor.push({ value: u.idAutor, label: u.nombreAutor })
+	))
+
+	const options = []
+	usuarios.map((u) => (
+		options.push({ value: u.id, label: u.nombre })
+	))
+
+	const [state, setState] = useState({
+		selectedOption: selectedAuthor
+	})
+
+	const handleChange = selectedOption => {
+		setState({ selectedOption });
+		console.log(selectedOption)
+	}
 
 	//envio a la api
 	const handleSubmit = () => {
@@ -36,15 +64,12 @@ export const FormEditProject = ({ history }) => {
 		if (datos != "") {
 			formValues.urlImg = datos;
 		}
-
+		const selectedAuthor = []
+		state.selectedOption.map((u) => (
+			selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+		))
+		formValues.autores = selectedAuthor;
 		dispatch(editProject(idProject, formValues));
-	}
-	//const flag = false;
-	const [datos, setDatos] = useState('');
-
-	const MgAFAP = (datosMg) => {
-		formValues.urlImg = "";
-		setDatos(datosMg);
 	}
 
 	return (
@@ -129,11 +154,25 @@ export const FormEditProject = ({ history }) => {
 				</div>
 			</div>
 
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label>Agregar autores</label>
+					<Select
+						isMulti
+						name="usuarios"
+						options={options}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={state.selectedOption}
+						onChange={handleChange}
+					/>
+				</div>
+			</div>
 			<div className="row mb-12">
 				<div className="col mb-3">
 					<label> Imagen desde Galeria </label>
 					<div className="card">
-					<img className='foto' src={formValues.urlImg || datos} alt="Imagen" />
+						<img className='foto' src={formValues.urlImg || datos} alt="Imagen" />
 						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
@@ -164,16 +203,16 @@ export const FormEditProject = ({ history }) => {
 				</div>
 
 			</div>
-			
+
 			<div class="text-center">
-			<button
-				className="btn btn-primary btn-large"
-				onClick={handleSubmit}
-			>
-				Guardar
-			</button>
+				<button
+					className="btn btn-primary btn-large"
+					onClick={handleSubmit}
+				>
+					Guardar
+				</button>
 			</div>
-			
+
 		</div>
 	)
 }

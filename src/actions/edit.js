@@ -5,6 +5,7 @@ import { types } from "../types/types";
 import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
 import {startLoadingProject} from "../../src/actions/projects"
 import {startLoadingTesis} from "../../src/actions/tesis"
+
 export const editProject = (idProject, formValues) => {
 	return async (dispatch, getState) => {
 		

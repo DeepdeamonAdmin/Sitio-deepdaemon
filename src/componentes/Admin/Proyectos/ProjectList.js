@@ -12,33 +12,10 @@ import {
 
 const ProjectList = () => {
 
-    //const dispatch = useDispatch();
-
-    //const { projects } = useSelector( state => state.projects );
-    
-    //const { data:project, loading } = useGet(getProject);
     const auth = getAuth();
     const dN = auth.currentUser.displayName;
 
     const { projects } = useSelector(state => state.projects);
-    console.log(projects)
-    // const [projects, setProjects] = React.useState([])
-	// React.useEffect(() => {
-	// 	const getProjects = async () => {
-	// 		try {
-    //             const ref = collection(db, "Proyectos")
-	// 			//const q = query(ref, where("publisher", "==", dN))
-    //             //console.log(q)
-    //             const Data = await getDocs(ref);
-	// 			const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-	// 			setProjects(arrayData)
-				
-	// 		} catch (error) {
-	// 			console.log(error)
-	// 		}
-	// 	}
-	// 	getProjects()
-	// }, [])
     
     return (
         <>
