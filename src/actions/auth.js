@@ -107,7 +107,8 @@ const completarDatosDesdeForm = async (uid, formValues) => {
 		'start': formValues.start,
 		'end': formValues.end,
 		'idSchool': formValues.idSchool,
-		'idCareer': formValues.idCareer
+		'idCareer': formValues.idCareer,
+		'esAutor': formValues.esAutor
 	})
 }
 

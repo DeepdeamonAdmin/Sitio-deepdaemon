@@ -1,5 +1,5 @@
 import React from 'react';
-import {db} from '../../../firebase/firebase-config'
+import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { registroDesdeLider } from '../../../actions/auth';
@@ -27,16 +27,17 @@ export const FormAddAlumno = () => {
 		start: '',
 		end: '',
 		idSchool: '',
-		idCareer: ''
+		idCareer: '',
+		esAutor: ''
 	});
 
 	const { name, lastname, password, linkedin, email, shortDesc, longDesc,
-		photo, start, end } = formValues;
+		photo, start, end, esAutor } = formValues;
 
 
 	//envio a la api
 	const handleSubmit = (e) => {
-		// console.log(formValues);
+		console.log(formValues);
 		e.preventDefault();
 		dispatch(registroDesdeLider(formValues));
 
@@ -52,9 +53,9 @@ export const FormAddAlumno = () => {
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setEscuela(arrayData)
-				
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -67,9 +68,9 @@ export const FormAddAlumno = () => {
 		const obtenerCarrera = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Carrera"));
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setCarrera(arrayData)
-				
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -77,7 +78,7 @@ export const FormAddAlumno = () => {
 		obtenerCarrera()
 	}, [])
 
-	
+
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -235,7 +236,7 @@ export const FormAddAlumno = () => {
 								escuela.map(item => (
 									<option key={item.id} value={item.id}> {item.name} </option>
 								))
-								
+
 							}
 						</select>
 					</div>
@@ -281,6 +282,21 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 				</div>
+				<div className="row">
+					<div className="col-md-6 mb-5">
+						<label>Considerar para ser autor</label>
+						<select
+							className="form-control"
+							name='esAutor'
+							value={esAutor}
+							onChange={handleInputChange}
+						>
+							<option value='Si' > Si </option>
+							<option value='No' > No </option>
+						</select>
+					</div>
+				</div>
+
 				<button
 					className="btn2 btn-primary btn-large btn-block mb-4"
 					type="submit"

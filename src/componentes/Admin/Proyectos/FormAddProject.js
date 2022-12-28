@@ -16,7 +16,7 @@ export const FormAddProject = () => {
 	const dispatch = useDispatch();
 	const auth = getAuth();
 	const dN = auth.currentUser.displayName;
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	//Traemos la información de los usuarios de firebase
 	const { usuarios } = useSelector(state => state.user);
@@ -42,7 +42,7 @@ export const FormAddProject = () => {
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 	}
-	
+
 	//Checkbox autores
 	const options = []
 	usuarios.map((u) => (
@@ -60,15 +60,16 @@ export const FormAddProject = () => {
 	//envio a la api
 	const handleEnvProyect = () => {
 		const selectedAuthor = []
-		state.selectedOption.map((u) => (
-			selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
-		))
-
+		if (state.selectedOption != null) {
+			state.selectedOption.map((u) => (
+				selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+			))
+		}
 		formValues.autores = selectedAuthor;
 		formValues.urlImg = datos;
 		dispatch(startNewProject(formValues));
-		// reset();
-		// navigate('/admin/projects');
+		reset();
+		navigate('/admin/projects');
 	}
 
 	return (

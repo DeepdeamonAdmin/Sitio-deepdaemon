@@ -29,6 +29,7 @@ export const FormEditarAlumno = (props) => {
 		return alumno.id === idAlumno
 	})
 	const alumno = alumnoO[0]
+	console.log(alumno)
 	const [formValues, handleInputChange] = useForm(alumno);
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
@@ -48,8 +49,10 @@ export const FormEditarAlumno = (props) => {
 		school,
 		grado,
 		titulo,
-		display,
+		display, 
+		esAutor
 	} = formValues;
+
 
 	const handleContra = (e) => {
 		if (password == password2) dispatch(editUser(formValues, oldPassword));
@@ -72,7 +75,8 @@ export const FormEditarAlumno = (props) => {
 			school,
 			grado,
 			titulo,
-			display,
+			display, 
+			esAutor
 		};
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
@@ -343,6 +347,20 @@ export const FormEditarAlumno = (props) => {
 					</select>
 				</div>
 			</div>
+			<div className="row">
+					<div className="col-md-6 mb-5">
+						<label>Considerar para ser autor</label>
+						<select
+							className="form-control"
+							name='esAutor'
+							value={esAutor}
+							onChange={handleInputChange}
+						>
+							<option value='Si' > Si </option>
+							<option value='No' > No </option>
+						</select>
+					</div>
+				</div>
 
 			<button
 				className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"

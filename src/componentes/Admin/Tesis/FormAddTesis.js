@@ -59,15 +59,17 @@ export const FormAddTesis = () => {
 	//envio a la api
 	const handleEnvTesis = () => {
 		const selectedAuthor = []
-		state.selectedOption.map((u) => (
-			selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
-		))
+		if (state.selectedOption != null) {
+			state.selectedOption.map((u) => (
+				selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+			))
+		}
 
 		formValues.autores = selectedAuthor;
 		formValues.urlImg = datos;
 		dispatch(startNewTesis(formValues));
-		// reset();
-		// navigate('/admin/Tesis');
+		reset();
+		navigate('/admin/Tesis');
 	}
 
 	return (
