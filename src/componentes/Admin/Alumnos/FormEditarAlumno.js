@@ -10,7 +10,7 @@ import fotoPerfil from '../../../assets/Usuario.jpg'
 import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
 import { startLoadinUsersAll, startUploading } from '../../../actions/user';
-
+import Form from 'react-bootstrap/Form';
 import { collection, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
@@ -29,30 +29,20 @@ export const FormEditarAlumno = (props) => {
 		return alumno.id === idAlumno
 	})
 	const alumno = alumnoO[0]
-	console.log(alumno)
+	//console.log(alumno)
 	const [formValues, handleInputChange] = useForm(alumno);
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
+
 
 	useEffect(() => {
 		setOldPassword(alumno.password)
 	}, [usuarios]);
 
 	const {
-		Github,
-		descripcion,
-		email,
-		urlImg,
-		linkedin,
-		nombre,
-		password,
-		school,
-		grado,
-		titulo,
-		display, 
-		esAutor
+		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display
 	} = formValues;
-
+	const [isChecked, setIsChecked] = useState(ss);
 
 	const handleContra = (e) => {
 		if (password == password2) dispatch(editUser(formValues, oldPassword));
@@ -61,23 +51,13 @@ export const FormEditarAlumno = (props) => {
 
 
 	const handleSave = (e) => {
-
+		//alumno.ss = isChecked;
 		e.preventDefault();
 		const memberRef = doc(db, 'Usuarios', alumno.id);
 		const data = {
-			Github,
-			descripcion,
-			email,
-			urlImg,
-			linkedin,
-			nombre,
-			password,
-			school,
-			grado,
-			titulo,
-			display, 
-			esAutor
+			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display
 		};
+		data.ss = isChecked
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
 		Swal.fire('Usuario editado', 'Éxito');
@@ -92,19 +72,17 @@ export const FormEditarAlumno = (props) => {
 
 		//dispatch(editUser(formValues, oldPassword));
 	}
-	//Traemos la informacion de Career
-	const { data: dataCareer } = useGet(getCareer);
-	//Traemos la informacion de School
-	const { data: dataSchool } = useGet(getSchool);
 
+	//Traemos la informacion de School
+	//Traemos la informacion de Career
 	const [escuela, listEscuela] = React.useState([])
 	React.useEffect(() => {
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				listEscuela(arrayData)
-				
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -117,9 +95,9 @@ export const FormEditarAlumno = (props) => {
 		const obtenerCarrera = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Carrera"));
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				listCarrera(arrayData)
-				
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -137,6 +115,12 @@ export const FormEditarAlumno = (props) => {
 			dispatch(startEditingPicture(formValues, file));
 		}
 	}
+
+	const handleOnChange = () => {
+		setIsChecked(!isChecked);
+
+	};
+
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -168,11 +152,12 @@ export const FormEditarAlumno = (props) => {
 				{/* </div> */}
 
 				<div className="col mb-3">
-					<label> Nombre </label>
+					<label> Nombre* </label>
 					<input
 						className="form-control"
 						type='text'
 						name='nombre'
+						required
 						placeholder='Nombre'
 						value={nombre}
 						onChange={handleInputChange}
@@ -188,6 +173,7 @@ export const FormEditarAlumno = (props) => {
 								className="form-control"
 								type='password'
 								name='password'
+								required
 								placeholder='Contraseña'
 								value={password}
 								onChange={handleInputChange}
@@ -217,37 +203,22 @@ export const FormEditarAlumno = (props) => {
 
 			</div>
 
-			<div className="row">
-				{alumno.rol === 'other' && (
-					<div className="col mb-3">
-						<label> Estado actual </label>
-						<select
-							className="form-control"
-							name='grado'
-							value={grado}
-							onChange={handleInputChange}
-						>
-							<option value='current'>En curso</option>
-							<option value='graduate'>Graduado</option>
-						</select>
-					</div>
-				)}
-			</div>
 
 			<div className="row">
 				<div className="col mb-3">
-					<label> Email: </label>
+					<label> Email* </label>
 					<input
 						className="form-control"
 						type='email'
 						name='email'
+						required
 						placeholder='Email'
 						value={email}
 						onChange={handleInputChange}
 					/>
 				</div>
 				<div className="col mb-3" style={{ display: 'none' }}>
-					<label> Contraseña </label>
+					<label> Contraseña* </label>
 					<input
 						className="form-control"
 						type='text'
@@ -258,7 +229,7 @@ export const FormEditarAlumno = (props) => {
 					/>
 				</div>
 				<div className="col mb-3" style={{ display: 'none' }}>
-					<label> Confirmar contraseña </label>
+					<label> Confirmar contraseña* </label>
 					<input
 						className="form-control"
 						type='password'
@@ -269,6 +240,58 @@ export const FormEditarAlumno = (props) => {
 						onChange={(e) => setPassword2(e.target.value)}
 					/>
 				</div>
+			</div>
+			<div className="row">
+
+				<div className="col mb-3">
+					<label>Tipo de usuario</label>
+					<select
+						className="form-control"
+						name='rol'
+						value={rol}
+						onChange={handleInputChange}
+					>
+						<option value='alumno' > Alumno </option>
+					</select>
+				</div>
+
+			</div>
+			<div className="row">
+				{/* {alumno.rol === 'other' && ( */}
+				<div className="col mb-3">
+					<label> Grado </label>
+					<select
+						className="form-control"
+						name='grado'
+						value={grado}
+						onChange={handleInputChange}
+					>
+						<option value="vacio"> No se ha seleccionado ninguna opcion </option>
+						<option value='current' > Current </option>
+						<option value='graduate' > Graduate </option>
+						<option value='Leader' > Leader </option>
+						<option value='out' > Out </option>
+					</select>
+				</div>
+				{/* // )} */}
+			</div>
+			<div className="row">
+				{/* {alumno.rol === 'other' && ( */}
+				<div className="col mb-3">
+					<label> Nivel </label>
+					<select
+						className="form-control"
+						name='nivel'
+						value={nivel}
+						onChange={handleInputChange}
+					><option value="vacio"> No se ha seleccionado ninguna opcion </option>
+						<option value='bachelor' > Bachelor </option>
+						<option value='masters' > Masters </option>
+						<option value='phd' > PHD </option>
+						<option value='work' > Work </option>
+					</select>
+				</div>
+				{/* // )} */}
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -297,6 +320,28 @@ export const FormEditarAlumno = (props) => {
 						onChange={handleInputChange}
 					/>
 				</div>
+				<div className="col mb-3">
+					<label> Github </label>
+					<input
+						className="form-control"
+						type='url'
+						name='github'
+						placeholder='Github'
+						value={github}
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="col mb-3">
+					<label> Facebook </label>
+					<input
+						className="form-control"
+						type='url'
+						name='facebook'
+						placeholder='Facebook'
+						value={facebook}
+						onChange={handleInputChange}
+					/>
+				</div>
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -317,16 +362,20 @@ export const FormEditarAlumno = (props) => {
 					<select
 						className="form-control"
 						name='idSchool'
+						value={idSchool}
 						onChange={handleInputChange}
+
 					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
 						{
-							/*dataSchool.map(item => (
-								<option key={item.id} value={item.id}> {item.name} </option>
-							))*/
+
 							escuela.map(item => (
 								<option key={item.id} value={item.id}> {item.name} </option>
 							))
+
+
 						}
+
 					</select>
 				</div>
 				<div className="col mb-2">
@@ -334,34 +383,45 @@ export const FormEditarAlumno = (props) => {
 					<select
 						className="form-control"
 						name='idCareer'
+						value={idCareer}
 						onChange={handleInputChange}
 					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
 						{
-							/*dataCareer.map(item => (
-								<option key={item.id} value={item.id}> {item.name} </option>
-							))*/
+
 							carrera.map(item => (
-								<option key={item.id} value={item.id}> {item.name} </option>
+								<option key={item.id} value={item.name}> {item.name} </option>
 							))
 						}
+
 					</select>
 				</div>
 			</div>
 			<div className="row">
-					<div className="col-md-6 mb-5">
-						<label>Considerar para ser autor</label>
-						<select
-							className="form-control"
-							name='esAutor'
-							value={esAutor}
-							onChange={handleInputChange}
-						>
-							<option value='Si' > Si </option>
-							<option value='No' > No </option>
-						</select>
-					</div>
+				<div className="col-md-6 mb-5">
+					<label>Considerar para ser autor</label>
+					<select
+						className="form-control"
+						name='esAutor'
+						value={esAutor}
+						onChange={handleInputChange}
+					>
+						<option value='Y' > Si </option>
+						<option value='N' > No </option>
+					</select>
 				</div>
-
+			</div>
+			<div className="row">
+				<div className="col-md-6 mb-5">
+					<Form.Check
+						type="checkbox"
+						id="ss"
+						label="ss"
+						checked={isChecked}
+						onChange={handleOnChange}
+					/>
+				</div>
+			</div>
 			<button
 				className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"
 				onClick={handleSave}

@@ -45,20 +45,24 @@ export const startRegisterWithEmailPassword = (formValues) => {
 const completarDatos = async (uid, formvalues) => {
 	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
-		"rol": 'other',
+		"rol": formvalues.rol,
 		"nombre": formvalues.name,
 		"email": formvalues.email,
 		"password": formvalues.password,
-		"password2": formvalues.password2,
+		// "password2": formvalues.password2,
 		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/user.png?alt=media&token=d78d67df-1b61-4b47-8eb1-1a18ae83e340',
 		'display': 'Y',
 		'grado': 'current',
 		"descripcion": '',
-		"school": '',
-		"titulo": '',
+		"idSchool": 'vacio',
+		"idCareer": 'vacio',
+		"ss": '',
+		// "titulo": '',
+		"nivel": 'vacio',
+		"esAutor": 'Y',
 		"linkedin": '',
 		"facebook": '',
-		"Github": '',
+		"github": '',
 	})
 	console.log('Se agrego la bd');
 
@@ -91,24 +95,23 @@ export const registroDesdeLider = (formValues) => {
 const completarDatosDesdeForm = async (uid, formValues) => {
 	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
-		"rol": 'other',
-		'display': 'Y',
-		"name": formValues.name,
-		'lastname': formValues.lastname,
-		'password': formValues.password,
-		'linkedin': formValues.linkedin,
-		'email': formValues.email,
-		'shortDesc': formValues.shortDesc,
-		'longDesc': formValues.longDesc,
-		'status': formValues.status,
-		'photo': formValues.photo,
-		'ss': formValues.ss,
-		'nivel': formValues.nivel,
-		'start': formValues.start,
-		'end': formValues.end,
-		'idSchool': formValues.idSchool,
-		'idCareer': formValues.idCareer,
-		'esAutor': formValues.esAutor
+		"rol": formValues.rol,
+		"nombre": formValues.nombre,
+		"email": formValues.email,
+		"password": formValues.password,
+		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/user.png?alt=media&token=d78d67df-1b61-4b47-8eb1-1a18ae83e340',
+		'display': formValues.display,
+		'grado': formValues.grado,
+		"descripcion": formValues.descripcion,
+		"idSchool": formValues.idSchool,
+		"idCareer": formValues.idCareer,
+		"ss": formValues.ss,
+		// "titulo": '',
+		"nivel": formValues.nivel,
+		"esAutor": formValues.esAutor,
+		"linkedin": formValues.linkedin,
+		"facebook": formValues.facebook,
+		"github": formValues.github,
 	})
 }
 

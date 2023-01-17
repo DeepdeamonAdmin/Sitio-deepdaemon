@@ -51,7 +51,7 @@ export const EditInfoTesis = () => {
 	))
 
 	const options = []
-	usuarios.map((u) => (
+	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
 		options.push({ value: u.id, label: u.nombre })
 	))
 

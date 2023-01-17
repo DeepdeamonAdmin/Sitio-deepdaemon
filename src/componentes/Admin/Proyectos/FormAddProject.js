@@ -43,9 +43,9 @@ export const FormAddProject = () => {
 		setDatos(datosMg);
 	}
 
-	//Checkbox autores
+	//Select autores
 	const options = []
-	usuarios.map((u) => (
+	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
 		options.push({ value: u.id, label: u.nombre })
 	))
 

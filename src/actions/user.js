@@ -103,7 +103,7 @@ export const startLoadinUsersAll = () => {
 	return async (dispatch) => {
 		const ruta = '/Usuarios'
 		const users = await loadAllUsers(ruta);
-		//verificamos que obtenimos el documento 
+		//verificamos que obtenemos el documento 
 		if (users) {
 			dispatch(setUsers(users));
 		} else {
