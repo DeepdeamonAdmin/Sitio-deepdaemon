@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-
+import Swal from "sweetalert2";
 import { useEffect, useState } from 'react';
 import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
@@ -26,9 +26,10 @@ const SignCard = (item) => {
 	const deleteAviso = async (id) => {
 		const avisoDoc = doc(db, 'Avisos', id);
 		await deleteDoc(avisoDoc);
-		getAvisos();
+		Swal.fire('Imagen eliminada', 'Éxito');
 	}
 
+	
 	return (
 		<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
 			<div className="row no-gutters">

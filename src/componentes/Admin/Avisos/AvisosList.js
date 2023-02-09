@@ -29,8 +29,8 @@ export default function AvisosList() {
 	}
 	//Usar useEffect
 	useEffect(() => {
-		getAvisos();
-	}, [])
+		getAvisos()
+	})
 
 	return (
 		<>
@@ -40,7 +40,6 @@ export default function AvisosList() {
 						<SignCard
 							key={aviso.id}
 							{...aviso}
-							
 						/>
 					))
 				}
