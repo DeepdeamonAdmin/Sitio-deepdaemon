@@ -75,7 +75,7 @@ export const NavBarAdmin = () => {
 						activeClassName="active"
 						className="nav-item nav-link"
 						exact
-						to="/admin/"
+						to="/admin/externos"
 					>
 						Externos
 					</NavLink>

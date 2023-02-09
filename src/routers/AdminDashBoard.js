@@ -4,6 +4,7 @@ import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
 import { MembersScreen } from '../componentes/Admin/Miembros/MembersScreen';
 import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { AlumnoScreen } from '../componentes/Admin/Alumnos/AlumnoScreen';
+import { ExternoScreen} from '../componentes/Admin/Externos/ExternoScreen'
 import { TesisScreen } from '../componentes/Admin/Tesis/TesisScreen';
 import { FormAddTesis } from '../componentes/Admin/Tesis/FormAddTesis';
 import { EditInfoTesis } from '../componentes/Admin/Tesis/EditInfoTesis';
@@ -35,10 +36,12 @@ export const AdminDashBoard = () => {
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
 					<Route path="release" element={<ReleaseScreen />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />
+					<Route path="externos" element={<ExternoScreen />} />
 					<Route path="tesis" element={<TesisScreen />} />
 					<Route path='addTesis' element={ <FormAddTesis /> } />
 					<Route path='tesis/:idTesis/:params' element={ <EditInfoTesis /> } exact/>
 					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
+					<Route path="externos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />
 					<Route path="galery" element={<GalleryScreen />} />

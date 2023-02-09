@@ -181,6 +181,7 @@ export const FormAddRelease = () => {
 			a14.disabled = true;
 			a15.disabled = true;
 			a16.disabled = true;
+			
 		}
 		else if(valor === "mastersthesis" || valor === "phdthesis"){
 			a0.disabled = false;
@@ -344,8 +345,7 @@ export const FormAddRelease = () => {
 						<select
 							className="form-control"
 							name='postType'
-							value={postType}
-							onChange={ (e) => cambio(e) }
+							onChange={ ((e) => cambio(e)) }
 						>
 							<option value = 'article' > article </option>
 							<option value = 'book' > book </option>
