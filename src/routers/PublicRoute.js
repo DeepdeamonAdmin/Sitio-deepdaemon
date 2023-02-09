@@ -7,8 +7,10 @@ export const PublicRoute = ({isAuthenticade, children, rol}) => {
     return <Navigate to='/' replace />
   }else if (isAuthenticade && rol === 'administrador') {
       return <Navigate to="/admin" replace />;
-    }else if(isAuthenticade && rol !== 'administrador' ){
+    }else if(isAuthenticade && rol === 'alumno' ){
       return <Navigate to="/user" replace />;
+    }else if(isAuthenticade && rol === 'externo' ){
+      return <Navigate to="/externo" replace />;
     }
   return children;
 };

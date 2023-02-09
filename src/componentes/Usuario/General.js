@@ -214,7 +214,7 @@ export const General = ({ id }) => {
               <PublicationScreen type="magazine" />
             </Tab.Pane>
             <Tab.Pane eventKey="book">
-			<PublicationScreen type="book"/>
+			        <PublicationScreen type="book"/>
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>

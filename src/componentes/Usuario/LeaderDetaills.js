@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { uiCurrentModal, uiOpenModal } from '../../actions/ui';
 import { ModalInfoProject } from './ModalInfoProject';
 
-export const LeaderDetaills = ({leader }) => {
+export const LeaderDetaills = ({leader}) => {
 	const dispatch = useDispatch();
 	const [currentModal, setCurrentModal] = useState(null)
 	const [showInf, setShowInfo] = useState(false)

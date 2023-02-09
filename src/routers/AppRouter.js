@@ -21,6 +21,7 @@ import { login } from '../actions/auth';
 import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
 import { startLoadingTesis, startLoadinTesisAll } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
+import { ExternoDashBoard} from './ExternoDashBoard'
 
 
 
@@ -96,8 +97,16 @@ export const AppRouter = () => {
                 <Route 
                     path="user/*"
                     element={ 
-                        <ProtectedRoute isAuthenticade={isLoggedIn && rol !== 'administrador' && rol !== undefined }>
+                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
                             <UserDashBoard />
+                        </ProtectedRoute>
+                    } 
+                />       
+                <Route 
+                    path="externo/*"
+                    element={ 
+                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'externo'}>
+                            <ExternoDashBoard/>
                         </ProtectedRoute>
                     } 
                 />       

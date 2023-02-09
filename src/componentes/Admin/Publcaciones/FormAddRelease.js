@@ -29,6 +29,7 @@ export const FormAddRelease = () => {
 
 	//funcion que recibe el valor del input
 	const cambio = (e) => {
+		
 		//Guardar el valor en una variable
 		let valor = e.target.value;
 		if(valor === "article"){
@@ -277,8 +278,8 @@ export const FormAddRelease = () => {
 			a14.disabled = true;
 			a15.disabled = true;
 			a16.disabled = true;
+			
 		}
-		handleInputChange();
 	}
 	
 	
@@ -346,7 +347,7 @@ export const FormAddRelease = () => {
 						<select
 							className="form-control"
 							name='postType'
-							onChange={ (e) => cambio(e) }
+							onChange={(e) => cambio(e)  }
 						>
 							<option value = 'article' > article </option>
 							<option value = 'book' > book </option>
