@@ -11,6 +11,7 @@ import { Tesis } from '../componentes/users/Tesis';
 import { Publications } from '../componentes/users/Publications';
 import { User } from '../componentes/users/User';
 import { Blog } from '../componentes/users/Blog';
+import { PublicationDetails } from '../componentes/Usuario/PublicationDetails';
 //import { Projects } from '../componentes/users/Projects';
 
 export const UserDashBoard = () => {
@@ -26,7 +27,7 @@ export const UserDashBoard = () => {
                     <Route path='perfil' element={ <Perfil /> } />
                     <Route path='addTesis' element={ <FormAddTesis /> } />
                     <Route path='addpublication' element={ <FormAddRelease /> } />
-                    <Route path='morepublication/:idPub' element={ <FormAddRelease /> } exact/>
+                    <Route path='morepublication/:idPub' element={ <PublicationDetails /> } exact/>
                     <Route path='tesis/:idTesis/:params' element={ <EditInfoTesis /> } exact/>
                     <Route path="*" element={ <RutaError />} />
                 </Routes>
