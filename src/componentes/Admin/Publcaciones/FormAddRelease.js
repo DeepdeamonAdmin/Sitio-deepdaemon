@@ -338,7 +338,7 @@ export const FormAddRelease = () => {
 
     return (
         <div className="container">
-					<h2>Agregar Publicacion </h2>
+					<h2>Agregar Publicación </h2>
 				<hr/>
 			
 				<div className="row">
