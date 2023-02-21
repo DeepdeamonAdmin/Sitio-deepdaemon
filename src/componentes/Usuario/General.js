@@ -68,7 +68,7 @@ export const General = ({ id }) => {
           </div>
         </Row>
       </div>
-      <h1>ANUNCIOS!!!</h1>
+      <h1>ANUNCIOS</h1>
 
       <Container>
         <Carousel>
