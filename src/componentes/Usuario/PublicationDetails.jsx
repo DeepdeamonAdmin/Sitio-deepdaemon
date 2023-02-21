@@ -10,6 +10,7 @@ export const PublicationDetails = () => {
         return <div>Cargando...</div> // Este es un mensaje de carga en lo que se obtienen las publicaciones
     }
 
+    // TODO: Aquí hay que darle formato y estilos para presentar la información de mejor manera
     return (
         <div>
             <h2>{publication.title ? publication.title : 'Sin título'}</h2>
