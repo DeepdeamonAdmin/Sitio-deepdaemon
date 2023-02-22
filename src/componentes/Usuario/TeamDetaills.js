@@ -28,7 +28,7 @@ export const TeamDetaills = ({usuario }) => {
 					<div className='d-flex flex-col animate__animated animate__fadeIn'>
 						<ul class="list-group list-group-flush">
 							<li className="list-group-item text-white bg-primary "><b>Sobre mi:</b><i>{usuarioF.descripcion}</i></li>
-							<li className="list-group-item">Titulo de Tesis: {usuarioF.titulo}</li>
+							<li className="list-group-item">{usuarioF.titulo ? `Titulo de Tesis: ${usuarioF.titulo}` : "Sin tesis"}</li>
 							<li className="list-group-item">Email: {usuarioF.email}</li>
 						</ul>
 					</div>
