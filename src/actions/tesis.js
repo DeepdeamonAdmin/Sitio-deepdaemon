@@ -28,7 +28,7 @@ export const startNewTesis = (formValues) => {
 				display: formValues.display,
 				url: formValues.url,
 				publisher: formValues.publisher,
-				autores: formValues.autores
+				autores: formValues.autores ? formValues.autores : 'Sin autores'
 			}
 			// const newTesisInd = {
 			// 	name: formValues.name,
