@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { editTesis } from '../../../actions/edit';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 
 export const EditInfoTesis = () => {
 
@@ -32,6 +34,23 @@ export const EditInfoTesis = () => {
 		return t.id === idTesis
 	})
 	const tesisObj = tesisO[0]
+
+	//tech infor firebase
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
+
 
 	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(tesisObj)
@@ -109,16 +128,22 @@ export const EditInfoTesis = () => {
 			</div>
 
 			<div className="form-group row">
-				<div className="col mb-3">
+				<div className="col mb-2">
 					<label> Tech </label>
-					<input
+					<select
 						className="form-control"
-						type='text'
 						name='nameTech'
-						placeholder='Nombre Tecnología'
 						value={nameTech}
 						onChange={handleInputChange}
-					/>
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{
+							techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+
+						}
+					</select>
 				</div>
 				<div className="col mb-3">
 					<label>Status </label>

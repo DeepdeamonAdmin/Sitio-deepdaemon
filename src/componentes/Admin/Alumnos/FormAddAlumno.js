@@ -44,12 +44,7 @@ export const FormAddAlumno = () => {
 			e.preventDefault();
 			dispatch(registroDesdeLider(formValues));
 	}
-
-	// //Traemos la informacion de Career
-	// const { data: dataCareer } = useGet(getCareer);
-	// //Traemos la informacion de School
-	// const { data: dataSchool } = useGet(getSchool);
-
+	//info firebase escuela
 	const [escuela, setEscuela] = React.useState([])
 	React.useEffect(() => {
 		const obtenerEscuela = async () => {
@@ -65,6 +60,7 @@ export const FormAddAlumno = () => {
 		obtenerEscuela()
 	}, [])
 
+	//info firebase carrera
 	const [carrera, setCarrera] = React.useState([])
 	React.useEffect(() => {
 		const obtenerCarrera = async () => {

@@ -10,6 +10,9 @@ import { getAuth } from 'firebase/auth';
 import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useSelector } from 'react-redux';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
+
 export const FormAddProject = () => {
 
 
@@ -20,6 +23,22 @@ export const FormAddProject = () => {
 
 	//Traemos la información de los usuarios de firebase
 	const { usuarios } = useSelector(state => state.user);
+
+	//tech infor firebase
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 	//Formulario
 	const [formValues, handleInputChange, reset] = useForm({
@@ -103,16 +122,22 @@ export const FormAddProject = () => {
 				</div>
 			</div>
 			<div className="form-group row">
-				<div className="col mb-3">
+				<div className="col mb-2">
 					<label> Tech </label>
-					<input
+					<select
 						className="form-control"
-						type='text'
 						name='nameTech'
-						placeholder='Nombre Tecnología'
 						value={nameTech}
 						onChange={handleInputChange}
-					/>
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{
+							techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+
+						}
+					</select>
 				</div>
 				<div className="col mb-3">
 					<label>Status </label>

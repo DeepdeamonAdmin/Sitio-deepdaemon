@@ -1,7 +1,6 @@
 import React from 'react';
 import Select from 'react-select'
 import { useState } from 'react';
-import { db } from "../../../firebase/firebase-config";
 import { useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +8,8 @@ import { useForm } from '../../../hooks/useForm';
 import { editProject } from '../../../actions/edit';
 import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 
 export const FormEditProject = ({ history }) => {
 
@@ -26,6 +27,22 @@ export const FormEditProject = ({ history }) => {
 		return p.id === idProject
 	})
 	const project = pojectO[0]
+
+	//tech infor firebase
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(project)
@@ -103,17 +120,25 @@ export const FormEditProject = ({ history }) => {
 				</div>
 			</div>
 			<div className="form-group row">
-				<div className="col mb-3">
+
+				<div className="col mb-2">
 					<label> Tech </label>
-					<input
+					<select
 						className="form-control"
-						type='text'
 						name='nameTech'
-						placeholder='Nombre Tecnología'
 						value={nameTech}
 						onChange={handleInputChange}
-					/>
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{
+							techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+
+						}
+					</select>
 				</div>
+
 				<div className="col mb-3">
 					<label>Status </label>
 					<select
