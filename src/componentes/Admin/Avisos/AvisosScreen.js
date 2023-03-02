@@ -2,6 +2,8 @@ import React from 'react'
 import ModalAddSign from './ModalAddSign'
 import { AddNewFab } from '../../ui/AddNewFab';
 import AvisosList from './AvisosList';
+import { Link } from 'react-router-dom';
+
 export default function AvisosScreen() {
 	return (
 		<>
@@ -14,8 +16,11 @@ export default function AvisosScreen() {
 				<div className="row">
 					{/* <SearchScreen /> */}
 					<div className="col-md-2 mb-2">
-						<ModalAddSign />
-						<AddNewFab />
+						{/* <ModalAddSign />
+						<AddNewFab /> */}
+						<Link to={`agregar`} className="btn btn-primary fab">
+                        <i className="fas fa-plus"></i>
+						</Link>
 					</div>
 				</div>
 			</div>

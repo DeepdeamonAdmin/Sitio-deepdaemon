@@ -21,6 +21,7 @@ import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
 import FormEditLider from '../componentes/Admin/Lideres/FormEditLider';
 import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 import { General } from '../componentes/Usuario/General'
+import { FormAddSign } from '../componentes/Admin/Avisos/FormAddSign';
 
 
 export const AdminDashBoard = () => {
@@ -46,6 +47,7 @@ export const AdminDashBoard = () => {
 					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
+					<Route path="avisos/agregar" element={<FormAddSign />} />
 					{/* <Route path="other" element={<OtherScreen />} /> */}
 					<Route path="Instituciones" element={<InstitucionesScreen />} />
 					<Route path="Carreras" element={<CarrerasScreen />} />
