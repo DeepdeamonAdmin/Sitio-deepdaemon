@@ -28,7 +28,7 @@ export const LeaderScreen = () => {
 							<div className= "row mb-4">
 								<div className="col ml-3">
 									<img
-										className="img-fluid"
+										className="imageleader"
 										src={usuario.urlImg}
 										alt="leader"
 										
@@ -36,10 +36,9 @@ export const LeaderScreen = () => {
 								</div>
 
 								<div className="col">
+									<br></br>
 									<h5 className=""> {usuario.nombre} </h5>
-
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
-									
 									<ModalCrearCuenta />
 									<VerMas usuario = {usuario}/>
 								</div>

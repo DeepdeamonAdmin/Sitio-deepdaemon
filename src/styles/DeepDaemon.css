@@ -80,7 +80,7 @@
   }
   
   .section {
-    padding: 25px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -98,7 +98,7 @@
   }
   
   .academy {
-    background-image: url("./assets/img/bg/academy_bg.jpg");
+    /*background-image: url("./assets/img/bg/academy_bg.jpg");*/
     background-position: center center;
     background-repeat: no-repeat;
     background-color: #012e4d;
@@ -106,6 +106,53 @@
     align-items: stretch;
     display: flex;
   }
+
+  .separator{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
+    background-color: #012e4d;
+    color: white;
+    border-radius: 8px;
+  }
+
+  .imageleader{
+    margin-left: 10%;
+    width: 80%;
+    height: 100%;
+    border-radius: 5%;
+  }
+
+  .modal-leader{
+    width: 50%;
+    height: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 8%;
+  }
+  
+  .modalheader {
+    width: 100%;
+    font-size: 25px;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px;
+  }
+  .modalcontent {
+    color: #000;
+    padding: 5%;
+  }
+  .modalactions {
+    width: 100%;
+    text-align: center;
+    margin-left: 40%;
+  }
+  
+  .sections{
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    padding: 50px;
+  }
+
   .team_separator {
     background-image: url("./assets/img/bg/todos_2018_bg.jpg");
     background-position: top center;
@@ -139,6 +186,7 @@
   
   .projects .nav-item {
     margin: auto;
+    
   }
   .projects .nav-link {
     background-color: transparent;

@@ -24,6 +24,7 @@ export const ProjectDetaills = ({ color, project }) => {
             {/* <li className="list-group-item">Resultados: {project.results}</li> */}
             {/* <li className="list-group-item"><a href={project.link} class="card-link">GitHub</a></li> */}
             <div className="text-center">
+              <hr />
               <iframe
                 className="mt-3 text-center"
                 //src="https://www.youtube.com/embed/OG0w_4qDiy8"
@@ -32,7 +33,7 @@ export const ProjectDetaills = ({ color, project }) => {
                 gesture="media"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
-                style={{ width: 250, height: 200 }}
+                style={{ width: '100%', height: '100%' }}
               ></iframe>
             </div>
             <li className={`list-group-item text-white bg-${color}`}>
