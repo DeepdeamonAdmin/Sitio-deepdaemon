@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { useGet } from '../../../hooks/useGet';
 import { getTech } from '../../../selectors/get/getTech';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { startNewPublication, startUploadingPublication } from '../../../actions/publications';
 
 export const FormAddRelease = () => {
@@ -279,6 +279,11 @@ export const FormAddRelease = () => {
 				break;
 		}
 	}, [selectValue])
+
+	// * Aquí obtenemos el ID de la publicación para usar este formulario para editarla
+	const {idRelease} = useParams()
+	const publications = useSelector(state => state.publications)
+	const publication = publications["publications"].find(p => p.id === idRelease)
 
 	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
 	const handleSelectChange = ({target}) => {

@@ -8,7 +8,7 @@ import { ModalAddrelease } from './ModalAddrelease';
 export const Publications = () => {
 
     const { publications } = useSelector( state => state.publications );
-            
+    const {rol} = useSelector(state => state.user)            
 
     return (
     <div className='container'>
@@ -61,10 +61,10 @@ export const Publications = () => {
                             <td className='td-project'>
                                 <Link
                                     // to ='/user/morepublication/a'
-                                    to ={`/user/morepublication/${publication.id}`}
+                                    to ={rol === 'administrador' ? `release/edit/${publication.id}` : `/user/morepublication/${publication.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >
-                                    Ver más
+                                    {rol === 'administrador' ? 'Editar' : 'Ver más'}
                                 </Link>
                             </td>
                         </tr>

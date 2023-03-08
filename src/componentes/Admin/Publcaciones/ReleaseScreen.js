@@ -1,5 +1,6 @@
 import React from 'react'
 import { AddNewFab } from '../../ui/AddNewFab'
+import { Publications } from '../../users/Publications'
 import { ModalAddrelease } from './ModalAddrelease'
 import PublicacionesList from './PublicacionesList'
 
@@ -12,6 +13,7 @@ export const ReleaseScreen = () => {
                 <AddNewFab /> 
             </div>
             <div>
+                <Publications />
                 {/*<PublicacionesList/>*/}
             </div>
         </>
