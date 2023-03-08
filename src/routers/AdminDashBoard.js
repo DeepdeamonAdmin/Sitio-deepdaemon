@@ -21,6 +21,7 @@ import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
 import FormEditLider from '../componentes/Admin/Lideres/FormEditLider';
 import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 import { General } from '../componentes/Usuario/General'
+import { FormAddRelease } from '../componentes/Admin/Publcaciones/FormAddRelease';
 
 
 export const AdminDashBoard = () => {
@@ -43,7 +44,7 @@ export const AdminDashBoard = () => {
 					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="externos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					{/* TODO: Hay que hacer el formulario de editar publicación o reutilizarlo */}
-					<Route path="release/edit/:idRelease" element={<FormAddProject/>} />
+					<Route path="release/editPub/:idRelease" element={<FormAddRelease/>} />
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />
 					<Route path="galery" element={<GalleryScreen />} />

@@ -61,7 +61,7 @@ export const Publications = () => {
                             <td className='td-project'>
                                 <Link
                                     // to ='/user/morepublication/a'
-                                    to ={rol === 'administrador' ? `release/edit/${publication.id}` : `/user/morepublication/${publication.id}`}
+                                    to ={rol === 'administrador' ? `editPub/${publication.id}` : `/user/morepublication/${publication.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >
                                     {rol === 'administrador' ? 'Editar' : 'Ver más'}
