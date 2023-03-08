@@ -12,7 +12,6 @@ export const FormAddRelease = () => {
 	// UseState para cada input
 	const [autorDisabled, setAutorDisabled] = useState(false)
 	const [titleDisabled, setTitleDisabled] = useState(false)
-	// TODO: Aquí hay que agregar un useState para el enlace pero hay que preguntarle al profe cuándo se habilita
 	const [journalDisabled, setJournalDisabled] = useState(true)
 	const [yearMonthDisabled, setYearMonthDisabled] = useState(false)
 	const [volumeDisabled, setVolumeDisabled] = useState(true)
@@ -465,16 +464,15 @@ export const FormAddRelease = () => {
 			</div>
 			<div className="row">
 				<div className="col mb-3">
-					<label> Link </label>
+					<label> DOI </label>
 					<input
 						className="form-control"
 						type='url'
 						name='link'
 						id='link'
-						placeholder='Enlace'
+						placeholder='DOI'
 						value={link}
 						onChange={handleInputChange}
-						disabled={true}
 					/>
 				</div>
 
