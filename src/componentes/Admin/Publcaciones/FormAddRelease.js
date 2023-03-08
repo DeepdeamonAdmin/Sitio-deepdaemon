@@ -345,7 +345,7 @@ export const FormAddRelease = () => {
 
 	return (
 		<div className="container">
-			<h2>Agregar Publicacion </h2>
+			<h2>{publication ? 'Editar publicación' : 'Agregar publicación'}</h2>
 			<hr />
 
 			<div className="row">
@@ -695,7 +695,7 @@ export const FormAddRelease = () => {
 				className="btn2 btn-primary btn-large btn-block"
 				onClick={handleSubmit}
 			>
-				Agregar
+				{publication ? 'Guardar cambios' : 'Agregar'}
 			</button>
 
 
