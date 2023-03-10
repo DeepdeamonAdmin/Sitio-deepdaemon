@@ -1,7 +1,6 @@
 import React from 'react';
 import Select from 'react-select'
 import { useState } from 'react';
-import { db } from "../../../firebase/firebase-config";
 import { useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +8,8 @@ import { useForm } from '../../../hooks/useForm';
 import { editProject } from '../../../actions/edit';
 import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 
 export const FormEditProject = ({ history }) => {
 
@@ -26,6 +27,22 @@ export const FormEditProject = ({ history }) => {
 		return p.id === idProject
 	})
 	const project = pojectO[0]
+
+	//tech infor firebase
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(project)
@@ -80,12 +97,11 @@ export const FormEditProject = ({ history }) => {
 			</div>
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label> Name </label>
+					<label> Nombre del proyecto </label>
 					<input
 						className="form-control"
 						type='text'
 						name='name'
-						placeholder='Nombre'
 						value={name}
 						onChange={handleInputChange}
 					/>
@@ -96,26 +112,34 @@ export const FormEditProject = ({ history }) => {
 						className="form-control"
 						type='text'
 						name='correo'
-						placeholder='Correo de contacto'
+						placeholder='Correo electrónico'
 						value={correo}
 						onChange={handleInputChange}
 					/>
 				</div>
 			</div>
 			<div className="form-group row">
-				<div className="col mb-3">
-					<label> Tech </label>
-					<input
+
+				<div className="col mb-2">
+					<label> Tecnología utilizada </label>
+					<select
 						className="form-control"
-						type='text'
 						name='nameTech'
-						placeholder='Nombre Tecnología'
 						value={nameTech}
 						onChange={handleInputChange}
-					/>
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{
+							techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+
+						}
+					</select>
 				</div>
+
 				<div className="col mb-3">
-					<label>Status </label>
+					<label>Status del proyecto </label>
 					<select
 						className="form-control"
 						name='estado'
@@ -131,23 +155,21 @@ export const FormEditProject = ({ history }) => {
 
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label>Description</label>
+					<label>Descripción</label>
 					<textarea
 						className="form-control"
 						rows='6' cols='40'
 						name='descripcion'
-						placeholder=' Desciption'
 						value={descripcion}
 						onChange={handleInputChange}
 					/>
 				</div>
 				<div className="col mb-3">
-					<label> Results </label>
+					<label> Resultados </label>
 					<textarea
 						className="form-control"
 						rows='6'
 						name='results'
-						placeholder='Resultados'
 						value={results}
 						onChange={handleInputChange}
 					/>
@@ -167,9 +189,20 @@ export const FormEditProject = ({ history }) => {
 						onChange={handleChange}
 					/>
 				</div>
+				<div className="col mb-3">
+					<label>Liga del video</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL'
+						value={url}
+						onChange={handleInputChange}
+					/>
+				</div>
 			</div>
 			<div className="row mb-12">
-				<div className="col mb-3">
+				<div className="col-md-3 mb-3">
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={formValues.urlImg || datos} alt="Imagen" />
@@ -178,21 +211,11 @@ export const FormEditProject = ({ history }) => {
 					</div>
 				</div>
 
-				<div className="col mb-3">
-					<label>URL</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL de video'
-						value={url}
-						onChange={handleInputChange}
-					/>
-				</div>
+				
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
-						className="form-control"
+						className="form-control col-md-1 mb-3"
 						name='display'
 						value={display}
 						onChange={handleInputChange}

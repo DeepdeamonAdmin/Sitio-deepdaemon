@@ -18,7 +18,7 @@ export const startsNewImage = (formValues) => {
 			name: formValues.name,
 			desc: formValues.desc,
 
-			photo: img,
+			photo: img || formValues.urlImg
 		}
 
 		const docRef = await addDoc(collection(db, `Avisos/`), newImage);
@@ -28,7 +28,7 @@ export const startsNewImage = (formValues) => {
 			dispatch(addNewtoGallery(docRef.id, newImage));
 			dispatch(uiCloseModal())
 		} else {
-			Swal.fire('Error al enviar el aviso');
+			Swal.fire('Error al guardar el aviso');
 		}
 	}
 }

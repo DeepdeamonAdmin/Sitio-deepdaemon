@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 
 import { uiCloseModal } from '../../../actions/ui';
 import { customStyles } from '../../../helpers/modalCustomStyles';
-import FormAddSign from './FormAddSign';
+import {FormAddSign} from './FormAddSign';
 
 Modal.setAppElement('#app');
 

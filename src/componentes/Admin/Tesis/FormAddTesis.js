@@ -9,6 +9,8 @@ import { getAuth } from 'firebase/auth';
 import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useSelector } from 'react-redux';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 
 export const FormAddTesis = () => {
 
@@ -41,6 +43,22 @@ export const FormAddTesis = () => {
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 	}
+
+	//tech
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 	//Checkbox autores
 	const options = []
@@ -81,12 +99,11 @@ export const FormAddTesis = () => {
 
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label> Name </label>
+					<label> Nombre del proyecto </label>
 					<input
 						className="form-control"
 						type='text'
 						name='name'
-						placeholder='Nombre'
 						value={name}
 						onChange={handleInputChange}
 					/>
@@ -97,26 +114,33 @@ export const FormAddTesis = () => {
 						className="form-control"
 						type='text'
 						name='correo'
-						placeholder='Correo de contacto'
+						placeholder='Correo electrónico'
 						value={correo}
 						onChange={handleInputChange}
 					/>
 				</div>
 			</div>
 			<div className="form-group row">
-				<div className="col mb-3">
-					<label> Tech </label>
-					<input
+				<div className="col mb-2">
+					<label> Tecnología utilizada</label>
+					<select
 						className="form-control"
-						type='text'
 						name='nameTech'
-						placeholder='Nombre Tecnología'
 						value={nameTech}
 						onChange={handleInputChange}
-					/>
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{
+							techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+
+						}
+					</select>
 				</div>
+
 				<div className="col mb-3">
-					<label>Status </label>
+					<label>Status del proyecto </label>
 					<select
 						className="form-control"
 						name='estado'
@@ -131,23 +155,21 @@ export const FormAddTesis = () => {
 			</div>
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label>Description</label>
+					<label>Descripción</label>
 					<textarea
 						className="form-control"
 						rows='6' cols='40'
 						name='descripcion'
-						placeholder=' Desciption'
 						value={descripcion}
 						onChange={handleInputChange}
 					/>
 				</div>
 				<div className="col mb-3">
-					<label> Results </label>
+					<label> Resultados </label>
 					<textarea
 						className="form-control"
 						rows='6'
 						name='results'
-						placeholder='Resultados'
 						value={results}
 						onChange={handleInputChange}
 					/>
@@ -167,20 +189,8 @@ export const FormAddTesis = () => {
 						onChange={handleChange}
 					/>
 				</div>
-			</div>
-
-			<div className="row mb-12">
 				<div className="col mb-3">
-					<label> Imagen desde Galeria </label>
-					<div className="card">
-						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
-						<FotosGalleryChoose />
-					</div>
-				</div>
-
-				<div className="col mb-3">
-					<label>URL</label>
+					<label>Liga del video</label>
 					<input
 						className="form-control"
 						type='text'
@@ -190,10 +200,22 @@ export const FormAddTesis = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
+			</div>
+
+			<div className="row mb-12">
+				<div className="col-md-3 mb-3">
+					<label> Imagen desde Galeria </label>
+					<div className="card">
+						<img className='foto' src={urlImg || datos} alt="Imagen" />
+						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
+						<FotosGalleryChoose />
+					</div>
+				</div>
+				
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
-						className="form-control"
+						className="form-control col-md-1 mb-3"
 						name='display'
 						value={display}
 						onChange={handleInputChange}
