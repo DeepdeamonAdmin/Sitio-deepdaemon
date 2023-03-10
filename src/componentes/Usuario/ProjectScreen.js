@@ -8,10 +8,16 @@ import {db} from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
 import {getAuth,} from 'firebase/auth';
 
-export const ProjectScreen = ({ status1, status2 }) => {
+
+
+export const ProjectScreen = ({ status1, status2}) => {
 
 	//const { projectsAll } = useSelector(state => state.projects);
 	//console.log(projectsAll)
+	const dispatch = useDispatch();
+	const [currentModal, setCurrentModal] = useState(null);
+	const [showInf, setShowInfo] = useState(false);
+
 	const [projects, setProjects] = React.useState([])
 	React.useEffect(() => {
 		const getProjects = async () => {
@@ -31,7 +37,7 @@ export const ProjectScreen = ({ status1, status2 }) => {
 	}, [])
 	console.log(projects)
 	return (
-		<div className="card-columns cards-cols animate__animated animate__fadeIn">
+		<div className="cards-cols animate__animated animate__fadeIn">
 			{
 				projects.map(project => (
 					//imprimir solamente si el estado es igual al seleccionado
@@ -44,8 +50,8 @@ export const ProjectScreen = ({ status1, status2 }) => {
 								style={{
 									objectFit: 'cover',
 									objectPosition: 'center',
-									height: "150px",
-									width: '150px'
+									height: "100px",
+									width: '100px'
 								}}
 								alt="member"
 							/>

@@ -68,8 +68,9 @@ export const General = ({ id }) => {
           </div>
         </Row>
       </div>
+      <div className="sections">
       <h1>ANUNCIOS</h1>
-
+      <hr/>
       <Container>
         <Carousel>
           {avisos.map((aviso) => (
@@ -86,6 +87,7 @@ export const General = ({ id }) => {
           ))}
         </Carousel>
       </Container>
+      </div>
 
       <Container className="section" id="Nosotros">
         <h1>Un poco sobre nosotros</h1>
@@ -138,8 +140,10 @@ export const General = ({ id }) => {
         </Row>
       </Container>
 
+      <br></br>
       <Container fluid className="academy">
         <Container className="section white">
+        <br></br>  
           <h1>La Investigación no solo es académica</h1>
           <hr />
           <p>
@@ -149,27 +153,35 @@ export const General = ({ id }) => {
           </p>
         </Container>
       </Container>
-
+      
+      <br></br>
+      <br></br>
       <div className="Container" id="Lideres">
         <h1>LOS LÍDERES</h1>
-        <hr />
+        <hr/>
+        <br></br>
         <div className="row">
           <LeaderScreen />
         </div>
       </div>
-
-      <Container fluid className="section portfolio" id="Proyectos">
-        <h1> Proyectos </h1>
+      <br></br>
+      <br></br>
+      
+      <br></br>
+      <br></br>
+      <Container fluid className="section portfolio separator" id="Proyectos">
+        <h1 className=""> Proyectos </h1>
+        <hr/>
         <Tab.Container defaultActiveKey="indevelop">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="indevelop">
-                <h1>Novedades</h1>
+                <h2>Novedades</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="completed">
-                <h1>Destacado</h1>
+                <h2>Destacado</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -184,24 +196,27 @@ export const General = ({ id }) => {
           </Tab.Content>
         </Tab.Container>
       </Container>
+      <br></br>
+      <br></br>
+      
 
-      <Container fluid className="section portfolio" id="Publicaciones">
-        <h1> Publicaciones </h1>
+      <Container fluid className="section portfolio sections" id="Publicaciones">
+        <h1 className=""> Publicaciones </h1>
         <Tab.Container defaultActiveKey="congress">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="congress">
-                <h1>Congreso</h1>
+                <h2>Congreso</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="magazine">
-                <h1>Revista</h1>
+                <h2>Revista</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="book">
-                <h1>Libro</h1>
+                <h2>Libro</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -219,19 +234,21 @@ export const General = ({ id }) => {
           </Tab.Content>
         </Tab.Container>
       </Container>
+      <br></br>
 
+      <br></br>
       <Container fluid className="section" id="Equipo">
-        <h1>Colaboradores</h1>
+        <h1>Equipo</h1>
         <Tab.Container defaultActiveKey="current">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="current">
-                <h1>Las Promesas</h1>
+                <h2>Las Promesas</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="graduate">
-                <h1>Los egresados</h1>
+                <h2>Los egresados</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -254,19 +271,21 @@ export const General = ({ id }) => {
           </Tab.Content>
         </Tab.Container>
       </Container>
+      <br></br>
 
+      <br></br>
       <Container fluid className="section portfolio" id="Tesis">
-        <h1> Tesis </h1>
+        <h1 className="separator"> Tesis </h1>
         <Tab.Container defaultActiveKey="indevelop">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="indevelop">
-                <h1>En desarrollo</h1>
+                <h2>En desarrollo</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="completed">
-                <h1>Finalizadas</h1>
+                <h2>Finalizadas</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -281,7 +300,9 @@ export const General = ({ id }) => {
           </Tab.Content>
         </Tab.Container>
       </Container>
+      <br></br>
 
+      <br></br>
       <Container fluid className="team_separator">
         <Container className="section white">
           <h1>Inteligencia colectiva</h1>
@@ -292,7 +313,9 @@ export const General = ({ id }) => {
           </h2>
         </Container>
       </Container>
+      <br></br>
 
+      <br></br>
       <Container className="section">
         <Row>
           <Col md="auto">
