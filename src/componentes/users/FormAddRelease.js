@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { useGet } from '../../hooks/useGet';
 import { getTech } from '../../selectors/get/getTech';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { startNewPublication, startUploadingPublication } from '../../actions/publications';
+import { db } from '../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 
 export const FormAddRelease = () => {
 	// UseState para el select
@@ -280,6 +282,11 @@ export const FormAddRelease = () => {
 		}
 	}, [selectValue])
 
+	// * Aquí obtenemos el ID de la publicación para usar este formulario para editarla
+	const {idRelease} = useParams()
+	const publications = useSelector(state => state.publications)
+	const publication = publications["publications"].find(p => p.id === idRelease)
+
 	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
 	const handleSelectChange = ({target}) => {
 		setSelectValue(target.value)
@@ -333,14 +340,27 @@ export const FormAddRelease = () => {
 		navigate('/admin/publications');
 	}
 
-	//Traemos la información de tech
-	const { data } = useGet(getTech);
+	//tech infor firebase
+	const [techOption, setTech] = useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 
 
 	return (
 		<div className="container">
-			<h2>Agregar Publicacion </h2>
+			<h2>{publication ? 'Editar publicación' : 'Agregar publicación'}</h2>
 			<hr />
 
 			<div className="row">
@@ -425,8 +445,8 @@ export const FormAddRelease = () => {
 
 				>
 					{
-						data.map(item => (
-							<option key={item.id} value={item.id}> {item.descr} </option>
+						techOption.map(item => (
+							<option key={item.id} value={item.id}> {item.nombre} </option>
 						))
 					}
 				</select>
@@ -679,7 +699,7 @@ export const FormAddRelease = () => {
 						name='display'
 						value={display}
 						onChange={handleInputChange}
-						required='true'
+						required={true}
 					>
 						<option value='Si' > Si </option>
 						<option value='No' > No </option>
@@ -690,7 +710,7 @@ export const FormAddRelease = () => {
 				className="btn2 btn-primary btn-large btn-block"
 				onClick={handleSubmit}
 			>
-				Agregar
+				{publication ? 'Guardar cambios' : 'Agregar'}
 			</button>
 
 

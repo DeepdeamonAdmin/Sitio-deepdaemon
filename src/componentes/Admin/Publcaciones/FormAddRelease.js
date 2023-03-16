@@ -5,6 +5,8 @@ import { useGet } from '../../../hooks/useGet';
 import { getTech } from '../../../selectors/get/getTech';
 import { useNavigate, useParams } from 'react-router-dom';
 import { startNewPublication, startUploadingPublication } from '../../../actions/publications';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
 
 export const FormAddRelease = () => {
 	// UseState para el select
@@ -338,8 +340,21 @@ export const FormAddRelease = () => {
 		navigate('/admin/publications');
 	}
 
-	//Traemos la información de tech
-	const { data } = useGet(getTech);
+	//tech infor firebase
+	const [techOption, setTech] = useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 
 
@@ -430,8 +445,8 @@ export const FormAddRelease = () => {
 
 				>
 					{
-						data.map(item => (
-							<option key={item.id} value={item.id}> {item.descr} </option>
+						techOption.map(item => (
+							<option key={item.id} value={item.id}> {item.nombre} </option>
 						))
 					}
 				</select>
@@ -684,7 +699,7 @@ export const FormAddRelease = () => {
 						name='display'
 						value={display}
 						onChange={handleInputChange}
-						required='true'
+						required={true}
 					>
 						<option value='Si' > Si </option>
 						<option value='No' > No </option>
