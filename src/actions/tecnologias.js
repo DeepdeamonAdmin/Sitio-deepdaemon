@@ -1,4 +1,4 @@
-import { doc, addDoc, collection } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { loadAllWorks } from "../helpers/loadAllWorks";
