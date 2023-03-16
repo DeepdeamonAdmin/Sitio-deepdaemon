@@ -68,6 +68,7 @@ export const General = ({ id }) => {
           </div>
         </Row>
       </div>
+      <div className="embed-responsive">
       <div className="sections">
       <h1>ANUNCIOS</h1>
       <hr/>
@@ -169,8 +170,8 @@ export const General = ({ id }) => {
       
       <br></br>
       <br></br>
-      <Container fluid className="section portfolio separator" id="Proyectos">
-        <h1 className=""> Proyectos </h1>
+      <Container fluid className="section portfolio" id="Proyectos">
+        <h1 className="separator"> Proyectos </h1>
         <hr/>
         <Tab.Container defaultActiveKey="indevelop">
           <Nav className="projects">
@@ -200,8 +201,8 @@ export const General = ({ id }) => {
       <br></br>
       
 
-      <Container fluid className="section portfolio sections" id="Publicaciones">
-        <h1 className=""> Publicaciones </h1>
+      <Container fluid className="section portfolio" id="Publicaciones">
+        <h1 className="separator"> Publicaciones </h1>
         <Tab.Container defaultActiveKey="congress">
           <Nav className="projects">
             <Nav.Item>
@@ -237,7 +238,7 @@ export const General = ({ id }) => {
       <br></br>
 
       <br></br>
-      <Container fluid className="section" id="Equipo">
+      <Container fluid className="section sections" id="Equipo">
         <h1>Equipo</h1>
         <Tab.Container defaultActiveKey="current">
           <Nav className="projects">
@@ -365,6 +366,7 @@ export const General = ({ id }) => {
         <hr />
         <footer>&copy; DeepDaemon 2019</footer>
       </Container>
+      </div>
     </div>
   );
 };

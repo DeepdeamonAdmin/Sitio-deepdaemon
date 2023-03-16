@@ -11,9 +11,6 @@ import {
 } from 'firebase/auth';
 
 export const TesisScreen = ({ status1, status2 }) => {
-
-	//const { projectsAll } = useSelector(state => state.projects);
-	//console.log(projectsAll)
 	const [projects, setProjects] = React.useState([])
 	React.useEffect(() => {
 		const getProjects = async () => {
