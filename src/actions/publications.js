@@ -11,6 +11,7 @@ import { loadAllWorks } from '../helpers/loadAllWorks';
 
 
 export const startNewPublication = ( formValues ) => {
+    console.log('ESTOS SON LOS FORMVALUES', formValues)
     return async( dispatch, getState ) => {
         
 
@@ -20,7 +21,7 @@ export const startNewPublication = ( formValues ) => {
         const newPublication = {
             postType: formValues.postType || '',
             descr: formValues.descr ||'',
-            nameTech: formValues.nameTech || '',
+            tech: formValues.idTech || '',
             frontImg: img || 'img.jpg',
             link: formValues.link ||'',
             autor: formValues.autor ||'',

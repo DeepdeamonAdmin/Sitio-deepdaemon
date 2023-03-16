@@ -296,6 +296,7 @@ export const FormAddRelease = () => {
 	const [formValues, handleInputChange, reset] = useForm({
 		postType: '',
 		descr: '',
+		tech: '',
 		frontImg: '',
 		modalMedia: '',
 		modalType: '',
@@ -320,7 +321,7 @@ export const FormAddRelease = () => {
 		display: 'Yes'
 	});
 
-	const { postType, descr, frontImg, modalMedia, link, autor, title,
+	const { postType, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
 		organization, school, note, institution, display } = formValues;
@@ -442,7 +443,7 @@ export const FormAddRelease = () => {
 					className="form-control"
 					name='idTech'
 					onChange={handleInputChange}
-
+					value={tech}
 				>
 					{
 						techOption.map(item => (
