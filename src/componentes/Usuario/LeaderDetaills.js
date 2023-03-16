@@ -12,7 +12,9 @@ import "../../styles/DeepDaemon.css";
 // //configuracion Modal
 Modal.setAppElement('#app');
 
-export const LeaderDetaills = ({leader, color}) => {
+export const LeaderDetaills = ({leader, color}) => {/*la variable leader nos permite obtener cualquier 
+                                                    información de un lider en especifico*/
+
     const { usuarios } = useSelector(state => state.user);
 
     const { modalOpen } = useSelector( state => state.ui );
@@ -49,11 +51,20 @@ export const LeaderDetaills = ({leader, color}) => {
             {close => (
             <div className="modal modal-leader">
                 
-                <div className="modalheader bg-primary"> LIDER </div>
+                <div className="modalheader bg-primary"> {leader.nombre} </div>
                 <div className="modalcontent">
                 {' '}				
                 <div className='d-flex flex-col animate__animated animate__fadeIn'>
-                <h5> {usuarios.leader} </h5>
+                        <img
+							className="img-fluid"
+							src={leader.urlImg}//aqui obtiene la imagen de cada uno de los lideres
+							alt="member"
+							style={{
+								width:"200px",
+								height: "300px",
+								objectFit: "cover"
+							}}
+						/>	
 					<ul className="list-group list-group-flush">
 						<li className={`list-group-item`}><b>Sobre mi:</b><i> {leader.descripcion}</i></li>
 						<li className="list-group-item">Email: {leader.email}</li>

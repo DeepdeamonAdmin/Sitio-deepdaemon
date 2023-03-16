@@ -122,10 +122,10 @@
 
   .modal-leader{
     width: 50%;
-    height: 50%;
+    height: 80%;
     margin-left: 25%;
     margin-right: 25%;
-    margin-top: 8%;
+    margin-top: 5%;
   }
 
   .modal-team{ /*Modal que muestra detalles de los usuarios, equipo*/
