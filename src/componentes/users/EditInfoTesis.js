@@ -48,7 +48,7 @@ export const EditInfoTesis= () => {
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
 
 	const handleSubmit = () => {
-		if (datos != "") {
+		if (datos !== "") {
 			formValues.urlImg = datos;
 		}
 
