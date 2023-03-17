@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
-import { useGet } from '../../../hooks/useGet';
-import { getTech } from '../../../selectors/get/getTech';
+import { getAuth } from 'firebase/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { startNewPublication, startUploadingPublication } from '../../../actions/publications';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
 export const FormAddRelease = () => {
+	const auth = getAuth();
+	const currentUser = auth.currentUser.displayName;
 	// UseState para el select
 	const [selectValue, setSelectValue] = useState('')
 	// UseState para cada input
@@ -308,7 +309,7 @@ export const FormAddRelease = () => {
 		volume: '',
 		number: '',
 		pages: '',
-		publisher: '',
+		publisher: currentUser,
 		address: '',
 		howpublished: '',
 		booktitle: '',
@@ -441,10 +442,11 @@ export const FormAddRelease = () => {
 				<label> Tech </label>
 				<select
 					className="form-control"
-					name='idTech'
+					name='tech'
 					onChange={handleInputChange}
 					value={tech}
 				>
+					<option value={''}>Selecciona una opción</option>
 					{
 						techOption.map(item => (
 							<option key={item.id} value={item.id}> {item.nombre} </option>
