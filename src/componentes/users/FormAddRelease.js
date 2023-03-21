@@ -367,7 +367,7 @@ export const FormAddRelease = () => {
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
-						value={selectValue}
+						value={publication ? publication.postType : selectValue}
 						className="form-control"
 						name='postType'
 						onChange={handleSelectChange}
@@ -431,7 +431,7 @@ export const FormAddRelease = () => {
 						rows='3' cols='40'
 						name='descr'
 						placeholder=' Desciption'
-						value={descr}
+						value={publication ? publication.descr : descr}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -442,7 +442,7 @@ export const FormAddRelease = () => {
 					className="form-control"
 					name='tech'
 					onChange={handleInputChange}
-					value={tech}
+					value={publication ? publication.tech : tech}
 				>
 					<option value={''}>Selecciona una opción</option>
 					{
@@ -464,7 +464,7 @@ export const FormAddRelease = () => {
 						name='autor'
 						id='autor'
 						placeholder='Autor'
-						value={autor}
+						value={publication ? publication.autor : autor}
 						onChange={handleInputChange}
 						disabled={autorDisabled}
 					/>
@@ -477,7 +477,7 @@ export const FormAddRelease = () => {
 						name='title'
 						id='title'
 						placeholder='Title'
-						value={title}
+						value={publication ? publication.title : title}
 						onChange={handleInputChange}
 						disabled={titleDisabled}
 					/>
@@ -492,7 +492,7 @@ export const FormAddRelease = () => {
 						name='link'
 						id='link'
 						placeholder='DOI'
-						value={link}
+						value={publication ? publication.link : link}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -504,7 +504,7 @@ export const FormAddRelease = () => {
 						name='journal'
 						id='journal'
 						placeholder='Journal'
-						value={journal}
+						value={publication ? publication.journal : journal}
 						onChange={handleInputChange}
 						disabled={journalDisabled}
 					/>
@@ -518,7 +518,7 @@ export const FormAddRelease = () => {
 						min='1900-01-01'
 						name='yearMonth'
 						id='yearMonth'
-						value={yearMonth}
+						value={publication ? publication.yearMonth : yearMonth}
 						onChange={handleInputChange}
 						disabled={yearMonthDisabled}
 					/>
@@ -530,7 +530,7 @@ export const FormAddRelease = () => {
 						name='volume'
 						id='volume'
 						placeholder='Volume'
-						value={volume}
+						value={publication ? publication.volume : volume}
 						onChange={handleInputChange}
 						disabled={volumeDisabled}
 					/>
@@ -542,7 +542,7 @@ export const FormAddRelease = () => {
 						name='number'
 						id='number'
 						placeholder='Number'
-						value={number}
+						value={publication ? publication.number : number}
 						onChange={handleInputChange}
 						disabled={numberDisabled}
 					/>
@@ -554,7 +554,7 @@ export const FormAddRelease = () => {
 						name='pages'
 						id='pages'
 						placeholder='Pages'
-						value={pages}
+						value={publication ? publication.pages : pages}
 						onChange={handleInputChange}
 						disabled={pagesDisabled}
 					/>
@@ -569,7 +569,7 @@ export const FormAddRelease = () => {
 						name='publisher'
 						id='publisher'
 						placeholder='Publisher'
-						value={publisher}
+						value={publication ? publication.publisher : publisher}
 						onChange={handleInputChange}
 						disabled={publisherDisabled}
 					/>
@@ -581,7 +581,7 @@ export const FormAddRelease = () => {
 						name='address'
 						id='address'
 						placeholder='Address'
-						value={address}
+						value={publication ? publication.address : address}
 						onChange={handleInputChange}
 						disabled={addressDisabled}
 					/>
@@ -595,7 +595,7 @@ export const FormAddRelease = () => {
 						name='howpublished'
 						id='howpublished'
 						placeholder='Howpublished'
-						value={howpublished}
+						value={publication ? publication.howpublished : howpublished}
 						onChange={handleInputChange}
 						disabled={howpublishedDisabled}
 					/>
@@ -607,7 +607,7 @@ export const FormAddRelease = () => {
 						name='booktitle'
 						id='booktitle'
 						placeholder='Booktitle'
-						value={booktitle}
+						value={publication ? publication.booktitle : booktitle}
 						onChange={handleInputChange}
 						disabled={booktitleDisabled}
 					/>
@@ -622,7 +622,7 @@ export const FormAddRelease = () => {
 						name='editor'
 						id='editor'
 						placeholder='Editor'
-						value={editor}
+						value={publication ? publication.editor : editor}
 						onChange={handleInputChange}
 						disabled={editorDisabled}
 					/>
@@ -634,7 +634,7 @@ export const FormAddRelease = () => {
 						name='series'
 						id='series'
 						placeholder='Series'
-						value={series}
+						value={publication ? publication.series : series}
 						onChange={handleInputChange}
 						disabled={seriesDisabled}
 					/>
@@ -649,7 +649,7 @@ export const FormAddRelease = () => {
 						name='organization'
 						id='organization'
 						placeholder='Organization'
-						value={organization}
+						value={publication ? publication.organization : organization}
 						onChange={handleInputChange}
 						disabled={organizationDisabled}
 					/>
@@ -661,7 +661,7 @@ export const FormAddRelease = () => {
 						name='school'
 						id='school'
 						placeholder='School'
-						value={school}
+						value={publication ? publication.school : school}
 						onChange={handleInputChange}
 						disabled={schoolDisabled}
 					/>
@@ -675,7 +675,7 @@ export const FormAddRelease = () => {
 						name='note'
 						id='note'
 						placeholder='Note'
-						value={note}
+						value={publication ? publication.note : note}
 						onChange={handleInputChange}
 						disabled={noteDisabled}
 					/>
@@ -688,7 +688,7 @@ export const FormAddRelease = () => {
 						name='institution'
 						id='institution'
 						placeholder='Institution'
-						value={institution}
+						value={publication ? publication.institution : institution}
 						onChange={handleInputChange}
 						disabled={institutionDisabled}
 					/>
@@ -698,7 +698,7 @@ export const FormAddRelease = () => {
 					<select
 						className="form-control"
 						name='display'
-						value={display}
+						value={publication ? publication.display : display}
 						onChange={handleInputChange}
 						required={true}
 					>
