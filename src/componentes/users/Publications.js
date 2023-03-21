@@ -71,10 +71,10 @@ export const Publications = () => {
                             </td> */}
                             <td className='td-project'>
                                 <Link
-                                    to ={rol === 'administrador' ? `editPub/${publication.id}` : `/user/morepublication/${publication.id}`}
+                                    to ={rol === 'administrador' ? `editPub/${publication.id}` : `/user/editPublication/${publication.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >
-                                    {rol === 'administrador' ? 'Editar' : 'Ver más'}
+                                    Editar
                                 </Link>
                             </td>
                         </tr>
