@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { startNewPublication, startUploadingPublication } from '../../actions/publications';
 import { db } from '../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
+import { editPublication } from '../../actions/edit';
 
 export const FormAddRelease = () => {
 	const auth = getAuth();
@@ -320,7 +321,7 @@ export const FormAddRelease = () => {
 		note: '',
 		institution: '',
 		display: 'Yes'
-	});
+	}, publication);
 
 	const { postType, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
@@ -340,6 +341,16 @@ export const FormAddRelease = () => {
 		dispatch(startNewPublication(formValues));
 		reset();
 		navigate('/admin/publications');
+	}
+
+	/**
+	 * Esta función se encarga de manejar la actualización de una publicación
+	 * recibe como parámetro el evento para prevenir la acción por default
+	 * @param {event} e 
+	 */
+	const handleUpdatePublication = e => {
+		e.preventDefault()
+		dispatch(editPublication(publication.id, formValues))
 	}
 
 	//tech infor firebase
@@ -367,7 +378,7 @@ export const FormAddRelease = () => {
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
-						value={publication ? publication.postType : selectValue}
+						value={selectValue}
 						className="form-control"
 						name='postType'
 						onChange={handleSelectChange}
@@ -396,7 +407,7 @@ export const FormAddRelease = () => {
 						className="form-control"
 						type='file'
 						name='frontImg'
-						value={frontImg}
+						files={frontImg}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -406,7 +417,7 @@ export const FormAddRelease = () => {
 						className="form-control"
 						type='file'
 						name='modalMedia'
-						value={modalMedia}
+						files={modalMedia}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -431,7 +442,7 @@ export const FormAddRelease = () => {
 						rows='3' cols='40'
 						name='descr'
 						placeholder=' Desciption'
-						value={publication ? publication.descr : descr}
+						value={descr}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -442,7 +453,7 @@ export const FormAddRelease = () => {
 					className="form-control"
 					name='tech'
 					onChange={handleInputChange}
-					value={publication ? publication.tech : tech}
+					value={tech}
 				>
 					<option value={''}>Selecciona una opción</option>
 					{
@@ -464,7 +475,7 @@ export const FormAddRelease = () => {
 						name='autor'
 						id='autor'
 						placeholder='Autor'
-						value={publication ? publication.autor : autor}
+						value={autor}
 						onChange={handleInputChange}
 						disabled={autorDisabled}
 					/>
@@ -477,7 +488,7 @@ export const FormAddRelease = () => {
 						name='title'
 						id='title'
 						placeholder='Title'
-						value={publication ? publication.title : title}
+						value={title}
 						onChange={handleInputChange}
 						disabled={titleDisabled}
 					/>
@@ -492,7 +503,7 @@ export const FormAddRelease = () => {
 						name='link'
 						id='link'
 						placeholder='DOI'
-						value={publication ? publication.link : link}
+						value={link}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -504,7 +515,7 @@ export const FormAddRelease = () => {
 						name='journal'
 						id='journal'
 						placeholder='Journal'
-						value={publication ? publication.journal : journal}
+						value={journal}
 						onChange={handleInputChange}
 						disabled={journalDisabled}
 					/>
@@ -518,7 +529,7 @@ export const FormAddRelease = () => {
 						min='1900-01-01'
 						name='yearMonth'
 						id='yearMonth'
-						value={publication ? publication.yearMonth : yearMonth}
+						value={yearMonth}
 						onChange={handleInputChange}
 						disabled={yearMonthDisabled}
 					/>
@@ -530,7 +541,7 @@ export const FormAddRelease = () => {
 						name='volume'
 						id='volume'
 						placeholder='Volume'
-						value={publication ? publication.volume : volume}
+						value={volume}
 						onChange={handleInputChange}
 						disabled={volumeDisabled}
 					/>
@@ -542,7 +553,7 @@ export const FormAddRelease = () => {
 						name='number'
 						id='number'
 						placeholder='Number'
-						value={publication ? publication.number : number}
+						value={number}
 						onChange={handleInputChange}
 						disabled={numberDisabled}
 					/>
@@ -554,7 +565,7 @@ export const FormAddRelease = () => {
 						name='pages'
 						id='pages'
 						placeholder='Pages'
-						value={publication ? publication.pages : pages}
+						value={pages}
 						onChange={handleInputChange}
 						disabled={pagesDisabled}
 					/>
@@ -569,7 +580,7 @@ export const FormAddRelease = () => {
 						name='publisher'
 						id='publisher'
 						placeholder='Publisher'
-						value={publication ? publication.publisher : publisher}
+						value={publisher}
 						onChange={handleInputChange}
 						disabled={publisherDisabled}
 					/>
@@ -581,7 +592,7 @@ export const FormAddRelease = () => {
 						name='address'
 						id='address'
 						placeholder='Address'
-						value={publication ? publication.address : address}
+						value={address}
 						onChange={handleInputChange}
 						disabled={addressDisabled}
 					/>
@@ -595,7 +606,7 @@ export const FormAddRelease = () => {
 						name='howpublished'
 						id='howpublished'
 						placeholder='Howpublished'
-						value={publication ? publication.howpublished : howpublished}
+						value={howpublished}
 						onChange={handleInputChange}
 						disabled={howpublishedDisabled}
 					/>
@@ -607,7 +618,7 @@ export const FormAddRelease = () => {
 						name='booktitle'
 						id='booktitle'
 						placeholder='Booktitle'
-						value={publication ? publication.booktitle : booktitle}
+						value={booktitle}
 						onChange={handleInputChange}
 						disabled={booktitleDisabled}
 					/>
@@ -622,7 +633,7 @@ export const FormAddRelease = () => {
 						name='editor'
 						id='editor'
 						placeholder='Editor'
-						value={publication ? publication.editor : editor}
+						value={editor}
 						onChange={handleInputChange}
 						disabled={editorDisabled}
 					/>
@@ -634,7 +645,7 @@ export const FormAddRelease = () => {
 						name='series'
 						id='series'
 						placeholder='Series'
-						value={publication ? publication.series : series}
+						value={series}
 						onChange={handleInputChange}
 						disabled={seriesDisabled}
 					/>
@@ -649,7 +660,7 @@ export const FormAddRelease = () => {
 						name='organization'
 						id='organization'
 						placeholder='Organization'
-						value={publication ? publication.organization : organization}
+						value={organization}
 						onChange={handleInputChange}
 						disabled={organizationDisabled}
 					/>
@@ -661,7 +672,7 @@ export const FormAddRelease = () => {
 						name='school'
 						id='school'
 						placeholder='School'
-						value={publication ? publication.school : school}
+						value={school}
 						onChange={handleInputChange}
 						disabled={schoolDisabled}
 					/>
@@ -675,7 +686,7 @@ export const FormAddRelease = () => {
 						name='note'
 						id='note'
 						placeholder='Note'
-						value={publication ? publication.note : note}
+						value={note}
 						onChange={handleInputChange}
 						disabled={noteDisabled}
 					/>
@@ -688,7 +699,7 @@ export const FormAddRelease = () => {
 						name='institution'
 						id='institution'
 						placeholder='Institution'
-						value={publication ? publication.institution : institution}
+						value={institution}
 						onChange={handleInputChange}
 						disabled={institutionDisabled}
 					/>
@@ -698,7 +709,7 @@ export const FormAddRelease = () => {
 					<select
 						className="form-control"
 						name='display'
-						value={publication ? publication.display : display}
+						value={display}
 						onChange={handleInputChange}
 						required={true}
 					>
@@ -709,7 +720,7 @@ export const FormAddRelease = () => {
 			</div>
 			<button
 				className="btn2 btn-primary btn-large btn-block"
-				onClick={handleSubmit}
+				onClick={publication ? handleUpdatePublication : handleSubmit}
 			>
 				{publication ? 'Guardar cambios' : 'Agregar'}
 			</button>

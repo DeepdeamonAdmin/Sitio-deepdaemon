@@ -5,6 +5,7 @@ import { types } from "../types/types";
 import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
 import {startLoadingProject} from "../../src/actions/projects"
 import {startLoadingTesis} from "../../src/actions/tesis"
+import {startLoadingPublication} from "../../src/actions/publications"
 
 export const editProject = (idProject, formValues) => {
 	return async (dispatch, getState) => {
@@ -27,6 +28,19 @@ export const editTesis = (idTesis, formValues) => {
 
 		//dispatch(refreshData(dataToFirestore))
 		dispatch(startLoadingTesis())
+		Swal.fire('Informacion actualizada:', formValues.name, 'success')
+		
+	}
+}
+
+export const editPublication = (idPublication, formValues) => {
+	return async (dispatch, getState) => {
+		
+		const dataToFirestore = { ...formValues }
+		const publicationUpdate = updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore)
+
+		//dispatch(refreshData(dataToFirestore))
+		dispatch(startLoadingPublication())
 		Swal.fire('Informacion actualizada:', formValues.name, 'success')
 		
 	}
