@@ -38,6 +38,12 @@ export const ModalFoto = (id) => {
 					<GalleryListModal id={id}/>
 				</div>
 			</div>
+            <button
+                className="btn2 btn-primary btn-large btn-block"
+                onClick={closeModal}
+            >
+                Cerrar
+            </button>
         </Modal>
 	)
 }

@@ -22,8 +22,7 @@ export const FotosGallery = () => {
         <button
             className="btn btn-primary"
             onClick={ handleClickNew }
-        >
-           Cambiar foto
+        >           Cambiar foto
         </button>
     )
 }

@@ -8,10 +8,14 @@ import { registroDesdeLider } from '../../../actions/auth';
 import { useForm } from '../../../hooks/useForm';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import { ModalGalleryAddAlumnos } from './ModalGalleryAddAlumnos';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+import { useNavigate } from 'react-router-dom';
 
 export const FormAddAlumno = () => {
 	const dispatch = useDispatch();
-	const [formValues, handleInputChange] = useForm({
+	const navigate = useNavigate();
+	const [formValues, handleInputChange, reset] = useForm({
 		nombre: '',
 		// lastname: '',
 		password: '',
@@ -36,13 +40,16 @@ export const FormAddAlumno = () => {
 	});
 
 	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display } = formValues;
-//console.log(formValues)
+	//console.log(formValues)
 
 	//envio a la api
 	const handleSubmit = (e) => {
-			formValues.ss = isChecked;
-			e.preventDefault();
-			dispatch(registroDesdeLider(formValues));
+		formValues.urlImg = datos;
+		formValues.ss = isChecked;
+		e.preventDefault();
+		dispatch(registroDesdeLider(formValues));
+		reset();
+		navigate('/admin/alumnos');
 	}
 	//info firebase escuela
 	const [escuela, setEscuela] = React.useState([])
@@ -82,7 +89,12 @@ export const FormAddAlumno = () => {
 
 	}
 
-	
+	//Galeria
+	const [datos, setDatos] = useState('');
+	const MgAFAP = (datosMg) => {
+		setDatos(datosMg);
+	}
+
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -100,6 +112,18 @@ export const FormAddAlumno = () => {
 							required
 							placeholder='Name'
 							value={nombre}
+							onChange={handleInputChange}
+						/>
+					</div>
+					<div className="col mb-3">
+						<label> Contraseña* </label>
+						<input
+							className="form-control"
+							type='password'
+							name='password'
+							required
+							placeholder='Password'
+							value={password}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -129,61 +153,39 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 					<div className="col mb-3">
-						<label> Contraseña* </label>
-						<input
+						<label> Grado </label>
+						<select
 							className="form-control"
-							type='password'
-							name='password'
-							required
-							placeholder='Password'
-							value={password}
+							name='grado'
+							value={grado}
 							onChange={handleInputChange}
-						/>
+						>
+							<option value="vacio"> No se ha seleccionado ninguna opcion </option>
+							<option value='current' > Current </option>
+							<option value='graduate' > Graduate </option>
+							<option value='Leader' > Leader </option>
+							<option value='out' > Out </option>
+						</select>
 					</div>
-				</div>
-				<div className="row">
-					<div className="col mb-3">
-						<label> Linkedin </label>
-						<input
-							className="form-control"
-							type='url'
-							name='linkedin'
-							placeholder='Linkedin'
-							value={linkedin}
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div className="col mb-3">
-						<label> Github </label>
-						<input
-							className="form-control"
-							type='url'
-							name='github'
-							placeholder='Github'
-							value={github}
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div className="col mb-3">
-						<label> Facebook </label>
-						<input
-							className="form-control"
-							type='url'
-							name='facebook'
-							placeholder='Facebook'
-							value={facebook}
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div className="col custom-file">
-						<label>Seleccione archivo </label>
-						<input
-							className="custom-file-input"
-							type='file'
-							name='photo'
-							value={urlImg}
-							onChange={handleInputChange}
-						/>
+					<div className="col-md-2 mb-5">
+						<div className="input-group-prepend">
+							{/* <div className="input-group-text col-12">
+								<label> S.S. </label>
+								<input
+									type='checkbox'
+									name='ss'
+									value='1'
+									onChange={handleInputChange}
+								/>
+							</div> */}
+							<Form.Check
+								type="checkbox"
+								id="ss"
+								label="ss"
+								checked={isChecked}
+								onChange={handleOnChange}
+							/>
+						</div>
 					</div>
 				</div>
 				<div className="row">
@@ -199,35 +201,7 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 				</div>
-				{/* <div className="row">
-					<div className="col mb-3">
-						<label>Descripción </label>
-						<textarea
-							className="form-control"
-							rows='10' cols='40'
-							name='longDesc'
-							placeholder='Desciption'
-							value={longDesc}
-							onChange={handleInputChange}
-						/>
-					</div>
-				</div> */}
 				<div className="row">
-					<div className="col-md-4 mb-3">
-						<label> Grado </label>
-						<select
-							className="form-control"
-							name='grado'
-							value={grado}
-							onChange={handleInputChange}
-						>
-							<option value="vacio"> No se ha seleccionado ninguna opcion </option>
-							<option value='current' > Current </option>
-							<option value='graduate' > Graduate </option>
-							<option value='Leader' > Leader </option>
-							<option value='out' > Out </option>
-						</select>
-					</div>
 					<div className="col-md-4 mb-2 ">
 						<label>Nivel</label>
 						<select
@@ -243,28 +217,6 @@ export const FormAddAlumno = () => {
 							<option value='work' > Work </option>
 						</select>
 					</div>
-					<div className="col-md-2 mb-5">
-						<div className="input-group-prepend">
-							{/* <div className="input-group-text col-12">
-								<label> S.S. </label>
-								<input
-									type='checkbox'
-									name='ss'
-									value='1'
-									onChange={handleInputChange}
-								/>
-							</div> */}
-							<Form.Check
-									type="checkbox"
-									id="ss"
-									label="ss"
-									checked={isChecked}
-									onChange={handleOnChange}
-								/>
-						</div>
-					</div>
-				</div>
-				<div className="row">
 					<div className="col mb-2">
 						<label> Escuela </label>
 						<select
@@ -305,6 +257,57 @@ export const FormAddAlumno = () => {
 						</select>
 					</div>
 				</div>
+				<div className="row">
+					<div className="col mb-3">
+						<label> Linkedin </label>
+						<input
+							className="form-control"
+							type='url'
+							name='linkedin'
+							placeholder='Linkedin'
+							value={linkedin}
+							onChange={handleInputChange}
+						/>
+					</div>
+					<div className="col mb-3">
+						<label> Github </label>
+						<input
+							className="form-control"
+							type='url'
+							name='github'
+							placeholder='Github'
+							value={github}
+							onChange={handleInputChange}
+						/>
+					</div>
+					<div className="col mb-3">
+						<label> Facebook </label>
+						<input
+							className="form-control"
+							type='url'
+							name='facebook'
+							placeholder='Facebook'
+							value={facebook}
+							onChange={handleInputChange}
+						/>
+					</div>
+				</div>
+
+				{/* <div className="row">
+					<div className="col mb-3">
+						<label>Descripción </label>
+						<textarea
+							className="form-control"
+							rows='10' cols='40'
+							name='longDesc'
+							placeholder='Desciption'
+							value={longDesc}
+							onChange={handleInputChange}
+						/>
+					</div>
+				</div> */}
+
+
 				{/* <div className="row">
 					<div className="col-md-6 mb-5">
 						<label> Comienzo </label>
@@ -329,8 +332,17 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 				</div> */}
+
 				<div className="row">
-					<div className="col-md-6 mb-5">
+					<div className="col-md-3 mb-3">
+						<label> Imagen desde Galeria </label>
+						<div className="card">
+							<img className='foto' src={urlImg || datos} alt="Imagen" />
+							<ModalGalleryAddAlumnos MgAFAP={MgAFAP} />
+							<FotosGalleryChoose />
+						</div>
+					</div>
+					<div className="col mb-3">
 						<label>Mostrar en página principal</label>
 						<select
 							className="form-control"
@@ -342,9 +354,7 @@ export const FormAddAlumno = () => {
 							<option value='N' > No </option>
 						</select>
 					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-6 mb-5">
+					<div className="col mb-3">
 						<label>Considerar para ser autor</label>
 						<select
 							className="form-control"
@@ -356,9 +366,7 @@ export const FormAddAlumno = () => {
 							<option value='N' > No </option>
 						</select>
 					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-6 mb-5">
+					<div className="col mb-3">
 						<label>Tipo de usuario</label>
 						<select
 							className="form-control"
@@ -370,13 +378,14 @@ export const FormAddAlumno = () => {
 						</select>
 					</div>
 				</div>
-
-				<button
-					className="btn2 btn-primary btn-large btn-block mb-4"
-					type="submit"
-				>
-					Agregar
-				</button>
+				<div class="text-center">
+					<button
+						className="btn btn-primary btn-large"
+						type="submit"
+					>
+						Agregar
+					</button>
+				</div>
 			</form>
 		</div>
 	)

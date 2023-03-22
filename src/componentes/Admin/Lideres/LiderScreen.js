@@ -3,6 +3,7 @@ import { ModalAddLider } from './ModalAddLider';
 import { AddNewFab } from '../../ui/AddNewFab';
 //import { SearchScreen } from '../../ui/SearchScreen';
 import { LiderList } from './LiderList';
+import { Link } from 'react-router-dom';
 
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
@@ -22,8 +23,11 @@ export const LiderScreen = () => {
             <div className="row">
                 {/* <SearchScreen /> */}
                 <div className="col-md-2 mb-2">
-                    <ModalAddLider />
-                    <AddNewFab /> 
+                    {/* <ModalAddLider />
+                    <AddNewFab />  */}
+                    <Link to={`agregar`} className="btn btn-primary fab">
+                        <i className="fas fa-plus"></i>
+						</Link>
                 </div>    
             </div>
         </div>

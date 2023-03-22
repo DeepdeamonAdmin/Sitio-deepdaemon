@@ -4,7 +4,7 @@ import { AddNewFab } from '../../ui/AddNewFab';
 //import { SearchScreen } from '../../ui/SearchScreen';
 import { AlumnoList } from './AlumnoList';
 import { GraduatedList } from './GraduatedList';
-
+import { Link } from 'react-router-dom';
 
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
@@ -21,8 +21,11 @@ export const AlumnoScreen = () => {
 				<div className="row">
 					{/* <SearchScreen /> */}
 					<div className="col-md-2 mb-2">
-						<ModalAddAlumno />
-						<AddNewFab />
+						{/* <ModalAddAlumno />
+						<AddNewFab /> */}
+						<Link to={`agregar`} className="btn btn-primary fab">
+                        <i className="fas fa-plus"></i>
+						</Link>
 					</div>
 				</div>
 			</div>

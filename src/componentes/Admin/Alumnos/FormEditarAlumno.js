@@ -132,8 +132,8 @@ export const FormEditarAlumno = (props) => {
 				)}
 				<hr />
 			</div>
-			<div className="row">
-				<div className='col mb-3'>
+			<div className="row mb-12">
+				<div className='col-md-3 mb-3'>
 					<div className="card">
 						<img className='foto' src={urlImg || fotoPerfil} alt="Foto de Perfil" />
 						<ModalFoto id={alumno.id} />
@@ -151,6 +151,10 @@ export const FormEditarAlumno = (props) => {
 				/>
 				{/* </div> */}
 
+			</div>
+
+			<div className="row">
+				
 				<div className="col mb-3">
 					<label> Nombre* </label>
 					<input
@@ -163,7 +167,18 @@ export const FormEditarAlumno = (props) => {
 						onChange={handleInputChange}
 					/>
 				</div>
-
+				<div className="col mb-3">
+					<label> Email* </label>
+					<input
+						className="form-control"
+						type='email'
+						name='email'
+						required
+						placeholder='Email'
+						value={email}
+						onChange={handleInputChange}
+					/>
+				</div>
 				<div className='col mb-3'>
 					<div className="card">
 
@@ -192,7 +207,7 @@ export const FormEditarAlumno = (props) => {
 							/>
 						</div>
 						<button
-							className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"
+							className="btn btn-primary"
 							onClick={handleContra}
 						>
 							Cambiar
@@ -202,21 +217,8 @@ export const FormEditarAlumno = (props) => {
 				</div>
 
 			</div>
-
-
 			<div className="row">
-				<div className="col mb-3">
-					<label> Email* </label>
-					<input
-						className="form-control"
-						type='email'
-						name='email'
-						required
-						placeholder='Email'
-						value={email}
-						onChange={handleInputChange}
-					/>
-				</div>
+				
 				<div className="col mb-3" style={{ display: 'none' }}>
 					<label> Contraseña* </label>
 					<input
@@ -254,10 +256,6 @@ export const FormEditarAlumno = (props) => {
 						<option value='alumno' > Alumno </option>
 					</select>
 				</div>
-
-			</div>
-			<div className="row">
-				{/* {alumno.rol === 'other' && ( */}
 				<div className="col mb-3">
 					<label> Grado </label>
 					<select
@@ -273,10 +271,6 @@ export const FormEditarAlumno = (props) => {
 						<option value='out' > Out </option>
 					</select>
 				</div>
-				{/* // )} */}
-			</div>
-			<div className="row">
-				{/* {alumno.rol === 'other' && ( */}
 				<div className="col mb-3">
 					<label> Nivel </label>
 					<select
@@ -291,70 +285,7 @@ export const FormEditarAlumno = (props) => {
 						<option value='work' > Work </option>
 					</select>
 				</div>
-				{/* // )} */}
-			</div>
-			<div className="row">
-				<div className="col mb-3">
-					<label> Mostrar en página principal </label>
-					<select
-						className="form-control"
-						name='display'
-						value={display}
-						onChange={handleInputChange}
-					>
-						<option value='Y'>Si</option>
-						<option value='N'>No</option>
-					</select>
-
-				</div>
-			</div>
-			<div className="row">
-				<div className="col mb-3">
-					<label> Linkedin </label>
-					<input
-						className="form-control"
-						type='url'
-						name='linkedin'
-						placeholder='Likedin'
-						value={linkedin}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label> Github </label>
-					<input
-						className="form-control"
-						type='url'
-						name='github'
-						placeholder='Github'
-						value={github}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label> Facebook </label>
-					<input
-						className="form-control"
-						type='url'
-						name='facebook'
-						placeholder='Facebook'
-						value={facebook}
-						onChange={handleInputChange}
-					/>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col mb-3">
-					<label>Descripción </label>
-					<textarea
-						className="form-control"
-						rows='10' cols='40'
-						name='descripcion'
-						placeholder='Descripción'
-						value={descripcion}
-						onChange={handleInputChange}
-					/>
-				</div>
+				
 			</div>
 			<div className="row">
 				<div className="col mb-2">
@@ -397,6 +328,69 @@ export const FormEditarAlumno = (props) => {
 					</select>
 				</div>
 			</div>
+			{/* <div className="row"> */}
+				{/* {alumno.rol === 'other' && ( */}
+				
+				{/* // )} */}
+			{/* </div> */}
+			{/* <div className="row"> */}
+				{/* {alumno.rol === 'other' && ( */}
+				
+				{/* // )} */}
+			{/* </div> */}
+			{/* <div className="row">
+				
+			</div> */}
+			<div className="row">
+				<div className="col mb-3">
+					<label>Descripción </label>
+					<textarea
+						className="form-control"
+						rows='10' cols='40'
+						name='descripcion'
+						placeholder='Descripción'
+						value={descripcion}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col mb-3">
+					<label> Linkedin </label>
+					<input
+						className="form-control"
+						type='url'
+						name='linkedin'
+						placeholder='Likedin'
+						value={linkedin}
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="col mb-3">
+					<label> Github </label>
+					<input
+						className="form-control"
+						type='url'
+						name='github'
+						placeholder='Github'
+						value={github}
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="col mb-3">
+					<label> Facebook </label>
+					<input
+						className="form-control"
+						type='url'
+						name='facebook'
+						placeholder='Facebook'
+						value={facebook}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+			
+			
 			<div className="row">
 				<div className="col-md-6 mb-5">
 					<label>Considerar para ser autor</label>
@@ -410,9 +404,19 @@ export const FormEditarAlumno = (props) => {
 						<option value='N' > No </option>
 					</select>
 				</div>
-			</div>
-			<div className="row">
-				<div className="col-md-6 mb-5">
+				<div className="col mb-3">
+					<label> Mostrar en página principal </label>
+					<select
+						className="form-control"
+						name='display'
+						value={display}
+						onChange={handleInputChange}
+					>
+						<option value='Y'>Si</option>
+						<option value='N'>No</option>
+					</select>
+				</div>
+				<div className="col mb-3">
 					<Form.Check
 						type="checkbox"
 						id="ss"
@@ -422,12 +426,17 @@ export const FormEditarAlumno = (props) => {
 					/>
 				</div>
 			</div>
+
+			<div class="text-center">
 			<button
-				className="btn2 btn-primary btn-large btn-block p-2 mb-2 w-25 mx-auto"
+				className="btn btn-primary btn-large"
 				onClick={handleSave}
 			>
 				Guardar
 			</button>
+			</div>
+			
+			
 		</div>
 	)
 }

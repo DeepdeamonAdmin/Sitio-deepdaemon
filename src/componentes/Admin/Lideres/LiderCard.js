@@ -43,7 +43,7 @@ export const LiderCard = (item) => {
 						</Link>
 					</p>
 
-					<p>
+					{/* <p>
 						<button
 							type="button"
 							className="btn btn-success btn-sm"
@@ -54,7 +54,7 @@ export const LiderCard = (item) => {
 							type="button"
 							className="btn btn-secondary btn-sm"
 						>Proyectos</button>
-					</p>
+					</p> */}
 				</div>
 
 			</div>

@@ -54,7 +54,7 @@ export const AlumnoCard = (item) => {
 						</Link>
 					</p>
 
-					<p>
+					{/* <p>
 						<button
 							type="button"
 							className="btn btn-success btn-sm"
@@ -65,7 +65,7 @@ export const AlumnoCard = (item) => {
 							type="button"
 							className="btn btn-secondary btn-sm"
 						>Proyectos</button>
-					</p>
+					</p> */}
 				</div>
 
 			</div>

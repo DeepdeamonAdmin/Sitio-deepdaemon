@@ -23,6 +23,8 @@ import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 import { General } from '../componentes/Usuario/General'
 import { FormAddRelease } from '../componentes/Admin/Publcaciones/FormAddRelease';
 import { FormAddSign } from '../componentes/Admin/Avisos/FormAddSign';
+import { FormAddAlumno } from '../componentes/Admin/Alumnos/FormAddAlumno';
+import { FormAddLider } from '../componentes/Admin/Lideres/FormAddLider';
 
 
 export const AdminDashBoard = () => {
@@ -38,6 +40,7 @@ export const AdminDashBoard = () => {
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
 					<Route path="release" element={<ReleaseScreen />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />
+					<Route path="alumnos/agregar" element={<FormAddAlumno />} />
 					<Route path="externos" element={<ExternoScreen />} />
 					<Route path="tesis" element={<TesisScreen />} />
 					<Route path='addTesis' element={ <FormAddTesis /> } />
@@ -47,6 +50,7 @@ export const AdminDashBoard = () => {
 					{/* TODO: Hay que hacer el formulario de editar publicación o reutilizarlo */}
 					<Route path="release/editPub/:idRelease" element={<FormAddRelease/>} />
 					<Route path="lideres" element={<LiderScreen />} />
+					<Route path="lideres/agregar" element={<FormAddLider />} />
 					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />

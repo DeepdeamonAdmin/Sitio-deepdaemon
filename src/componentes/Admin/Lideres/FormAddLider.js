@@ -4,11 +4,12 @@ import fotoPerfil from '../../../assets/Usuario.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { activeData, startSaveData, startUploading } from '../../../actions/user';
 import { useForm } from '../../../hooks/useForm';
-
 import validator from 'validator';
-
+import { ModalGalleryAddLideres } from './ModalGalleryAddLideres';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { registrarLider } from '../../../actions/auth';
 import { removeError, setError } from '../../../actions/ui';
+import { useState } from 'react';
 
 //importar todas las imagenes de la galeria
 import azul from "../../../assets/azul.jpg";
@@ -29,17 +30,24 @@ const [formValues, handleInputChange ] = useForm({
   password: '',
   password2: '',  
   display: 'Y',
+  urlImg: ''
 });
 
-const {name, email, password, password2 } = formValues;
+const {name, email, password, password2,urlImg } = formValues;
 
 const handleRegistrer = (e) => { 
   
   e.preventDefault();
   if ( isFormValid() ) {
+    formValues.urlImg = datos;
     dispatch( registrarLider(formValues) );
   }
 
+}
+//Galeria
+const [datos, setDatos] = useState('');
+const MgAFAP = (datosMg) => {
+  setDatos(datosMg);
 }
 
 const isFormValid = () => {
@@ -122,12 +130,22 @@ return (
         </div>
 
         <div className='row'>
-          <div className='mb-2 col-sm-6'>
+          {/* <div className='mb-2 col-sm-6'>
             <label className="form-label">Seleccionar una foto de la galeria</label>
             <input type="file" className="form-control" name="fotoPerfil" onChange={ handleInputChange } />
             <img src={ fotoPerfil } alt="fotoPerfil" className="img-fluid" />
-          </div>
-          <div className='mb-2 col-sm-6'>
+          </div> */}
+          <div className="col-md-3 mb-3">
+						<label> Imagen desde Galeria </label>
+						<div className="card">
+							<img className='foto' src={urlImg || datos} alt="Imagen" />
+							<ModalGalleryAddLideres MgAFAP={MgAFAP} />
+							<FotosGalleryChoose />
+						</div>
+					</div>
+          
+        </div>
+        <div class="text-center">
             <button 
                 type="submit"
                 className="btn btn-primary btn-registro"
@@ -136,7 +154,6 @@ return (
                     Registrar
               </button>   
           </div>
-        </div>
 
       </div>
     </form>
