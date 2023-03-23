@@ -51,14 +51,13 @@ export const TesisScreen = ({ status1, status2}) => {
 								style={{
 									objectFit: 'cover',
 									objectPosition: 'center',
-									height: "100px",
-									width: '100px'
+									height: "80px",
+									width: '80px'
 								}}
 								alt="member"
 							/>
 							<div className="card-body text-primary">
 								<h5 className="card-title"> {project.name} </h5>
-								{/* {<ModalInfoProject item={project} key={project.id} id={project.id} />} */}
 								<ProjectDetaills color={"primary"} project={project} />
 							</div>
 						</div>
@@ -68,61 +67,3 @@ export const TesisScreen = ({ status1, status2}) => {
 		</div >
 	)
 }
-
-
-
-{/*import React, { useState } from 'react'
-import { useGet } from '../../hooks/useGet';
-import { getProjectStatus } from '../../selectors/get/getProjectStatus';
-import { ProjectDetaills } from './ProjectDetaills';
-import { ModalInfoProject } from './ModalInfoProject';
-import TesisCardUser from '../users/TesisCardUser'
-import { useSelector, useDispatch } from 'react-redux';
-import {db} from '../../firebase/firebase-config';
-import { collection, getDocs, where, get, query } from "firebase/firestore";
-import {
-	getAuth,
-} from 'firebase/auth';
-
-export const TesisScreen = ({ status1, status2 }) => {
-	const [projects, setProjects] = React.useState([])
-	const auth = getAuth();
-    const dN = auth.currentUser.displayName;
-
-    const { tesis } = useSelector(state => state.tesis);
-    console.log(tesis)
-
-	React.useEffect(() => {
-		const getProjects = async () => {
-			try {
-                const ref = collection(db, "Tesis")
-				const q = query(ref, where("estado", "in", [status1, status2]))
-                console.log(q)
-                const Data = await getDocs(q);
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
-				setProjects(arrayData)
-				
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		getProjects()
-	}, [])
-	console.log(projects)
-	return (
-		<div className="card-columns cards-cols animate__animated animate__fadeIn">
-			{
-				<div className="card-columns animate__animated animate__fadeIn">
-                {
-                    tesis.map(item => (
-                        <TesisCardUser
-                            key={item.id}
-                            {...item}
-                        />
-                    ))
-                }
-            	</div>
-			}
-		</div >
-	)
-}*/}

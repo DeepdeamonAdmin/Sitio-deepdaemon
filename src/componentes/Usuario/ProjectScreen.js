@@ -12,8 +12,6 @@ import {getAuth,} from 'firebase/auth';
 
 export const ProjectScreen = ({ status1, status2}) => {
 
-	//const { projectsAll } = useSelector(state => state.projects);
-	//console.log(projectsAll)
 	const dispatch = useDispatch();
 	const [currentModal, setCurrentModal] = useState(null);
 	const [showInf, setShowInfo] = useState(false);
@@ -51,16 +49,18 @@ export const ProjectScreen = ({ status1, status2}) => {
 								style={{
 									objectFit: 'cover',
 									objectPosition: 'center',
-									height: "100px",
-									width: '100px'
+									height: "80px",
+									width: '80px'
 								}}
 								alt="member"
 							/>
 							<div className="card-body text-primary">
 								<h5 className="card-title"> {project.name} </h5>
-								{/* {<ModalInfoProject item={project} key={project.id} id={project.id} />} */}
 								<ProjectDetaills color={"primary"} project={project} />
 							</div>
+							{/*<div className="card-body text-primary">
+								<ProjectDetaills color={"primary"} project={project} />
+							</div>*/}
 						</div>
 					)
 				))

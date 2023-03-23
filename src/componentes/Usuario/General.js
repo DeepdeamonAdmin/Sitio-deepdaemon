@@ -238,18 +238,18 @@ export const General = ({ id }) => {
       <br></br>
 
       <br></br>
-      <Container fluid className="section sections" id="Equipo">
-        <h1>Equipo</h1>
+      <Container fluid className="section sections team_sectionBg" id="Equipo">
+        <h1 className="team_title">Equipo</h1>
         <Tab.Container defaultActiveKey="current">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="current">
-                <h2>Las Promesas</h2>
+                <h2 className="team_title">Las Promesas</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="graduate">
-                <h2>Los egresados</h2>
+                <h2 className="team_title">Los egresados</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>

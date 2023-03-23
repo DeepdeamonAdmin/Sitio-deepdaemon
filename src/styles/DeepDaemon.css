@@ -79,6 +79,10 @@
     width: 100%;
   }
   
+  .team_title{
+    color: white;
+  }
+
   .section {
     padding: 50px;
     display: flex;
@@ -97,8 +101,16 @@
     text-transform: uppercase;
   }
   
+  .team_sectionBg {
+    background-image: url("./assets/img/bg/fdSections.jpg");
+    background-position: top center;
+    align-items: stretch;
+    display: flex;
+  }
+  
   .academy {
-    /*background-image: url("./assets/img/bg/academy_bg.jpg");*/
+    background-image: url("./assets/img/bg/fdSections.jpg");
+    text-align: left;
     background-position: center center;
     background-repeat: no-repeat;
     background-color: #012e4d;
