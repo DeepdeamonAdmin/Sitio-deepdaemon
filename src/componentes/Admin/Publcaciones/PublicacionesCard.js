@@ -10,8 +10,8 @@ import { startLoadingPublication } from '../../../actions/publications';
 const PublicacionesCard = (item) => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const uid = useParams();
+//    const navigate = useNavigate();
+//    const uid = useParams();
   
 
     const handleDelete = (e) => {
@@ -35,30 +35,30 @@ const PublicacionesCard = (item) => {
     }
 
     return (
-        <div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
+        <div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540, height: 250}}>
             <div className="row no-gutters">
-                <div className="col-md-4">
+                <div className="card-body no-gutters">
+                    <h5 className="card-title"> {item.title} </h5>
+                </div>
+                <div className="">
+                    <p className="badge bg-primary text-wrap"> {item.autor} </p>
+                </div>
+                {/*<div className="col-md-4">
                     <img
                         //src={`../../../../media/proyectos/project.png`}
-                        src={item.urlImg}
+                        src={item.frontImg}
                         alt="publication"
                         className="card-img"
                     />
-                </div>
-                <div className="col-md-5">
-                    <div className="card-body">
-                        <h5 className="card-title"> {item.name} </h5>
-                        <p className="card-text"> {item.descr} </p>
-                    </div>
-                </div>
+                </div>*/}
                 <div className="col-md-1">
-                <p>
+                {/*<p>
                         <Link 
                             to={ `/admin/tesis/${item.id }/${item}` }
                             className ="btn btn-primary btn-sm">
                                 Edit
                         </Link>
-                    </p>
+                </p>*/}
                     
                     <p>
                         <button 

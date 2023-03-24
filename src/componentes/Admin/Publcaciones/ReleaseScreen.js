@@ -13,8 +13,8 @@ export const ReleaseScreen = () => {
                 <AddNewFab /> 
             </div>
             <div>
-                <Publications />
-                {/*<PublicacionesList/>*/}
+                {/*<Publications />*/}
+                <PublicacionesList/>
             </div>
         </>
         

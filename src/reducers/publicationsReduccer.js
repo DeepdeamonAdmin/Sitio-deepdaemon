@@ -26,6 +26,7 @@ export const publicationsReduccer = ( state = initialState, action ) => {
     
     switch (action.type) {
 
+
         case types.publicationActive:
             return {
                 ...state,
@@ -49,9 +50,17 @@ export const publicationsReduccer = ( state = initialState, action ) => {
                 ...state,
                 publications: [...action.payload ]
             }
+
+        case types.publicationsAllLoad:
+            return {
+                ...state,
+                publicationss: [...action.payload ]
+            }
             
         default:
             return state
+
+        
     }
 
 
