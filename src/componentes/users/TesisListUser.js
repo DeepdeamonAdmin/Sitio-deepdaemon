@@ -1,9 +1,9 @@
 import React from 'react'
 import TesisCardUser from './TesisCardUser'
-import {db} from '../../firebase/firebase-config';
+import { db } from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
 import {
-	getAuth,
+    getAuth,
 } from 'firebase/auth';
 import { useSelector } from 'react-redux';
 
@@ -15,13 +15,18 @@ const TesisListUser = () => {
 
     const { tesis } = useSelector(state => state.tesis);
     // Esta variable es para obtener solo las tesis que son del usuario
-    const tesisDelUsuario = tesis.filter( tesis => tesis.autores.some(autor => autor.nombreAutor === currentUser) )
+    const tesisDelUsuario = tesis.filter(tesis => {
+        if (!Array.isArray(tesis.autores)) {
+            return false;
+        }
+        return tesis.autores.some(autor => autor.nombreAutor === currentUser);
+    })
 
-    
+
     return (
         <>
             {/* { loading && <p className="animate__animated animate__flash">Loading</p> } */}
-        
+
             <div className="card-columns animate__animated animate__fadeIn">
                 {
                     // Aquí iteramos solo las tesis del usuario en lugar de todas las tesis
