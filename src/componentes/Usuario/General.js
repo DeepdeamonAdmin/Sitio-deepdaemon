@@ -69,6 +69,8 @@ export const General = ({ id }) => {
         </Row>
       </div>
       <div className="sections" style={{textAlign: "center"}}>
+      <div className="embed-responsive">
+      <div className="sections">
       <h1>ANUNCIOS</h1>
       <hr/>
       <Container>
@@ -77,7 +79,7 @@ export const General = ({ id }) => {
             <Carousel.Item key={aviso.id}>
               <Image
                 src={aviso.photo}
-                style={{ width: "800px", height: "500px"}}
+                style={{ width: "100%", height: "900px" }}
               />
               <Carousel.Caption>
                 <h3>{aviso.name}</h3>
@@ -148,7 +150,7 @@ export const General = ({ id }) => {
           <hr />
           <p>
             Por eso creamos un grupo de investigación que tiene como objetivo
-            usar la inteligencia artificial para resolver problemas de la
+            usar la inteligencia artificial <br></br> para resolver problemas de la
             industria.
           </p>
         </Container>
@@ -169,8 +171,8 @@ export const General = ({ id }) => {
       
       <br></br>
       <br></br>
-      <Container fluid className="section portfolio separator" id="Proyectos">
-        <h1 className=""> Proyectos </h1>
+      <Container fluid className="section portfolio" id="Proyectos">
+        <h1 className="separator"> Proyectos </h1>
         <hr/>
         <Tab.Container defaultActiveKey="indevelop">
           <Nav className="projects">
@@ -200,8 +202,8 @@ export const General = ({ id }) => {
       <br></br>
       
 
-      <Container fluid className="section portfolio sections" id="Publicaciones">
-        <h1 className=""> Publicaciones </h1>
+      <Container fluid className="section portfolio" id="Publicaciones">
+        <h1 className="separator"> Publicaciones </h1>
         <Tab.Container defaultActiveKey="congress">
           <Nav className="projects">
             <Nav.Item>
@@ -237,18 +239,18 @@ export const General = ({ id }) => {
       <br></br>
 
       <br></br>
-      <Container fluid className="section" id="Equipo">
-        <h1>Equipo</h1>
+      <Container fluid className="section sections team_sectionBg" id="Equipo">
+        <h1 className="team_title">Equipo</h1>
         <Tab.Container defaultActiveKey="current">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="current">
-                <h2>Las Promesas</h2>
+                <h2 className="team_title">Las Promesas</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="graduate">
-                <h2>Los egresados</h2>
+                <h2 className="team_title">Los egresados</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -365,6 +367,8 @@ export const General = ({ id }) => {
         <hr />
         <footer>&copy; DeepDaemon 2019</footer>
       </Container>
+      </div>
+      </div>
     </div>
   );
 };

@@ -6,14 +6,16 @@ import { ModalInfoProject } from './ModalInfoProject';
 import { useSelector, useDispatch } from 'react-redux';
 import {db} from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
-import {
-	getAuth,
-} from 'firebase/auth';
+import {getAuth,} from 'firebase/auth';
 
-export const TesisScreen = ({ status1, status2 }) => {
 
-	//const { projectsAll } = useSelector(state => state.projects);
-	//console.log(projectsAll)
+
+export const TesisScreen = ({ status1, status2}) => {
+
+	const dispatch = useDispatch();
+	const [currentModal, setCurrentModal] = useState(null);
+	const [showInf, setShowInfo] = useState(false);
+
 	const [projects, setProjects] = React.useState([])
 	React.useEffect(() => {
 		const getProjects = async () => {
@@ -33,7 +35,8 @@ export const TesisScreen = ({ status1, status2 }) => {
 	}, [])
 	console.log(projects)
 	return (
-		<div className="card-columns cards-cols animate__animated animate__fadeIn">
+		<div className="cards-cols animate__animated animate__fadeIn">
+			{projects.length === 0 && <p>No se encontraron tesis por el momento.</p>}
 			{
 				projects.map(project => (
 					//imprimir solamente si el estado es igual al seleccionado
@@ -46,17 +49,15 @@ export const TesisScreen = ({ status1, status2 }) => {
 								style={{
 									objectFit: 'cover',
 									objectPosition: 'center',
-									height: "200px",
-									width: '200px'
+									height: "110px",
+									width: '110px'
 								}}
 								alt="member"
 							/>
 							<div className="card-body text-primary">
 								<h5 className="card-title"> {project.name} </h5>
-								{/* {<ModalInfoProject item={project} key={project.id} id={project.id} />} */}
 								<ProjectDetaills color={"primary"} project={project} />
 							</div>
-
 						</div>
 					)
 				))

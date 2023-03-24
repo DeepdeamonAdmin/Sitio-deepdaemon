@@ -12,7 +12,9 @@ import "../../styles/DeepDaemon.css";
 // //configuracion Modal
 Modal.setAppElement('#app');
 
-export const LeaderDetaills = ({leader, color}) => {
+export const LeaderDetaills = ({leader, color}) => {/*la variable leader nos permite obtener cualquier 
+                                                    información de un lider en especifico*/
+
     const { usuarios } = useSelector(state => state.user);
 
     const { modalOpen } = useSelector( state => state.ui );
@@ -37,8 +39,8 @@ export const LeaderDetaills = ({leader, color}) => {
     
     return (
         <>
-        <Popup
-            trigger={<button
+        <Popup //aqui inicia el modal que abrira la informacion de los lideres
+            trigger={<button //Boton que activa el pop up
 				className={`btn btn-primary`}
 				onClick={handleClickNew}>
 				{!showInf ? "Ver más.." : "Ver menos"}
@@ -47,22 +49,22 @@ export const LeaderDetaills = ({leader, color}) => {
             nested
         >
             {close => (
-            <div className="modal modal-leader">
+            <div className="modal-leader">
                 
-                <div className="modalheader bg-primary"> LIDER </div>
+                <div className="modalheader bg-primary"> {leader.nombre} </div>
                 <div className="modalcontent">
-                {' '}	
-                {/*
-                    usuarios.map(usuario => (
-                        (usuario.grado === "leader" && usuario.display === "Y") && (
-                            <img
-                                className="img-fluid"
-                                src={usuario.urlImg}
-                                alt="leader"			
-                            />)
-                        ))*/}			
+                {' '}				
                 <div className='d-flex flex-col animate__animated animate__fadeIn'>
-                <h5> {usuarios.leader} </h5>
+                        <img
+							className="img-fluid"
+							src={leader.urlImg}//aqui obtiene la imagen de cada uno de los lideres
+							alt="member"
+							style={{
+								width:"200px",
+								height: "300px",
+								objectFit: "cover"
+							}}
+						/>	
 					<ul className="list-group list-group-flush">
 						<li className={`list-group-item`}><b>Sobre mi:</b><i> {leader.descripcion}</i></li>
 						<li className="list-group-item">Email: {leader.email}</li>
@@ -70,10 +72,10 @@ export const LeaderDetaills = ({leader, color}) => {
 				</div>
                 </div>
                     <div className="modalactions">
-                        <button
+                        <button //boton para cerrar el modal en pop up 
                             className={`btn btn-primary`}
                             onClick={() => {
-                            console.log('modal closed ');
+                            console.log('modal closed '); 
                             close();
                         }}>
                             Cerrar
@@ -82,39 +84,6 @@ export const LeaderDetaills = ({leader, color}) => {
                 </div>
             )}
         </Popup>
-        {/*<Popup trigger={<button>Trigger</button>} position="top left">
-            {close => (
-            <div>
-                Content here
-                <a className="close" onClick={close}>
-                &times;
-                </a>
-            </div>
-            )}
-        </Popup>
-            <Popup trigger={<button className={`btn btn-${color}`}> Ver más</button>} >
-                    <div className='d-flex flex-col animate__animated animate__fadeIn'>
-                        <ul className="list-group list-group-flush">
-                            <li className={`list-group-item text-white bg-primary `}><b>Sobre mi:</b><i> {leader.descripcion}</i></li>
-                            <li className="list-group-item">Email: {leader.email}</li>
-                        </ul>
-                    </div>
-            </Popup>
-            <Modal 
-                isOpen={ modalOpen }
-                onRequestClose={ closeModal }
-                style={ customStyles }
-                closeTimeoutMS={ 200 }
-                className="modal"
-                overlayClassName="modal-fondo"
-                >
-                    <div className='d-flex flex-col animate__animated animate__fadeIn'>
-                    <ul className="list-group list-group-flush">
-                        <li className={`list-group-item text-white bg-primary `}><b>Sobre mi:</b><i> {leader.descripcion}</i></li>
-                        <li className="list-group-item">Email: {leader.email}</li>
-                    </ul>
-                </div>
-            </Modal>*/}
         </>
     )
 }
