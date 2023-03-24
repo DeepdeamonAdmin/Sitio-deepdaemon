@@ -20,7 +20,7 @@ export const startNewPublication = ( formValues ) => {
         const newPublication = {
             postType: formValues.postType || '',
             descr: formValues.descr ||'',
-            nameTech: formValues.nameTech || '',
+            tech: formValues.tech || '',
             frontImg: img || 'img.jpg',
             link: formValues.link ||'',
             autor: formValues.autor ||'',

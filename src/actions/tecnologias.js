@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { loadAllWorks } from "../helpers/loadAllWorks";
@@ -9,11 +9,13 @@ export const startsNewTech = (formValues) => {
 		const newInst = {
 			nombre: formValues.name,
 		}
-        await setDoc(doc(db, 'Tecnologias', formValues.name), {
-			'nombre': formValues.name
-		})
-		Swal.fire('Tecnología guardada', 'Éxito');
-        dispatch(addNewTech(formValues.name, newInst));
+        const newTech = await addDoc(collection(db, 'Tecnologias'), newInst)
+		if(newTech) {
+			Swal.fire('Tecnología guardada con éxito', 'Éxito');
+        	dispatch(addNewTech(formValues.name, newInst));
+		} else {
+			Swal.fire('Error al agrega la tecnología', 'error')
+		}
 	}
 }
 

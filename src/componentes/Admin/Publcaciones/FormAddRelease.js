@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
-import { useGet } from '../../../hooks/useGet';
-import { getTech } from '../../../selectors/get/getTech';
+import { getAuth } from 'firebase/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { startNewPublication, startUploadingPublication } from '../../../actions/publications';
+import { db } from '../../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
+import { editPublication } from '../../../actions/edit';
 
 export const FormAddRelease = () => {
+	const auth = getAuth();
+	const currentUser = auth.currentUser.displayName;
 	// UseState para el select
 	const [selectValue, setSelectValue] = useState('')
 	// UseState para cada input
@@ -294,6 +298,7 @@ export const FormAddRelease = () => {
 	const [formValues, handleInputChange, reset] = useForm({
 		postType: '',
 		descr: '',
+		tech: '',
 		frontImg: '',
 		modalMedia: '',
 		modalType: '',
@@ -305,7 +310,7 @@ export const FormAddRelease = () => {
 		volume: '',
 		number: '',
 		pages: '',
-		publisher: '',
+		publisher: currentUser,
 		address: '',
 		howpublished: '',
 		booktitle: '',
@@ -316,9 +321,9 @@ export const FormAddRelease = () => {
 		note: '',
 		institution: '',
 		display: 'Yes'
-	});
+	}, publication);
 
-	const { postType, descr, frontImg, modalMedia, link, autor, title,
+	const { postType, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
 		organization, school, note, institution, display } = formValues;
@@ -338,8 +343,31 @@ export const FormAddRelease = () => {
 		navigate('/admin/publications');
 	}
 
-	//Traemos la información de tech
-	const { data } = useGet(getTech);
+	/**
+	 * Esta función se encarga de manejar la actualización de una publicación
+	 * recibe como parámetro el evento para prevenir la acción por default
+	 * @param {event} e 
+	 */
+	const handleUpdatePublication = e => {
+		e.preventDefault()
+		dispatch(editPublication(publication.id, formValues))
+	}
+
+	//tech infor firebase
+	const [techOption, setTech] = useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 
 
@@ -381,7 +409,7 @@ export const FormAddRelease = () => {
 						className="form-control"
 						type='file'
 						name='frontImg'
-						value={frontImg}
+						files={frontImg}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -391,7 +419,7 @@ export const FormAddRelease = () => {
 						className="form-control"
 						type='file'
 						name='modalMedia'
-						value={modalMedia}
+						files={modalMedia}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -425,13 +453,14 @@ export const FormAddRelease = () => {
 				<label> Tech </label>
 				<select
 					className="form-control"
-					name='idTech'
+					name='tech'
 					onChange={handleInputChange}
-
+					value={tech}
 				>
+					<option value={''}>Selecciona una opción</option>
 					{
-						data.map(item => (
-							<option key={item.id} value={item.id}> {item.descr} </option>
+						techOption.map(item => (
+							<option key={item.id} value={item.id}> {item.nombre} </option>
 						))
 					}
 				</select>
@@ -684,7 +713,7 @@ export const FormAddRelease = () => {
 						name='display'
 						value={display}
 						onChange={handleInputChange}
-						required='true'
+						required={true}
 					>
 						<option value='Si' > Si </option>
 						<option value='No' > No </option>
@@ -693,7 +722,7 @@ export const FormAddRelease = () => {
 			</div>
 			<button
 				className="btn2 btn-primary btn-large btn-block"
-				onClick={handleSubmit}
+				onClick={publication ? handleUpdatePublication : handleSubmit}
 			>
 				{publication ? 'Guardar cambios' : 'Agregar'}
 			</button>

@@ -1,8 +1,8 @@
 import { useState } from "react"
 
 
-export const useForm = (initialState = {}) => {
-	const [values, setValues] = useState(initialState);
+export const useForm = (initialState = {}, publication) => {
+	const [values, setValues] = useState(publication || initialState);
 	const reset = () => {
 		setValues(initialState);
 	}
@@ -11,7 +11,7 @@ export const useForm = (initialState = {}) => {
 	const handleInputChange = ({ target }) => {
 		setValues({
 			...values,
-			[target.name]: target.value
+			[target.name]: target.hasOwnProperty['files'] ? target.files[0] : target.value
 		});
 
 	}

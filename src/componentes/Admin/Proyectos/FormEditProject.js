@@ -78,7 +78,7 @@ export const FormEditProject = ({ history }) => {
 	//envio a la api
 	const handleSubmit = () => {
 		//e.preventDefault();
-		if (datos != "") {
+		if (datos !== "") {
 			formValues.urlImg = datos;
 		}
 		const selectedAuthor = []

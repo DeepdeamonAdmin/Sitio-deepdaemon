@@ -1,12 +1,15 @@
 import React from 'react'
+import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { startNewTesis } from '../../../src/actions/tesis';
 import { useForm } from '../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
 import { ModalGalleryAddTesis } from '../../../src/componentes/users/ModalGalleryAddTesis';
 import { FotosGalleryChoose } from '../ui/FotosGalleryChoose';
+import { db } from '../../firebase/firebase-config'
+import { collection, getDocs } from 'firebase/firestore';
 export const FormAddTesis = () => {
 
 
@@ -24,14 +27,40 @@ export const FormAddTesis = () => {
 		estado: 'indevelop',
 		display: 'Yes',
 		url: '',
-		publisher: dN
+		publisher: dN,
+		autores: ''
 	});
 
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, autores } = formValues;
 
 	
 	const navigate = useNavigate();
+
+	//Traemos la información de los usuarios de firebase
+	const { usuarios } = useSelector(state => state.user);
+	//Checkbox autores
+	const options = []
+	
+	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
+		options.push({ value: u.id, label: u.nombre })
+	))
+
+	const [state, setState] = useState({
+		selectedOption: null
+	})
+
+	const handleChange = selectedOption => {
+		setState({ selectedOption });
+	}
+
 	const handleEnvTesis = () => {
+		const selectedAuthor = [];
+		if(state.selectedOption != null) {
+			state.selectedOption.map(u => (
+				selectedAuthor.push({idAutor: u.value, nombreAutor: u.label})
+			))
+		}
+		formValues.autores = selectedAuthor;
 		formValues.urlImg = datos;
 		dispatch(startNewTesis(formValues));
 		reset();
@@ -43,9 +72,22 @@ export const FormAddTesis = () => {
 	const MgAFAP = (datosMg) => {
 	 	setDatos(datosMg);
 	}
-	// const handleFileChange = (e) => {
-	// 	console.log(e.target.value)
-	// }
+	
+	//tech
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
 
 	return (
 		<div className="container">
@@ -81,14 +123,20 @@ export const FormAddTesis = () => {
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label> Tech </label>
-					<input
+					<select
 						className="form-control"
-						type='text'
 						name='nameTech'
-						placeholder='Nombre Tecnología'
 						value={nameTech}
 						onChange={handleInputChange}
-					/>
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{
+							techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+
+						}
+					</select>
 				</div>
 				<div className="col mb-3">
 					<label>Status </label>
@@ -117,7 +165,7 @@ export const FormAddTesis = () => {
 					/>
 				</div>
 				<div className="col mb-3">
-					<label> Results </label>
+					<label> Resultados </label>
 					<textarea
 						className="form-control"
 						rows='6'
@@ -125,6 +173,21 @@ export const FormAddTesis = () => {
 						placeholder='Resultados'
 						value={results}
 						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+
+			<div className="form-group row">
+				<div className="col mb-3">
+					<label>Agregar autores</label>
+					<Select
+						isMulti
+						name="usuarios"
+						options={options}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={state.selectedOption}
+						onChange={handleChange}
 					/>
 				</div>
 			</div>
