@@ -119,6 +119,20 @@
     height: 100%;
     border-radius: 5%;
   }
+  .imageleader2{
+    margin-left: 10%;
+    width: 85%;
+    height: 80%;
+    border-radius: 5%;
+  }
+
+  .imagealum{
+    margin-left: 10%;
+    width: 95%;
+    height: 90%;
+    border-radius: 5%;
+    max-height: 90%;
+  }
 
   .modal-leader{
     width: 50%;
@@ -148,7 +162,7 @@
   .sections{
     background-color: #e0e0e0;
     border-radius: 8px;
-    width: 100%;
+    width: auto;
     height: auto;
     padding: 50px;
   }

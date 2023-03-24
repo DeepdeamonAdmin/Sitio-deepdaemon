@@ -4,20 +4,16 @@ import { useSelector } from 'react-redux';
 import PublicacionesCard from './PublicacionesCard';
 
 const PublicacionesList = () => {
+    //const auth = getAuth();
+    //const dN = auth.currentUser.displayName;
 
-    const auth = getAuth();
-    const dN = auth.currentUser.displayName;
-
-    const { publicaciones } = useSelector(state => state.publications);
-    console.log(publicaciones)
-
-    
+    const  publications  = useSelector(state => state.publications);
+    //console.log(publications);
     return (
         <>
-        
-            <div className="card-columns animate__animated animate__fadeIn">
+            <div className="card-columns animate__animated animate__fadeIn px-5">
                 {
-                    publicaciones.map(item => (
+                   publications.publications.map( item=> (
                         <PublicacionesCard
                             key={item.id}
                             {...item}

@@ -23,49 +23,49 @@ export const AlumnoCard = (item) => {
 
 
 	return (
-		<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
+		<div className="card ms-3 mt-2" style={{ maxWidth: 540, height: 230 }}>
 			<div className="row no-gutters">
 				{/* <ModalEditarAlumno item={item.nombre} /> */}
-				<div className="col-md-4">
+				<div className="col-md-4 mt-2 ml-2 d-flex align-items-stretch" >
 					<img src={item.urlImg} 
-						className="card-img" 
-						alt="..."  
+						className="imagealum d-inline-flex p-2" 
+						alt="..."
 						style={{
-							height: "200px",
-							width: '200px'
-						}}
+							marginLeft : '10%',
+							with : '95%',
+							height : '90%',
+							borderRadius : "5%"
+						}}  
 					/>
 				</div>
-				<div className="col-md-5">
-					<div className="card-body">
-						<h5 className="card-title"> {item.nombre} </h5>
+				<div className="col-sm-4 d-flex flex-column">
+					<div className="card-body p-1">
+						<h5 className="card-title ml-2 mt-2"> {item.nombre} </h5>
 						<p className="card-text"> {item.email} </p>
 					</div>
 				</div>
-				<div className="col-md-1">
-					<p>
+				<div className="col-sm-3 d-flex flex-column ml-1">
+					
 
 						{/* <button className="btn btn-primary" onClick={() => dispatch(uiOpenModalEdit())}>
 							Editar
 						</button> */}
 
-						<Link to={`editar/${item.id}`} className="btn btn-primary">
+						<Link to={`editar/${item.id}`} className="btn btn-primary btn-sm p-2">
 							Editar
 						</Link>
-					</p>
+					
 
-					<p>
+					
 						<button
 							type="button"
-							className="btn btn-success btn-sm"
+							className="btn btn-success btn-sm p-2"
 							onClick={handleDelete}>Eliminar</button>
-					</p>
-					<p>
+					
 						<button
 							type="button"
-							className="btn btn-secondary btn-sm"
+							className="btn btn-secondary btn-sm p-2"
 						>Proyectos</button>
-					</p>
 				</div>
 
 			</div>

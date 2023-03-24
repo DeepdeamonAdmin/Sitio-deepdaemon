@@ -21,13 +21,13 @@ export const LiderCard = (item) => {
         Swal.fire('Usuario eliminado', 'Éxito');
 	}
 	return (
-		<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
+		<div className="card ms-3" style={{ maxWidth: 540, height: 250  }}>
 			<div className="row no-gutters">
-				<div className="col-md-4">
+				<div className="col-md-4 d-flex align-items-stretch">
 					<img
 						src={item.urlImg}
 						alt="member"
-						className="card-img"
+						className="imageleader2"
 					/>
 				</div>
 				<div className="col-md-5">

@@ -42,7 +42,7 @@ export const General = ({ id }) => {
   //Usar useEffect
   useEffect(() => {
     getAvisos();
-  }, []);
+  });
 
   return (
     <div className="">
@@ -68,7 +68,7 @@ export const General = ({ id }) => {
           </div>
         </Row>
       </div>
-      <div className="sections">
+      <div className="sections" style={{textAlign: "center"}}>
       <h1>ANUNCIOS</h1>
       <hr/>
       <Container>
@@ -77,7 +77,7 @@ export const General = ({ id }) => {
             <Carousel.Item key={aviso.id}>
               <Image
                 src={aviso.photo}
-                style={{ width: "100%", height: "800px" }}
+                style={{ width: "800px", height: "500px"}}
               />
               <Carousel.Caption>
                 <h3>{aviso.name}</h3>
