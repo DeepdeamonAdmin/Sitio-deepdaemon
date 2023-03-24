@@ -79,7 +79,7 @@ export const FormAddTesis = () => {
 		const selectedAuthor = []
 		if (state.selectedOption != null) {
 			state.selectedOption.map((u) => (
-				selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+				selectedAuthor.push(u.label)
 			))
 		}
 

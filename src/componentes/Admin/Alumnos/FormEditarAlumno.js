@@ -11,10 +11,9 @@ import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
 import { startLoadinUsersAll, startUploading } from '../../../actions/user';
 import Form from 'react-bootstrap/Form';
-import { collection, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, updateDoc, doc, query, where, querySnapshot } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
-
 import { ModalFoto } from './ModalFoto';
 import { FotosGallery } from '../../ui/FotosGallery';
 
@@ -34,10 +33,28 @@ export const FormEditarAlumno = (props) => {
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
 
-
 	useEffect(() => {
 		setOldPassword(alumno.password)
 	}, [usuarios]);
+
+	//proyectos donde el lider es autor
+	const [listProject, setListProject] = React.useState([])
+	React.useEffect(() => {
+		const obtenerProject = async () => {
+			try {
+				const projectRef = collection(db, "Proyectos");
+				const queryRef = query(projectRef, where("autores", "array-contains",
+					alumno.nombre));;
+				const q = await getDocs(queryRef)
+				const arrayData = q.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setListProject(arrayData)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerProject()
+	}, [])
+
 
 	const {
 		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display
@@ -154,7 +171,7 @@ export const FormEditarAlumno = (props) => {
 			</div>
 
 			<div className="row">
-				
+
 				<div className="col mb-3">
 					<label> Nombre* </label>
 					<input
@@ -218,7 +235,7 @@ export const FormEditarAlumno = (props) => {
 
 			</div>
 			<div className="row">
-				
+
 				<div className="col mb-3" style={{ display: 'none' }}>
 					<label> Contraseña* </label>
 					<input
@@ -285,7 +302,7 @@ export const FormEditarAlumno = (props) => {
 						<option value='work' > Work </option>
 					</select>
 				</div>
-				
+
 			</div>
 			<div className="row">
 				<div className="col mb-2">
@@ -329,14 +346,14 @@ export const FormEditarAlumno = (props) => {
 				</div>
 			</div>
 			{/* <div className="row"> */}
-				{/* {alumno.rol === 'other' && ( */}
-				
-				{/* // )} */}
+			{/* {alumno.rol === 'other' && ( */}
+
+			{/* // )} */}
 			{/* </div> */}
 			{/* <div className="row"> */}
-				{/* {alumno.rol === 'other' && ( */}
-				
-				{/* // )} */}
+			{/* {alumno.rol === 'other' && ( */}
+
+			{/* // )} */}
 			{/* </div> */}
 			{/* <div className="row">
 				
@@ -389,54 +406,29 @@ export const FormEditarAlumno = (props) => {
 					/>
 				</div>
 			</div>
-			
-			
+
+
 			<div className="row">
 				<div className="col-md-6 mb-5">
-					<label>Considerar para ser autor</label>
-					<select
-						className="form-control"
-						name='esAutor'
-						value={esAutor}
-						onChange={handleInputChange}
-					>
-						<option value='Y' > Si </option>
-						<option value='N' > No </option>
-					</select>
-				</div>
-				<div className="col mb-3">
-					<label> Mostrar en página principal </label>
-					<select
-						className="form-control"
-						name='display'
-						value={display}
-						onChange={handleInputChange}
-					>
-						<option value='Y'>Si</option>
-						<option value='N'>No</option>
-					</select>
-				</div>
-				<div className="col mb-3">
-					<Form.Check
-						type="checkbox"
-						id="ss"
-						label="ss"
-						checked={isChecked}
-						onChange={handleOnChange}
-					/>
+				<label> Proyectos </label>
+					<ul>
+						{listProject.map(item => (
+							<li>{item.name}</li>
+						))}
+					</ul>
 				</div>
 			</div>
 
 			<div class="text-center">
-			<button
-				className="btn btn-primary btn-large"
-				onClick={handleSave}
-			>
-				Guardar
-			</button>
+				<button
+					className="btn btn-primary btn-large"
+					onClick={handleSave}
+				>
+					Guardar
+				</button>
 			</div>
-			
-			
+
+
 		</div>
 	)
 }

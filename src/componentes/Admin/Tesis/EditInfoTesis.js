@@ -66,12 +66,12 @@ export const EditInfoTesis = () => {
 	//Checkbox autores
 	const selectedAuthor = []
 	autores.map((u) => (
-		selectedAuthor.push({ value: u.idAutor, label: u.nombreAutor })
+		selectedAuthor.push({ label: u, value: u})
 	))
 
 	const options = []
 	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
-		options.push({ value: u.id, label: u.nombre })
+		options.push({ value: u.id, label: u.nombre})
 	))
 
 	const [state, setState] = useState({
@@ -90,7 +90,7 @@ export const EditInfoTesis = () => {
 		}
 		const selectedAuthor = []
 		state.selectedOption.map((u) => (
-			selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+			selectedAuthor.push(u.label)
 		))
 		formValues.autores = selectedAuthor;
 		dispatch(editTesis(idTesis, formValues));

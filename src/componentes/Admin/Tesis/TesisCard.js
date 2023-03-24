@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 //import { startNewTesis } from '../../../src/actions/tesis';
-import { deleteTesisUser} from '../../../../src/actions/delete';
+import { deleteTesisUser } from '../../../../src/actions/delete';
 //import { deleteProject } from '../../../actions/delete';
 //import { collection, getDocs, where, get, query } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
@@ -30,14 +30,14 @@ const TesisCardUser = (item) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Continuar'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 console.log(item.id)
-                dispatch( deleteTesisUser(item) );    
-                dispatch(startLoadingTesis())            
+                dispatch(deleteTesisUser(item));
+                dispatch(startLoadingTesis())
                 //navigate('/admin/tesis');
             }
-          })
+        })
     }
 
     return (
@@ -58,21 +58,12 @@ const TesisCardUser = (item) => {
                     </div>
                 </div>
                 <div className="col-md-1">
-                <p>
-                        <Link 
-                            to={ `/admin/tesis/${item.id }/${item}` }
-                            className ="btn btn-primary btn-sm">
-                                Edit
-                        </Link>
-                    </p>
-                    
                     <p>
-                        <button 
-                            type="button" 
-                            className="btn btn-success btn-sm"
-                            onClick={ handleDelete }
-                            >
-                                Delete</button>
+                        <Link
+                            to={`/admin/tesis/${item.id}/${item}`}
+                            className="btn btn-primary btn-sm">
+                            Edit
+                        </Link>
                     </p>
                 </div>
 

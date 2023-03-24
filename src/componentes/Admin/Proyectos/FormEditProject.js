@@ -58,7 +58,7 @@ export const FormEditProject = ({ history }) => {
 	//Checkbox autores
 	const selectedAuthor = []
 	autores.map((u) => (
-		selectedAuthor.push({ value: u.idAutor, label: u.nombreAutor })
+		selectedAuthor.push({ value: u, label: u })
 	))
 
 	const options = []
@@ -83,7 +83,7 @@ export const FormEditProject = ({ history }) => {
 		}
 		const selectedAuthor = []
 		state.selectedOption.map((u) => (
-			selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+			selectedAuthor.push( u.label)
 		))
 		formValues.autores = selectedAuthor;
 		dispatch(editProject(idProject, formValues));

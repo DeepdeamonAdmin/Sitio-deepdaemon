@@ -65,7 +65,7 @@ export const FormAddProject = () => {
 	//Select autores
 	const optionsAutores = []
 	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
-		optionsAutores.push({ value: u.id, label: u.nombre })
+		optionsAutores.push({ value: u.id, label: u.nombre})
 	))
 
 	const [state, setState] = useState({
@@ -81,7 +81,7 @@ export const FormAddProject = () => {
 		const selectedAuthor = []
 		if (state.selectedOption != null) {
 			state.selectedOption.map((u) => (
-				selectedAuthor.push({ idAutor: u.value, nombreAutor: u.label })
+				selectedAuthor.push( u.label)
 			))
 		}
 		formValues.autores = selectedAuthor;

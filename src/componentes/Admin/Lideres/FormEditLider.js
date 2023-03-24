@@ -7,9 +7,11 @@ import { useGet } from '../../../hooks/useGet';
 import { getCareer } from '../../../selectors/get/getCareer';
 import { getSchool } from '../../../selectors/get/getSchool';
 import fotoPerfil from '../../../assets/Usuario.jpg'
-import { editUser, startEditingPicture } from '../../../actions/edit';
+import { editUser, startEditingPicture, getProjectsAutor } from '../../../actions/edit';
 import Swal from 'sweetalert2';
 import { startUploading } from '../../../actions/user';
+import { db } from '../../../firebase/firebase-config'
+
 
 export default function FormEditLider() {
 
@@ -24,10 +26,37 @@ export default function FormEditLider() {
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
 
+
 	useEffect(() => {
 		setOldPassword(lider.password)
 	}, [usuarios]);
 
+	//proyectos donde el lider es autor
+	// const [listProject, setListProject] = React.useState([])
+	// React.useEffect(() => {
+	// 	const obtenerProject = async () => {
+	// 		try {
+	// 			//const Data = await getDocs(collection(db, "Proyectos"));
+
+	// 			// Create a reference to the projects collection
+	// 			const projectRef = db.collection('Proyectos');
+
+	// 			// Create a query against the collection
+	// 			const queryRef = projectRef.where('autores', 'array-contains',
+	// 				lider.nombre).get();
+	// 			console.log(queryRef)
+	// 			const arrayData = queryRef.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+	// 			setListProject(arrayData)
+
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 		}
+	// 	}
+	// 	obtenerProject()
+	// }, [])
+	// listProject.map((u) => (
+	// 	console.log(u)
+	// ))
 	const {
 		Github,
 		descripcion,
@@ -44,7 +73,10 @@ export default function FormEditLider() {
 
 	const handleSave = (e) => {
 		e.preventDefault();
-		if (password == password2) dispatch(editUser(formValues, oldPassword));
+		if (password == password2) {
+			dispatch(editUser(formValues, oldPassword));
+			//dispatch(getProjectsAutor(lider.nombre));
+		}
 		else Swal.fire('Contraseñas no corresponden')
 	}
 	//Traemos la informacion de Career

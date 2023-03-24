@@ -65,15 +65,6 @@ const TesisCardUser = (item) => {
                                 Edit
                         </Link>
                     </p>
-                    
-                    <p>
-                        <button 
-                            type="button" 
-                            className="btn btn-success btn-sm"
-                            onClick={ handleDelete }
-                            >
-                                Delete</button>
-                    </p>
                 </div>
 
             </div>
