@@ -12,8 +12,6 @@ import {getAuth,} from 'firebase/auth';
 
 export const TesisScreen = ({ status1, status2}) => {
 
-	//const { projectsAll } = useSelector(state => state.projects);
-	//console.log(projectsAll)
 	const dispatch = useDispatch();
 	const [currentModal, setCurrentModal] = useState(null);
 	const [showInf, setShowInfo] = useState(false);
