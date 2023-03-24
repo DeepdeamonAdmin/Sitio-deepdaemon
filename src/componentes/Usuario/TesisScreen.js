@@ -38,7 +38,7 @@ export const TesisScreen = ({ status1, status2}) => {
 	console.log(projects)
 	return (
 		<div className="cards-cols animate__animated animate__fadeIn">
-			{projects.length === 0 && <p>No se encontraron proyectos por el momento.</p>}
+			{projects.length === 0 && <p>No se encontraron tesis por el momento.</p>}
 			{
 				projects.map(project => (
 					//imprimir solamente si el estado es igual al seleccionado
@@ -51,8 +51,8 @@ export const TesisScreen = ({ status1, status2}) => {
 								style={{
 									objectFit: 'cover',
 									objectPosition: 'center',
-									height: "80px",
-									width: '80px'
+									height: "110px",
+									width: '110px'
 								}}
 								alt="member"
 							/>

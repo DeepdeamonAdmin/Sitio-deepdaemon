@@ -49,7 +49,7 @@ export const LeaderDetaills = ({leader, color}) => {/*la variable leader nos per
             nested
         >
             {close => (
-            <div className="modal modal-leader">
+            <div className="modal-leader">
                 
                 <div className="modalheader bg-primary"> {leader.nombre} </div>
                 <div className="modalcontent">

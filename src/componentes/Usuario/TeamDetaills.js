@@ -35,7 +35,7 @@ export const TeamDetaills = ({usuario }) => {
             nested
         >
             {close => (
-            <div className="modal modal-team">
+            <div className="modal-team">
                 
                 <div className="modalheader bg-primary"> {usuarioF.nombre} </div>
                 <div className="modalcontent">

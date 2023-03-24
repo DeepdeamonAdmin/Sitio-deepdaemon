@@ -71,7 +71,7 @@ export const NavBarUser = () => {
         </ul>
         <ul>
           <button 
-            className='btn btn-ouline-primary nav-item nav-link'
+             className="btn btn-outline-secondary nav-item btnLogout"
             onClick={ handleLogout }>
               Logout
           </button>

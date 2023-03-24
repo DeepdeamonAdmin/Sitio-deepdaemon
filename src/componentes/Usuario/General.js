@@ -78,7 +78,7 @@ export const General = ({ id }) => {
             <Carousel.Item key={aviso.id}>
               <Image
                 src={aviso.photo}
-                style={{ width: "100%", height: "800px" }}
+                style={{ width: "100%", height: "900px" }}
               />
               <Carousel.Caption>
                 <h3>{aviso.name}</h3>
@@ -149,7 +149,7 @@ export const General = ({ id }) => {
           <hr />
           <p>
             Por eso creamos un grupo de investigación que tiene como objetivo
-            usar la inteligencia artificial para resolver problemas de la
+            usar la inteligencia artificial <br></br> para resolver problemas de la
             industria.
           </p>
         </Container>
