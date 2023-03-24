@@ -18,39 +18,43 @@ export const TeamScreen = ({ status }) => {
 
 	return (
 		<>
-
 			<div className="container card-columns">
-				{
-					usuarios.map(usuario => (
-						//Imprimir solamente los usuarios del grado que selecciono
-						(usuario.grado === status && usuario.display === "Y") && (
-							<div className="row mb-4">
-								<div className='col'>
-									<img
-										className="img-fluid"
-										src={usuario.urlImg}
-										alt="member"
-										style={{
-											width:"200px",
-											height: "300px",
-											objectFit: "cover"
-										}}
-									/>
-								</div>
-
-								<div className="col">
-									<h5 className="card-title"> {usuario.nombre} </h5>
-
-									{/*!user? <ModalCrearCuenta />: <TeamDetaills usuario={usuario} />*/}
-									{!user&&<ModalCrearCuenta />}
-									{/*<ModalInfoUser usuario={usuario}/>*/}
-									<VerMas usuario={usuario}/>
+				<div className="row">
+					{usuarios.map((usuario) => (
+					// Imprimir solamente los usuarios del grado que seleccionó
+					usuario.grado === status &&
+					usuario.display === "Y" && (
+						<div key={usuario.id} className="col-md-12 mb-3">
+						<div>
+							<div className="card">
+								<div className="card-body row align-items-center">
+									<div className="col-md-3">
+										<img
+											className="img-fluid"
+											src={usuario.urlImg}
+											alt="member"
+											style={{
+												width:"100px",
+												height: "110px",
+												objectFit: "cover"
+											}}
+										/>
+									</div>
+									<div className="col-md-6">
+										<h5 className="card-title">{usuario.nombre}</h5>
+									</div>
+									<div className="col-md-3 text-right">
+										{!user && <ModalCrearCuenta />}
+										<VerMas usuario={usuario} />
+									</div>
 								</div>
 							</div>
-						)
-					))
-				}
+						</div>
+						</div>
+					)
+					))}
+				</div>
 			</div>
 		</>
-	)
+	);	
 }

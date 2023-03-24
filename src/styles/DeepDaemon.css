@@ -79,6 +79,47 @@
     width: 100%;
   }
   
+  .team_title{
+    color: white;
+  }
+
+  /*Boton Logout*/
+  .btnLogout{
+    color: rgb(79, 79, 240);
+    height: 40px;
+    margin-left: -20px;
+    margin-top: 30px;
+  }
+
+  .team_sectionBg {
+    background-image: url("./assets/img/bg/fdSections.jpg");
+    background-position: top center;
+    min-height: 300px;
+    align-items: stretch;
+    display: flex;
+  }
+
+  .separator{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
+    background-color: #012e4d;
+    color: white;
+    border-radius: 8px;
+  }
+
+  .sections{
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    padding: 50px;
+  }
+
+  .team_separator {
+    background-image: url("./assets/img/bg/todos_2018_bg.jpg");
+    background-position: top center;
+    min-height: 300px;
+    align-items: stretch;
+    display: flex;
+  }
+  
   .section {
     padding: 50px;
     display: flex;
@@ -96,21 +137,15 @@
   .section h1 {
     text-transform: uppercase;
   }
-  
+
   .academy {
-    /*background-image: url("./assets/img/bg/academy_bg.jpg");*/
+    background-image: url("./assets/img/bg/text_bg.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-color: #012e4d;
     min-height: 300px;
     align-items: stretch;
     display: flex;
-  }
-
-  .separator{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
-    background-color: #012e4d;
-    color: white;
-    border-radius: 8px;
   }
 
   .imageleader{
@@ -120,12 +155,18 @@
     border-radius: 5%;
   }
 
-  .modal-leader{
-    width: 50%;
-    height: 50%;
-    margin-left: 25%;
+  .modal-leader{ /*Modal que muestra detalles de los lideres*/
+    width: 100%;
+    height: 80%;
     margin-right: 25%;
-    margin-top: 8%;
+    border-radius: 5px;
+  }
+
+  .modal-team{ /*Modal que muestra detalles de los usuarios, equipo*/
+    width: 100%;
+    height: 80%;
+    margin-right: 25%;
+    border-radius: 5px;
   }
   
   .modalheader {
@@ -143,22 +184,6 @@
     width: 100%;
     text-align: center;
     margin-left: 40%;
-  }
-  
-  .sections{
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    width: 100%;
-    height: auto;
-    padding: 50px;
-  }
-
-  .team_separator {
-    background-image: url("./assets/img/bg/todos_2018_bg.jpg");
-    background-position: top center;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
   }
   
   .section .icon {

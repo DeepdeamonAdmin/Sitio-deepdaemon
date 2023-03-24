@@ -27,6 +27,9 @@ export const PublicationScreen = ({type}) => {
 		getPublications()
 	}, [])
 	//console.log(publications)
+	if (publications.length === 0) {
+		return <p>No hay publicaciones disponibles por el momento.</p>;
+	}
 	return (
 		<div className="card-columns cards-cols animate__animated animate__fadeIn">
 			{
