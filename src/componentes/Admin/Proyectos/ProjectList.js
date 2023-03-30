@@ -21,7 +21,7 @@ const ProjectList = () => {
         <>
             {/* { loading && <p className="animate__animated animate__flash">Loading</p> } */}
         
-            <div className="card-columns animate__animated animate__fadeIn">
+            <div>
                 {
                     projects.map(item => (
                         <ProjectCard
