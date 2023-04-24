@@ -66,7 +66,7 @@ export const EditInfoTesis = () => {
 	//Checkbox autores
 	const selectedAuthor = []
 	autores.map((u) => (
-		selectedAuthor.push({ label: u, value: u})
+		selectedAuthor.push({ value: u, label: u})
 	))
 
 	const options = []

@@ -30,7 +30,6 @@ export const General = ({ id }) => {
   //Función para obtener todos los avisos
   const getAvisos = async () => {
     const datos = await getDocs(avisosCollection);
-    //console.log(datos.docs)
     setAvisos(
       datos.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
@@ -42,7 +41,7 @@ export const General = ({ id }) => {
   //Usar useEffect
   useEffect(() => {
     getAvisos();
-  });
+  }, []);
 
   return (
     <div className="">

@@ -33,7 +33,7 @@ export const ProjectScreen = ({ status1, status2}) => {
 		}
 		getProjects()
 	}, [])
-	console.log(projects)
+
 	return (
 		<div className="cards-cols animate__animated animate__fadeIn">
 			{projects.length === 0 && <p>No se encontraron proyectos por el momento.</p>}

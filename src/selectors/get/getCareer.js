@@ -8,21 +8,3 @@ export const getCareer = async() => {
 
 return data;   
 }
-
-/*const [escuela, listEscuela] = React.useState([])
-React.useEffect(() => {
-    const obtenerDatos = async () => {
-        try {
-            const Data = await getDocs(collection(db, "Escuela"));
-            const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-            listEscuela(arrayData)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    obtenerDatos()
-}, [])
-
-export{
-    escuela
-}*/

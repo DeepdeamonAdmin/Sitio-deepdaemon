@@ -30,7 +30,7 @@ export default function AvisosList() {
 	//Usar useEffect
 	useEffect(() => {
 		getAvisos()
-	})
+	}, [])
 
 	return (
 		<>
