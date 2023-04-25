@@ -21,8 +21,6 @@ export const Login = ({ history }) => {
 	const { loading } = useSelector( state => state.ui );
 
 	const { msgError } = useSelector( state => state.ui );
-
-	
 	
 	const [ formValues, handleInputChange ] = useForm({
 		email: '',

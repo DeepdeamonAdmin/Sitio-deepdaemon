@@ -46,7 +46,7 @@ export const FormEditProject = ({ history }) => {
 
 	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(project)
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, autores } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, colaboradoresLista } = formValues;
 
 	//Galeria
 	const [datos, setDatos] = useState('');
@@ -55,10 +55,12 @@ export const FormEditProject = ({ history }) => {
 		setDatos(datosMg);
 	}
 
-	//Checkbox autores
-	const selectedAuthor = []
-	autores.map((u) => (
-		selectedAuthor.push({ value: u, label: u })
+	const selectedDirectores = [];
+	const selectedColaboradores = [];
+
+	//Checkbox directores
+	directoresLista.map((u) => (
+		selectedDirectores.push({ value: u, label: u })
 	))
 
 	const options = []
@@ -66,26 +68,47 @@ export const FormEditProject = ({ history }) => {
 		options.push({ value: u.id, label: u.nombre })
 	))
 
-	const [state, setState] = useState({
-		selectedOption: selectedAuthor
+	const [directores, setDirectores] = useState({
+		selectedOption: selectedDirectores
 	})
 
-	const handleChange = selectedOption => {
-		setState({ selectedOption });
-		console.log(selectedOption)
+	const handleChangeDirectores = selectedOption => {
+		setDirectores({ selectedOption });
 	}
+	//Checkbox alumnos
+	colaboradoresLista.map((u) => (
+		selectedColaboradores.push({ value: u, label: u })
+	))
 
+	const [colaboradores, setColaboradores] = useState({
+		selectedOption: selectedColaboradores
+	})
+
+	const handleChangeColaboradores = selectedOption => {
+		setColaboradores({ selectedOption });
+	}
 	//envio a la api
 	const handleSubmit = () => {
 		//e.preventDefault();
 		if (datos !== "") {
 			formValues.urlImg = datos;
 		}
-		const selectedAuthor = []
-		state.selectedOption.map((u) => (
-			selectedAuthor.push( u.label)
-		))
-		formValues.autores = selectedAuthor;
+		const selectedDirectores = [];
+		const selectedColaboradores = [];
+		if (directores.selectedOption != null) {
+			directores.selectedOption.map((u) => (
+				selectedDirectores.push(u.label)
+			))
+		}
+		if (colaboradores.selectedOption != null) {
+			colaboradores.selectedOption.map((u) => (
+				selectedColaboradores.push(u.label)
+			))
+		}
+
+		formValues.directoresLista = selectedDirectores;
+		formValues.colaboradoresLista = selectedColaboradores;
+		formValues.urlImg = datos;
 		dispatch(editProject(idProject, formValues));
 	}
 
@@ -178,26 +201,27 @@ export const FormEditProject = ({ history }) => {
 
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label>Agregar autores</label>
+					<label>Agregar Directores</label>
 					<Select
 						isMulti
-						name="usuarios"
+						name="directores"
 						options={options}
 						className="basic-multi-select"
 						classNamePrefix="select"
-						value={state.selectedOption}
-						onChange={handleChange}
+						value={directores.selectedOption}
+						onChange={handleChangeDirectores}
 					/>
 				</div>
 				<div className="col mb-3">
-					<label>Liga del video</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL'
-						value={url}
-						onChange={handleInputChange}
+					<label>Agregar colaboradores</label>
+					<Select
+						isMulti
+						name="colaboradores"
+						options={options}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={colaboradores.selectedOption}
+						onChange={handleChangeColaboradores}
 					/>
 				</div>
 			</div>
@@ -211,7 +235,6 @@ export const FormEditProject = ({ history }) => {
 					</div>
 				</div>
 
-				
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -225,6 +248,17 @@ export const FormEditProject = ({ history }) => {
 					</select>
 				</div>
 
+				<div className="col mb-3">
+					<label>Liga del video</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL'
+						value={url}
+						onChange={handleInputChange}
+					/>
+				</div>
 			</div>
 
 			<div class="text-center">

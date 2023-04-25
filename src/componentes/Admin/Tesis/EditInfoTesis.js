@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -9,18 +10,11 @@ import { getAuth } from 'firebase/auth';
 import { useState } from 'react';
 import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
-import { editTesis } from '../../../actions/edit';
+import { editTesisGrado, editTesisPosgrado } from '../../../actions/edit';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
 export const EditInfoTesis = () => {
-
-	/*
-	const { projects } = useSelector( state => state.projects );
-	const { idProject } = useParams();
-	const dataProject = projects.filter(project=> project.id === idProject);*/
-	//const auth = getAuth();
-	//const dN = auth.currentUser.displayName;
 
 	//Traemos la información de los usuarios de firebase
 	const { usuarios } = useSelector(state => state.user);
@@ -51,10 +45,19 @@ export const EditInfoTesis = () => {
 		obtenerTech()
 	}, [])
 
+	const alumnosListaInitAux = [];
+	var alumnoAux = "";
+	if (tesisObj.grado == "Licenciatura") {
+		for (let i = 0; i < tesisObj.alumnosLista.length; i++) {
+			alumnosListaInitAux.push(tesisObj.alumnosLista[i]);
+		}
+	} else {
+		alumnoAux = tesisObj.alumnosLista;
+	}
 
 	//se muestra la informacion en el formulario
 	const [formValues, handleInputChange] = useForm(tesisObj)
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, autores } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, alumnosLista, grado, alumnosListaInit } = formValues;
 
 	//Galeria
 	const [datos, setDatos] = useState('');
@@ -63,37 +66,92 @@ export const EditInfoTesis = () => {
 		setDatos(datosMg);
 	}
 
-	//Checkbox autores
-	const selectedAuthor = []
-	autores.map((u) => (
-		selectedAuthor.push({ value: u, label: u})
+
+	const selectedDirectores = [];
+	const selectedAlumnos = [];
+
+	//Checkbox directores
+	directoresLista.map((u) => (
+		selectedDirectores.push({ value: u, label: u })
 	))
 
 	const options = []
 	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
-		options.push({ value: u.id, label: u.nombre})
+		options.push({ value: u.id, label: u.nombre })
 	))
 
-	const [state, setState] = useState({
-		selectedOption: selectedAuthor
+	const [directores, setDirectores] = useState({
+		selectedOption: selectedDirectores
 	})
 
-	const handleChange = selectedOption => {
-		setState({ selectedOption });
-		console.log(selectedOption)
+	const handleChangeDirectores = selectedOption => {
+		setDirectores({ selectedOption });
 	}
+	//Checkbox alumnos
+	if (formValues.grado == "Licenciatura") {
+		alumnosLista.map((u) => (
+			selectedAlumnos.push({ value: u, label: u })
+		))
+	} else {
+		selectedAlumnos.push({ value: alumnosLista, label: alumnosLista })
+	}
+
+
+	const [alumnos, setAlumnos] = useState({
+		selectedOption: selectedAlumnos
+	})
+
+	const handleChangeAlumnos = selectedOption => {
+		setAlumnos({ selectedOption });
+	}
+
 
 	//envio a la api
 	const handleSubmit = () => {
 		if (datos != "") {
 			formValues.urlImg = datos;
 		}
-		const selectedAuthor = []
-		state.selectedOption.map((u) => (
-			selectedAuthor.push(u.label)
-		))
-		formValues.autores = selectedAuthor;
-		dispatch(editTesis(idTesis, formValues));
+		const selectedDirectores = [];
+		const selectedAlumnos = [];
+		if (directores.selectedOption != null && alumnos.selectedOption != null) {
+
+			if (directores.selectedOption.length <= 2) {
+				if (directores.selectedOption != null) {
+					directores.selectedOption.map((u) => (
+						selectedDirectores.push(u.label)
+					))
+				}
+				if (formValues.grado == "Licenciatura") {
+					console.log("entrando a editar cuando es grado");
+					if (alumnos.selectedOption.length <= 4) {
+						if (alumnos.selectedOption != null) {
+							alumnos.selectedOption.map((u) => (
+								selectedAlumnos.push(u.label)
+							))
+						}
+						formValues.directoresLista = selectedDirectores;
+						formValues.alumnosLista = selectedAlumnos;
+						formValues.urlImg = datos;
+						formValues.alumnosListaInit = alumnosListaInitAux;
+						dispatch(editTesisGrado(idTesis, formValues));
+					} else {
+						Swal.fire('Error al agregar tesis, sólo se admiten máximo 4 alumnos');
+					}
+				} else {
+					console.log("entrando a editar cuando es posgrado");
+					formValues.directoresLista = selectedDirectores;
+					formValues.alumnosLista = alumnos.selectedOption.label;
+					formValues.urlImg = datos;
+					formValues.alumnosListaInit = alumnoAux;
+					dispatch(editTesisPosgrado(idTesis, formValues));
+				}
+
+			} else {
+				Swal.fire('Error al agregar tesis, sólo se admiten máximo 2 Directores');
+			}
+		} else {
+			Swal.fire('Error al agregar tesis,', 'Debe tener al menos un director/asesor y un alumno agregado', 'error');
+		}
 	}
 	return (
 		<div className="container">
@@ -101,7 +159,9 @@ export const EditInfoTesis = () => {
 				<h2>Editar Tesis </h2>
 				<hr />
 			</div>
-
+			<div className="col mb-3">
+				<label> Grado: {formValues.grado} </label>
+			</div>
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label> Nombre del proyecto </label>
@@ -183,29 +243,60 @@ export const EditInfoTesis = () => {
 			</div>
 
 			<div className="form-group row">
-				<div className="col mb-3">
-					<label>Agregar autores</label>
-					<Select
-						isMulti
-						name="usuarios"
-						options={options}
-						className="basic-multi-select"
-						classNamePrefix="select"
-						value={state.selectedOption}
-						onChange={handleChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label>Liga del video</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL'
-						value={url}
-						onChange={handleInputChange}
-					/>
-				</div>
+				{grado === "Licenciatura" ? (
+					<div className="col mb-3">
+						<label>Agregar Directores</label>
+						<Select
+							isMulti
+							name="directores"
+							options={options}
+							className="basic-multi-select"
+							classNamePrefix="select"
+							value={directores.selectedOption}
+							onChange={handleChangeDirectores}
+						/>
+					</div>
+				) : (
+					<div className="col mb-3">
+						<label>Agregar asesores</label>
+						<Select
+							isMulti
+							name="directores"
+							options={options}
+							className="basic-multi-select"
+							classNamePrefix="select"
+							value={directores.selectedOption}
+							onChange={handleChangeDirectores}
+						/>
+					</div>
+				)}
+
+				{grado === "Licenciatura" ? (
+					<div className="col mb-3">
+						<label>Agregar alumnos</label>
+						<Select
+							isMulti
+							name="alumnos"
+							options={options}
+							className="basic-multi-select"
+							classNamePrefix="select"
+							value={alumnos.selectedOption}
+							onChange={handleChangeAlumnos}
+						/>
+					</div>
+				) : (
+					<div className="col mb-3">
+						<label>Agregar alumno</label>
+						<Select
+							name="alumno"
+							options={options}
+							className="basic-single"
+							classNamePrefix="select"
+							value={alumnos.selectedOption}
+							onChange={handleChangeAlumnos}
+						/>
+					</div>
+				)}
 			</div>
 
 			<div className="row mb-12">
@@ -218,7 +309,7 @@ export const EditInfoTesis = () => {
 					</div>
 				</div>
 
-				
+
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -230,6 +321,18 @@ export const EditInfoTesis = () => {
 						<option value='Si' > Si </option>
 						<option value='No' > No </option>
 					</select>
+				</div>
+
+				<div className="col mb-3">
+					<label>Liga del video</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL'
+						value={url}
+						onChange={handleInputChange}
+					/>
 				</div>
 
 			</div>

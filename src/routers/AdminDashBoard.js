@@ -6,7 +6,9 @@ import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { AlumnoScreen } from '../componentes/Admin/Alumnos/AlumnoScreen';
 import { ExternoScreen} from '../componentes/Admin/Externos/ExternoScreen'
 import { TesisScreen } from '../componentes/Admin/Tesis/TesisScreen';
-import { FormAddTesis } from '../componentes/Admin/Tesis/FormAddTesis';
+import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
+import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
+import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
 import { EditInfoTesis } from '../componentes/Admin/Tesis/EditInfoTesis';
 import { ReleaseScreen } from '../componentes/Admin/Publcaciones/ReleaseScreen';
 import { LiderScreen } from '../componentes/Admin/Lideres/LiderScreen';
@@ -43,7 +45,9 @@ export const AdminDashBoard = () => {
 					<Route path="alumnos/agregar" element={<FormAddAlumno />} />
 					<Route path="externos" element={<ExternoScreen />} />
 					<Route path="tesis" element={<TesisScreen />} />
-					<Route path='addTesis' element={ <FormAddTesis /> } />
+					<Route path='addTesisGrado' element={ <FormAddTesisGrado/> } />
+					<Route path='addTesisMaestria' element={ <FormAddTesisMaestria/> } />
+					<Route path='addTesisDoctorado' element={ <FormAddTesisDoctorado/> } />
 					<Route path='tesis/:idTesis/:params' element={ <EditInfoTesis /> } exact/>
 					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="externos/editar/:idAlumno" element={<FormEditarAlumno />} />

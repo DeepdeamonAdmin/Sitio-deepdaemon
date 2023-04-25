@@ -81,17 +81,8 @@ export const FormEditarAlumno = (props) => {
 		dispatch(startLoadinUsersAll())
 		//ir a admin/alumnos para ver los cambios
 		navigate(`/admin/alumnos`);
-
-
-		//if (password == password2) 
-		//	dispatch(editUser(formValues, oldPassword));
-		//else Swal.fire('Contraseñas no corresponden')
-
-		//dispatch(editUser(formValues, oldPassword));
 	}
 
-	//Traemos la informacion de School
-	//Traemos la informacion de Career
 	const [escuela, listEscuela] = React.useState([])
 	React.useEffect(() => {
 		const obtenerEscuela = async () => {
