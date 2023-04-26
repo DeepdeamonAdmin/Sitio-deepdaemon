@@ -67,7 +67,6 @@ export const General = ({ id }) => {
           </div>
         </Row>
       </div>
-      <div className="sections" style={{textAlign: "center"}}>
       <div className="embed-responsive">
       <div className="sections">
       <h1>ANUNCIOS</h1>
@@ -366,7 +365,6 @@ export const General = ({ id }) => {
         <hr />
         <footer>&copy; DeepDaemon 2019</footer>
       </Container>
-      </div>
       </div>
     </div>
   );
