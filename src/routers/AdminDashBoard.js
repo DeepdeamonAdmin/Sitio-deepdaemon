@@ -49,13 +49,14 @@ export const AdminDashBoard = () => {
 					<Route path='addTesisMaestria' element={ <FormAddTesisMaestria/> } />
 					<Route path='addTesisDoctorado' element={ <FormAddTesisDoctorado/> } />
 					<Route path='tesis/:idTesis/:params' element={ <EditInfoTesis /> } exact/>
-					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
+					<Route path="lideres/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="externos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					{/* TODO: Hay que hacer el formulario de editar publicación o reutilizarlo */}
 					<Route path="release/editPub/:idRelease" element={<FormAddRelease/>} />
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="lideres/agregar" element={<FormAddLider />} />
-					<Route path="lideres/editar/:idLider" element={<FormEditLider />} />
+					{/*Se reutilizó el formuladrio de editar alumno para el lider*/}
+					{/*<Route path="lideres/editar/:idLider" element={<FormEditLider />} />*/}
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
 					<Route path="avisos/agregar" element={<FormAddSign />} />
