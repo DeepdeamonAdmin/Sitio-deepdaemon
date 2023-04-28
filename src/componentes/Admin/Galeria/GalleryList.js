@@ -28,7 +28,7 @@ export default function GalleryList() {
 
 	useEffect(() => {
 		getGallery()
-	})
+	}, [])
 	return (
 		<>
 			{

@@ -4,18 +4,16 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import Form from 'react-bootstrap/Form'
-import { startNewProject } from '../../../../src/actions/projects';
-import { useForm } from '../../../../src/hooks/useForm';
+import { startNewTesisGrado } from '../../../actions/tesis';
+import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
-import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
+import { ModalGalleryAddTesis } from '../../users/ModalGalleryAddTesis';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useSelector } from 'react-redux';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
-export const FormAddProject = () => {
-
+export const FormAddTesisGrado = () => {
 
 	const dispatch = useDispatch();
 	const auth = getAuth();
@@ -38,9 +36,10 @@ export const FormAddProject = () => {
 		url: '',
 		publisher: dN,
 		directoresLista: '',
-		colaboradoresLista: '',
+		alumnosLista: '',
+		grado: 'Licenciatura'
 	});
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, colaboradoresLista } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, alumnosLista, grado } = formValues;
 
 	//Galeria
 	const [datos, setDatos] = useState('');
@@ -48,7 +47,7 @@ export const FormAddProject = () => {
 		setDatos(datosMg);
 	}
 
-	//tech infor firebase
+	//tech
 	const [techOption, setTech] = React.useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -78,45 +77,62 @@ export const FormAddProject = () => {
 		setDirectores({ selectedOption });
 	}
 	//Checkbox alumnos
-	const [colaboradores, setColaboradores] = useState({
+	const [alumnos, setAlumnos] = useState({
 		selectedOption: null
 	})
 
-	const handleChangeColaboradores = selectedOption => {
-		setColaboradores({ selectedOption });
+	const handleChangeAlumnos = selectedOption => {
+		setAlumnos({ selectedOption });
 	}
-	//envio a la api
-	const handleEnvProyect = () => {
 
+	//envio a la api
+	const handleEnvTesis = () => {
 		const selectedDirectores = [];
-		const selectedColaboradores = [];
-		if (directores.selectedOption != null) {
-			directores.selectedOption.map((u) => (
-				selectedDirectores.push(u.label)
-			))
+		const selectedAlumnos = [];
+		
+		if (directores.selectedOption != null && alumnos.selectedOption != null) {
+			if (directores.selectedOption.length <= 2) {
+				if (directores.selectedOption != null) {
+					directores.selectedOption.map((u) => (
+						selectedDirectores.push(u.label)
+					))
+				}
+				if (alumnos.selectedOption.length <= 4) {
+					if (alumnos.selectedOption != null) {
+						alumnos.selectedOption.map((u) => (
+							selectedAlumnos.push(u.label)
+						))
+					}
+					console.log(selectedDirectores);
+					console.log(selectedAlumnos);
+					formValues.directoresLista = selectedDirectores;
+					formValues.alumnosLista = selectedAlumnos;
+					formValues.urlImg = datos;
+					dispatch(startNewTesisGrado(formValues));
+					reset();
+					navigate('/admin/Tesis');
+				} else {
+					Swal.fire('Error al agregar tesis', 'Sólo se admiten máximo 4 alumnos', 'error');
+				}
+			} else {
+				Swal.fire('Error al agregar tesis', 'Sólo se admiten máximo 2 Directores', 'error');
+			}
+		}else{
+			Swal.fire('Error al agregar tesis,', 'Debe tener al menos un director y un alumno agregado', 'error');
 		}
-		if (colaboradores.selectedOption != null) {
-			colaboradores.selectedOption.map((u) => (
-				selectedColaboradores.push(u.label)
-			))
-		}
-		formValues.directoresLista = selectedDirectores;
-		formValues.colaboradoresLista = selectedColaboradores;
-		formValues.urlImg = datos;
-		dispatch(startNewProject(formValues));
-		reset();
-		navigate('/admin/projects');
+
 	}
 
 	return (
 		<div className="container">
 			<div className="app-title">
-				<h2>Agregar Proyecto </h2>
+				<h2>Agregar Tesis Licenciatura</h2>
 				<hr />
 			</div>
+
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label> Nombre del proyecto</label>
+					<label> Nombre del proyecto </label>
 					<input
 						className="form-control"
 						type='text'
@@ -126,7 +142,7 @@ export const FormAddProject = () => {
 					/>
 				</div>
 				<div className="col mb-3">
-					<label>Contacto</label>
+					<label> Contacto</label>
 					<input
 						className="form-control"
 						type='text'
@@ -145,7 +161,6 @@ export const FormAddProject = () => {
 						name='nameTech'
 						value={nameTech}
 						onChange={handleInputChange}
-
 					>
 						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
 						{
@@ -155,10 +170,10 @@ export const FormAddProject = () => {
 
 						}
 					</select>
-
 				</div>
+
 				<div className="col mb-3">
-					<label>Status del proyecto</label>
+					<label>Status del proyecto </label>
 					<select
 						className="form-control"
 						name='estado'
@@ -208,15 +223,15 @@ export const FormAddProject = () => {
 					/>
 				</div>
 				<div className="col mb-3">
-					<label>Agregar colaboradores</label>
+					<label>Agregar alumnos</label>
 					<Select
 						isMulti
-						name="colaboradores"
+						name="alumnos"
 						options={options}
 						className="basic-multi-select"
 						classNamePrefix="select"
-						value={colaboradores.selectedOption}
-						onChange={handleChangeColaboradores}
+						value={alumnos.selectedOption}
+						onChange={handleChangeAlumnos}
 					/>
 				</div>
 			</div>
@@ -226,7 +241,7 @@ export const FormAddProject = () => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>
@@ -250,24 +265,23 @@ export const FormAddProject = () => {
 						className="form-control"
 						type='text'
 						name='url'
-						placeholder='URL'
+						placeholder='URL de video'
 						value={url}
 						onChange={handleInputChange}
 					/>
 				</div>
+
 			</div>
 
 			<div class="text-center">
 				<button
 					className="btn btn-primary btn-large"
-					onClick={handleEnvProyect}
+					onClick={handleEnvTesis}
 				>
 					Agregar
 				</button>
 			</div>
 
-
 		</div>
 	)
 }
-

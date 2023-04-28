@@ -31,7 +31,8 @@ export const startNewProject = (formValues) => {
 				display: formValues.display,
 				url: formValues.url,
 				publisher: formValues.publisher,
-				autores: formValues.autores
+				directoresLista: formValues.directoresLista,
+				colaboradoresLista: formValues.colaboradoresLista
 			}
 
 			const docRef1 = await addDoc(collection(db, "Proyectos"), newProject);

@@ -1,18 +1,19 @@
 import React from 'react'
 import Select from 'react-select'
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { startNewTesis } from '../../../../src/actions/tesis';
+import { startNewTesisPosgrado } from '../../../actions/tesis';
 import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
-import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
+import { ModalGalleryAddTesis } from '../../users/ModalGalleryAddTesis';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useSelector } from 'react-redux';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
-export const FormAddTesis = () => {
+export const FormAddTesisDoctorado = () => {
 
 	const dispatch = useDispatch();
 	const auth = getAuth();
@@ -34,9 +35,11 @@ export const FormAddTesis = () => {
 		display: 'Yes',
 		url: '',
 		publisher: dN,
-		autores: ''
+		asesoresLista: '',
+		alumnosLista: '',
+		grado: 'Doctorado'
 	});
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, autores } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, asesoresLista, alumnosLista, grado } = formValues;
 
 	//Galeria
 	const [datos, setDatos] = useState('');
@@ -60,40 +63,58 @@ export const FormAddTesis = () => {
 		obtenerTech()
 	}, [])
 
-	//Checkbox autores
+	//Checkbox directores
 	const options = []
 	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
 		options.push({ value: u.id, label: u.nombre })
 	))
 
-	const [state, setState] = useState({
+	const [asesores, setAsesores] = useState({
 		selectedOption: null
 	})
 
-	const handleChange = selectedOption => {
-		setState({ selectedOption });
+	const handleChangeDirectores = selectedOption => {
+		setAsesores({ selectedOption });
+	}
+	//Checkbox alumnos
+	const [alumnos, setAlumnos] = useState({
+		selectedOption: null
+	})
+
+	const handleChangeAlumnos = selectedOption => {
+		setAlumnos({ selectedOption });
 	}
 
 	//envio a la api
 	const handleEnvTesis = () => {
-		const selectedAuthor = []
-		if (state.selectedOption != null) {
-			state.selectedOption.map((u) => (
-				selectedAuthor.push(u.label)
-			))
+		const selectedAsesores = [];
+		if (asesores.selectedOption != null && alumnos.selectedOption != null) {
+			if (asesores.selectedOption.length <= 2) {
+				if (asesores.selectedOption != null) {
+					asesores.selectedOption.map((u) => (
+						selectedAsesores.push(u.label)
+					))
+				}
+				formValues.directoresLista = selectedAsesores;
+				formValues.alumnosLista = alumnos.selectedOption.label;
+				formValues.urlImg = datos;
+				dispatch(startNewTesisPosgrado(formValues));
+				reset();
+				navigate('/admin/Tesis');
+
+			} else {
+				Swal.fire('Error al agregar tesis, sólo se admiten máximo 2 Directores');
+			}
+		} else {
+			Swal.fire('Error al agregar tesis,', 'Debe tener al menos un asesor y un alumno agregado', 'error');
 		}
 
-		formValues.autores = selectedAuthor;
-		formValues.urlImg = datos;
-		dispatch(startNewTesis(formValues));
-		reset();
-		navigate('/admin/Tesis');
 	}
 
 	return (
 		<div className="container">
 			<div className="app-title">
-				<h2>Agregar Tesis </h2>
+				<h2>Agregar Tesis de Doctorado</h2>
 				<hr />
 			</div>
 
@@ -178,26 +199,26 @@ export const FormAddTesis = () => {
 
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label>Agregar autores</label>
+					<label>Agregar asesores</label>
 					<Select
 						isMulti
-						name="usuarios"
+						name="directores"
 						options={options}
 						className="basic-multi-select"
 						classNamePrefix="select"
-						value={state.selectedOption}
-						onChange={handleChange}
+						value={asesores.selectedOption}
+						onChange={handleChangeDirectores}
 					/>
 				</div>
 				<div className="col mb-3">
-					<label>Liga del video</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL de video'
-						value={url}
-						onChange={handleInputChange}
+					<label>Agregar alumno</label>
+					<Select
+						name="alumno"
+						options={options}
+						className="basic-single"
+						classNamePrefix="select"
+						value={alumnos.selectedOption}
+						onChange={handleChangeAlumnos}
 					/>
 				</div>
 			</div>
@@ -211,7 +232,7 @@ export const FormAddTesis = () => {
 						<FotosGalleryChoose />
 					</div>
 				</div>
-				
+
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -223,6 +244,18 @@ export const FormAddTesis = () => {
 						<option value='Si' > Si </option>
 						<option value='No' > No </option>
 					</select>
+				</div>
+
+				<div className="col mb-3">
+					<label>Liga del video</label>
+					<input
+						className="form-control"
+						type='text'
+						name='url'
+						placeholder='URL de video'
+						value={url}
+						onChange={handleInputChange}
+					/>
 				</div>
 
 			</div>

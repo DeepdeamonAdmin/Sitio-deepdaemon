@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import { NavBarUser } from '../componentes/ui/NavBarUser';
 import { RutaError } from '../componentes/ui/RutaError';
 import { EditInfoTesis } from '../componentes/users/EditInfoTesis';
-import { FormAddTesis } from '../componentes/users/FormAddTesis';
 import { FormAddRelease } from '../componentes/users/FormAddRelease';
 import { Perfil } from '../componentes/users/Perfil';
 //import { Projects } from '../componentes/users/Projects';
@@ -12,6 +11,9 @@ import { Publications } from '../componentes/users/Publications';
 import { User } from '../componentes/users/User';
 import { Blog } from '../componentes/users/Blog';
 import { PublicationDetails } from '../componentes/Usuario/PublicationDetails';
+import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
+import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
+import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
 //import { Projects } from '../componentes/users/Projects';
 
 export const UserDashBoard = () => {
@@ -25,7 +27,9 @@ export const UserDashBoard = () => {
                     <Route path='publicaciones' element={ <Publications/> } />
                     <Route path='blog' element={ <Blog /> } />
                     <Route path='perfil' element={ <Perfil /> } />
-                    <Route path='addTesis' element={ <FormAddTesis /> } />
+                    <Route path='addTesisGrado' element={ <FormAddTesisGrado /> } />
+                    <Route path='addTesisMaestria' element={ <FormAddTesisMaestria /> } />
+                    <Route path='addTesisDoctorado' element={ <FormAddTesisDoctorado /> } />
                     <Route path='addpublication' element={ <FormAddRelease /> } />
                     <Route path='editPublication/:idRelease' element={ <FormAddRelease /> } exact/>
                     <Route path='tesis/:idTesis/:params' element={ <EditInfoTesis /> } exact/>

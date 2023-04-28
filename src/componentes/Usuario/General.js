@@ -4,7 +4,7 @@ import React from "react";
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
-import QR from "../../assets/qrcontacto.png";
+import QR from "../../assets/QR_Actualizado.jpeg";
 
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
 import "../../styles/DeepDaemon.css";
@@ -30,7 +30,6 @@ export const General = ({ id }) => {
   //Función para obtener todos los avisos
   const getAvisos = async () => {
     const datos = await getDocs(avisosCollection);
-    //console.log(datos.docs)
     setAvisos(
       datos.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
@@ -334,7 +333,7 @@ export const General = ({ id }) => {
             <div className="text-center">
               <Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
               <br />
-              <Button variant="secondary ">Contáctanos</Button>
+              {/*<Button variant="secondary ">Contáctanos</Button>*/}
             </div>
           </Col>
         </Row>

@@ -30,8 +30,8 @@ export const FormAddAlumno = () => {
 		urlImg: '',
 		ss: false,
 		nivel: 'vacio',
-		// start: '',
-		// end: '',
+		start: '',
+		end: '',
 		idSchool: 'vacio',
 		idCareer: 'vacio',
 		esAutor: 'Y',
@@ -39,7 +39,7 @@ export const FormAddAlumno = () => {
 		rol: 'alumno'
 	});
 
-	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display } = formValues;
+	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, start, end, password, rol, ss, esAutor, display } = formValues;
 	//console.log(formValues)
 
 	//envio a la api
@@ -308,9 +308,9 @@ export const FormAddAlumno = () => {
 				</div> */}
 
 
-				{/* <div className="row">
+				<div className="row">
 					<div className="col-md-6 mb-5">
-						<label> Comienzo </label>
+						<label> Fecha de Inicio </label>
 						<input
 							className="form-control"
 							type='date'
@@ -321,7 +321,7 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 					<div className="col-md-6 mb-5">
-						<label> Termino </label>
+						<label> Fecha de Termino </label>
 						<input
 							className="form-control"
 							type='date'
@@ -331,7 +331,7 @@ export const FormAddAlumno = () => {
 							onChange={handleInputChange}
 						/>
 					</div>
-				</div> */}
+				</div> 
 
 				<div className="row">
 					<div className="col-md-3 mb-3">
@@ -380,7 +380,7 @@ export const FormAddAlumno = () => {
 				</div>
 				<div class="text-center">
 					<button
-						className="btn btn-primary btn-large"
+						className="btn btn-primary btn-lg mb-5"
 						type="submit"
 					>
 						Agregar

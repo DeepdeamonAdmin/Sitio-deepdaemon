@@ -20,7 +20,7 @@ export default function BlogList() {
 
 	useEffect(() => {
 		getBlog()
-	})
+	}, [])
 	return (
 		<>
 			{
