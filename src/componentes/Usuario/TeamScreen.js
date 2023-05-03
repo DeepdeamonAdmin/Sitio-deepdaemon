@@ -7,6 +7,7 @@ import { ModalCrearCuenta } from './ModalCrearCuenta';
 import { ModalInfoUser } from './ModalInfoUser';
 import { VerMas } from '../ui/VerMas';
 import { auth } from '../../firebase/firebase-config';
+import { auto } from '@popperjs/core';
 // import {  } from './ProjectDetaills';
 
 
@@ -19,7 +20,7 @@ export const TeamScreen = ({ status }) => {
 	return (
 		<>
 			<div className="container card-columns">
-				<div className="row">
+				<div className="row" >
 					{usuarios.map((usuario) => (
 					// Imprimir solamente los usuarios del grado que seleccionó
 					usuario.grado === status &&
