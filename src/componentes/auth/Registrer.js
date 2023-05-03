@@ -134,7 +134,7 @@ export const Registrer = () => {
               <Select
                 name="rol"
                 options={options}
-                className="basic-single"
+                className="form-control"
                 classNamePrefix="select"
                 isClearable={false}
                 value={state.selectedOption}

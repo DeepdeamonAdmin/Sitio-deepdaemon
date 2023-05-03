@@ -5,7 +5,8 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
-	updateProfile
+	updateProfile,
+	sendEmailVerification
 } from 'firebase/auth';
 
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
@@ -20,6 +21,7 @@ import { startLoading, finishLoading, uiCloseModal } from './ui';
 // const dispatch = useDispatch();
 //Registrar usuario por correo
 export const startRegisterWithEmailPassword = (formValues) => {
+
 	return (dispatch) => {
 
 		const auth = getAuth();
@@ -28,6 +30,7 @@ export const startRegisterWithEmailPassword = (formValues) => {
 				await updateProfile(user, { displayName: formValues.name });
 
 				completarDatos(user.uid, formValues);
+				validar(auth);
 
 				dispatch(
 					uiCloseModal()
@@ -41,7 +44,14 @@ export const startRegisterWithEmailPassword = (formValues) => {
 	}
 }
 
+//Funcion que envia un correo electronico para validar la cuenta.
+function validar(auth) {
+	
+	sendEmailVerification(auth.currentUser)
+		.then(() => {
 
+		});
+}
 const completarDatos = async (uid, formvalues) => {
 	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
@@ -69,7 +79,7 @@ const completarDatos = async (uid, formvalues) => {
 }
 
 export const registroDesdeLider = (formValues) => {
-		const auth = getAuth();
+	const auth = getAuth();
 	return (dispatch) => {
 		const auth2 = getAuth(app2);
 		createUserWithEmailAndPassword(auth2, formValues.email, formValues.password)
@@ -88,7 +98,7 @@ export const registroDesdeLider = (formValues) => {
 				console.log(e);
 				Swal.fire('Error', e.message, 'error');
 			})
-			console.log(auth.currentUser.displayName)
+		console.log(auth.currentUser.displayName)
 	}
 }
 

@@ -10,12 +10,12 @@ import { TeamDetaills } from '../Usuario/TeamDetaills';
 
 import './Ui.css';
 
-export const VerMas = (usuario, publicacion) => {
+export const VerMas = (usuario) => {
 
     const dispatch = useDispatch();
     const user = auth.currentUser;
     const usuarioC = usuario;
-    //console.log(usuarioC.usuario);
+
 
     const handleClickNew = () => {
         dispatch( uiOpenModal() );
@@ -23,8 +23,7 @@ export const VerMas = (usuario, publicacion) => {
 
     const { datos }  = useSelector( state => state.user );
     
-
-    console.log(usuario.PublicationDetaills);
+    
     
     return (
         

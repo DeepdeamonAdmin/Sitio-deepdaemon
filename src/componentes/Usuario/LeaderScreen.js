@@ -17,6 +17,7 @@ export const LeaderScreen = () => {
 	
 
 	const { usuarios } = useSelector(state => state.user);
+	
 
 	return (
 		<>

@@ -46,7 +46,10 @@ export const AppRouter = () => {
         
         onAuthStateChanged(auth, ( user ) => {
 
-            if ( user?.uid ) {
+            
+            //Validacion para los usuarios verificados para poder entrar.
+            //if ( (user?.uid) && user.emailVerified) {
+            if ( (user?.uid)) {
                 dispatch( login( user.uid, user.displayName ) );
                 setIsLoggedIn( true );
                 dispatch( getUserRolUid() );
@@ -55,6 +58,12 @@ export const AppRouter = () => {
                 dispatch( startLoadinProjectsAll() );
                 dispatch( startLoadingTesis() );
                 dispatch( startLoadinTesisAll() );
+
+                if(user.emailVerified){
+                    console.log("Verificado")
+                }else{
+                    console.log("No verificado")
+                }
                 
 
             } else {
