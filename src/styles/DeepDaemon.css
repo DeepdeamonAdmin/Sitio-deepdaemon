@@ -99,12 +99,32 @@
     display: flex;
   }
 
+  .pub_sectionBg {
+    background-image: url("./assets/img/bg/Publicaciones.jpg");
+    background-position: top center;
+    min-height: 300px;
+    align-items: stretch;
+    display: flex;
+  }
+
+  .proy_sectionBg {
+    background-image: url("./assets/img/bg/Poyectos.jpg");
+    background-position: top center;
+    min-height: 300px;
+    align-items: stretch;
+    display: flex;
+  }
   .separator{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
     background-color: #012e4d;
     color: white;
     border-radius: 8px;
   }
 
+  .separator2{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
+    background-color: #025E9D;
+    color: white;
+    border-radius: 8px;
+  }
   .sections{
     border-radius: 8px;
     width: 100%;
@@ -200,7 +220,6 @@
     margin-left: 40%;
   }
   
-<<<<<<< HEAD
   .sections{
     background-color: #e0e0e0;
     border-radius: 8px;
@@ -217,8 +236,6 @@
     display: flex;
   }
   
-=======
->>>>>>> 5f699a760d54fdb3ae2c10861876843ecc240447
   .section .icon {
     font-size: 50px;
     line-height: 30px;
@@ -244,7 +261,8 @@
   
   .projects .nav-item {
     margin: auto;
-    
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
   }
   .projects .nav-link {
     background-color: transparent;
@@ -253,7 +271,8 @@
   }
   
   .projects .nav-link.active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(4, 21, 46, 0.7);
+    border-radius: 10px;
   }
 
   

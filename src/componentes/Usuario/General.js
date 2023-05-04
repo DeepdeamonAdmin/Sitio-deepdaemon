@@ -170,19 +170,19 @@ export const General = ({ id }) => {
       
       <br></br>
       <br></br>
-      <Container fluid className="section portfolio" id="Proyectos">
-        <h1 className="separator"> Proyectos </h1>
+      <Container fluid className="section portfolio proy_sectionBg" id="Proyectos">
+        <h1 className="separator2 team_title"> Proyectos </h1>
         <hr/>
         <Tab.Container defaultActiveKey="indevelop">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="indevelop">
-                <h2>Novedades</h2>
+                <h2 className="team_title">Novedades</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="completed">
-                <h2>Destacado</h2>
+                <h2 className="team_title">Destacado</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -201,30 +201,30 @@ export const General = ({ id }) => {
       <br></br>
       
 
-      <Container fluid className="section portfolio" id="Publicaciones">
+      <Container fluid className="section portfolio pub_sectionBg" id="Publicaciones">
         <h1 className="separator"> Publicaciones </h1>
         <Tab.Container defaultActiveKey="congress">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="congress">
-                <h2>Congreso</h2>
+                <h2 className="team_title">Congreso</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="magazine">
-                <h2>Revista</h2>
+                <h2 className="team_title">Revista</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="book">
-                <h2>Libro</h2>
+                <h2 className="team_title">Libro</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
           <hr />
           <Tab.Content>
             <Tab.Pane eventKey="congress">
-              <PublicationScreen type="article" />
+              <PublicationScreen type="article"/>
             </Tab.Pane>
             <Tab.Pane eventKey="magazine">
               <PublicationScreen type="magazine" />
@@ -233,6 +233,7 @@ export const General = ({ id }) => {
 			        <PublicationScreen type="book"/>
             </Tab.Pane>
           </Tab.Content>
+          <br></br>
         </Tab.Container>
       </Container>
       <br></br>
@@ -281,12 +282,12 @@ export const General = ({ id }) => {
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="indevelop">
-                <h2>En desarrollo</h2>
+                <h2 className="team_title">En desarrollo</h2>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="completed">
-                <h2>Finalizadas</h2>
+                <h2 className="team_title">Finalizadas</h2>
               </Nav.Link>
             </Nav.Item>
           </Nav>
