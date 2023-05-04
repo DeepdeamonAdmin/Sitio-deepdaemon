@@ -15,7 +15,7 @@ export const PublicationScreen = ({type}) => {
 			try {
                 const ref = collection(db, "Publicaciones")
 				const q = query(ref, where("postType", '==', type))
-                console.log(q)
+                //console.log(q)
                 const Data = await getDocs(q);
 				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
 				setPublications(arrayData)
@@ -41,9 +41,6 @@ export const PublicationScreen = ({type}) => {
 
 								<div className="card-body text-dark">
 									<h5 className="card-title"> {publication.title} </h5>
-									{/* {<ModalInfoProject item={publication} key={publication.id} id={publication.id} />} */}
-									{/*<PublicationDetaills publication={publication} />*/}
-									{console.log(publication)}
 									<ModalCrearCuenta />
 									<VerMasProject publicacion={publication}/>
 								</div>

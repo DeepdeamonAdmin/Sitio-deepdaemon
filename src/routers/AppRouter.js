@@ -1,12 +1,13 @@
-import React, { useEffect, useState }from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
+import Swal from 'sweetalert2';
 //uso de rutas e
 import {
     BrowserRouter as Router,
     Route,
     Routes
-  } from 'react-router-dom';
+} from 'react-router-dom';
 
 //rutas para sitio de administración
 import { AdminDashBoard } from './AdminDashBoard';
@@ -21,7 +22,7 @@ import { login } from '../actions/auth';
 import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
 import { startLoadingTesis, startLoadinTesisAll } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
-import { ExternoDashBoard} from './ExternoDashBoard'
+import { ExternoDashBoard } from './ExternoDashBoard'
 
 
 
@@ -32,84 +33,122 @@ export const AppRouter = () => {
     const dispatch = useDispatch();
     const auth = getAuth();
 
-    const [ checking, setChecking ] = useState(true);
-    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-    
-    const { rol } = useSelector( state => state.user );
+    const [checking, setChecking] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-   
+    const { rol } = useSelector(state => state.user);
+
+    function validar() {
+
+        sendEmailVerification(auth.currentUser)
+
+            .then(() => {
+
+            });
+    }
+    const refresh = () => window.location.reload(true)
+
     useEffect(() => {
 
-        dispatch( startLoadinUsersAll() );
-        dispatch( startLoadinProjectsAll() );
-        dispatch( startLoadinTesisAll() );
-        
-        onAuthStateChanged(auth, ( user ) => {
+        dispatch(startLoadinUsersAll());
+        dispatch(startLoadinProjectsAll());
+        dispatch(startLoadinTesisAll());
 
-            if ( user?.uid ) {
-                dispatch( login( user.uid, user.displayName ) );
-                setIsLoggedIn( true );
-                dispatch( getUserRolUid() );
-                dispatch( startLoadingProject() );
-                dispatch( startLoadingPublication() );
-                dispatch( startLoadinProjectsAll() );
-                dispatch( startLoadingTesis() );
-                dispatch( startLoadinTesisAll() );
-                
+        onAuthStateChanged(auth, (user) => {
+
+
+            //Validacion para los usuarios verificados para poder entrar.
+            //if ((user?.uid) && user.emailVerified) {
+                if ( (user?.uid)) {
+                dispatch(login(user.uid, user.displayName));
+                //console.log(user.displayName)
+                setIsLoggedIn(true);
+                dispatch(getUserRolUid());
+                dispatch(startLoadingProject());
+                dispatch(startLoadingPublication());
+                dispatch(startLoadinProjectsAll());
+                dispatch(startLoadingTesis());
+                dispatch(startLoadinTesisAll());
+
+                if (user.emailVerified) {
+                    console.log("Verificado")
+                } else {
+                    console.log("No verificado")
+                }
+
 
             } else {
-                setIsLoggedIn( false );
+                setIsLoggedIn(false);
+                /*Swal.fire({
+                    title: 'Verificar Cuenta',
+                    text: "Se enviará un correo de verificación",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Enviar Confirmación'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        validar();
+                        Swal.fire(
+                            'Enviado!',
+                            'Se envió el correo de verificación.',
+                            'success'
+                        )
+                    }
+                })*/
+                console.log("Verificar usuario")
             }
 
             setChecking(false);
 
         });
-        
-    }, [ dispatch, auth, setChecking, setIsLoggedIn ])
+
+    }, [dispatch, auth, setChecking, setIsLoggedIn])
 
 
-    if ( checking ) {
+    if (checking) {
         return (
             <h1>Espere...</h1>
         )
     }
 
 
-     return (
+    return (
         <Router>
             <Routes>
-                <Route 
+                <Route
                     path='/*'
                     element={
-                        <PublicRoute isAuthenticade = { isLoggedIn } rol= { rol } >
-                        <HomeRoutes /> 
+                        <PublicRoute isAuthenticade={isLoggedIn} rol={rol} >
+                            <HomeRoutes />
                         </PublicRoute>
-                    } 
+                    }
                 />
-                <Route 
+                <Route
                     path="Admin/*"
-                    element={ 
-                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador' }>
+                    element={
+                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador'}>
                             <AdminDashBoard />
                         </ProtectedRoute>
-                    } 
+                    }
                 />
-                <Route 
+                <Route
                     path="user/*"
-                    element={ 
+                    element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
                             <UserDashBoard />
                         </ProtectedRoute>
-                    } 
-                />       
-                <Route 
+                    }
+                />
+                <Route
                     path="externo/*"
-                    element={ 
+                    element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'externo'}>
-                            <ExternoDashBoard/>
+                            <ExternoDashBoard />
                         </ProtectedRoute>
-                    } 
-                />       
+                    }
+                />
             </Routes>
         </Router>
     )

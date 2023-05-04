@@ -6,6 +6,11 @@ import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
 import QR from "../../assets/QR_Actualizado.jpeg";
 
+import '@splidejs/react-splide/css';
+import '@splidejs/splide/css/skyblue';
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import "../../styles/carrusel.css"
+
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
 import "../../styles/DeepDaemon.css";
 import { Container, Nav, Carousel } from "react-bootstrap";
@@ -43,6 +48,27 @@ export const General = ({ id }) => {
     getAvisos();
   }, []);
 
+  //Opciones para configurar el carrusel 
+  let lo = 0
+  if (avisos.length <= 2 ){
+    lo = 2
+  }
+  if (avisos.length > 2){
+    lo = 3
+  }
+  const options = {
+    type: 'loop',
+    gap: '2rem',
+    perPage: lo,
+    autoplay: true,
+    pauseOnHover: true,
+    resetProgress: false,
+    slideFocus: true,
+    focus: true,
+  
+
+  };
+
   return (
     <div className="">
       <div className="d-flex flex-row dd_header">
@@ -68,10 +94,28 @@ export const General = ({ id }) => {
         </Row>
       </div>
       <div className="embed-responsive">
-      <div className="sections">
-      <h1>ANUNCIOS</h1>
-      <hr/>
-      <Container>
+        <div className="sections">
+          <h1>ANUNCIOS</h1>
+          <hr />
+          <div className="wrapper">
+            <Splide
+              options={options}
+              aria-labelledby="autoplay-example-heading"
+              hasTrack={false}
+            >
+              <div style={{ position: 'relative' }}>
+                <SplideTrack>
+                  {avisos.map((aviso) => (
+                  <SplideSlide >
+                    <img src={ aviso.photo}/>
+                  </SplideSlide>
+                  ))}
+
+                </SplideTrack>
+              </div>
+            </Splide>
+          </div>
+          {/*<Container>
         <Carousel>
           {avisos.map((aviso) => (
             <Carousel.Item key={aviso.id}>
@@ -86,10 +130,9 @@ export const General = ({ id }) => {
             </Carousel.Item>
           ))}
         </Carousel>
-      </Container>
-      </div>
-
-      <Container className="section" id="Nosotros">
+      </Container>*/}
+        </div>
+        <Container className="section" id="Nosotros">
         <h1>Un poco sobre nosotros</h1>
         <hr />
         <p>
@@ -256,15 +299,15 @@ export const General = ({ id }) => {
           <hr />
           <Tab.Content>
             <Tab.Pane eventKey="current">
-              <div className="Container section">
-                <div className="row">
+              <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
+                <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "-10px" }}>
                   <TeamScreen status="current" />
                 </div>
               </div>
             </Tab.Pane>
             <Tab.Pane eventKey="graduate">
-              <div className="Container section">
-                <div className="row">
+            <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
+                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "-10px" }}>
                   <TeamScreen status="graduate" />
                 </div>
               </div>
@@ -368,5 +411,7 @@ export const General = ({ id }) => {
       </Container>
       </div>
     </div>
+
+    
   );
 };

@@ -1,36 +1,37 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { uiOpenModal} from '../../actions/ui';
+import { uiOpenModal } from '../../actions/ui';
 import { auth } from '../../firebase/firebase-config';
 
-
 import './Ui.css';
+import { PublicationDetaills } from '../Usuario/PublicationDetaills';
 
 export const VerMasProject = (publicacion) => {
 
     const dispatch = useDispatch();
-    //const project = auth.currentUser};
+    const pub = publicacion;
 
     const handleClickNew = () => {
-        dispatch( uiOpenModal() );
+        dispatch(uiOpenModal());
     }
-    console.log("Publicccc")
-    console.log(publicacion);
+
+    const user = auth.currentUser;
+    
+
+    if (!user) return <button
+        className="btn btn-success"
+        onClick={handleClickNew}
+    >
+        Ver más..
+    </button>
+
+    return <PublicationDetaills publication = {pub.publicacion}/>
 
 
 
-    return (
-        <>
-            <button
-                className="btn btn-success"
-                onClick={handleClickNew}
-            >
-                Ver más..
-            </button>
-        </>
-        
-        
-           
-    )
+
+
+
+
 }
