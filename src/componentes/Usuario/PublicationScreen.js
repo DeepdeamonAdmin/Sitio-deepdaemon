@@ -37,7 +37,7 @@ export const PublicationScreen = ({type}) => {
 					return (
 						//imprimir solamente si el estado es igual al seleccionado
 						(publication.display === "Yes") && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }}>
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 350, height: 195 }}>
 
 								<div className="card-body text-dark">
 									<h5 className="card-title"> {publication.title} </h5>

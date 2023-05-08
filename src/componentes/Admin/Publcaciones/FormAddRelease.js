@@ -340,7 +340,7 @@ export const FormAddRelease = () => {
 		e.preventDefault();
 		dispatch(startNewPublication(formValues));
 		reset();
-		navigate('/admin/publications');
+		navigate('/admin/release');
 	}
 
 	/**

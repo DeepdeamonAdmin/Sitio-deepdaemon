@@ -35,6 +35,8 @@ export const Login = ({ history }) => {
 		e.preventDefault();
 		if( isFormValid() ){
 			dispatch( startLoginEmailPassword(email, password) );
+            //console.log("This is email addres")
+            //console.log(email)
 			history.replace(lastPath)	
 		}
 	}

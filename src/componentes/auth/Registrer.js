@@ -12,6 +12,8 @@ import { useRef } from 'react';
 import Select from 'react-select';
 import { useState } from 'react';
 
+import Swal from 'sweetalert2';
+
 export const Registrer = () => {
 
   const recaptchaRef = useRef(null);
@@ -38,13 +40,16 @@ export const Registrer = () => {
   });
 
   const { name, email, password, password2, rol } = formValues;
-
+  var verifyEmail = ""
   const handleRegistrer = (e) => {
 
     e.preventDefault();
     if (isFormValid()) {
       //if (recaptchaRef.current.getValue()) {
         dispatch(startRegisterWithEmailPassword(formValues));
+        console.log("This is email addres varifyEmail")
+        console.log(verifyEmail)
+        
       //}
     }
 
@@ -81,8 +86,41 @@ export const Registrer = () => {
       return false;
     }
 
+    //Verifica si el email que se introdujo en el formulario es de una cuenta del ipn
+    //si es del ipn, alumno o cic, el rol que se asigna es alumno
+    //En caso de que no coincida, se asigna un rol de externo
+    if(verifyEmail.includes("@alumno.ipn.mx")||verifyEmail.includes("@cic.ipn.mx")){
+      //console.log("Yes, it do contain")
+      formValues.rol = "alumno";
+      Swal.fire({
+        title: '<strong>Cuenta Creada</strong>',
+        icon: 'success',
+        html:
+          'Su cuenta de <b><u>alumno</u></b> fue creada con exito ',
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Great!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+      })
+      //console.log(state.selectedOption.value)
+      //console.log(state.selectedOption)
+    }else{
+      //console.log("No, it doesn't contain"+ verifyEmail + "No sirve")
+      formValues.rol = "externo";
+      Swal.fire({
+        title: '<strong>Cuenta Creada</strong>',
+        icon: 'success',
+        html:
+          'Su cuenta de <b><u>externo</u></b> fue creada con exito ',
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Great!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+      })
+    }
+
     dispatch(removeError());
-    formValues.rol = state.selectedOption.value;
+    //formValues.rol = state.selectedOption.value;
     // console.log(formValues.tipoUsuario)
     return true;
 
@@ -126,6 +164,7 @@ export const Registrer = () => {
                 required
                 onChange={handleInputChange}
               />
+              {verifyEmail = email}
             </div>
           </div>
           <div className='row'>

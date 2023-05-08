@@ -41,7 +41,7 @@ export const ProjectScreen = ({ status1, status2}) => {
 				projects.map(project => (
 					//imprimir solamente si el estado es igual al seleccionado
 					(project.display === "Yes") && (
-						<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }} >
+						<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ maxWidth: 450, MaxHeight: 150 }} >
 							<img
 								className="card-img"
 								src={project.urlImg}
