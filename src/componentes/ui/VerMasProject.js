@@ -19,12 +19,14 @@ export const VerMasProject = (publicacion) => {
     const user = auth.currentUser;
     
 
-    if (!user) return <button
+    if (!user) return <div style={{position:'absolute', bottom:10}}>
+    <button
         className="btn btn-success"
         onClick={handleClickNew}
     >
         Ver más..
     </button>
+    </div>
 
     return <PublicationDetaills publication = {pub.publicacion}/>
 

@@ -89,7 +89,7 @@ export const Registrer = () => {
     //Verifica si el email que se introdujo en el formulario es de una cuenta del ipn
     //si es del ipn, alumno o cic, el rol que se asigna es alumno
     //En caso de que no coincida, se asigna un rol de externo
-    if(verifyEmail.includes("@alumno.ipn.mx")||verifyEmail.includes("@cic.ipn.mx")){
+    if(verifyEmail.includes("@alumno.ipn.mx")||verifyEmail.includes("@cic.ipn.mx")||verifyEmail.includes("@ipn.mx")){
       //console.log("Yes, it do contain")
       formValues.rol = "alumno";
       Swal.fire({

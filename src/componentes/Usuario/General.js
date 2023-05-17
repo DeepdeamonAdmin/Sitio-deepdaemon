@@ -245,7 +245,7 @@ export const General = ({ id }) => {
 
       <Container fluid className="section portfolio pub_sectionBg" id="Publicaciones">
         <h1 className="separator"> Publicaciones </h1>
-        <Tab.Container defaultActiveKey="congress">
+        <Tab.Container defaultActiveKey="magazine">
           <Nav className="projects">
             <Nav.Item>
               <Nav.Link eventKey="congress">
@@ -266,21 +266,21 @@ export const General = ({ id }) => {
           <hr />
           <Tab.Content>
             <Tab.Pane eventKey="congress">
-            <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+            <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
                 <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
               <PublicationScreen type="article"/>
               </div>
               </div>
             </Tab.Pane>
                   <Tab.Pane eventKey="magazine" >
-                  <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                  <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
                 <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                   <PublicationScreen type="magazine"/>
                   </div>
               </div>   
             </Tab.Pane>
             <Tab.Pane eventKey="book" >
-            <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+            <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
                 <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
 			        <PublicationScreen type="book" />
               </div>

@@ -37,10 +37,10 @@ export const PublicationScreen = ({type}) => {
 					return (
 						//imprimir solamente si el estado es igual al seleccionado
 						(publication.display === "Yes") && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 350, height: 195 }}>
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 360, height: 150 , position:'relative' }}>
 
 								<div className="card-body text-dark">
-									<h5 className="card-title"> {publication.title} </h5>
+									<h6 className="card-title"> {publication.title} </h6>
 									<ModalCrearCuenta />
 									<VerMasProject publicacion={publication}/>
 								</div>
