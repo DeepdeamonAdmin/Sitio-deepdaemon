@@ -299,6 +299,7 @@ export const FormAddRelease = () => {
 	const dispatch = useDispatch();
 	const [formValues, handleInputChange, reset] = useForm({
 		postType: '',
+		urlImg: '',
 		descr: '',
 		tech: '',
 		frontImg: '',
@@ -323,13 +324,12 @@ export const FormAddRelease = () => {
 		note: '',
 		institution: '',
 		display: 'Yes',
-		urlImg: ''
 	}, publication);
 
-	const { postType, descr, tech, frontImg, modalMedia, link, autor, title,
+	const { postType,urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display, urlImg } = formValues;
+		organization, school, note, institution, display} = formValues;
 
 	//Galeria
 	const [datos, setDatos] = useState('');
@@ -345,8 +345,8 @@ export const FormAddRelease = () => {
 	}
 	//envio a la api
 	const navigate = useNavigate();
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleSubmit = () => {
+		formValues.urlImg = datos;
 		dispatch(startNewPublication(formValues));
 		reset();
 		navigate('/admin/release');
