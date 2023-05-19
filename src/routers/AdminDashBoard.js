@@ -41,6 +41,7 @@ export const AdminDashBoard = () => {
 					<Route path="projects/agregar" element={<FormAddProject />} />
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
 					<Route path="release" element={<ReleaseScreen />} />
+					<Route path="release/agregar" element={<FormAddRelease />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />
 					<Route path="alumnos/agregar" element={<FormAddAlumno />} />
 					<Route path="externos" element={<ExternoScreen />} />

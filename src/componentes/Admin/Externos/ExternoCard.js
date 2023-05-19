@@ -1,21 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-//import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateDoc, doc } from 'firebase/firestore';
 import { db } from "../../../firebase/firebase-config";
 import Swal from "sweetalert2";
+import { deleteUserExt } from '../../../actions/delete';
+import { startLoadinUserExt } from '../../../actions/user';
+
 
 export const ExternoCard = (item) => {
-	//const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	const handleDelete = (e) => {
 		e.preventDefault();
-        const memberRef = doc(db, 'Usuarios', item.id);
-        const data = {display: 'N'};
-        updateDoc (memberRef, data);
-        //mostrar mensaje de confirmacion
-        Swal.fire('Usuario eliminado', 'Éxito');
-	}
+        Swal.fire({
+            title: '¿Estás seguro de eliminar este usuario?',
+            text: "No podrás revertir esto",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Continuar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(item.id)
+                dispatch(deleteUserExt(item));
+                dispatch(startLoadinUserExt());
+            }
+        })
+    }
 
 
 	return (

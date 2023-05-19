@@ -7,6 +7,8 @@ import { startNewPublication, startUploadingPublication } from '../../../actions
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 import { editPublication } from '../../../actions/edit';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+import { ModalGalleryAddProjects } from '../Proyectos/ModalGalleryAddProjects';
 
 export const FormAddRelease = () => {
 	const auth = getAuth();
@@ -297,6 +299,7 @@ export const FormAddRelease = () => {
 	const dispatch = useDispatch();
 	const [formValues, handleInputChange, reset] = useForm({
 		postType: '',
+		urlImg: '',
 		descr: '',
 		tech: '',
 		frontImg: '',
@@ -320,13 +323,19 @@ export const FormAddRelease = () => {
 		school: '',
 		note: '',
 		institution: '',
-		display: 'Yes'
+		display: 'Yes',
 	}, publication);
 
-	const { postType, descr, tech, frontImg, modalMedia, link, autor, title,
+	const { postType,urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display } = formValues;
+		organization, school, note, institution, display} = formValues;
+
+	//Galeria
+	const [datos, setDatos] = useState('');
+	const MgAFAP = (datosMg) => {
+		setDatos(datosMg);
+	}
 
 	const handleFileChange = (e) => {
 		const file = e.target.files[0];
@@ -336,8 +345,8 @@ export const FormAddRelease = () => {
 	}
 	//envio a la api
 	const navigate = useNavigate();
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleSubmit = () => {
+		formValues.urlImg = datos;
 		dispatch(startNewPublication(formValues));
 		reset();
 		navigate('/admin/release');
@@ -372,11 +381,12 @@ export const FormAddRelease = () => {
 
 
 	return (
-		<div className="container">
-			<h2>{publication ? 'Editar publicación' : 'Agregar publicación'}</h2>
-			<hr />
-
-			<div className="row">
+		<div className="container mb-5">
+			<div className="app-title">
+				<h2>{publication ? 'Editar publicación' : 'Agregar publicación'}</h2>
+				<hr />
+			</div>
+			<div className="form-group row">
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
@@ -413,6 +423,7 @@ export const FormAddRelease = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
+				
 				<div className="col mb-3">
 					<label>Modal Media </label>
 					<input
@@ -434,6 +445,15 @@ export const FormAddRelease = () => {
 						<option value='video' > video </option>
 						<option value='embed' > embed </option>
 					</select>
+				</div>
+
+				<div className="col-md-3 mb-3">
+					<label> Imagen desde Galeria </label>
+					<div className="card">
+						<img className='foto' src={urlImg || datos} alt="Imagen" />
+						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<FotosGalleryChoose />
+					</div>
 				</div>
 			</div>
 			<div className="row">
@@ -721,7 +741,7 @@ export const FormAddRelease = () => {
 				</div>
 			</div>
 			<button
-				className="btn2 btn-primary btn-large btn-block"
+				className="btn2 btn-primary btn-lg btn-block mt-3"
 				onClick={publication ? handleUpdatePublication : handleSubmit}
 			>
 				{publication ? 'Guardar cambios' : 'Agregar'}

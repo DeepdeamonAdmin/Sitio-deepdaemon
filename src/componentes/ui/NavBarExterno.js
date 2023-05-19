@@ -125,7 +125,7 @@ export const NavBarExterno = () => {
         </ul>
         <ul>
           <button 
-            className='btn btn-ouline-primary nav-item nav-link'
+            className='btn btn-outline-primary nav-item btnLogout'
             onClick={ handleLogout }>
               Logout
           </button>

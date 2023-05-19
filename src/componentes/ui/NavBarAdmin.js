@@ -141,11 +141,11 @@ export const NavBarAdmin = () => {
 			<div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
 				<ul className="navbar-nav ml-auto">
 					<button
-						className="nav-item nav-link btn"
+						className="btn btn-outline-primary nav-item btnLogout"
 						onClick={handleLogout}
 
 					>
-						Salir
+						Logout
 					</button>
 				</ul>
 			</div>

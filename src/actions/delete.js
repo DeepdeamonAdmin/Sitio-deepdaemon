@@ -97,6 +97,23 @@ export const deletePublicacion = (item) => {
         }
     }
 }
+export const deleteUserExt = (item) => {
+
+    return async (dispatch, getState) => {
+        //const { uid } = getState().auth;
+  
+        const deleteUsrExt = await deleteDoc(doc(db, "Usuarios", item.id));
+
+        if (!deleteUsrExt) {
+            Swal.fire({
+                title: 'Usuario eliminado',
+                icon: 'success',
+            })
+        } else {
+            Swal.fire('Error al eliminar usuario');
+        }
+    }
+}
 export const deleteTesisUser = (item) => {
 
     return async (dispatch, getState) => {

@@ -255,21 +255,21 @@ export const General = ({ id }) => {
             <hr />
             <Tab.Content>
               <Tab.Pane eventKey="congress">
-                <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="article" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="magazine" >
-                <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="magazine" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="book" >
-                <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="book" />
                   </div>
