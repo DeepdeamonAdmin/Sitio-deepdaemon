@@ -36,13 +36,22 @@ const PublicacionesCard = (item) => {
 
     return (
 
-        <div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540, height: 250 }}>
+        <div className="card ms-3" style={{ maxWidth: 540, height: 290 }}>
             <div className="row no-gutters">
-                <div className="card-body no-gutters">
-                    <h5 className="card-title"> {item.title} </h5>
+                <h6 className="card-title mt-3 text-sm" style={{ textAlign: 'center' }}>{item.title}</h6>
+            </div>
+            <div className="row no-gutters">
+                <div className="col-md-4 d-flex align-items-stretch">
+                    <img
+                        src={item.urlImg}
+                        alt="publish"
+                        className="imageleader2"
+                    />
                 </div>
-                <div className="">
-                    <p className="badge bg-primary text-wrap"> {item.autor} </p>
+                <div className='col-md-4'>
+                    <div className="card-body">
+
+                    </div>
                 </div>
                 {/*<div className="col-md-4">
                     <img
@@ -64,13 +73,19 @@ const PublicacionesCard = (item) => {
                     <p>
                         <button
                             type="button"
-                            className="btn btn-success btn-sm"
+                            className="btn btn-success btn-md"
                             onClick={handleDelete}
                         >
                             Delete</button>
                     </p>
                 </div>
 
+            </div>
+            <div className="row no-gutters">
+                <div className="card-body">
+
+                    <p className="badge bg-primary text-wrap"> {item.autor} </p>
+                </div>
             </div>
         </div>
     )

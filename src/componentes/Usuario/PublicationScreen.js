@@ -37,8 +37,20 @@ export const PublicationScreen = ({type}) => {
 					return (
 						//imprimir solamente si el estado es igual al seleccionado
 						(publication.display === "Yes") && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 360, height: 150 , position:'relative' }}>
-
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 360, height: 170 , position:'relative' }}>
+								<img
+								className="card-img mt-3 ml-2"
+								src={publication.urlImg}
+								//Centrar la imagen
+								style={{
+									objectFit: 'cover',
+									objectPosition: 'center',
+									height: "110px",
+									width: '110px'
+								}}
+								alt="member"
+							/>
+								
 								<div className="card-body text-dark">
 									<h6 className="card-title"> {publication.title} </h6>
 									<ModalCrearCuenta />
