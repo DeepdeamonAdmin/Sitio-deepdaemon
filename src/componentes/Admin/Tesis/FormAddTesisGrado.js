@@ -63,6 +63,18 @@ export const FormAddTesisGrado = () => {
 		obtenerTech()
 	}, [])
 
+	const techoptions = []
+	techOption.map(item => (
+		techoptions.push({ value: item.id, label: item.nombre })
+	))
+	const [tecnos, setTecnos] = useState({
+		selectedOption: null
+	})
+
+	const handleChangeTecnos = selectedOption => {
+		setTecnos({ selectedOption });
+	}
+
 	//Checkbox directores
 	const options = []
 	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
@@ -89,7 +101,7 @@ export const FormAddTesisGrado = () => {
 	const handleEnvTesis = () => {
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
-		
+		const selectedTecnos = [];
 		if (directores.selectedOption != null && alumnos.selectedOption != null) {
 			if (directores.selectedOption.length <= 2) {
 				if (directores.selectedOption != null) {
@@ -103,10 +115,16 @@ export const FormAddTesisGrado = () => {
 							selectedAlumnos.push(u.label)
 						))
 					}
+					if (tecnos.selectedOption != null) {
+						tecnos.selectedOption.map((u) => (
+							selectedTecnos.push(u.label)
+						))
+					}
 					console.log(selectedDirectores);
 					console.log(selectedAlumnos);
 					formValues.directoresLista = selectedDirectores;
 					formValues.alumnosLista = selectedAlumnos;
+					formValues.nameTech = selectedTecnos;
 					formValues.urlImg = datos;
 					dispatch(startNewTesisGrado(formValues));
 					reset();
@@ -155,21 +173,16 @@ export const FormAddTesisGrado = () => {
 			</div>
 			<div className="form-group row">
 				<div className="col mb-2">
-					<label> Tecnología utilizada</label>
-					<select
-						className="form-control"
-						name='nameTech'
-						value={nameTech}
-						onChange={handleInputChange}
-					>
-						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-						{
-							techOption.map(item => (
-								<option key={item.id} value={item.id}> {item.nombre} </option>
-							))
-
-						}
-					</select>
+					<label>Tecnología utilizada</label>
+					<Select
+						isMulti
+						name="nameTech"
+						options={techoptions}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={tecnos.selectedOption}
+						onChange={handleChangeTecnos}
+					/>
 				</div>
 
 				<div className="col mb-3">

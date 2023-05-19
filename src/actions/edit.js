@@ -128,6 +128,7 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 				ruta = "Niveles/Posgrado/Doctorado"
 				break;
 		}
+		console.log("ruta:" + ruta);
 		console.log("init: " + formValues.alumnosListaInit);
 		console.log("nuevo: " + formValues.alumnosLista);
 
@@ -152,6 +153,8 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 		} catch (error) {
 			console.log("Error:", error);
 		}
+
+
 
 		if (alumno != "exist") {
 

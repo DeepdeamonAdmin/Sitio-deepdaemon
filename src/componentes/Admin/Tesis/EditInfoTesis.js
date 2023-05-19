@@ -29,21 +29,6 @@ export const EditInfoTesis = () => {
 	})
 	const tesisObj = tesisO[0]
 
-	//tech infor firebase
-	const [techOption, setTech] = React.useState([])
-	React.useEffect(() => {
-		const obtenerTech = async () => {
-			try {
-				const Data = await getDocs(collection(db, "Tecnologias"));
-				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-				setTech(arrayData)
-
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		obtenerTech()
-	}, [])
 
 	const alumnosListaInitAux = [];
 	var alumnoAux = "";
@@ -66,6 +51,39 @@ export const EditInfoTesis = () => {
 		setDatos(datosMg);
 	}
 
+	//tech infor firebase
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
+
+	const selectedTecnos = [];
+	const techoptions = []
+	techOption.map(item => (
+		techoptions.push({ value: item.id, label: item.nombre })
+	))
+
+	nameTech.map((u) => (
+		selectedTecnos.push({ value: u, label: u })
+	))
+
+	const [tecnos, setTecnos] = useState({
+		selectedOption: selectedTecnos
+	})
+
+	const handleChangeTecnos = selectedOption => {
+		setTecnos({ selectedOption });
+	}
 
 	const selectedDirectores = [];
 	const selectedAlumnos = [];
@@ -87,6 +105,7 @@ export const EditInfoTesis = () => {
 	const handleChangeDirectores = selectedOption => {
 		setDirectores({ selectedOption });
 	}
+
 	//Checkbox alumnos
 	if (formValues.grado == "Licenciatura") {
 		alumnosLista.map((u) => (
@@ -95,7 +114,6 @@ export const EditInfoTesis = () => {
 	} else {
 		selectedAlumnos.push({ value: alumnosLista, label: alumnosLista })
 	}
-
 
 	const [alumnos, setAlumnos] = useState({
 		selectedOption: selectedAlumnos
@@ -113,6 +131,7 @@ export const EditInfoTesis = () => {
 		}
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
+		const selectedTecnos = [];
 		if (directores.selectedOption != null && alumnos.selectedOption != null) {
 
 			if (directores.selectedOption.length <= 2) {
@@ -129,8 +148,14 @@ export const EditInfoTesis = () => {
 								selectedAlumnos.push(u.label)
 							))
 						}
+						if (tecnos.selectedOption != null) {
+							tecnos.selectedOption.map((u) => (
+								selectedTecnos.push(u.label)
+							))
+						}
 						formValues.directoresLista = selectedDirectores;
 						formValues.alumnosLista = selectedAlumnos;
+						formValues.nameTech = selectedTecnos;
 						formValues.urlImg = datos;
 						formValues.alumnosListaInit = alumnosListaInitAux;
 						dispatch(editTesisGrado(idTesis, formValues));
@@ -138,11 +163,17 @@ export const EditInfoTesis = () => {
 						Swal.fire('Error al agregar tesis, sólo se admiten máximo 4 alumnos');
 					}
 				} else {
-					console.log("entrando a editar cuando es posgrado");
+					if (tecnos.selectedOption != null) {
+						tecnos.selectedOption.map((u) => (
+							selectedTecnos.push(u.label)
+						))
+					}
 					formValues.directoresLista = selectedDirectores;
-					formValues.alumnosLista = alumnos.selectedOption.label;
+					formValues.alumnosLista = alumnos.selectedOption[0].label;
+					formValues.nameTech = selectedTecnos;
 					formValues.urlImg = datos;
 					formValues.alumnosListaInit = alumnoAux;
+					console.log("dispatch(editTesisPosgrado(idTesis, formValues));");
 					dispatch(editTesisPosgrado(idTesis, formValues));
 				}
 
@@ -188,21 +219,16 @@ export const EditInfoTesis = () => {
 
 			<div className="form-group row">
 				<div className="col mb-2">
-					<label> Tecnología utilizada </label>
-					<select
-						className="form-control"
-						name='nameTech'
-						value={nameTech}
-						onChange={handleInputChange}
-					>
-						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-						{
-							techOption.map(item => (
-								<option key={item.id} value={item.id}> {item.nombre} </option>
-							))
-
-						}
-					</select>
+					<label>Tecnología utilizada</label>
+					<Select
+						isMulti
+						name="nameTech"
+						options={techoptions}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={tecnos.selectedOption}
+						onChange={handleChangeTecnos}
+					/>
 				</div>
 				<div className="col mb-3">
 					<label>Status del proyecto</label>

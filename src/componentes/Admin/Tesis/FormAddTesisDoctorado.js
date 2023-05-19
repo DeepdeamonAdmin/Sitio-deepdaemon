@@ -62,6 +62,17 @@ export const FormAddTesisDoctorado = () => {
 		}
 		obtenerTech()
 	}, [])
+	const techoptions = []
+	techOption.map(item => (
+		techoptions.push({ value: item.id, label: item.nombre })
+	))
+	const [tecnos, setTecnos] = useState({
+		selectedOption: null
+	})
+
+	const handleChangeTecnos = selectedOption => {
+		setTecnos({ selectedOption });
+	}
 
 	//Checkbox directores
 	const options = []
@@ -76,6 +87,7 @@ export const FormAddTesisDoctorado = () => {
 	const handleChangeDirectores = selectedOption => {
 		setAsesores({ selectedOption });
 	}
+
 	//Checkbox alumnos
 	const [alumnos, setAlumnos] = useState({
 		selectedOption: null
@@ -88,6 +100,7 @@ export const FormAddTesisDoctorado = () => {
 	//envio a la api
 	const handleEnvTesis = () => {
 		const selectedAsesores = [];
+		const selectedTecnos = [];
 		if (asesores.selectedOption != null && alumnos.selectedOption != null) {
 			if (asesores.selectedOption.length <= 2) {
 				if (asesores.selectedOption != null) {
@@ -95,8 +108,14 @@ export const FormAddTesisDoctorado = () => {
 						selectedAsesores.push(u.label)
 					))
 				}
+				if (tecnos.selectedOption != null) {
+					tecnos.selectedOption.map((u) => (
+						selectedTecnos.push(u.label)
+					))
+				}
 				formValues.directoresLista = selectedAsesores;
 				formValues.alumnosLista = alumnos.selectedOption.label;
+				formValues.nameTech = selectedTecnos;
 				formValues.urlImg = datos;
 				dispatch(startNewTesisPosgrado(formValues));
 				reset();
@@ -143,23 +162,17 @@ export const FormAddTesisDoctorado = () => {
 			</div>
 			<div className="form-group row">
 				<div className="col mb-2">
-					<label> Tecnología utilizada</label>
-					<select
-						className="form-control"
-						name='nameTech'
-						value={nameTech}
-						onChange={handleInputChange}
-					>
-						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-						{
-							techOption.map(item => (
-								<option key={item.id} value={item.id}> {item.nombre} </option>
-							))
-
-						}
-					</select>
+					<label>Tecnología utilizada</label>
+					<Select
+						isMulti
+						name="nameTech"
+						options={techoptions}
+						className="basic-multi-select"
+						classNamePrefix="select"
+						value={tecnos.selectedOption}
+						onChange={handleChangeTecnos}
+					/>
 				</div>
-
 				<div className="col mb-3">
 					<label>Status del proyecto </label>
 					<select
