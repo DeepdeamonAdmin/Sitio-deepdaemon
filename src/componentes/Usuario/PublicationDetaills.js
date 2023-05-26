@@ -48,6 +48,7 @@ export const PublicationDetaills = ({ publication }) => {
                 <ul className="list-group list-group-flush">
                   <li className={`list-group-item`} style={{textAlign:'justify'}}><b>Abstract :</b><i> {publication.descr}</i></li>
                   <li className="list-group-item">Autor : {publication.autor}</li>
+                  {publication.postType === 'magazine'? <li className="list-group-item">KeyWords : {publication.keywords}</li>: null}
                 </ul>
               </div>
             </div>

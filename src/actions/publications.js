@@ -40,7 +40,8 @@ export const startNewPublication = ( formValues ) => {
             school: formValues.school || '',
             note: formValues.note || '',
             institution: formValues.institution || '',
-            display: formValues.display || 'No'
+            display: formValues.display || 'No',
+            keywords: formValues.keywords || '',
         }
         const newPublicationInd = {
 			postType: formValues.postType,

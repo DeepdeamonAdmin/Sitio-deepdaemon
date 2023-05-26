@@ -33,6 +33,7 @@ export const FormAddRelease = () => {
 	const [schoolDisabled, setSchoolDisabled] = useState(true)
 	const [noteDisabled, setNoteDisabled] = useState(true)
 	const [institutionDisabled, setInstitutionDisabled] = useState(true)
+	const [keywordsDisabled, setKeywordsDisabled] = useState(true)
 	useEffect(() => {
 		switch (selectValue) {
 			case 'article':
@@ -53,6 +54,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(true)
 				break;
 			case 'book':
 				setAutorDisabled(false)
@@ -72,6 +74,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 
 			case 'booklet':
@@ -92,6 +95,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'conference':
 				setAutorDisabled(false)
@@ -111,6 +115,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'inbook':
 				setAutorDisabled(false)
@@ -130,6 +135,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'incollection':
 				setAutorDisabled(false)
@@ -149,6 +155,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'inproceedings':
 				setAutorDisabled(true)
@@ -168,6 +175,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'manual':
 				setAutorDisabled(false)
@@ -187,6 +195,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'mastersthesis' || 'phdthesis':
 				setAutorDisabled(false)
@@ -206,6 +215,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(false)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'proceedings':
 				setAutorDisabled(true)
@@ -225,6 +235,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			case 'techreport':
 				setAutorDisabled(false)
@@ -244,6 +255,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(false)
+				setKeywordsDisabled(false)
 				break;
 			case 'misc':
 				setAutorDisabled(false)
@@ -263,6 +275,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 			default:
 				setAutorDisabled(false)
@@ -282,6 +295,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
+				setKeywordsDisabled(false)
 				break;
 		}
 	}, [selectValue])
@@ -324,12 +338,13 @@ export const FormAddRelease = () => {
 		note: '',
 		institution: '',
 		display: 'Yes',
+		keywords: '',
 	}, publication);
 
 	const { postType,urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display} = formValues;
+		organization, school, note, institution, display, keywords} = formValues;
 
 	//Galeria
 	const [datos, setDatos] = useState('');
@@ -465,6 +480,19 @@ export const FormAddRelease = () => {
 						name='descr'
 						placeholder=' Desciption'
 						value={descr}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col mb-3">
+					<label> KeyWords </label>
+					<textarea
+						className="form-control"
+						rows='3' cols='40'
+						name='keywords'
+						placeholder=' KeyWords'
+						value={keywords}
 						onChange={handleInputChange}
 					/>
 				</div>

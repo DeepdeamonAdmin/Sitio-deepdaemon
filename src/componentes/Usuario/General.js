@@ -54,7 +54,7 @@ export const General = ({ id }) => {
     lo = 2
   }
   if (avisos.length > 2) {
-    lo = 3
+    lo = 4
   }
   const options = {
     type: 'loop',
@@ -92,7 +92,7 @@ export const General = ({ id }) => {
         </Row>
       </div>
       <div className="embed-responsive">
-        <div className="wrapper" style={{ maxWidth: `${600 + 200 * (avisos.length - 3)}px`, margin: 'auto', marginTop: 4 }}>
+      <div className="wrapper" style={{ maxWidth: `${1000 + 200 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
           <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
             <div style={{ position: 'relative' }}>
               <SplideTrack>
@@ -105,6 +105,7 @@ export const General = ({ id }) => {
             </div>
           </Splide>
         </div>
+
         {/* <Container>
             <Carousel>
               {avisos.map((aviso) => (
@@ -234,7 +235,7 @@ export const General = ({ id }) => {
 
         <Container fluid className="section portfolio pub_sectionBg" id="Publicaciones">
           <h1 className="separator"> Publicaciones </h1>
-          <Tab.Container defaultActiveKey="congress">
+          <Tab.Container defaultActiveKey="magazine">
             <Nav className="projects">
               <Nav.Item>
                 <Nav.Link eventKey="congress">
