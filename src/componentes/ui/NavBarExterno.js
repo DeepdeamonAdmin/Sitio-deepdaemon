@@ -12,7 +12,7 @@ export const NavBarExterno = () => {
 
 	const handleLogout = () => {
 		dispatch(startLogout());
-		history.replace('/');
+		history('/', {replace: true});
 
 	}
     const { datos }  = useSelector( state => state.user );
