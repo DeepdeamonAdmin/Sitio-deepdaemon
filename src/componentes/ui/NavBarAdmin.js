@@ -14,7 +14,7 @@ export const NavBarAdmin = () => {
 
 	const handleLogout = () => {
 		dispatch(startLogout());
-		history.replace('/');
+		history('/', {replace: true});
 
 	}
 

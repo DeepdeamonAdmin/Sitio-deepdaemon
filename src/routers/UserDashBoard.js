@@ -19,7 +19,7 @@ export const UserDashBoard = () => {
         <NavBarUser/>
         <div>
                 <Routes>
-                    <Route  path="/" element={ <User /> } />
+                    <Route  path="" element={ <User /> } />
                     <Route path='tesis' element={ <Tesis/> } />
                     <Route path='publicaciones' element={ <Publications/> } />
                     <Route path='blog' element={ <Blog /> } />

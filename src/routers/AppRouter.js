@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
-import Swal from 'sweetalert2';
 //uso de rutas e
 import {
     BrowserRouter as Router,
