@@ -62,7 +62,7 @@ export const ModalCrearCuenta = () => {
                 </NavLink>
                 <div className="col-1"></div>
                 <NavLink to="/login">
-                    <button className="btn btn-primary"> Iniciar Sesión </button>
+                    <button className="btn btn-primary" onClick={closeModal}> Iniciar Sesión </button>
                 </NavLink>
             </row>
 
