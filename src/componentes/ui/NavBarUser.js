@@ -9,12 +9,11 @@ import logo from "../../assets/deepdaemon.png";
 export const NavBarUser = () => {
 
     const dispatch = useDispatch();
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         dispatch(startLogout());
-        history.replace('/user');   
-
+        navigate('/', {replace: true});
     }
 
     const { datos }  = useSelector( state => state.user );

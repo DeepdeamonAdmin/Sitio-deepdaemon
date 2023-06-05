@@ -5,16 +5,13 @@ import { RutaError } from '../componentes/ui/RutaError';
 import { EditInfoTesis } from '../componentes/users/EditInfoTesis';
 import { FormAddRelease } from '../componentes/users/FormAddRelease';
 import { Perfil } from '../componentes/users/Perfil';
-//import { Projects } from '../componentes/users/Projects';
 import { Tesis } from '../componentes/users/Tesis';
 import { Publications } from '../componentes/users/Publications';
 import { User } from '../componentes/users/User';
 import { Blog } from '../componentes/users/Blog';
-import { PublicationDetails } from '../componentes/Usuario/PublicationDetails';
 import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
 import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
 import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
-//import { Projects } from '../componentes/users/Projects';
 
 export const UserDashBoard = () => {
   return (
