@@ -20,7 +20,6 @@ import AvisosScreen from '../componentes/Admin/Avisos/AvisosScreen';
 import InstitucionesScreen from '../componentes/Admin/Instituciones/InstitucionesScreen';
 import CarrerasScreen from '../componentes/Admin/Carreras/CarrerasScreen';
 import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
-import FormEditLider from '../componentes/Admin/Lideres/FormEditLider';
 import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 import { General } from '../componentes/Usuario/General'
 import { FormAddRelease } from '../componentes/Admin/Publcaciones/FormAddRelease';
@@ -35,12 +34,13 @@ export const AdminDashBoard = () => {
 			<NavBarAdmin />
 			<div>
 				<Routes>
-					<Route path="/" element={<General />} />
+					<Route path="" element={<General />} />
 					<Route path="members" element={<MembersScreen />} />
 					<Route path="projects" element={<ProjectsScreen />} />
 					<Route path="projects/agregar" element={<FormAddProject />} />
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
 					<Route path="release" element={<ReleaseScreen />} />
+					<Route path="release/agregar" element={<FormAddRelease />} />
 					<Route path="alumnos" element={<AlumnoScreen />} />
 					<Route path="alumnos/agregar" element={<FormAddAlumno />} />
 					<Route path="externos" element={<ExternoScreen />} />

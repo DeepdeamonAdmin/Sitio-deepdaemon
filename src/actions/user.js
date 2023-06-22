@@ -10,6 +10,8 @@ import { loadUser } from '../helpers/loadUser';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadAllUsers } from '../helpers/loadAllUsers';
 
+import { loadWorks } from '../helpers/loadWorks';
+
 
 export const getUserRolUid = () => {
 	return async (dispatch, getState) => {
@@ -118,3 +120,12 @@ export const setUsers = (users) => ({
 	payload: users
 });
 
+export const startLoadinUserExt = () => {
+    return async( dispatch, getState ) => {
+        const { uid } = getState().auth;
+        const ruta =`Usuarios`;
+        const userExt = await loadAllUsers( ruta );
+        dispatch( setUsers( userExt ));
+        
+    }
+}

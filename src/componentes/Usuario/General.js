@@ -92,7 +92,7 @@ export const General = ({ id }) => {
         </Row>
       </div>
       <div className="embed-responsive">
-        <div className="wrapper" style={{ maxWidth: `${1000 + 200 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
+      <div className="wrapper" style={{ maxWidth: `${1000 + 200 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
           <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
             <div style={{ position: 'relative' }}>
               <SplideTrack>
@@ -105,6 +105,7 @@ export const General = ({ id }) => {
             </div>
           </Splide>
         </div>
+
         {/* <Container>
             <Carousel>
               {avisos.map((aviso) => (
@@ -234,16 +235,16 @@ export const General = ({ id }) => {
 
         <Container fluid className="section portfolio pub_sectionBg" id="Publicaciones">
           <h1 className="separator"> Publicaciones </h1>
-          <Tab.Container defaultActiveKey="congress">
+          <Tab.Container defaultActiveKey="magazine">
             <Nav className="projects">
               <Nav.Item>
                 <Nav.Link eventKey="congress">
-                  <h2 className="team_title">Congreso</h2>
+                  <h2 className="team_title">Congresos</h2>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="magazine">
-                  <h2 className="team_title">Revista</h2>
+                  <h2 className="team_title">Revistas</h2>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -255,21 +256,21 @@ export const General = ({ id }) => {
             <hr />
             <Tab.Content>
               <Tab.Pane eventKey="congress">
-                <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="article" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="magazine" >
-                <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="magazine" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="book" >
-                <div className="Container section" style={{ height: 380, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="book" />
                   </div>

@@ -10,7 +10,7 @@ export const ExternoDashBoard = () => {
         <NavBarExterno/>
         <div>
             <Routes>
-                <Route path="/" element={<General />} />
+                <Route path="" element={<General />} />
             </Routes>
         </div>
     </>

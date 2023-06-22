@@ -16,9 +16,9 @@ export const startNewPublication = ( formValues ) => {
 
         const { uid } = getState().auth;
         const { img } = getState().publications;
-
         const newPublication = {
             postType: formValues.postType || '',
+            urlImg: formValues.urlImg || '',
             descr: formValues.descr ||'',
             tech: formValues.tech || '',
             frontImg: img || 'img.jpg',
@@ -40,7 +40,8 @@ export const startNewPublication = ( formValues ) => {
             school: formValues.school || '',
             note: formValues.note || '',
             institution: formValues.institution || '',
-            display: formValues.display || 'No'
+            display: formValues.display || 'No',
+            keywords: formValues.keywords || '',
         }
         const newPublicationInd = {
 			postType: formValues.postType,
