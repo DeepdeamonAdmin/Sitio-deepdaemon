@@ -64,7 +64,7 @@ const PublicacionesCard = (item) => {
                 <div className="col-md-1">
                     <p>
                         <Link
-                            to={`/admin/tesis/${item.id}/${item}`}
+                            to={`/admin/release/editPub/${item.id}`}
                             className="btn btn-primary btn-sm">
                             Editar
                         </Link>

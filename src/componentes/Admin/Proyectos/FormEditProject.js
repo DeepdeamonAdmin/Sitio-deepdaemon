@@ -243,7 +243,7 @@ export const FormEditProject = ({ history }) => {
 						value={display}
 						onChange={handleInputChange}
 					>
-						<option value='Si' > Si </option>
+						<option value='Yes' > Si </option>
 						<option value='No' > No </option>
 					</select>
 				</div>
