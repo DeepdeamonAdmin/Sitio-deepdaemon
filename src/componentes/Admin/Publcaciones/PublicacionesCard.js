@@ -62,22 +62,22 @@ const PublicacionesCard = (item) => {
                     />
                 </div>*/}
                 <div className="col-md-1">
-                    {/*<p>
-                        <Link 
-                            to={ `/admin/tesis/${item.id }/${item}` }
-                            className ="btn btn-primary btn-sm">
-                                Edit
-                        </Link>
-                </p>*/}
-
                     <p>
+                        <Link
+                            to={`/admin/tesis/${item.id}/${item}`}
+                            className="btn btn-primary btn-sm">
+                            Editar
+                        </Link>
+                    </p>
+
+                    {/* <p>
                         <button
                             type="button"
                             className="btn btn-success btn-md"
                             onClick={handleDelete}
                         >
                             Delete</button>
-                    </p>
+                    </p> */}
                 </div>
 
             </div>
