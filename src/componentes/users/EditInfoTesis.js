@@ -73,9 +73,14 @@ export const EditInfoTesis = () => {
 		selectedDirectores.push({ value: u, label: u })
 	))
 
-	const options = []
-	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
-		options.push({ value: u.id, label: u.nombre })
+	const optionsD = []
+	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
+		optionsD.push({ value: u.id, label: u.nombre })
+	))
+
+	const optionsA = []
+	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
+		optionsA.push({ value: u.id, label: u.nombre })
 	))
 
 	const [directores, setDirectores] = useState({
@@ -247,7 +252,7 @@ export const EditInfoTesis = () => {
 						<Select
 							isMulti
 							name="directores"
-							options={options}
+							options={optionsD}
 							className="basic-multi-select"
 							classNamePrefix="select"
 							value={directores.selectedOption}
@@ -260,7 +265,7 @@ export const EditInfoTesis = () => {
 						<Select
 							isMulti
 							name="directores"
-							options={options}
+							options={optionsD}
 							className="basic-multi-select"
 							classNamePrefix="select"
 							value={directores.selectedOption}
@@ -275,7 +280,7 @@ export const EditInfoTesis = () => {
 						<Select
 							isMulti
 							name="alumnos"
-							options={options}
+							options={optionsA}
 							className="basic-multi-select"
 							classNamePrefix="select"
 							value={alumnos.selectedOption}
@@ -287,7 +292,7 @@ export const EditInfoTesis = () => {
 						<label>Agregar alumno</label>
 						<Select
 							name="alumno"
-							options={options}
+							options={optionsA}
 							className="basic-single"
 							classNamePrefix="select"
 							value={alumnos.selectedOption}

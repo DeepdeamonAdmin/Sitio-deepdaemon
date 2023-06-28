@@ -75,9 +75,14 @@ export const FormAddTesisDoctorado = () => {
 	}
 
 	//Checkbox directores
-	const options = []
-	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
-		options.push({ value: u.id, label: u.nombre })
+	const optionsD = []
+	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
+		optionsD.push({ value: u.id, label: u.nombre })
+	))
+
+	const optionsA = []
+	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
+		optionsA.push({ value: u.id, label: u.nombre })
 	))
 
 	const [asesores, setAsesores] = useState({
@@ -139,7 +144,7 @@ export const FormAddTesisDoctorado = () => {
 
 			<div className="form-group row">
 				<div className="col mb-3">
-					<label> Nombre del proyecto </label>
+					<label> Nombre de tesis </label>
 					<input
 						className="form-control"
 						type='text'
@@ -174,7 +179,7 @@ export const FormAddTesisDoctorado = () => {
 					/>
 				</div>
 				<div className="col mb-3">
-					<label>Status del proyecto </label>
+					<label>Status de la tesis </label>
 					<select
 						className="form-control"
 						name='estado'
@@ -216,7 +221,7 @@ export const FormAddTesisDoctorado = () => {
 					<Select
 						isMulti
 						name="directores"
-						options={options}
+						options={optionsD}
 						className="basic-multi-select"
 						classNamePrefix="select"
 						value={asesores.selectedOption}
@@ -227,7 +232,7 @@ export const FormAddTesisDoctorado = () => {
 					<label>Agregar alumno</label>
 					<Select
 						name="alumno"
-						options={options}
+						options={optionsA}
 						className="basic-single"
 						classNamePrefix="select"
 						value={alumnos.selectedOption}
@@ -254,7 +259,7 @@ export const FormAddTesisDoctorado = () => {
 						value={display}
 						onChange={handleInputChange}
 					>
-						<option value='Si' > Si </option>
+						<option value='Yes' > Si </option>
 						<option value='No' > No </option>
 					</select>
 				</div>

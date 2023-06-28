@@ -261,7 +261,13 @@ export const FormEditarAlumno = (props) => {
 						value={rol}
 						onChange={handleInputChange}
 					>
-						<option value='alumno' > Alumno </option>
+						{alumno.rol === 'alumno' && (
+							<option value='alumno' > Alumno </option>
+						)}
+						{alumno.rol === 'administrador' && (
+							<option value='administrador' > Líder </option>
+						)}
+
 					</select>
 				</div>
 				<div className="col mb-3">
@@ -296,7 +302,7 @@ export const FormEditarAlumno = (props) => {
 
 			</div>
 			<div className="row">
-				<div className="col mb-2">
+				<div className="col mb-3">
 					<label> Escuela </label>
 					<select
 						className="form-control"
@@ -317,7 +323,7 @@ export const FormEditarAlumno = (props) => {
 
 					</select>
 				</div>
-				<div className="col mb-2">
+				<div className="col mb-3">
 					<label> Carrera </label>
 					<select
 						className="form-control"
@@ -334,6 +340,30 @@ export const FormEditarAlumno = (props) => {
 						}
 
 					</select>
+				</div>
+				<div className="col mb-3">
+					<label>Mostrar en página principal</label>
+					<select
+						className="form-control"
+						name='display'
+						value={display}
+						onChange={handleInputChange}
+					>
+						<option value='Y' > Si </option>
+						<option value='N' > No </option>
+					</select>
+				</div>
+				<div className="col mb-3">
+						<label>Considerar para ser autor</label>
+						<select
+							className="form-control"
+							name='esAutor'
+							value={esAutor}
+							onChange={handleInputChange}
+						>
+							<option value='Y' > Si </option>
+							<option value='N' > No </option>
+						</select>
 				</div>
 			</div>
 			{/* <div className="row"> */}
@@ -401,7 +431,7 @@ export const FormEditarAlumno = (props) => {
 
 			<div className="row">
 				<div className="col-md-6 mb-5">
-				<label> Proyectos </label>
+					<label> Proyectos </label>
 					<ul>
 						{listProject.map(item => (
 							<li>{item.name}</li>

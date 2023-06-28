@@ -209,12 +209,12 @@ export const General = ({ id }) => {
             <Nav className="projects">
               <Nav.Item>
                 <Nav.Link eventKey="indevelop">
-                  <h2 className="team_title">Novedades</h2>
+                  <h2 className="team_title">En desarrollo</h2>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="completed">
-                  <h2 className="team_title">Destacado</h2>
+                  <h2 className="team_title">Finalizados</h2>
                 </Nav.Link>
               </Nav.Item>
             </Nav>

@@ -4,13 +4,13 @@ import { getProjectStatus } from '../../selectors/get/getProjectStatus';
 import { ProjectDetaills } from './ProjectDetaills';
 import { ModalInfoProject } from './ModalInfoProject';
 import { useSelector, useDispatch } from 'react-redux';
-import {db} from '../../firebase/firebase-config';
+import { db } from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
-import {getAuth,} from 'firebase/auth';
+import { getAuth, } from 'firebase/auth';
 
 
 
-export const ProjectScreen = ({ status1, status2}) => {
+export const ProjectScreen = ({ status1, status2 }) => {
 
 	const dispatch = useDispatch();
 	const [currentModal, setCurrentModal] = useState(null);
@@ -20,13 +20,13 @@ export const ProjectScreen = ({ status1, status2}) => {
 	React.useEffect(() => {
 		const getProjects = async () => {
 			try {
-                const ref = collection(db, "Proyectos")
+				const ref = collection(db, "Proyectos")
 				const q = query(ref, where("estado", "in", [status1, status2]))
-                console.log(q)
-                const Data = await getDocs(q);
-				const arrayData = Data.docs.map(doc => ({id: doc.id, ...doc.data()}))
+				console.log(q)
+				const Data = await getDocs(q);
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setProjects(arrayData)
-				
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -58,9 +58,7 @@ export const ProjectScreen = ({ status1, status2}) => {
 								<h5 className="card-title"> {project.name} </h5>
 								<ProjectDetaills color={"primary"} project={project} />
 							</div>
-							{/*<div className="card-body text-primary">
-								<ProjectDetaills color={"primary"} project={project} />
-							</div>*/}
+
 						</div>
 					)
 				))
