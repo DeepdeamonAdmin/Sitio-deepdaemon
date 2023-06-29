@@ -4,7 +4,7 @@ import { collection, getDocs, where, get, query } from "firebase/firestore";
 import { PublicationDetaills } from './PublicationDetaills';
 import { VerMas } from '../ui/VerMas';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
-import { VerMasProject } from '../ui/VerMasProject';
+import { VerMasPublication } from '../ui/VerMasPublication';
 
 export const PublicationScreen = ({type}) => {
  //const { projectsAll } = useSelector(state => state.publications);
@@ -54,7 +54,7 @@ export const PublicationScreen = ({type}) => {
 								<div className="card-body text-dark">
 									<h6 className="card-title"> {publication.title} </h6>
 									<ModalCrearCuenta />
-									<VerMasProject publicacion={publication}/>
+									<VerMasPublication publicacion={publication}/>
 								</div>
 							</div>
 						)

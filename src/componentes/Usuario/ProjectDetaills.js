@@ -11,7 +11,7 @@ import "../../styles/DeepDaemon.css";
 
 Modal.setAppElement('#app');
 
-export const ProjectDetaills = ({ color, project }) => {
+export const ProjectDetaills = ({project }) => {
   const dispatch = useDispatch();
   const [currentModal, setCurrentModal] = useState(null);
   const [showInf, setShowInfo] = useState(false);

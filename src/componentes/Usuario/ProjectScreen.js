@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../firebase/firebase-config';
 import { collection, getDocs, where, get, query } from "firebase/firestore";
 import { getAuth, } from 'firebase/auth';
+import { VerMasProject } from '../ui/VerMasProject';
+import { ModalCrearCuenta } from './ModalCrearCuenta';
 
 
 
@@ -56,7 +58,8 @@ export const ProjectScreen = ({ status1, status2 }) => {
 							/>
 							<div className="card-body text-primary">
 								<h5 className="card-title"> {project.name} </h5>
-								<ProjectDetaills color={"primary"} project={project} />
+								<ModalCrearCuenta/>
+								<VerMasProject project={project} />
 							</div>
 
 						</div>
