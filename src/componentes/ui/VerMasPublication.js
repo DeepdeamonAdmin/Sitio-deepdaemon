@@ -5,12 +5,12 @@ import { uiOpenModal } from '../../actions/ui';
 import { auth } from '../../firebase/firebase-config';
 
 import './Ui.css';
-import { ProjectDetaills } from '../Usuario/ProjectDetaills';
+import { PublicationDetaills } from '../Usuario/PublicationDetaills';
 
-export const VerMasProject = (project) => {
+export const VerMasPublication = (publicacion) => {
 
     const dispatch = useDispatch();
-    const proy = project;
+    const pub = publicacion;
 
     const handleClickNew = () => {
         dispatch(uiOpenModal());
@@ -19,7 +19,7 @@ export const VerMasProject = (project) => {
     const user = auth.currentUser;
     
 
-    if (!user) return <div style={{marginTop:-15 ,marginBottom: -15}}>
+    if (!user) return <div style={{position:'absolute', bottom:10}}>
     <button
         className="btn btn-success"
         onClick={handleClickNew}
@@ -28,7 +28,7 @@ export const VerMasProject = (project) => {
     </button>
     </div>
 
-    return <ProjectDetaills project = {proy.project}/>
+    return <PublicationDetaills publication = {pub.publicacion}/>
 
 
 
