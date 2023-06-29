@@ -405,13 +405,13 @@ export const FormAddRelease = () => {
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
-						value={selectValue}
+						value={postType}
 						className="form-control"
 						name='postType'
 						onChange={handleSelectChange}
 					>
 						<option value=''>Selecciona una opción</option>
-						<option value='article' > article </option>
+						<option value='magazine' > article </option>
 						<option value='book' > book </option>
 						<option value='booklet' > booklet </option>
 						<option value='conference' > conference </option>
