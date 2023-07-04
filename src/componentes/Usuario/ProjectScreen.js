@@ -37,35 +37,48 @@ export const ProjectScreen = ({ status1, status2 }) => {
 	}, [])
 
 	return (
-		<div className="cards-cols animate__animated animate__fadeIn">
-			{projects.length === 0 && <p className="team_title">No se encontraron proyectos por el momento.</p>}
-			{
-				projects.map(project => (
-					//imprimir solamente si el estado es igual al seleccionado
-					(project.display === "Yes") && (
-						<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ maxWidth: 450, MaxHeight: 150 }} >
-							<img
-								className="card-img"
-								src={project.urlImg}
-								//Centrar la imagen
-								style={{
-									objectFit: 'cover',
-									objectPosition: 'center',
-									height: "110px",
-									width: '110px'
-								}}
-								alt="member"
-							/>
-							<div className="card-body text-primary">
-								<h5 className="card-title"> {project.name} </h5>
-								<ModalCrearCuenta/>
-								<VerMasProject project={project} />
-							</div>
-
+		<div className="container-fluid card-columns">
+		  <div className="row">
+		  {projects.length === 0 && <p className="team_title"> No se encontraron proyectos por el momento.</p>}
+			{projects.map((project) => (
+			  // Imprimir solamente si el estado es igual al seleccionado
+			  project.display === "Yes" && (
+				<div key={project.id} className="col-md-12 mb-3">
+				  <div className="card" style={{ margin: 0 }}>
+					<div className="row g-0">
+					  <div className="col-md-3">
+						<img
+						  className="card-img"
+						  src={project.urlImg}
+						  style={{
+							objectFit: 'cover',
+							objectPosition: 'center',
+							height: "90px",
+							width: '90px'
+						  }}
+						  alt="member"
+						/>
+					  </div>
+					  <div className="col-md-9">
+						<div className="card-body text-primary d-flex flex-column h-100">
+						  <h6 className="card-title" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+							{project.name}
+						  </h6>
+						  <div className="flex-grow-1">
+							<p className="card-text">{project.description}</p>
+						  </div>
+						  <div className="text-right">
+							<ModalCrearCuenta />
+							<VerMasProject project={project} />
+						  </div>
 						</div>
-					)
-				))
-			}
-		</div >
-	)
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  )
+			))}
+		  </div>
+		</div>
+	  );	  
 }

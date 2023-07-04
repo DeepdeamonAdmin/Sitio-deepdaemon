@@ -35,33 +35,45 @@ export const TesisScreen = ({ status1, status2 }) => {
 	console.log(tesis)
 
 	return (
-		<div className="cards-cols animate__animated animate__fadeIn">
+		<div className="container-fluid card-columns">
 			{tesis.length === 0 && <p>No se encontraron tesis por el momento.</p>}
-			{
-				tesis.map(t => (
-					//imprimir solamente si el estado es igual al seleccionado
-					(t.display === "Yes") && (
-						<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 350, MaxHeight: 150 }} >
-							<img
-								className="card-img"
-								src={t.urlImg}
-								//Centrar la imagen
-								style={{
-									objectFit: 'cover',
-									objectPosition: 'center',
-									height: "110px",
-									width: '110px'
-								}}
-								alt="member"
-							/>
-							<div className="card-body text-primary">
-								<h5 className="card-title"> {t.name} </h5>
-								<ProjectDetaills color={"primary"} project={t} />
-							</div>
+		  <div className="row">
+			{tesis.map((t) => (
+			  // Imprimir solamente si el estado es igual al seleccionado
+			  t.display === "Yes" && (
+				<div key={t.id} className="col-md-12 mb-3">
+				  <div className="card" style={{ margin: 0 }}>
+					<div className="row g-0">
+					  <div className="col-md-3">
+						<img
+						  className="card-img"
+						  src={t.urlImg}
+						  style={{
+							objectFit: 'cover',
+							objectPosition: 'center',
+							height: "90px",
+							width: '90px'
+						  }}
+						  alt="member"
+						/>
+					  </div>
+					  <div className="col-md-9">
+						<div className="card-body text-primary d-flex flex-column h-100">
+						  <h6 className="card-title" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+							{t.name}
+						  </h6>
+						  <div className="text-right">
+						  <ProjectDetaills color={"primary"} project={t} />
+						  </div>
 						</div>
-					)
-				))
-			}
-		</div >
-	)
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  )
+			))}
+		  </div>
+		</div>
+	  );
+	  
 }
