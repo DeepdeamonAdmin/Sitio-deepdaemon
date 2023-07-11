@@ -362,6 +362,7 @@ export const FormAddRelease = () => {
 	const navigate = useNavigate();
 	const handleSubmit = () => {
 		formValues.urlImg = datos;
+		console.log(formValues.postType);
 		dispatch(startNewPublication(formValues));
 		reset();
 		navigate('/admin/release');
@@ -408,7 +409,7 @@ export const FormAddRelease = () => {
 						value={postType}
 						className="form-control"
 						name='postType'
-						onChange={handleSelectChange}
+						onChange={handleInputChange}
 					>
 						<option value=''>Selecciona una opción</option>
 						<option value='magazine' > article </option>
