@@ -31,36 +31,50 @@ export const PublicationScreen = ({type}) => {
 		return <p className="team_title">No hay publicaciones disponibles por el momento.</p>;
 	}
 	return (
-		<div className="card-columns cards-cols animate__animated animate__fadeIn">
-			{
-				publications.map(publication => {
-					return (
-						//imprimir solamente si el estado es igual al seleccionado
-						(publication.display === "Yes") && (
-							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ MaxWidth: 360, height: 170 , position:'relative' }}>
-								<img
-								className="card-img mt-3 ml-2"
-								src={publication.urlImg}
-								//Centrar la imagen
-								style={{
-									objectFit: 'cover',
-									objectPosition: 'center',
-									height: "110px",
-									width: '110px'
-								}}
-								alt="member"
-							/>
-								
-								<div className="card-body text-dark">
-									<h6 className="card-title"> {publication.title} </h6>
-									<ModalCrearCuenta />
-									<VerMasPublication publicacion={publication}/>
-								</div>
-							</div>
-						)
-					);
-				})
-			}
-		</div >
-	)
+        <div className="container-fluid">
+            {publications.length === 0 && <p>No se encontraron publicaciones por el momento.</p>}
+            <div className="row">
+                {publications.map((publication, index) => (
+                    // Imprimir solamente si el estado es igual al seleccionado
+                    publication.display === "Yes" && (
+                        <div key={publication.id} className="col-md-4 mb-3">
+                            <div className="card h-100" style={{ margin: 0 }}>
+                                <div className="row g-0">
+                                    <div className="col-md-3">
+                                        <img
+                                            className="card-img"
+                                            src={publication.urlImg}
+                                            style={{
+                                                objectFit: 'cover',
+                                                objectPosition: 'center',
+                                                height: "100%",
+                                                width: '100%',
+                                                maxHeight: "90px",
+                                                maxWidth: '90px'
+                                            }}
+                                            alt="member"
+                                        />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="card-body text-dark d-flex flex-column h-100">
+                                            <h6 className="card-title" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                {publication.title}
+                                            </h6>
+                                            <div className="text-right">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 text-right">
+                                                <ModalCrearCuenta />
+                                                <VerMasPublication publicacion={publication} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                ))}
+            </div>
+        </div>
+    );
 }
