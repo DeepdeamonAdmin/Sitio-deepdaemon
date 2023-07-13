@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
@@ -10,7 +10,7 @@ import { editPublication } from '../../../actions/edit';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { ModalGalleryAddProjects } from '../Proyectos/ModalGalleryAddProjects';
 
-export const FormAddRelease = () => {
+export const FormEditRelease = () => {
 	const auth = getAuth();
 	const currentUser = auth.currentUser.displayName;
 	// UseState para el select
@@ -301,14 +301,9 @@ export const FormAddRelease = () => {
 	}, [selectValue])
 
 	// * Aquí obtenemos el ID de la publicación para usar este formulario para editarla
-	const {idRelease} = useParams()
+	const { idRelease } = useParams()
 	const publications = useSelector(state => state.publications)
 	const publication = publications["publications"].find(p => p.id === idRelease)
-
-	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
-	const handleSelectChange = ({target}) => {
-		setSelectValue(target.value)
-	}
 
 	const dispatch = useDispatch();
 	const [formValues, handleInputChange, reset] = useForm({
@@ -341,11 +336,17 @@ export const FormAddRelease = () => {
 		keywords: '',
 	}, publication);
 
-	const { postType,urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
+	const { postType, urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display, keywords} = formValues;
+		organization, school, note, institution, display, keywords } = formValues;
 
+	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
+	const handleSelectChange = (event) => {
+		const { target } = event;
+		setSelectValue(target.value);
+		handleInputChange(event);
+	  }
 	//Galeria
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
@@ -407,6 +408,7 @@ export const FormAddRelease = () => {
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
+						value={postType}
 						className="form-control"
 						name='postType'
 						onChange={handleSelectChange}
@@ -439,7 +441,7 @@ export const FormAddRelease = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
-				
+
 				<div className="col mb-3">
 					<label>Modal Media </label>
 					<input

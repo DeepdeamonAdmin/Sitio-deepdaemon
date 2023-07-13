@@ -51,12 +51,12 @@ export const startNewPublication = ( formValues ) => {
         const docRef2 = await addDoc(collection(db, `Usuarios/${uid}/Publications`), newPublicationInd );
     
         if(docRef1 && docRef2 ){
-            Swal.fire('Reporte Enviado');
+            Swal.fire('Publicación agregada');
             dispatch( activePublication( docRef1.id, newPublication ) ); 
             dispatch( addNewPublication( docRef1.id, newPublication ) );
             dispatch(uiCloseModal()) 
         }else{
-            Swal.fire('Error al enviar Reporte');
+            Swal.fire('Error al registrar la publicación');
         }
     }
 }

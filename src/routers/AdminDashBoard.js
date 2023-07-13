@@ -26,6 +26,7 @@ import { FormAddRelease } from '../componentes/Admin/Publcaciones/FormAddRelease
 import { FormAddSign } from '../componentes/Admin/Avisos/FormAddSign';
 import { FormAddAlumno } from '../componentes/Admin/Alumnos/FormAddAlumno';
 import { FormAddLider } from '../componentes/Admin/Lideres/FormAddLider';
+import { FormEditRelease } from '../componentes/Admin/Publcaciones/FormEditRelease';
 
 
 export const AdminDashBoard = () => {
@@ -53,7 +54,7 @@ export const AdminDashBoard = () => {
 					<Route path="externos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					<Route path="alumnos/editar/:idAlumno" element={<FormEditarAlumno />} />
 					{/* TODO: Hay que hacer el formulario de editar publicación o reutilizarlo */}
-					<Route path="release/editPub/:idRelease" element={<FormAddRelease/>} />
+					<Route path="release/editPub/:idRelease" element={<FormEditRelease/>} />
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="lideres/agregar" element={<FormAddLider />} />
 					{/*Se reutilizó el formuladrio de editar alumno para el lider*/}
