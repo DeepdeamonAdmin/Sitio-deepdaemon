@@ -2,7 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { AppRouter } from './routers/AppRouter';
+import { AppRouterMobile } from './routers/AppRouterMobile';
 import { startLogout } from './actions/auth';
+import { isMobile } from 'react-device-detect';
 
 
 export const AppDeepDaemon = () => {
@@ -36,12 +38,23 @@ export const AppDeepDaemon = () => {
         document.addEventListener('mousemove', resetTimer);
     }
 
+
     startTimer();
-    return (
+    if(isMobile){
+        return(
 
-        <Provider store={store}>
-            <AppRouter />
-        </Provider>
+            <Provider store={store}>
+                <AppRouterMobile />
+            </Provider>
 
-    )
+        )
+    }else{
+        return (
+
+            <Provider store={store}>
+                <AppRouter />
+            </Provider>
+    
+        )
+    }
 }

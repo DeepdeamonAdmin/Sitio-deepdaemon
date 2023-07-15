@@ -53,8 +53,8 @@ export const ProjectScreen = ({ status1, status2 }) => {
 						  style={{
 							objectFit: 'cover',
 							objectPosition: 'center',
-							height: "90px",
-							width: '90px'
+							height: "100px",
+							width: '100px'
 						  }}
 						  alt="member"
 						/>

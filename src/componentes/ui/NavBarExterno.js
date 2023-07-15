@@ -7,7 +7,7 @@ import { startLogout } from '../../actions/auth';
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 
 export const NavBarExterno = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const history = useNavigate();
 
 	const handleLogout = () => {
@@ -30,7 +30,7 @@ export const NavBarExterno = () => {
         Lab. CCC{" "}
       </NavLink>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNavAltMarkup"

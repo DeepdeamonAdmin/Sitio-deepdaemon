@@ -34,7 +34,7 @@ export const AlumnoCard = (item) => {
 							marginLeft : '10%',
 							with : '95%',
 							height : '90%',
-							borderRadius : "5%"
+							borderRadius : "7%"
 						}}  
 					/>
 				</div>
@@ -42,18 +42,19 @@ export const AlumnoCard = (item) => {
 					<div className="card-body p-1">
 						<h5 className="card-title ml-2 mt-2"> {item.nombre} </h5>
 						<p className="card-text"> {item.email} </p>
+						<Link to={`editar/${item.id}`} className="btn btn-primary btn-sm p-2">
+							Editar
+						</Link>
 					</div>
 				</div>
-				<div className="col-sm-3 d-flex flex-column ml-1">
+				{/*<div className="col-sm-3 d-flex flex-column ml-1">
 					
 
 						{/* <button className="btn btn-primary" onClick={() => dispatch(uiOpenModalEdit())}>
 							Editar
 						</button> */}
 
-						<Link to={`editar/${item.id}`} className="btn btn-primary btn-sm p-2">
-							Editar
-						</Link>
+						
 					
 
 					{/* <p>
@@ -66,8 +67,8 @@ export const AlumnoCard = (item) => {
 							type="button"
 							className="btn btn-secondary btn-sm p-2"
 						>Proyectos</button>
-					</p> */}
-				</div>
+					</p> 
+					</div>*/}
 
 			</div>
 		</div >

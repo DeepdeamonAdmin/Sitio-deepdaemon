@@ -15,7 +15,7 @@ export const NavBar = () => {
         Lab. CCC{" "}
       </NavLink>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNavAltMarkup"
@@ -23,7 +23,7 @@ export const NavBar = () => {
         aria-expanded="true"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">

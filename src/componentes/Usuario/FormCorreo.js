@@ -63,35 +63,43 @@ const FormCorreo = () => {
         <div id="formulario" style={{display: "none"}}>
             <form onSubmit={sendEmail}>
                 <table>
-                    <tr>
-                        <td>
-                            <label>Nombre:</label>
-                        </td>
-                        <td>
-                            <input className="col mb-2" type="text" name="nombre" id="nombre" placeholder='Tu nombre' required/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Correo:</label>
-                        </td>
-                        <td>
-                            <input className="col mb-2" type="text" name="correo" id="correo" placeholder='Tu email' required/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Mensaje:</label>
-                        </td>
-                        <td>
-                            <textarea className="col mb-2" name="mensaje" id="mensaje" placeholder='Lo que nos quieres decir' required></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input className="btn2 btn-primary btn-large btn-block mb-3" type="submit" value="Enviar" />
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>Nombre:</label>
+                            </td>
+                            <td>
+                                <input className="col mb-2" type="text" name="nombre" id="nombre" placeholder='Tu nombre' required/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>Correo:</label>
+                            </td>
+                            <td>
+                                <input className="col mb-2" type="text" name="correo" id="correo" placeholder='Tu email' required/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>Mensaje:</label>
+                            </td>
+                            <td>
+                                <textarea className="col mb-2" name="mensaje" id="mensaje" placeholder='Lo que nos quieres decir' required></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td colSpan="2">
+                                <input className="btn2 btn-primary btn-large btn-block mb-3" type="submit" value="Enviar" />
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </form>
         </div>

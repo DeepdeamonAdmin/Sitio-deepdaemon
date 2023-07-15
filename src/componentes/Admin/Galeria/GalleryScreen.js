@@ -9,9 +9,13 @@ export const GalleryScreen = () => {
 		<div>
 			<h1>Pagina Galeria</h1>
 			<ModalAddGalery />
-			<AddNewFab />
-			<div className='section'>
-				<div className="card-columns ">
+			<div className='row'>
+				<div className="col-md-2 mb-2">
+					<AddNewFab/>
+				</div>
+			</div>
+			<div className='section' style={{position: 'static'}}>
+				<div className="card-columns " style={{display: 'flex', flexWrap: "wrap"}}>
 					<GalleryList />
 				</div>
 			</div>

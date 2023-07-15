@@ -79,14 +79,14 @@ export const General = ({ id }) => {
             <hr />
             <h2>Comunidad de conocimiento</h2>
           </div>
-          <div class="col-sm">
+          <div className="col-sm">
             <iframe
               className="embed-responsive"
               src="https://www.youtube.com/embed/OG0w_4qDiy8"
               title="YouTube video player"
               gesture="media"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
         </Row>
@@ -394,11 +394,11 @@ export const General = ({ id }) => {
             <br />
             Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
           </p>
-          <p>
+          <div>
             <FormCorreo />
             <span className="icon icon-envelop" />
             <a href="mailto:contacto@deepdaemon.org">contacto@deepdaemon.org </a>
-          </p>
+          </div>
           <p>
             <a href="https://twitter.com">
               <span className="icon icon-twitter" />
