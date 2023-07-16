@@ -46,14 +46,17 @@ export const GeneralMobile = ({ id }) => {
     getAvisos();
   }, []);
 
-  //Opciones para configurar el carrusel 
+  //Opciones para configurar el carrusel
   let lo = 0
-  if (avisos.length <= 2) {
-    lo = 2
+  if(window.innerWidth<700||avisos.length<2)lo=1;
+  else if(window.innerWidth<1000&&avisos.length>2)lo=2;
+  else lo=3;
+  {/*if (avisos.length <= 2) {
+    lo = 1
   }
   if (avisos.length > 2) {
-    lo = 4
-  }
+    lo = 1
+  }*/}
   const options = {
     type: 'loop',
     gap: '2rem',
@@ -69,7 +72,7 @@ export const GeneralMobile = ({ id }) => {
     <div className="">
       <div className="d-flex flex-row dd_header">
         <Row className="d-flex flex-row">
-          <div className="col-sm" id="Home">
+          <div className="" id="Home">
             <img src={cic} className="ddcic" alt="cic" />
             <img src={logo} className="ddlogo" alt="logo" />
             <h1>Laboratorio de Ciencias </h1>
@@ -77,41 +80,22 @@ export const GeneralMobile = ({ id }) => {
             <hr />
             <h2>Comunidad de conocimiento</h2>
           </div>
-          <div className="col-sm">
-          </div>
         </Row>
       </div>
       <div className="embed-responsive">
-      <div className="wrapper" style={{ maxWidth: `${1000 + 200 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
-          <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
-            <div style={{ position: 'relative' }}>
-              <SplideTrack>
-                {avisos.map((aviso) => (
-                  <SplideSlide>
-                    <img src={aviso.photo} />
-                  </SplideSlide>
-                ))}
-              </SplideTrack>
-            </div>
-          </Splide>
+        <div className="wrapper" style={{ maxWidth: `${1000 + 200 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
+            <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
+              <div style={{ position: 'relative' }}>
+                <SplideTrack>
+                  {avisos.map((aviso) => (
+                    <SplideSlide>
+                      <img src={aviso.photo} />
+                    </SplideSlide>
+                  ))}
+                </SplideTrack>
+              </div>
+            </Splide>
         </div>
-
-        {/* <Container>
-            <Carousel>
-              {avisos.map((aviso) => (
-                <Carousel.Item key={aviso.id}>
-                  <Image
-                    src={aviso.photo}
-                    style={{ width: "100%", height: "900px" }}
-                  />
-                  <Carousel.Caption>
-                    <h3>{aviso.name}</h3>
-                    <p>{aviso.desc}</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Container> */}
         <Container className="section" id="Nosotros">
           <h1>Un poco sobre nosotros</h1>
           <hr />
@@ -125,7 +109,7 @@ export const GeneralMobile = ({ id }) => {
 
         <Container className="section">
           <Row>
-            <Col>
+            <Col className="col-12 p-1">
               <div className="text-center">
                 <span className="icon icon-eye" />
               </div>
@@ -138,7 +122,7 @@ export const GeneralMobile = ({ id }) => {
                 comercial y social.
               </p>
             </Col>
-            <Col>
+            <Col className="col-12 p-1">
               <div className="text-center">
                 <span className="icon icon-quill" />
               </div>
@@ -150,7 +134,7 @@ export const GeneralMobile = ({ id }) => {
                 grupo de trabajo.
               </p>
             </Col>
-            <Col>
+            <Col className="col-12 p-1">
               <div className="text-center">
                 <span className="icon icon-heart" />
               </div>
@@ -258,7 +242,7 @@ export const GeneralMobile = ({ id }) => {
         <br></br>
 
         <br></br>
-       
+        
         <br></br>
 
         <br></br>

@@ -55,18 +55,6 @@ export const NavBarMobile = () => {
                         <Link
                             activeClass="active"
                             className="nav-item"
-                            to="Proyectos"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            onClick={handleClick}
-                        >
-                            Proyectos
-                        </Link>
-                        <Link
-                            activeClass="active"
-                            className="nav-item"
                             to="Lideres"
                             spy={true}
                             smooth={true}
@@ -75,6 +63,18 @@ export const NavBarMobile = () => {
                             onClick={handleClick}
                         >
                             Lideres
+                        </Link>
+                        <Link
+                            activeClass="active"
+                            className="nav-item"
+                            to="Proyectos"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                            onClick={handleClick}
+                        >
+                            Proyectos
                         </Link>
                         <Link
                             activeClass="active"

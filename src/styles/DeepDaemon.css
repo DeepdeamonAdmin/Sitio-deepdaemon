@@ -167,6 +167,7 @@
     min-height: 300px;
     align-items: stretch;
     display: flex;
+    padding: 0px;
   }
 
   .imageleader{
@@ -334,6 +335,10 @@
     width: 100%;
     height: 100%;
     z-index: 98;
+}
+.section.white{
+  padding-left: 25px;
+  padding-right: 25px;
 }
   @import url("https://use.fontawesome.com/releases/v5.0.10/css/all.css");
   
