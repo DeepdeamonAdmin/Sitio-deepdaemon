@@ -34,29 +34,79 @@ export const NavBarMobile = () => {
                 <NavLink to="/" className="navbar-brand mb-0">
                     Lab. CCC
                 </NavLink>
-                {/*<div className="navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
+                
+            </div>
+            
+            <div className={`links_mobile ${clicked ? 'active' : ''}`}>
+                <div className="navbar-collapse" id="navbarNavAltMarkup" style={{justifyContent:"center"}}>
+                    <div className="navbar-nav" id="links_items_mobile" style={{display: "flex", flexDirection:"column"}}>
                         <Link
-                            activeClass={clicked ? 'active' : ''}
-                            className="nav-item nav-link"
+                            activeClass="active"
+                            className="nav-item"
                             to="Nosotros"
                             spy={true}
                             smooth={true}
                             offset={-70}
                             duration={500}
+                            onClick={handleClick}
                         >
                             Nosotros
                         </Link>
+                        <Link
+                            activeClass="active"
+                            className="nav-item"
+                            to="Proyectos"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                            onClick={handleClick}
+                        >
+                            Proyectos
+                        </Link>
+                        <Link
+                            activeClass="active"
+                            className="nav-item"
+                            to="Lideres"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                            onClick={handleClick}
+                        >
+                            Lideres
+                        </Link>
+                        <Link
+                            activeClass="active"
+                            className="nav-item"
+                            to="Equipo"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                            onClick={handleClick}
+                        >
+                            Equipo
+                        </Link>
+                        <Link
+                            activeClass="active"
+                            className="nav-item"
+                            to="Contacto"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                            onClick={handleClick}
+                        >
+                            Contacto
+                        </Link>
                     </div>
-                </div>*/}
-            </div>
-            
-            <div className={`links_mobile ${clicked ? 'active' : ''}`}>
-                <a href="/" className="links_items_mobile">Nosotros</a>
+                </div>
+                {/*<a href="/" className="links_items_mobile">Nosotros</a>
                 <a href="/" className="links_items_mobile">Lideres</a>
                 <a href="/" className="links_items_mobile">Proyectos</a>
                 <a href="/" className="links_items_mobile">Equipo</a>
-                <a href="/" className="links_items_mobile">Contacto</a>
+                <a href="/" className="links_items_mobile">Contacto</a>*/}
             </div>
             <div className="nav-item" style={{position:"absolute", right:"10px"}}>
                 <BurguerButton clicked={clicked} handleClick={handleClick}/>
