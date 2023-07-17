@@ -43,7 +43,7 @@ export const NavBarMobileAuth = () => {
                         <Link
                             activeClass="active"
                             className="nav-item"
-                            to="Nosotros"
+                            to="/Nosotros"
                             spy={true}
                             smooth={true}
                             offset={-70}
@@ -100,8 +100,15 @@ export const NavBarMobileAuth = () => {
                         >
                             Contacto
                         </Link>
-                        <a href="/" onClick={handleLogout} className="text-white" style={{textDecoration:"none"}}>Logout</a>
-                        {/*<NavLink
+                        <div style={{display:"flex",justifyContent:"center"}}>
+                            <button 
+                                className='btn nav-item btn-dark text-white mt-0 pt-0 btn-xl col-4'
+                                onClick={ handleLogout }>
+                                Logout
+                            </button>
+                        </div>
+                        {/*<a href="/" onClick={handleLogout} className="text-white" style={{textDecoration:"none"}}>Logout</a>
+                        <NavLink
                             activeClass="active"
                             className="nav-item nav-link text-white"
                             onClick={handleLogout}

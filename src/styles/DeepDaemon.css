@@ -341,6 +341,13 @@
   padding-left: 25px;
   padding-right: 25px;
 }
+.btn-xl {
+  font-size: 24px; /* Ajusta el tamaño de fuente según tus necesidades */
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
+  justify-content: center;
+}
   @import url("https://use.fontawesome.com/releases/v5.0.10/css/all.css");
   
   /*@keyframes App-logo-spin {
