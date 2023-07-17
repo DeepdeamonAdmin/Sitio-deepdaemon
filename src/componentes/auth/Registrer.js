@@ -127,7 +127,7 @@ export const Registrer = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container' style={{overflow:"hidden"}}>
       <div className='centro'>
         <h2> Crea tu cuenta </h2>
         <hr />

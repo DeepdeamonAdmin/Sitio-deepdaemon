@@ -62,7 +62,7 @@ export const Login = ({ history }) => {
     }
 	
     return (
-        <div className="container">
+        <div className="container" style={{display:"flex",overflow:"hidden",paddingLeft:0,justifyContent:"center"}}>
 			<div className="principal">
 				<div className="app-title">
 					{

@@ -7,7 +7,7 @@ import { NavBarMobileAuth } from '../componentes/ui/NavBarMobileAuth';
 export const MobileDashBoardAuth = () => {
 	return (
 	<>  
-        <NavBarMobileAuth/>
+        <NavBarMobileAuth />
         <div>
             <Routes>
                 <Route path="" element={<GeneralMobile />} />

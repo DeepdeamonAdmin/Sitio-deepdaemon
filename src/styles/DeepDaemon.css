@@ -1,5 +1,6 @@
 .DeepDaemon {
     text-align: center;
+    
     /*min-width: 600px;*/
   }
 
@@ -31,7 +32,7 @@
 	
 	iframe { 
 		height: 350px;
-		width: 600px;
+		width: 100%;
 	}
   
   h1 {
@@ -314,7 +315,7 @@
   transition: all .5s ease;
 }
 #links_items_mobile{
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-decoration: none;
   color: white;
 }

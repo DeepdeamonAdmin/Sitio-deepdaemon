@@ -89,7 +89,7 @@ export const NavBarMobileSinAuth = () => {
                         </Link>
                         <NavLink
                             activeClass="active"
-                            className="nav-item nav-link text-white"
+                            className="nav-item nav-link text-white mt-0 pt-0 pb-0"
                             to="/registrer"
                             onClick={handleClick}
                         >
@@ -97,7 +97,7 @@ export const NavBarMobileSinAuth = () => {
                         </NavLink>
                         <NavLink
                             activeClass="active"
-                            className="nav-item nav-link text-white"
+                            className="nav-item nav-link text-white mt-0 pt-0"
                             to="/login"
                             onClick={handleClick}
                         >

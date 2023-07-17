@@ -70,7 +70,7 @@ export const GeneralMobile = ({ id }) => {
 
   return (
     <div className="">
-      <div className="d-flex flex-row dd_header">
+      <div className="d-flex flex-row dd_header" style={{overflow:"hidden"}}>
         <Row className="d-flex flex-row">
           <div className="" id="Home">
             <img src={cic} className="ddcic" alt="cic" />
