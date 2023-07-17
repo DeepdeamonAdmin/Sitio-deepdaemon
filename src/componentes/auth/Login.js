@@ -38,7 +38,7 @@ export const Login = ({ history }) => {
             //console.log("This is email addres")
             //console.log(email)
             if(history === undefined) return;
-			history.replace(lastPath)	
+			history.replace("lastPath")	
 		}
 	}
 

@@ -1,29 +1,16 @@
 import React, {useState} from "react";
 import { Link } from "react-scroll";
-import { useDispatch,  useSelector} from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { startLogout } from '../../actions/auth';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import BurguerButton from "./BurgerButton";
 
-export const NavBarMobile = () => {
+export const NavBarMobileSinAuth = () => {
     const [clicked,setClicked] = useState(false);
     const handleClick = () =>{
         setClicked(!clicked)
     }
-    const dispatch = useDispatch();
-    const history = useNavigate();
-  
-    const handleLogout = () => {
-        dispatch(startLogout());
-        history('/', {replace: true});
-  
-    }
-    const { datos }  = useSelector( state => state.user );
-    let nombre;
-    if(datos)nombre = datos.nombre;
     return (
       <>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark d-flex" id="navbar">
@@ -100,6 +87,22 @@ export const NavBarMobile = () => {
                         >
                             Contacto
                         </Link>
+                        <NavLink
+                            activeClass="active"
+                            className="nav-item nav-link text-white"
+                            to="/registrer"
+                            onClick={handleClick}
+                        >
+                            Registrarse
+                        </NavLink>
+                        <NavLink
+                            activeClass="active"
+                            className="nav-item nav-link text-white"
+                            to="/login"
+                            onClick={handleClick}
+                        >
+                            Iniciar Sesión
+                        </NavLink>
                     </div>
                 </div>
                 {/*<a href="/" className="links_items_mobile">Nosotros</a>

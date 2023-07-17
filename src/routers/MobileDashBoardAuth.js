@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { GeneralMobile } from '../componentes/Usuario/GeneralMobile';
-import { NavBarMobile } from '../componentes/ui/NavBarMobile';
+import { NavBarMobileAuth } from '../componentes/ui/NavBarMobileAuth';
 
 
-export const MobileDashBoard = () => {
+export const MobileDashBoardAuth = () => {
 	return (
 	<>  
-        <NavBarMobile/>
+        <NavBarMobileAuth/>
         <div>
             <Routes>
                 <Route path="" element={<GeneralMobile />} />

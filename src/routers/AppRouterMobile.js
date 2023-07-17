@@ -14,7 +14,8 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
 import { login } from '../actions/auth';
 import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
-import { MobileDashBoard } from './MobileDashBoard';
+import { MobileDashBoardSinAuth } from './MobileDashBoardSinAuth';
+import { MobileDashBoardAuth } from './MobileDashBoardAuth';
 
 
 
@@ -57,7 +58,7 @@ export const AppRouterMobile = () => {
                 if (user.emailVerified) {
                     console.log("Verificado")
                 } else {
-                    console.log("No verificado")
+                    console.log("No verificado Mobile")
                 }
 
 
@@ -87,7 +88,7 @@ export const AppRouterMobile = () => {
                     path='/*'
                     element={
                         <PublicRoute isAuthenticade={isLoggedIn} rol={rol} >
-                            <MobileDashBoard />
+                            <MobileDashBoardSinAuth />
                         </PublicRoute>
                     }
                 />
@@ -95,7 +96,7 @@ export const AppRouterMobile = () => {
                     path="Admin/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador'}>
-                            <MobileDashBoard />
+                            <MobileDashBoardAuth />
                         </ProtectedRoute>
                     }
                 />
@@ -103,7 +104,7 @@ export const AppRouterMobile = () => {
                     path="user/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
-                            <MobileDashBoard />
+                            <MobileDashBoardAuth />
                         </ProtectedRoute>
                     }
                 />
@@ -111,7 +112,7 @@ export const AppRouterMobile = () => {
                     path="externo/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'externo'}>
-                            <MobileDashBoard />
+                            <MobileDashBoardAuth />
                         </ProtectedRoute>
                     }
                 />
