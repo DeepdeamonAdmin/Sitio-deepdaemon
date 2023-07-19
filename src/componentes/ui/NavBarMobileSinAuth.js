@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Link } from "react-scroll";
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link2 } from 'react-router-dom';
 import styled from 'styled-components'
 
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
@@ -8,8 +8,12 @@ import BurguerButton from "./BurgerButton";
 
 export const NavBarMobileSinAuth = () => {
     const [clicked,setClicked] = useState(false);
+    const [omed,setOmed] = useState(false);
     const handleClick = () =>{
         setClicked(!clicked)
+    }
+    const handleMenu = () =>{
+        if(omed==false)setOmed(!omed)
     }
     return (
       <>
@@ -27,71 +31,85 @@ export const NavBarMobileSinAuth = () => {
             <div className={`links_mobile ${clicked ? 'active' : ''}`}>
                 <div className="navbar-collapse" id="navbarNavAltMarkup" style={{justifyContent:"center"}}>
                     <div className="navbar-nav" id="links_items_mobile" style={{display: "flex", flexDirection:"column"}}>
-                        <Link
-                            activeClass="active"
-                            className="nav-item"
-                            to="Nosotros"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            onClick={handleClick}
-                        >
-                            Nosotros
-                        </Link>
-                        <Link
-                            activeClass="active"
-                            className="nav-item"
-                            to="Lideres"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            onClick={handleClick}
-                        >
-                            Lideres
-                        </Link>
-                        <Link
-                            activeClass="active"
-                            className="nav-item"
-                            to="Proyectos"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            onClick={handleClick}
-                        >
-                            Proyectos
-                        </Link>
-                        <Link
-                            activeClass="active"
-                            className="nav-item"
-                            to="Equipo"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            onClick={handleClick}
-                        >
-                            Equipo
-                        </Link>
-                        <Link
-                            activeClass="active"
-                            className="nav-item"
-                            to="Contacto"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                            onClick={handleClick}
-                        >
-                            Contacto
-                        </Link>
+                        
+                        {(omed)?
+                            <NavLink
+                                activeClass="active"
+                                className="nav-item nav-link text-white mt-0 pt-0 pb-0"
+                                to="/"
+                                onClick={ () =>{handleClick(); setOmed(!omed);}}
+                            >
+                                Página Principal
+                            </NavLink>
+                            :
+                            <>
+                                <Link
+                                    activeClass="active"
+                                    className="nav-item"
+                                    to="Nosotros"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    onClick={handleClick}
+                                >
+                                    Nosotros
+                                </Link>
+                                <Link
+                                    activeClass="active"
+                                    className="nav-item"
+                                    to="Lideres"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    onClick={handleClick}
+                                >
+                                    Lideres
+                                </Link>
+                                <Link
+                                    activeClass="active"
+                                    className="nav-item"
+                                    to="Proyectos"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    onClick={handleClick}
+                                >
+                                    Proyectos
+                                </Link>
+                                <Link
+                                    activeClass="active"
+                                    className="nav-item"
+                                    to="Equipo"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    onClick={handleClick}
+                                >
+                                    Equipo
+                                </Link>
+                                <Link
+                                    activeClass="active"
+                                    className="nav-item"
+                                    to="/Contacto"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    onClick={handleClick}
+                                >
+                                    Contacto
+                                </Link>
+                            </>
+                        }
                         <NavLink
                             activeClass="active"
                             className="nav-item nav-link text-white mt-0 pt-0 pb-0"
                             to="/registrer"
-                            onClick={handleClick}
+                            onClick={ () =>{handleClick(); handleMenu();}}
                         >
                             Registrarse
                         </NavLink>
@@ -99,7 +117,7 @@ export const NavBarMobileSinAuth = () => {
                             activeClass="active"
                             className="nav-item nav-link text-white mt-0 pt-0"
                             to="/login"
-                            onClick={handleClick}
+                            onClick={ () =>{handleClick(); handleMenu();}}
                         >
                             Iniciar Sesión
                         </NavLink>
