@@ -21,22 +21,21 @@ export const LeaderScreen = () => {
 
 	return (
 		<>
-			<div className="container card-columns">
+			<div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
 						(usuario.grado === "leader" && usuario.display === "Y") && (
-							<div className= "row mb-4">
-								<div className="col ml-3">
+							<div className= "row mb-4" style={{width:"430px"}} >
+								<div className="col ml-2">
 									<img
 										className="imageleader"
 										src={usuario.urlImg}
 										alt="leader"
-										
 									/>
 								</div>
 
-								<div className="col">
+								<div className="col pl-0">
 									<br></br>
 									<h5 className=""> {usuario.nombre} </h5>
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
