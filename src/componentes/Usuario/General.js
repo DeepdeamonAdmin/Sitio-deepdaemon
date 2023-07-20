@@ -4,7 +4,7 @@ import React from "react";
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
-import QR from "../../assets/QR 20.07.2023.jpeg";
+import QR from "../../assets/QR_20_07_2023.jpeg";
 
 import '@splidejs/react-splide/css';
 import '@splidejs/splide/css/skyblue';
