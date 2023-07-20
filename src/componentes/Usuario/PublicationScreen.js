@@ -33,7 +33,7 @@ return (
         return (
           publication.display === "Yes" && (
             <div className="col-md-4" key={publication.id}>
-              <div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ maxWidth: 360, height: 170, position: 'relative' }}>
+              <div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ maxWidth: 400, height: 170, position: 'relative' }}>
                 <img
                   className="card-img mt-3 ml-2"
                   src={publication.urlImg}
@@ -46,10 +46,10 @@ return (
                   alt="member"
                 />
                 <div className="card-body text-dark">
-                  {/* Limitar el título a tres líneas con puntos suspensivos */}
+                  {/* Limitar el título a dos líneas con puntos suspensivos */}
                   <h6 className="card-title" style={{
                     display: '-webkit-box',
-                    WebkitLineClamp: 3,
+                    WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
