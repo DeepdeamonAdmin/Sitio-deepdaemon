@@ -4,7 +4,7 @@ import React from "react";
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
-import QR from "../../assets/QR_Actualizado.jpeg";
+import QR from "../../assets/QR 20.07.2023.jpeg";
 
 import '@splidejs/react-splide/css';
 import '@splidejs/splide/css/skyblue';
@@ -192,7 +192,6 @@ export const General = ({ id }) => {
         <div className="Container" id="Lideres">
           <h1>LOS LÍDERES</h1>
           <hr />
-          <br></br>
           <div className="row">
             <LeaderScreen />
           </div>

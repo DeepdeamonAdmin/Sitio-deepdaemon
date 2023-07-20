@@ -1,14 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useGet } from '../../hooks/useGet';
-import { getMemberStatus } from '../../selectors/get/getMemberStatus';
-import { TeamDetaills } from './TeamDetaills';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
-import { ModalInfoUser } from './ModalInfoUser';
 import { VerMas } from '../ui/VerMas';
 import { auth } from '../../firebase/firebase-config';
-import { auto } from '@popperjs/core';
-// import {  } from './ProjectDetaills';
 
 
 export const TeamScreen = ({ status }) => {
