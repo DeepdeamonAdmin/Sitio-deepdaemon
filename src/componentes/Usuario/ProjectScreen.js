@@ -9,6 +9,8 @@ import { collection, getDocs, where, get, query } from "firebase/firestore";
 import { getAuth, } from 'firebase/auth';
 import { VerMasProject } from '../ui/VerMasProject';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
+import { CardColumns } from 'reactstrap';
+import { left } from '@popperjs/core';
 
 
 
@@ -37,16 +39,58 @@ export const ProjectScreen = ({ status1, status2 }) => {
 	}, [])
 
 	return (
-		<div className="container-fluid card-columns">
-		  <div className="row">
-		  {projects.length === 0 && <p className="team_title"> No se encontraron proyectos por el momento.</p>}
-			{projects.map((project) => (
+		<>
+		<div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"left",marginLeft:"-20px"}}>
+			{projects.length===0&&<p className="team_title"> No se encontraron proyectos por el momento.</p>}
+			{
+				projects.map(project=>(
+					project.display==="Yes"&&(
+						<div key={project.id} clasName="card">
+							<div className="row mb-4 bg-light ml-2" style={{maxWidth:"450px",minWidth:"200px", height:"130px",borderRadius:"5px"}}>
+								<div className="col-sm-6" style={{margin:"0px",padding:0,width:"110px"}}>
+									<img
+										className="card-img"
+										src={project.urlImg}
+										style={{
+										objectFit: 'cover',
+										objectPosition: 'center',
+										height: "100px",
+										width: '100px',
+										borderRadius: '5px'
+										}}
+										alt="member"
+									/>
+								</div>
+								<div className="col" style={{position:"relative"}}>
+									<div className="card-body text-primary d-flex flex-column h-100">
+										<h6 className="card-title" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+											{project.name}
+										</h6>
+										<div className="flex-grow-1">
+											<p className="card-text">{project.description}</p>
+										</div>
+										<div className="text-right" style={{marginBottom:"10px"}}>
+											<ModalCrearCuenta />
+											<VerMasProject project={project} />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					)
+				))
+			}
+		</div>
+		{/*<div className="container-fluid card-columns">
+		  <div className="row">*/}
+		  {/*{projects.length === 0 && <p className="team_title"> No se encontraron proyectos por el momento.</p>}*/}
+			{/*</>{projects.map((project) => (
 			  // Imprimir solamente si el estado es igual al seleccionado
 			  project.display === "Yes" && (
 				<div key={project.id} className="col-md-12 mb-3">
-				  <div className="card" style={{ margin: 0 }}>
-					<div className="row g-0">
-					  <div className="col-md-3">
+				  <div className="card" style={{ margin: 0}}>
+					<div className="row g-0" >
+					  <div className="col-3">
 						<img
 						  className="card-img"
 						  src={project.urlImg}
@@ -79,6 +123,7 @@ export const ProjectScreen = ({ status1, status2 }) => {
 			  )
 			))}
 		  </div>
-		</div>
-	  );	  
+		</div>*/}
+		</>
+	);	  
 }
