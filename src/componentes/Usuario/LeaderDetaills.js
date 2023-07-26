@@ -37,9 +37,20 @@ export const LeaderDetaills = ({leader, color}) => {/*la variable leader nos per
 		document.querySelector('#fileSelector').click();
 	}
     
+    const customContentStyle = {
+        width: '70%',   // Personaliza el ancho del contenido
+        height: '70%',  // Personaliza la altura del contenido
+        overflowX: 'hidden', // Añade desplazamiento si el contenido excede las dimensiones del modal
+        overflowY: 'auto',
+    };
+    
+    const customOverlayStyle = {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Personaliza el color y transparencia del fondo de superposición
+    };
+
     return (
         <>
-        <Popup //aqui inicia el modal que abrira la informacion de los lideres
+        {/*<Popup //aqui inicia el modal que abrira la informacion de los lideres
             trigger={<button //Boton que activa el pop up
 				className={`btn btn-primary`}
 				onClick={handleClickNew}>
@@ -47,6 +58,8 @@ export const LeaderDetaills = ({leader, color}) => {/*la variable leader nos per
 			</button>}
             modal
             nested
+            contentStyle={customContentStyle}
+            overlayStyle={customOverlayStyle}
         >
             {close => (
             <div className="modal-leader">
@@ -83,7 +96,63 @@ export const LeaderDetaills = ({leader, color}) => {/*la variable leader nos per
                     </div>
                 </div>
             )}
-        </Popup>
+                    </Popup>*/}
+            <Popup
+                trigger={<button //Boton que activa el pop up
+                        className={`btn btn-primary`}
+                        onClick={handleClickNew}>
+                        {!showInf ? "Ver más.." : "Ver menos"}
+                        </button>}
+                modal
+                nested
+                contentStyle={customContentStyle}
+                overlayStyle={customOverlayStyle}
+            >
+                {close=>(
+                    <div className="modal-leader">
+                        <div className="modalheader bg-primary"> 
+                            {leader.nombre} 
+                        </div>
+                        <div className="modalcontent pb-0">
+                            <div className='container d-flex animate__animated animate__fadeIn'>
+                                <div className="Row d-flex flex-wrap">
+                                    <div className="col-sm-4 mr-0 pl-0 pr-0" >
+                                        <img
+                                            className="img-fluid"
+                                            src={leader.urlImg}//aqui obtiene la imagen de cada uno de los lideres
+                                            alt="member"
+                                            style={{
+                                                width:"200px",
+                                                height: "300px",
+                                                objectFit: "cover"
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="col-sm-8 pr-0 pl-0 mr-0 ml-0">
+                                        <ul className="list-group list-group-flush">
+                                            <li className={`list-group-item`}><b>Sobre mi:</b><i> {leader.descripcion} </i></li>
+                                            <li className="list-group-item">Email: {leader.email}</li>
+                                        </ul>
+                                        
+                                    </div>
+
+                                </div>
+                                	
+                            </div>
+                        </div>
+                        <div className="modalactions" style={{position:"relative",bottom:"10px",right:"10px"}}>
+                            <button //boton para cerrar el modal en pop up 
+                                className={`btn btn-primary`}
+                                onClick={() => {
+                                console.log('modal closed '); 
+                                close();
+                            }}>
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </Popup>
         </>
     )
 }

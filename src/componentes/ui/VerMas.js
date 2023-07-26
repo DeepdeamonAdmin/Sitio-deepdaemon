@@ -35,7 +35,7 @@ export const VerMas = (usuario) => {
         </button>: (usuarioC.usuario.grado ==="leader" 
             ?
             <>
-            <LeaderDetaills leader = {usuarioC.usuario} /> 
+            <LeaderDetaills leader = {usuarioC.usuario} className='popup-leader'/> 
             
             </>
             : <TeamDetaills usuario = {usuarioC} /> )
