@@ -402,7 +402,6 @@ export const General = ({ id }) => {
             <a href="">
               <span className="icon icon-twitter" />
             </a>
-            |
             <a href="">
               <span className="icon icon-facebook" />
             </a>
