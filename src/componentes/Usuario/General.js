@@ -393,17 +393,17 @@ export const General = ({ id }) => {
             <br />
             Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
           </p>
-          <p>
+          {/*<p>
             <FormCorreo />
             <span className="icon icon-envelop" />
             <a href="mailto:contacto@deepdaemon.org">contacto@deepdaemon.org </a>
-          </p>
+        </p>*/}
           <p>
-            <a href="https://twitter.com">
+            <a href="">
               <span className="icon icon-twitter" />
             </a>
             |
-            <a href="https://www.facebook.com">
+            <a href="">
               <span className="icon icon-facebook" />
             </a>
           </p>
