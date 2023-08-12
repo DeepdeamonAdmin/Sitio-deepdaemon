@@ -4,7 +4,7 @@ import React from "react";
 import join from "../../styles/assets/img/sitio/mastermind.png";
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
-import QR from "../../assets/QR_Actualizado.jpeg";
+import QR from "../../assets/QR_20_07_2023.jpeg";
 
 import '@splidejs/react-splide/css';
 import '@splidejs/splide/css/skyblue';
@@ -192,7 +192,6 @@ export const General = ({ id }) => {
         <div className="Container" id="Lideres">
           <h1>LOS LÍDERES</h1>
           <hr />
-          <br></br>
           <div className="row">
             <LeaderScreen />
           </div>
@@ -394,17 +393,17 @@ export const General = ({ id }) => {
             <br />
             Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
           </p>
-          <div>
+          {/*<p>
             <FormCorreo />
             <span className="icon icon-envelop" />
             <a href="mailto:contacto@deepdaemon.org">contacto@deepdaemon.org </a>
-          </div>
+        </p>*/}
           <p>
-            <a href="https://twitter.com">
+            <a href="">
               <span className="icon icon-twitter" />
             </a>
             |
-            <a href="https://www.facebook.com">
+            <a href="">
               <span className="icon icon-facebook" />
             </a>
           </p>
