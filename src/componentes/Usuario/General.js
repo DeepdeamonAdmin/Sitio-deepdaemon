@@ -189,19 +189,50 @@ export const General = ({ id }) => {
 
         <br></br>
         <br></br>
-        <div className="Container" id="Lideres">
+
+
+        <Container>
           <h1>LOS LÍDERES</h1>
           <hr />
           <br></br>
-          <div className="row">
-            <LeaderScreen />
-          </div>
-        </div>
-        <br></br>
-        <br></br>
+          <Tab.Container defaultActiveKey="leader">
+            <Nav className="projects">
+              <Nav.Item>
+                <Nav.Link eventKey="leader">
+                  <h2 className="team_title">Líderes</h2>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="colaborator">
+                  <h2 className="team_title">Colaboradores</h2>
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+            <hr />
+            <Tab.Content>
+              <Tab.Pane eventKey="leader">
+                <div className="Container" id="Lideres"> 
+                  <div className="row">
+                    <LeaderScreen status="leader"/>
+                  </div>
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="colaborator">
+                <div className="Container" id="Lideres"> 
+                  <div className="row">
+                    <LeaderScreen status="colaborator"/>
+                  </div>
+                </div>
+              </Tab.Pane>
+            </Tab.Content>
+            
 
-        <br></br>
-        <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+          </Tab.Container>
+        </Container>
         <Container fluid className="section portfolio proy_sectionBg" id="Proyectos">
           <h1 className="separator2 team_title"> Proyectos </h1>
           <hr />

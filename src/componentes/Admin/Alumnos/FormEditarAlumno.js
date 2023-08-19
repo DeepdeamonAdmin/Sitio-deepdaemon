@@ -57,9 +57,9 @@ export const FormEditarAlumno = (props) => {
 
 
 	const {
-		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display
+		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
 	} = formValues;
-	const [isChecked, setIsChecked] = useState(ss);
+	const [isChecked, setIsChecked] = useState(formValues.ss);
 
 	const handleContra = (e) => {
 		if (password == password2) dispatch(editUser(formValues, oldPassword));
@@ -72,9 +72,9 @@ export const FormEditarAlumno = (props) => {
 		e.preventDefault();
 		const memberRef = doc(db, 'Usuarios', alumno.id);
 		const data = {
-			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss, esAutor, display
+			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
 		};
-		data.ss = isChecked
+		//data.ss = isChecked
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
 		Swal.fire('Usuario editado', 'Éxito');
@@ -365,6 +365,20 @@ export const FormEditarAlumno = (props) => {
 							<option value='N' > No </option>
 						</select>
 				</div>
+				{alumno.rol === 'administrador' && (	
+					<div className="col mb-3">
+							<label>Seleccionar atributo</label>
+							<select
+								className="form-control"
+								name='idWork'
+								value={idWork}
+								onChange={handleInputChange}
+							>
+								<option value="leader" > Lider </option>
+								<option value="colaborator" > Colaborador </option>
+							</select>
+					</div>
+				)}
 			</div>
 			{/* <div className="row"> */}
 			{/* {alumno.rol === 'other' && ( */}

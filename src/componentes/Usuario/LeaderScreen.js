@@ -13,7 +13,7 @@ import { VerMas } from '../ui/VerMas';
 
 // const imagen = require.context('../../rutaimagen', true); //para rutas dinamicas en imagenes parte 1 ponerlo en helpers
 
-export const LeaderScreen = () => {
+export const LeaderScreen = ({ status }) => {
 	
 
 	const { usuarios } = useSelector(state => state.user);
@@ -25,7 +25,7 @@ export const LeaderScreen = () => {
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
-						(usuario.grado === "leader" && usuario.display === "Y") && (
+						(usuario.grado === "leader" && usuario.display === "Y" && usuario.idWork === status) && (
 							<div className= "row mb-4" style={{width:"430px"}} >
 								<div className="col ml-2">
 									<img
