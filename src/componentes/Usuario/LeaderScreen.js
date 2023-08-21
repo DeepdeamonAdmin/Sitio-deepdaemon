@@ -5,13 +5,8 @@ import { VerMas } from '../ui/VerMas';
 import { auth } from '../../firebase/firebase-config';
 
 export const LeaderScreen = ({ status }) => {
-	
 
-  // La colocamos
-  if (targetUser) {
-    const rowIndex = 1; // Second row
-    const columnIndex = 1; // Second column
-
+  const { usuarios } = useSelector(state => state.user);
 	return (
 		<>
 			<div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
@@ -43,4 +38,3 @@ export const LeaderScreen = ({ status }) => {
 		</>
 	)
   }
-}
