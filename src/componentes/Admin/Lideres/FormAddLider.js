@@ -31,10 +31,11 @@ export const FormAddLider = () => {
     password2: '',
     display: 'Y',
     urlImg: '',
-    esAutor: 'Y'
+    esAutor: 'Y',
+    idWork: ''
   });
 
-  const { name, email, password, password2, display, esAutor, urlImg } = formValues;
+  const { name, email, password, password2, display, esAutor, idWork, urlImg } = formValues;
 
   const handleRegistrer = (e) => {
 
@@ -168,7 +169,18 @@ export const FormAddLider = () => {
                   <option value='N' > No </option>
                 </select>
               </div>
-
+              <div className="col mb-3">
+                <label>Seleccionar atributo</label>
+                <select
+                  className="form-control"
+                  name='idWork'
+                  value={idWork}
+                  onChange={handleInputChange}
+                >
+                  <option value='leader' > Lider </option>
+                  <option value='colaborator' > Colaborador </option>
+                </select>
+              </div>
             </div>
             <div class="text-center">
               <button
