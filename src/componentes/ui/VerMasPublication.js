@@ -19,7 +19,7 @@ export const VerMasPublication = (publicacion) => {
     const user = auth.currentUser;
     
 
-    if (!user) return <div style={{position:'absolute', bottom:10}}>
+    if (!user) return <div>
     <button
         className="btn btn-success"
         onClick={handleClickNew}
