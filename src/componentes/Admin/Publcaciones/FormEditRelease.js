@@ -417,7 +417,11 @@ export const FormEditRelease = () => {
 	}, [])
 
 
-
+	//setSelectValue(formValues.postType = selectValue);
+	useEffect(()=>{
+		//setSelectValue(formValues.postType = selectValue);
+		setSelectValue(formValues.postType);
+	},[]);
 	return (
 		<div className="container mb-5">
 			<div className="app-title">
