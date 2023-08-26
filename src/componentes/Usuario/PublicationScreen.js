@@ -30,11 +30,11 @@ export const PublicationScreen = ({ type }) => {
 
   return (
     <>
-    <div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
+    <div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center", flexDirection:"row", maxHeight:"160px"}}>
       {
         publications.map(publication=>(
           publication.display==="Yes"&&(
-            <div key={publication.id} className="card mb-4 mr-2" style={{maxWidth:"400px",minWidth:"300px", maxHeight:"160px"}}>
+            <div key={publication.id} className="card mb-4 mr-2 " style={{maxWidth:"400px",minWidth:"300px"}}>
               <div className="row-md-1 mb-1 bg-light d-flex" style={{borderRadius:"5px",height:"160px"}}>
                 <div className="col-4 d-flex" style={{margin:"5px",padding:0,alignItems:"center"}}>
                   <img
