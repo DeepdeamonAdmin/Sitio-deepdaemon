@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { registerTech } from '../../../actions/register';
 import { startsNewTech } from '../../../actions/tecnologias';
 import { useForm } from '../../../hooks/useForm';
 

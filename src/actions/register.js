@@ -3,7 +3,6 @@ import postMember from "../selectors/post/postMember";
 import postProject from "../selectors/post/postProject";
 import { postPublication } from "../selectors/post/postPublication";
 import postSchool from "../selectors/post/postSchool";
-import postTech from "../selectors/post/postTech";
 import { types } from "../types/types";
 
 
@@ -71,25 +70,6 @@ export const registerInstitution = (formValues) => {
         postSchool(dataSchool);
         dispatch(valInstitution(name));
     }
-}
-
-export const registerTech = (formValues) => {
-    //Datos de la tecnología
-    const { name, descr, icon } = formValues;
-    const dataTech = {
-        id: 0,
-        name: name,
-        descr: descr,
-        icon: icon
-    };
-
-    return async(dispatch) => {
-
-         //Enviar datos a tech
-        postTech(dataTech);
-        dispatch(valTeach(name));
-    }
-
 }
 
 export const registerProject = (formValues) => {

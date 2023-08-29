@@ -16,7 +16,28 @@ export const PublicationScreen = ({ type }) => {
         const q = query(ref, where("postType", '==', type));
         const Data = await getDocs(q);
         const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setPublications(arrayData);
+        /*******************/
+        function esFechaInvalida(fechaString) {
+          const fecha = new Date(fechaString);
+          return isNaN(fecha) || fecha.toString() === 'Invalid Date';
+        }
+        
+        function compararFechas(a, b) {
+          if (esFechaInvalida(a.yearMonth)) {
+            return 1; // a es inválida, va después de b
+          }
+          if (esFechaInvalida(b.yearMonth)) {
+            return -1; // b es inválida, va después de a
+          }
+          return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
+        }
+        const fechasOrdenadas = arrayData.slice().sort(compararFechas);
+        for(let i=0;i<fechasOrdenadas.length;i++){
+          console.log(fechasOrdenadas[i].yearMonth);
+        }
+        //const arrayDataOrdered = arrayData.slice().sort((a, b) => a.yearMonth - b.yearMonth);
+        //arraydata = arraydata.sort((a, b) => a.yearMonth - a.yearMonth)*/
+        setPublications(fechasOrdenadas);
       } catch (error) {
         console.log(error);
       }
