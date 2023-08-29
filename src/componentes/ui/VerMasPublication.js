@@ -20,12 +20,13 @@ export const VerMasPublication = (publicacion) => {
     
 
     if (!user) return <div>
-    <button
-        className="btn btn-success"
-        onClick={handleClickNew}
-    >
-        Ver más..
-    </button>
+        <button
+            className="btn btn-success"
+            onClick={handleClickNew}
+            style={{marginTop:40}}
+        >
+            Ver más..
+        </button>
     </div>
 
     return <PublicationDetaills publication = {pub.publicacion}/>
