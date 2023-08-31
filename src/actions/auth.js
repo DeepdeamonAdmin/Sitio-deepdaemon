@@ -9,7 +9,7 @@ import {
 	sendEmailVerification
 } from 'firebase/auth';
 
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 import { db, app2 } from "../firebase/firebase-config";
 import { googleAuthProvider } from '../firebase/firebase-config';
@@ -219,7 +219,6 @@ export const startLoginEmailPassword = (email, password) => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
 				dispatch(login(user.uid, user.displayName));
-
 				dispatch(finishLoading());
 			})
 			.catch(e => {

@@ -32,9 +32,9 @@ export const PublicationScreen = ({ type }) => {
           return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
         }
         const fechasOrdenadas = arrayData.slice().sort(compararFechas);
-        for(let i=0;i<fechasOrdenadas.length;i++){
+        /*for(let i=0;i<fechasOrdenadas.length;i++){
           console.log(fechasOrdenadas[i].yearMonth);
-        }
+        }*/
         //const arrayDataOrdered = arrayData.slice().sort((a, b) => a.yearMonth - b.yearMonth);
         //arraydata = arraydata.sort((a, b) => a.yearMonth - a.yearMonth)*/
         setPublications(fechasOrdenadas);

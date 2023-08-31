@@ -34,5 +34,5 @@ export {
   app2,
     db,
     googleAuthProvider,
-    auth,
+    auth
 }

@@ -36,10 +36,11 @@ export const FormAddAlumno = () => {
 		idCareer: 'vacio',
 		esAutor: 'Y',
 		display: 'Y',
+		idWork: '',
 		rol: 'alumno'
 	});
 
-	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, start, end, password, rol, ss, esAutor, display } = formValues;
+	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, start, end, password, rol, ss, esAutor, display, idWork } = formValues;
 	//console.log(formValues)
 
 	//envio a la api
