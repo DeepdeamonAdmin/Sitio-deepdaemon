@@ -412,7 +412,7 @@ export const FormAddRelease = () => {
 						onChange={handleSelectChange}
 					>
 						<option value=''>Selecciona una opción</option>
-						<option value='magazine' > article </option>
+						<option value='article' > article </option>
 						<option value='book' > book </option>
 						<option value='booklet' > booklet </option>
 						<option value='conference' > conference </option>
