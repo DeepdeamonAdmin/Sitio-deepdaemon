@@ -371,6 +371,8 @@ export const FormEditRelease = () => {
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
+		formValues.urlImg=datosMg;
+		//console.log(formValues.urlImg)
 	}
 
 	const handleFileChange = (e) => {
@@ -384,7 +386,7 @@ export const FormEditRelease = () => {
 	const handleSubmit = () => {
 		formValues.urlImg = datos;
 		formValues.postType = selectValue;
-		console.log(formValues.postType);
+		//console.log(formValues.postType);
 		dispatch(startNewPublication(formValues));
 		reset();
 		navigate('/admin/release');

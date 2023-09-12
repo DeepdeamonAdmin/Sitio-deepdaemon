@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { startsNewInstitution } from '../../../actions/institutions';
-// import { registerInstitution } from '../../../actions/register';
 import { useForm } from '../../../hooks/useForm';
 
 const FormAddInstitution = () => {

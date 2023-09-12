@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
 import { useNavigate, useParams } from 'react-router-dom';
-import { startNewPublication, startUploadingPublication } from '../../../actions/publications';
+import { startNewPublication, startUploadingPublication, startUploadingBibtex, startsNewBibtex } from '../../../actions/publications';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 import { editPublication } from '../../../actions/edit';
@@ -15,6 +15,8 @@ export const FormAddRelease = () => {
 	const currentUser = auth.currentUser.displayName;
 	// UseState para el select
 	const [selectValue, setSelectValue] = useState('')
+	// Variable para el archivo bibtex
+	let bibtex_File;
 	// UseState para cada input
 	const [autorDisabled, setAutorDisabled] = useState(false)
 	const [titleDisabled, setTitleDisabled] = useState(false)
@@ -54,7 +56,7 @@ export const FormAddRelease = () => {
 				setSchoolDisabled(true)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
-				setKeywordsDisabled(false)
+				setKeywordsDisabled(true)
 				break;
 			case 'book':
 				setAutorDisabled(false)
@@ -88,7 +90,7 @@ export const FormAddRelease = () => {
 				setPublisherDisabled(true)
 				setAddressDisabled(false)
 				setHowpublishedDisabled(false)
-				setBooktitleDisabled(true)
+				setBooktitleDisabled(false)
 				setEditorDisabled(false)
 				setSeriesDisabled(false)
 				setOrganizationDisabled(false)
@@ -153,7 +155,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
-				setNoteDisabled(true)
+				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
 				break;
@@ -218,7 +220,7 @@ export const FormAddRelease = () => {
 				setKeywordsDisabled(false)
 				break;
 			case 'proceedings':
-				setAutorDisabled(false)
+				setAutorDisabled(true)
 				setTitleDisabled(false)
 				setJournalDisabled(true)
 				setYearMonthDisabled(false)
@@ -293,7 +295,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
-				setNoteDisabled(true)
+				setNoteDisabled(false)
 				setInstitutionDisabled(false)
 				setKeywordsDisabled(false)
 				break;
@@ -313,7 +315,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
-				setNoteDisabled(true)
+				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
 				break;
@@ -359,17 +361,20 @@ export const FormAddRelease = () => {
 		institution: '',
 		display: 'Yes',
 		keywords: '',
+		bibtexfile: '',
 	}, publication);
 
 	const { postType,urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display, keywords} = formValues;
-
+		organization, school, note, institution, display, keywords, bibtexfile} = formValues;
+	//Bibtex
+	const [datosbibtex, setDatosBibtex] = useState('');
 	//Galeria
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
+		formValues.urlImg=datosMg;
 	}
 
 	const handleFileChange = (e) => {
@@ -378,13 +383,94 @@ export const FormAddRelease = () => {
 			dispatch(startUploadingPublication(file));
 		}
 	}
+	/***************************/
+	/*const [formValuesBibtex, handleInputBibtexChange, resetBibtex] = useForm({
+		name: ''
+	})*/
+	const handleFileBibtexChange = (e) => {
+		bibtex_File = e.target.files[0];
+		setDatosBibtex(bibtex_File);
+		if (bibtex_File!=null) {
+			/*if (Bibtex_File.name == '') {
+				dispatch(startUploadingBibtex(Bibtex_File));
+			} else {
+				const typeFile = Bibtex_File.name.split('.')[1]
+				const fileName = Bibtex_File.name + '.' + typeFile
+				const auxFile = new File([Bibtex_File], fileName)
+				dispatch(startUploadingBibtex(auxFile));
+			}*/
+			const reader = new FileReader();
+			reader.onload = function (e) {
+                const content = e.target.result;
+                //console.log(content); // Muestra el contenido en la consola
+				get_data(content);
+            };
+			reader.readAsText(bibtex_File);
+		}
+	}
+	/*const handleSave = () => {
+		dispatch(startsNewBibtex(formValuesBibtex));
+		resetBibtex();
+
+	}*/
+	const [funcionEjecutada, setFuncionEjecutada] = useState(false);
+	function get_data(content){
+		const text = content.split();
+		let testStr = content;
+		let info = ["title","author","journal","volume","number","pages","publisher","address","howpublished","booktitle","editor","series","organization","school","institution","note","year"]
+		let types = ["article","book","booklet","conference","inbook","incollection","inproceedings","manual","masterthesis","misc","phdthesis","proceedings","techreport","unpublished"]
+		let testRegexType;
+		let testRegex;
+		for(let i=0;i<types.length;i++){
+			testRegexType = new RegExp("@"+types[i]+"{","i");
+			if(testRegexType.test(testStr)){
+				formValues.postType = types[i];
+				setSelectValue(types[i]);
+			}
+		}
+		for(let i=0;i<info.length;i++){
+			testRegex = new RegExp(info[i],"i");
+			if(testRegex.test(testStr)){
+				const textRegexString = new RegExp(info[i]+"={(.*?)}","i");
+				const information = content.match(textRegexString);
+				//console.log(information[1]);
+				if(i==0)formValues.title = information[1];
+				if(i==1)formValues.autor = information[1];
+				if(i==2)formValues.journal = information[1];
+				if(i==3)formValues.volume = information[1];
+				if(i==4)formValues.number = information[1];
+				if(i==5)formValues.pages = information[1];
+				if(i==6)formValues.publisher = information[1];
+				if(i==7)formValues.address = information[1];
+				if(i==8)formValues.howpublished = information[1];
+				if(i==9)formValues.booktitle = information[1];
+				if(i==10)formValues.editor = information[1];
+				if(i==11)formValues.series = information[1];
+				if(i==12)formValues.organization = information[1];
+				if(i==13)formValues.school = information[1];
+				if(i==14)formValues.institution = information[1];
+				if(i==15)formValues.note = information[1];
+				if(i==16)formValues.yearMonth = information[1]+"-01-01";
+			}	
+			//console.log(testRegex.test(testStr));
+			//console.log(formValues);
+		}
+		setFuncionEjecutada(true);
+		//console.log(text);
+	}
+	useEffect(() => {
+		//console.log("File data accepted");
+	  }, [funcionEjecutada]);
+	/***************************/
 	//envio a la api
+	const fileSelector = document.getElementById('fileSelector');
 	const navigate = useNavigate();
 	const handleSubmit = () => {
 		formValues.urlImg = datos;
 		formValues.postType = selectValue;
-		console.log(formValues.postType);
-		dispatch(startNewPublication(formValues));
+		//formValues.bibtexfile = datosbibtex;
+		bibtex_File = datosbibtex;
+		dispatch(startNewPublication(formValues,bibtex_File));
 		reset();
 		navigate('/admin/release');
 	}
@@ -425,11 +511,24 @@ export const FormAddRelease = () => {
 			</div>
 			<div className="form-group row">
 				<div className="col-md-2 mb-3">
+					<label for="fileSelector">Seleccionar archivo bibtex:</label>
+					<input
+						className='form-control'
+						id="fileSelector"
+						type="file"
+						name="file"
+						accept="text/txt"
+						src='bibtexfile'
+						onChange={handleFileBibtexChange}
+					/>
+				</div>
+				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
 						className="form-control"
 						name='postType'
 						onChange={handleSelectChange}
+						value={selectValue}
 					>
 						<option value=''>Selecciona una opción</option>
 						<option value='article' > article </option>

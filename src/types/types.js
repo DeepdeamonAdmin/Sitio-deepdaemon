@@ -82,6 +82,9 @@ export const types = {
 	publicationActive: '[Publication] Set Publication active',
 	publicationsLoad: '[Publication] Load Publications',
 	publicationsAllLoad: '[Publications] All Load Publications',
+	//publicationsBibtexAddNewBibtex: '[Publication] New Bibtex Publication',
+	publicationsBibtexAddNew: '[Publication] New Bibtex Publication',
+	loadBibtex: '[Publication] Loading Bibtex',
 
 	// Para la galería
 	galleryAddNew: '[Images] New Image', //Agregando imagen con nombre

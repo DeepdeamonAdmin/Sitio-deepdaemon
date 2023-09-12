@@ -56,7 +56,16 @@ export const publicationsReduccer = ( state = initialState, action ) => {
                 ...state,
                 publicationss: [...action.payload ]
             }
-            
+        
+        case types.publicationsBibtexAddNew:
+            return{
+                ...state,
+                bibtexprueba: action.payload
+            }
+        case types.publicationsBibtexAddNewBibtex:
+            return{
+                ...state
+            }
         default:
             return state
 

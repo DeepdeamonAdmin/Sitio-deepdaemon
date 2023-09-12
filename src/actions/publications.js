@@ -10,12 +10,26 @@ import { uiCloseModal } from './ui';
 import { loadAllWorks } from '../helpers/loadAllWorks';
 
 
-export const startNewPublication = ( formValues ) => {
+export const startNewPublication = ( formValues,bibtex_File) => {
     return async( dispatch, getState ) => {
-        
-
         const { uid } = getState().auth;
-        const { img } = getState().publications;
+        const { img, bibtex } = getState().publications;
+        let fileUrl='';
+        if(bibtex_File){
+            Swal.fire({
+                title: 'Uploading...',
+                text: 'Please wait...',
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            const ruta = ''
+            fileUrl = await fileUpload(ruta, bibtex_File);
+            dispatch(loadBibtex(fileUrl));
+            Swal.close();
+        }
         const newPublication = {
             postType: formValues.postType || '',
             urlImg: formValues.urlImg || '',
@@ -42,12 +56,13 @@ export const startNewPublication = ( formValues ) => {
             institution: formValues.institution || '',
             display: formValues.display || 'No',
             keywords: formValues.keywords || '',
+            bibtexfile: fileUrl || '',
         }
         const newPublicationInd = {
 			postType: formValues.postType,
 		}
     
-        const docRef1 = await addDoc(collection(db, `Publicaciones`), newPublication );
+        const docRef1 = await addDoc(collection(db, `Publicaciones`), newPublication);
         const docRef2 = await addDoc(collection(db, `Usuarios/${uid}/Publications`), newPublicationInd );
     
         if(docRef1 && docRef2 ){
@@ -157,3 +172,55 @@ export const setAllPublications = (publications) => ({
 	type: types.publicationsAllLoad,
 	payload: publications
 });
+
+/****************************** */
+export const startsNewBibtex = (formValues) => {
+	return async (dispatch, getState) => {
+		const { uid } = getState().auth;
+		const { bibtexprueba } = getState().publications;
+
+		const newBibtex = {
+			name: formValues.name,
+			file: bibtexprueba,
+		}
+
+		const docRef = await addDoc(collection(db, `Bibtex/${uid}/Files`), newBibtex);
+
+		if (docRef) {
+			Swal.fire('Archivo guardado', 'Éxito');
+			dispatch(addNewtoBibtex(docRef.id, newBibtex));
+			dispatch(uiCloseModal())
+		} else {
+			Swal.fire('Error al enviar archivo');
+		}
+	}
+}
+export const startUploadingBibtex = (file) => {
+	return async (dispatch) => {
+
+		Swal.fire({
+			title: 'Uploading...',
+			text: 'Please wait...',
+			allowOutsideClick: false,
+			onBeforeOpen: () => {
+				Swal.showLoading();
+			}
+		});
+
+		const ruta = ''
+		const fileUrl = await fileUpload(ruta, file);
+		dispatch(loadBibtex(fileUrl));
+		Swal.close();
+	}
+}
+
+export const loadBibtex = (url) => ({
+	type: types.publicationsBibtexAddNew,
+	payload: url
+});
+export const addNewtoBibtex = (id, bibtex) => ({
+	type: types.publicationsBibtexAddNew,
+	payload: {
+		id, bibtex
+	}
+})
