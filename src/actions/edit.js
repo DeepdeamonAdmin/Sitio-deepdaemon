@@ -5,7 +5,7 @@ import { types } from "../types/types";
 import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
 import { startLoadingProject } from "../../src/actions/projects"
 import { startLoadingTesis } from "../../src/actions/tesis"
-import { startLoadingPublication } from "../../src/actions/publications"
+import { startLoadingPublication, startsNewBibtex } from "../../src/actions/publications"
 
 export const editProject = (idProject, formValues) => {
 	return async (dispatch, getState) => {
@@ -213,9 +213,15 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 	}
 }
 
-export const editPublication = (idPublication, formValues) => {
+export const editPublication = (idPublication, formValues, bibtex_File) => {
 	return async (dispatch, getState) => {
-
+		if(bibtex_File){
+			const { url } = getState().publications;
+			//console.log("Si hay bibtex");
+			await dispatch(startsNewBibtex(formValues,bibtex_File));
+			//console.log(formValues.bibtexfile);
+			//console.log(url);
+		}
 		const dataToFirestore = { ...formValues }
 		const publicationUpdate = updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore)
 

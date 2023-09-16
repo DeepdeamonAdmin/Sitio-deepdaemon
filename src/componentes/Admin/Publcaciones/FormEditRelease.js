@@ -9,6 +9,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { editPublication } from '../../../actions/edit';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { ModalGalleryAddProjects } from '../Proyectos/ModalGalleryAddProjects';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 export const FormEditRelease = () => {
 	const auth = getAuth();
@@ -354,12 +355,13 @@ export const FormEditRelease = () => {
 		institution: '',
 		display: 'Yes',
 		keywords: '',
+		bibtexfile: '',
 	}, publication);
 
 	const { postType, urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display, keywords } = formValues;
+		organization, school, note, institution, display, keywords, bibtexfile } = formValues;
 
 	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
 	const handleSelectChange = (event) => {
@@ -367,6 +369,92 @@ export const FormEditRelease = () => {
 		setSelectValue(target.value);
 		handleInputChange(event);
 	  }
+	//Bibtex
+	let bibtex_File;
+	const [datosbibtex, setDatosBibtex] = useState('');
+	const handleFileBibtexChange = (e) => {
+		bibtex_File = e.target.files[0];
+		//if(e.target.files.length===0)setFuncionEjecutada(false);
+		setDatosBibtex(bibtex_File);
+		if (bibtex_File!=null) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+                const content = e.target.result;
+				get_data(content);
+            };
+			reader.readAsText(bibtex_File);
+		}else{
+			setFuncionEjecutada(false);
+		}
+	}
+	const [funcionEjecutada, setFuncionEjecutada] = useState(false);
+	function get_data(content){
+		const text = content.split();
+		let testStr = content;
+		let info = ["title","author","journal","volume","number","pages","publisher","address","howpublished","booktitle","editor","series","organization","school","institution","note","year"]
+		let types = ["article","book","booklet","conference","inbook","incollection","inproceedings","manual","masterthesis","misc","phdthesis","proceedings","techreport","unpublished"]
+		let testRegexType;
+		let testRegex;
+		for(let i=0;i<types.length;i++){
+			testRegexType = new RegExp("@"+types[i]+"{","i");
+			if(testRegexType.test(testStr)){
+				formValues.postType = types[i];
+				setSelectValue(types[i]);
+			}
+		}
+		for(let i=0;i<info.length;i++){
+			testRegex = new RegExp(info[i],"i");
+			if(testRegex.test(testStr)){
+				const textRegexString = new RegExp(info[i]+"={(.*?)}","i");
+				const information = content.match(textRegexString);
+				if(i==0)formValues.title = information[1];
+				if(i==1)formValues.autor = information[1];
+				if(i==2)formValues.journal = information[1];
+				if(i==3)formValues.volume = information[1];
+				if(i==4)formValues.number = information[1];
+				if(i==5)formValues.pages = information[1];
+				if(i==6)formValues.publisher = information[1];
+				if(i==7)formValues.address = information[1];
+				if(i==8)formValues.howpublished = information[1];
+				if(i==9)formValues.booktitle = information[1];
+				if(i==10)formValues.editor = information[1];
+				if(i==11)formValues.series = information[1];
+				if(i==12)formValues.organization = information[1];
+				if(i==13)formValues.school = information[1];
+				if(i==14)formValues.institution = information[1];
+				if(i==15)formValues.note = information[1];
+				if(i==16)formValues.yearMonth = information[1]+"-01-01";
+			}	
+		}
+		setFuncionEjecutada(true);
+		setFuncionEjecutada(false);
+	}
+	useEffect(() => {
+	}, [funcionEjecutada]);
+	const handleDownload = () =>{
+		const storage = getStorage();
+		const textRegexString = new RegExp("/([^\/?]+)\\?","i");
+		const information = formValues.bibtexfile.match(textRegexString);
+		//console.log(information[1]);
+		const pathReference = ref(storage, information[1]);
+		getDownloadURL(pathReference).then((url) => {
+			// File deleted successfully
+			//console.log("Descarga exitosa");
+			//console.log(url);
+			const anchor = document.createElement('a');
+			anchor.setAttribute('href', url);
+			anchor.setAttribute('target','_blank');
+			anchor.setAttribute('download', information[1]+".txt");
+			anchor.click();
+		}).catch((error) => {
+			//console.log("Fallo al descargar");
+			// Uh-oh, an error occurred!
+		});
+		/*const a = document.createElement('a');
+		a.href = pathReference; // Set the file path or URL
+		a.download = information[1]; // Set the desired file name for download
+		a.click();*/
+	}
 	//Galeria
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
@@ -399,7 +487,9 @@ export const FormEditRelease = () => {
 	 */
 	const handleUpdatePublication = e => {
 		e.preventDefault()
-		dispatch(editPublication(publication.id, formValues))
+		bibtex_File = datosbibtex;
+		dispatch(editPublication(publication.id, formValues, bibtex_File))
+		setFuncionEjecutada(false);
 	}
 
 	//tech infor firebase
@@ -424,6 +514,11 @@ export const FormEditRelease = () => {
 		//setSelectValue(formValues.postType = selectValue);
 		setSelectValue(formValues.postType);
 	},[]);
+	function getname(){
+		const textRegexString = new RegExp("/([^\/?]+)\\?","i");
+		const information = formValues.bibtexfile.match(textRegexString);
+		return(information[1]);
+	}
 	return (
 		<div className="container mb-5">
 			<div className="app-title">
@@ -431,10 +526,34 @@ export const FormEditRelease = () => {
 				<hr />
 			</div>
 			<div className="form-group row">
+				<div className="col mb-3">
+					<label for="fileSelector">Seleccionar bibtex:</label>
+					<input
+						className='form-control'
+						id="fileSelector"
+						type="file"
+						name="file"
+						accept="text/txt"
+						src='bibtexfile'
+						onChange={handleFileBibtexChange}
+					/>
+					{
+					(formValues.bibtexfile)?(
+					<div>
+						<label style={{marginTop:15,marginBottom:-10}}>Descargar archivo:</label>
+						<button class="btn btn-primary" onClick={handleDownload}>{
+						getname()
+						}</button>
+					</div>
+					):(
+						<div></div>
+					)}
+				</div>
+				
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
-						value={postType}
+						value={selectValue}
 						className="form-control"
 						name='postType'
 						onChange={handleSelectChange}
@@ -799,9 +918,9 @@ export const FormEditRelease = () => {
 			</div>
 			<button
 				className="btn2 btn-primary btn-lg btn-block mt-3"
-				onClick={publication ? handleUpdatePublication : handleSubmit}
+				onClick={handleUpdatePublication}
 			>
-				{publication ? 'Guardar cambios' : 'Agregar'}
+				{'Guardar cambios'}
 			</button>
 
 

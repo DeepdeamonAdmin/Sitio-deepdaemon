@@ -1,13 +1,14 @@
 // allow read, write: if request.auth != null;
 
 import Swal from 'sweetalert2';
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadWorks } from '../helpers/loadWorks';
 import { uiCloseModal } from './ui';
 import { loadAllWorks } from '../helpers/loadAllWorks';
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 
 export const startNewPublication = ( formValues,bibtex_File) => {
@@ -174,8 +175,42 @@ export const setAllPublications = (publications) => ({
 });
 
 /****************************** */
-export const startsNewBibtex = (formValues) => {
-	return async (dispatch, getState) => {
+export const startsNewBibtex = (formValues,bibtex_File) => {
+    let fileUrl='';
+    return async( dispatch, getState ) => {
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        const ruta = ''
+        if(formValues.bibtexfile){
+            const storage = getStorage();
+            const textRegexString = new RegExp("/([^\/?]+)\\?","i");
+			const information = formValues.bibtexfile.match(textRegexString);
+            const desertRef = ref(storage, information[1]);
+            deleteObject(desertRef).then(() => {
+                // File deleted successfully
+                //console.log("Borrado exitosamente");
+            }).catch((error) => {
+                //console.log("Fallo al borrar");
+                // Uh-oh, an error occurred!
+            });
+            //const bibtexDoc = doc(db, formValues.bibtexfile);
+            //await deleteDoc(bibtexDoc);
+        }
+        fileUrl = await fileUpload(ruta, bibtex_File);
+        dispatch(loadBibtex(fileUrl));
+        //dispatch(changeUrl(formValues,fileUrl));
+        formValues.bibtexfile = fileUrl;
+        Swal.close();
+        
+    }
+	/*return async (dispatch, getState) => {
 		const { uid } = getState().auth;
 		const { bibtexprueba } = getState().publications;
 
@@ -193,7 +228,7 @@ export const startsNewBibtex = (formValues) => {
 		} else {
 			Swal.fire('Error al enviar archivo');
 		}
-	}
+	}*/
 }
 export const startUploadingBibtex = (file) => {
 	return async (dispatch) => {
@@ -218,6 +253,9 @@ export const loadBibtex = (url) => ({
 	type: types.publicationsBibtexAddNew,
 	payload: url
 });
+export const changeUrl = (formValues,fileUrl) =>{
+    formValues.bibtexfile = fileUrl;
+}
 export const addNewtoBibtex = (id, bibtex) => ({
 	type: types.publicationsBibtexAddNew,
 	payload: {

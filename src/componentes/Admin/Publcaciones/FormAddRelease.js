@@ -468,7 +468,6 @@ export const FormAddRelease = () => {
 	const handleSubmit = () => {
 		formValues.urlImg = datos;
 		formValues.postType = selectValue;
-		//formValues.bibtexfile = datosbibtex;
 		bibtex_File = datosbibtex;
 		dispatch(startNewPublication(formValues,bibtex_File));
 		reset();
