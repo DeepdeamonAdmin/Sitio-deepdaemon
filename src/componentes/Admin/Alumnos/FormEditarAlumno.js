@@ -74,6 +74,7 @@ export const FormEditarAlumno = (props) => {
 		const data = {
 			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
 		};
+		if(alumno.rol==="alumno"||alumno.rol==="externo")data.idWork="";
 		//data.ss = isChecked
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
@@ -132,7 +133,7 @@ export const FormEditarAlumno = (props) => {
 	return (
 		<div className="container">
 			<div className="app-title">
-				{alumno.rol === 'other' && (
+				{(alumno.rol === 'externo'||alumno.rol === 'alumno') && (
 					<h2>Editar Alumno </h2>
 				)}
 				{alumno.rol === 'administrador' && (
@@ -264,8 +265,17 @@ export const FormEditarAlumno = (props) => {
 						{alumno.rol === 'alumno' && (
 							<option value='alumno' > Alumno </option>
 						)}
+						{alumno.rol === 'alumno' && (
+							<option value='externo' > Externo </option>
+						)}
 						{alumno.rol === 'administrador' && (
 							<option value='administrador' > Líder </option>
+						)}
+						{alumno.rol === 'externo' && (
+								<option value='externo' > Externo </option>
+						)}
+						{alumno.rol === 'externo' && (
+								<option value='alumno' > Alumno </option>
 						)}
 
 					</select>

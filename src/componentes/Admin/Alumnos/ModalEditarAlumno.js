@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModalEdit } from '../../../actions/ui';
 import { customStyles } from '../../../helpers/modalCustomStyles';
-import { FormEditAlumno } from './FormEditAlumno';
+
 
 Modal.setAppElement('#app');
 
