@@ -1,20 +1,3 @@
-/*
-    {
-        publications: [],
-        active: null,
-        publication: {
-            id: 'KASKLDJALKSDJ129387123',
-            name:'',
-            descripcion: '',
-            impact: '',
-            urlImg: '',
-            urlModalMedia: '',
-            link: '',
-            nameTech: '',
-        }
-    }
-*/
-
 import { types } from '../types/types';
 
 const initialState = {

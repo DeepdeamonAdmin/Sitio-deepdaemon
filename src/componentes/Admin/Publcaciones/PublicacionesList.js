@@ -6,8 +6,9 @@ import PublicacionesCard from './PublicacionesCard';
 const PublicacionesList = () => {
     //const auth = getAuth();
     //const dN = auth.currentUser.displayName;
-
     const  publications  = useSelector(state => state.publications);
+    
+    
     //console.log(publications);
     return (
         <>

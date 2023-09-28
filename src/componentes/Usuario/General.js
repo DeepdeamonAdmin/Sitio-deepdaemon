@@ -66,6 +66,22 @@ export const General = ({ id }) => {
     slideFocus: true,
     focus: true,
   };
+  const videos = ["https://www.youtube.com/embed/YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","https://www.youtube.com/embed/OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","https://www.youtube.com/embed/OG0w_4qDiy8"]
+  const options_video = {
+    type: 'loop',
+    gap: '2rem',
+    perPage: 1,
+    autoplay: true,
+    resetProgress: false,
+    slideFocus: true,
+    focus: true,
+    height: '350px',
+		width: '80%',
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    interval: 10000
+  };
+
 
   return (
     <div className="">
@@ -80,14 +96,33 @@ export const General = ({ id }) => {
             <h2>Comunidad de conocimiento</h2>
           </div>
           <div className="col-sm">
-            <iframe
+            <Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
+              <div style={{ position: 'relative' }}>
+                <SplideTrack>
+                  {videos.map((video) => (
+                    <SplideSlide>
+                      <iframe
+                        className="embed-responsive"
+                        src={video}
+                        title="YouTube video player"
+                        gesture="media"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        key={video}
+                      ></iframe>
+                    </SplideSlide>
+                  ))}
+                </SplideTrack>
+              </div>
+            </Splide>
+            {/*<iframe
               className="embed-responsive"
               src="https://www.youtube.com/embed/OG0w_4qDiy8"
               title="YouTube video player"
               gesture="media"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+                  ></iframe>*/}
           </div>
         </Row>
       </div>
@@ -98,7 +133,7 @@ export const General = ({ id }) => {
               <SplideTrack>
                 {avisos.map((aviso) => (
                   <SplideSlide>
-                    <img src={aviso.photo} />
+                    <img src={aviso.photo} key={aviso.photo}/>
                   </SplideSlide>
                 ))}
               </SplideTrack>

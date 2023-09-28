@@ -16,7 +16,6 @@ export const PublicationScreen = ({ type }) => {
         const q = query(ref, where("postType", '==', type));
         const Data = await getDocs(q);
         const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        /*******************/
         function esFechaInvalida(fechaString) {
           const fecha = new Date(fechaString);
           return isNaN(fecha) || fecha.toString() === 'Invalid Date';
@@ -32,11 +31,6 @@ export const PublicationScreen = ({ type }) => {
           return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
         }
         const fechasOrdenadas = arrayData.slice().sort(compararFechas);
-        /*for(let i=0;i<fechasOrdenadas.length;i++){
-          console.log(fechasOrdenadas[i].yearMonth);
-        }*/
-        //const arrayDataOrdered = arrayData.slice().sort((a, b) => a.yearMonth - b.yearMonth);
-        //arraydata = arraydata.sort((a, b) => a.yearMonth - a.yearMonth)*/
         setPublications(fechasOrdenadas);
       } catch (error) {
         console.log(error);

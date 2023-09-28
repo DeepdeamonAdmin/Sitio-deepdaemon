@@ -105,7 +105,7 @@ export const TeamScreen = ({ status }) => {
 											}}
 										/>
 									</div>
-									<div clasName="col" style={{maxWidth:"250px",marginLeft:"5%"}}>
+									<div className="col" style={{maxWidth:"250px",marginLeft:"5%"}}>
 										<div className="card-body" style={{position:"relative",paddingBottom:0,marginBottom:0}}>
 											<h5 className="card-title" style={{height:"50px"}}>
 												{usuario.nombre}

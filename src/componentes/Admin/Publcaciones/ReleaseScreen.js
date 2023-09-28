@@ -1,7 +1,4 @@
 import React from 'react'
-import { AddNewFab } from '../../ui/AddNewFab'
-import { Publications } from '../../users/Publications'
-import { ModalAddrelease } from './ModalAddrelease'
 import PublicacionesList from './PublicacionesList'
 import { Link } from 'react-router-dom';
 
@@ -11,7 +8,7 @@ export const ReleaseScreen = () => {
             <div className='Container'>
                 <div className='row'>
                     <div className='col-mb-3'>
-                        <h1> Publicaciones DeepDaemon </h1>
+                        <h1> Publicaciones DeepDaemon</h1>
                     </div>
                 </div>
                 <div className="row">
