@@ -10,6 +10,7 @@ export default function GalleryList() {
 	const { uid } = useSelector(state => state.auth)
 	// console.log(uid);
 	const [gallery, setGallery] = useState([])
+	const [function_gallery,setfunction_gallery] = useState('false')
 
 	const galleryCollection = collection(db, `Gallery/${uid}/Imagenes`);
 
@@ -18,6 +19,7 @@ export default function GalleryList() {
 		setGallery(
 			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
 		);
+		setfunction_gallery('true');
 	}
 
 	const deleteImagen = async (id) => {
@@ -29,7 +31,7 @@ export default function GalleryList() {
 
 	useEffect(() => {
 		getGallery()
-	}, [gallery])
+	}, [function_gallery])
 	return (
 		<>
 			{

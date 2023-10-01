@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteMember } from '../../../actions/delete';
 
 import { useEffect, useState } from 'react';
-import { collection, getDoc, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { updateDoc, doc } from 'firebase/firestore';
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
 import Swal from "sweetalert2";

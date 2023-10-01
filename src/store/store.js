@@ -10,7 +10,6 @@ import { projectsReduccer } from "../reducers/projectsReduccer";
 import { publicationsReduccer } from "../reducers/publicationsReduccer";
 import { registerReducer } from "../reducers/registerReducer";
 import { uiReduccer } from "../reducers/uiReducer";
-
 import { tesisReducer } from "../reducers/tesisReducer";
 import { userReducer } from "../reducers/userReduccer";
 

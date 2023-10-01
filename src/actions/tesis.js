@@ -5,7 +5,6 @@ import { uiCloseModal } from './ui';
 import { types } from '../types/types';
 import { loadWorks } from '../helpers/loadWorks';
 import { loadAllWorks } from '../helpers/loadAllWorks';
-//import { collection, getDocs, deleteDoc, doc, where, query } from 'firebase/firestore';
 
 
 

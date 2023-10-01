@@ -96,7 +96,7 @@ export const General = ({ id }) => {
             <h2>Comunidad de conocimiento</h2>
           </div>
           <div className="col-sm">
-            <Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
+            {/*<Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
               <div style={{ position: 'relative' }}>
                 <SplideTrack>
                   {videos.map((video) => (
@@ -114,15 +114,15 @@ export const General = ({ id }) => {
                   ))}
                 </SplideTrack>
               </div>
-            </Splide>
-            {/*<iframe
+                  </Splide>*/}
+            <iframe
               className="embed-responsive"
               src="https://www.youtube.com/embed/OG0w_4qDiy8"
               title="YouTube video player"
               gesture="media"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-                  ></iframe>*/}
+                  ></iframe>
           </div>
         </Row>
       </div>

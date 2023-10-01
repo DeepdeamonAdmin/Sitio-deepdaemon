@@ -45,8 +45,8 @@ export const ProjectScreen = ({ status1, status2 }) => {
 			{
 				projects.map(project=>(
 					project.display==="Yes"&&(
-						<div key={project.id} className="card">
-							<div className="row mb-4 bg-light ml-2" style={{maxWidth:"450px",minWidth:"200px", height:"130px",borderRadius:"5px"}}>
+						<div key={project.id} className="card-row">
+							<div className="row mb-4 bg-light ml-2" style={{maxWidth:"500px",minWidth:"200px", height:"130px",borderRadius:"5px"}}>
 								<div className="col-sm-6" style={{margin:"0px",padding:0,width:"110px"}}>
 									<img
 										className="card-img"
