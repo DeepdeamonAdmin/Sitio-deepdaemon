@@ -3,10 +3,7 @@ import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-//import { startNewTesis } from '../../../src/actions/tesis';
 import { deleteTesisUser } from '../../../../src/actions/delete';
-//import { deleteProject } from '../../../actions/delete';
-//import { collection, getDocs, where, get, query } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { startLoadingTesis } from '../../../actions/tesis';
 

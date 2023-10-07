@@ -128,27 +128,18 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 				ruta = "Niveles/Posgrado/Doctorado"
 				break;
 		}
-		console.log("ruta:" + ruta);
-		console.log("init: " + formValues.alumnosListaInit);
-		console.log("nuevo: " + formValues.alumnosLista);
 
 		if (formValues.alumnosListaInit != formValues.alumnosLista) {
 			const docRefdelete = await deleteDoc(doc(db, ruta + "/" + formValues.alumnosListaInit));
 			alumnoNuevo = true;
-			console.log("doc eliminado");
 		}
 
 		const docRef = doc(db, ruta, formValues.alumnosLista);
-		console.log("docRef:" + docRef.id);
 
 		try {
 			const docSnap = await getDoc(docRef);
 			if (docSnap.exists()) {
 				alumno = "exist";
-				console.log("Document data:", docSnap.data());
-				console.log("alumno: ", alumno);
-			} else {
-				console.log("No such document!");
 			}
 		} catch (error) {
 			console.log("Error:", error);
@@ -159,7 +150,6 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 		if (alumno != "exist") {
 
 			//codigo para editar
-			console.log("entrando a editar cuando existe");
 			const dataToFirestore = {
 				name: formValues.name,
 				correo: formValues.correo,
@@ -189,7 +179,6 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 
 
 		} else {
-			console.log("entrando a editar cuando no existe");
 			const dataToFirestore = {
 				name: formValues.name,
 				correo: formValues.correo,
@@ -222,10 +211,10 @@ export const editPublication = (idPublication, formValues, bibtex_File) => {
 			//console.log(formValues.bibtexfile);
 			//console.log(url);
 		}
-		const dataToFirestore = { ...formValues }
-		const publicationUpdate = updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore)
+		const dataToFirestore = { ...formValues };
+		const publicationUpdate = updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore);
 
-		dispatch(startLoadingPublication())
+		await dispatch(startLoadingPublication());
 		Swal.fire('Informacion actualizada:', formValues.name, 'success')
 
 	}

@@ -58,6 +58,7 @@ export const FormAddAlumno = () => {
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
+
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setEscuela(arrayData)
 

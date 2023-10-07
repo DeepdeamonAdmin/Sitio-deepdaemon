@@ -146,8 +146,7 @@ export const startLoadingPublication = () => {
         const { uid } = getState().auth;
         const ruta =`Publicaciones`;
         const publications = await loadWorks( ruta );
-        dispatch( setPublications( publications ));
-        
+        await dispatch( setPublications( publications ));
     }
 }
 

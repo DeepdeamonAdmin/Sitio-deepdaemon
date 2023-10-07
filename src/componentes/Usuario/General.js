@@ -66,7 +66,7 @@ export const General = ({ id }) => {
     slideFocus: true,
     focus: true,
   };
-  const videos = ["https://www.youtube.com/embed/YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","https://www.youtube.com/embed/OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","https://www.youtube.com/embed/OG0w_4qDiy8"]
+  const videos = ["YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","OG0w_4qDiy8"]
   const options_video = {
     type: 'loop',
     gap: '2rem',
@@ -81,8 +81,6 @@ export const General = ({ id }) => {
     pauseOnFocus: true,
     interval: 10000
   };
-
-
   return (
     <div className="">
       <div className="d-flex flex-row dd_header">
@@ -103,13 +101,14 @@ export const General = ({ id }) => {
                     <SplideSlide>
                       <iframe
                         className="embed-responsive"
-                        src={video}
+                        src={"https://www.youtube.com/embed/"+video}
                         title="YouTube video player"
                         gesture="media"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                         key={video}
-                      ></iframe>
+                        name="YT_video"
+                    ></iframe>
                     </SplideSlide>
                   ))}
                 </SplideTrack>
@@ -122,7 +121,7 @@ export const General = ({ id }) => {
               gesture="media"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-                  ></iframe>
+            ></iframe>
           </div>
         </Row>
       </div>

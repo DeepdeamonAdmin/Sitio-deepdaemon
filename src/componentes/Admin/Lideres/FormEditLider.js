@@ -31,32 +31,6 @@ export default function FormEditLider() {
 		setOldPassword(lider.password)
 	}, [usuarios]);
 
-	//proyectos donde el lider es autor
-	// const [listProject, setListProject] = React.useState([])
-	// React.useEffect(() => {
-	// 	const obtenerProject = async () => {
-	// 		try {
-	// 			//const Data = await getDocs(collection(db, "Proyectos"));
-
-	// 			// Create a reference to the projects collection
-	// 			const projectRef = db.collection('Proyectos');
-
-	// 			// Create a query against the collection
-	// 			const queryRef = projectRef.where('autores', 'array-contains',
-	// 				lider.nombre).get();
-	// 			console.log(queryRef)
-	// 			const arrayData = queryRef.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-	// 			setListProject(arrayData)
-
-	// 		} catch (error) {
-	// 			console.log(error)
-	// 		}
-	// 	}
-	// 	obtenerProject()
-	// }, [])
-	// listProject.map((u) => (
-	// 	console.log(u)
-	// ))
 	const {
 		Github,
 		descripcion,

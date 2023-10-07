@@ -5,7 +5,6 @@ import ProjectCard from './ProjectCard';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {db} from '../../../firebase/firebase-config';
-import { collection, getDocs, where, get, query } from "firebase/firestore";
 import {
 	getAuth,
 } from 'firebase/auth';

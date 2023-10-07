@@ -16,29 +16,15 @@ export const TesisScreen = ({ status1, status2 }) => {
 	const [currentModal, setCurrentModal] = useState(null);
 	const [showInf, setShowInfo] = useState(false);
 
-	const [tesis, setTesis] = React.useState([])
-	React.useEffect(() => {
-		const getTesis = async () => {
-			try {
-				const ref = collection(db, "Tesis")
-				const q = query(ref, where("estado", "in", [status1, status2]))
-				const Data = await getDocs(q);
-				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-				setTesis(arrayData)
-
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		getTesis()
-	}, [])
-	console.log(tesis)
+	//const [tesis, setTesis] = React.useState([])
+	const tesis  = useSelector(state => state.tesis);
+	var tesis_type = tesis.tesis.filter(tesis => (tesis.estado===status1||tesis.estado===status2));
 
 	return (
 		<div className="container-fluid card-columns">
-			{tesis.length === 0 && <p>No se encontraron tesis por el momento.</p>}
+			{tesis_type.length === 0 && <p>No se encontraron tesis por el momento.</p>}
 		  <div className="row">
-			{tesis.map((t) => (
+			{tesis_type.map((t) => (
 			  // Imprimir solamente si el estado es igual al seleccionado
 			  t.display === "Yes" && (
 				<div key={t.id} className="col-md-12 mb-3">

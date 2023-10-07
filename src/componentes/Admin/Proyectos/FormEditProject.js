@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select'
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -51,9 +51,11 @@ export const FormEditProject = ({ history }) => {
 	//Galeria
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
-		formValues.urlImg = "";
 		setDatos(datosMg);
+		formValues.urlImg=datos;
 	}
+	
+	
 
 	const selectedDirectores = [];
 	const selectedColaboradores = [];
@@ -95,9 +97,6 @@ export const FormEditProject = ({ history }) => {
 	//envio a la api
 	const handleSubmit = () => {
 		//e.preventDefault();
-		if (datos !== "") {
-			formValues.urlImg = datos;
-		}
 		const selectedDirectores = [];
 		const selectedColaboradores = [];
 		if (directores.selectedOption != null) {
@@ -113,7 +112,7 @@ export const FormEditProject = ({ history }) => {
 
 		formValues.directoresLista = selectedDirectores;
 		formValues.colaboradoresLista = selectedColaboradores;
-		formValues.urlImg = datos;
+		if(datos!="")formValues.urlImg = datos;
 		dispatch(editProject(idProject, formValues));
 	}
 

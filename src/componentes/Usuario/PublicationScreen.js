@@ -4,12 +4,15 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { VerMasPublication } from '../ui/VerMasPublication';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
 import { auth } from '../../firebase/firebase-config';
+import { useSelector } from 'react-redux';
 
 export const PublicationScreen = ({ type }) => {
-  const [publications, setPublications] = React.useState([]);
+  //const [publications, setPublications] = React.useState([]);
 	const user = auth.currentUser;
+  const publications  = useSelector(state => state.publications);
+  var publications_type = publications.publications.filter(publications => publications.postType===type);
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     const getPublications = async () => {
       try {
         const ref = collection(db, "Publicaciones");
@@ -37,7 +40,7 @@ export const PublicationScreen = ({ type }) => {
       }
     };
     getPublications();
-  }, [type]);
+  }, [type]);*/
 
   if (publications.length === 0) {
     return <p className="team_title">No hay publicaciones disponibles por el momento.</p>;
@@ -47,7 +50,7 @@ export const PublicationScreen = ({ type }) => {
     <>
     <div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center", flexDirection:"row", maxHeight:"160px",gap:4}}>
       {
-        publications.map(publication=>(
+        publications_type.map(publication=>(
           publication.display==="Yes"&&(
             <div key={publication.id} className="card mb-3 mr-1 " style={{maxWidth:"400px",minWidth:"300px"}}>
               <div className="row-md-1 mb-1 bg-light d-flex" style={{borderRadius:"5px",height:"160px"}}>

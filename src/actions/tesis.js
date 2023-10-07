@@ -15,6 +15,7 @@ export const startNewTesisGrado = (formValues) => {
 		const q = query(tesisRef, where("name", "==", formValues.name));
 		const Data = await getDocs(q);
 
+
 		const alumnosArray = [];
 		for (let i = 0; i < formValues.alumnosLista.length; i++) {
 			const docRef = doc(db, "Niveles/Grado/Licenciatura", formValues.alumnosLista[i]);
@@ -174,7 +175,7 @@ export const addNewTesis = (id, tesis) => ({
 export const startLoadingTesis = () => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
-		const ruta = "Tesis";
+		const ruta = `Tesis`;
 		const tesis = await loadWorks(ruta);
 		dispatch(setTesis(tesis));
 
@@ -188,13 +189,9 @@ export const setTesis = (tesis) => ({
 
 export const startLoadinTesisAll = () => {
 	return async (dispatch) => {
-		const ruta = 'Tesis'
+		const ruta = `Tesis`;
 		const tesis = await loadAllWorks(ruta);
-		if (tesis) {
-			dispatch(setAllTesis(tesis));
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
+		dispatch(setAllTesis(tesis));
 	}
 }
 

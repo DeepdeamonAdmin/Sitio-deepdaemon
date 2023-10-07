@@ -23,7 +23,6 @@ export const EditInfoTesis = () => {
 	const dispatch = useDispatch();
 	const { idTesis } = useParams();
 	const { tesis } = useSelector(state => state.tesis);
-	console.log(idTesis)
 	const tesisO = tesis.filter(t => {
 		return t.id === idTesis
 	})
@@ -47,8 +46,8 @@ export const EditInfoTesis = () => {
 	//Galeria
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
-		formValues.urlImg = "";
 		setDatos(datosMg);
+		formValues.urlImg=datos;
 	}
 
 	//tech infor firebase
@@ -126,9 +125,7 @@ export const EditInfoTesis = () => {
 
 	//envio a la api
 	const handleSubmit = () => {
-		if (datos != "") {
-			formValues.urlImg = datos;
-		}
+		if(datos!="")formValues.urlImg = datos;
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
 		const selectedTecnos = [];
@@ -141,7 +138,6 @@ export const EditInfoTesis = () => {
 					))
 				}
 				if (formValues.grado == "Licenciatura") {
-					console.log("entrando a editar cuando es grado");
 					if (alumnos.selectedOption.length <= 4) {
 						if (alumnos.selectedOption != null) {
 							alumnos.selectedOption.map((u) => (
@@ -156,7 +152,7 @@ export const EditInfoTesis = () => {
 						formValues.directoresLista = selectedDirectores;
 						formValues.alumnosLista = selectedAlumnos;
 						formValues.nameTech = selectedTecnos;
-						formValues.urlImg = datos;
+						//formValues.urlImg = datos;
 						formValues.alumnosListaInit = alumnosListaInitAux;
 						dispatch(editTesisGrado(idTesis, formValues));
 					} else {
@@ -171,9 +167,8 @@ export const EditInfoTesis = () => {
 					formValues.directoresLista = selectedDirectores;
 					formValues.alumnosLista = alumnos.selectedOption[0].label;
 					formValues.nameTech = selectedTecnos;
-					formValues.urlImg = datos;
+					//formValues.urlImg = datos;
 					formValues.alumnosListaInit = alumnoAux;
-					console.log("dispatch(editTesisPosgrado(idTesis, formValues));");
 					dispatch(editTesisPosgrado(idTesis, formValues));
 				}
 

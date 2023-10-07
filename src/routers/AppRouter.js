@@ -50,8 +50,9 @@ export const AppRouter = () => {
     useEffect(() => {
 
         dispatch(startLoadinUsersAll());
-        dispatch(startLoadinProjectsAll());
-        dispatch(startLoadinTesisAll());
+        dispatch(startLoadingProject());
+        dispatch(startLoadingTesis());
+        dispatch(startLoadingPublication());
 
         onAuthStateChanged(auth, (user) => {
 
@@ -63,11 +64,11 @@ export const AppRouter = () => {
                 //console.log(user.displayName)
                 setIsLoggedIn(true);
                 dispatch(getUserRolUid());
-                dispatch(startLoadingProject());
-                dispatch(startLoadingPublication());
-                dispatch(startLoadinProjectsAll());
-                dispatch(startLoadingTesis());
-                dispatch(startLoadinTesisAll());
+                //dispatch(startLoadingProject());
+                
+                //dispatch(startLoadinProjectsAll());
+                //dispatch(startLoadingTesis());
+                //dispatch(startLoadinTesisAll());
 
                 if (user.emailVerified) {
                     console.log("Verificado")

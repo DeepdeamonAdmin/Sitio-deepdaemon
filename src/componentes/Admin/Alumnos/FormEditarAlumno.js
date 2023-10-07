@@ -45,7 +45,8 @@ export const FormEditarAlumno = (props) => {
 				const projectRef = collection(db, "Proyectos");
 				const queryRef = query(projectRef, where("autores", "array-contains",
 					alumno.nombre));;
-				const q = await getDocs(queryRef)
+				const q = await getDocs(queryRef);
+
 				const arrayData = q.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setListProject(arrayData)
 			} catch (error) {

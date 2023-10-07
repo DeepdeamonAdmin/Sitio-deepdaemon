@@ -123,7 +123,6 @@ export const EditInfoTesis = () => {
 					))
 				}
 				if (formValues.grado == "Licenciatura") {
-					console.log("entrando a editar cuando es grado");
 					if (alumnos.selectedOption.length <= 4) {
 						if (alumnos.selectedOption != null) {
 							alumnos.selectedOption.map((u) => (
@@ -139,7 +138,6 @@ export const EditInfoTesis = () => {
 						Swal.fire('Error al agregar tesis, sólo se admiten máximo 4 alumnos');
 					}
 				} else {
-					console.log("entrando a editar cuando es posgrado");
 					formValues.directoresLista = selectedDirectores;
 					formValues.alumnosLista = alumnos.selectedOption.label;
 					formValues.urlImg = datos;
