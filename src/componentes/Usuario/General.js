@@ -26,6 +26,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { PublicationScreen } from "./PublicationScreen";
+import ReactPlayer from 'react-player'
 
 export const General = ({ id }) => {
   //Configurar hooks
@@ -66,7 +67,8 @@ export const General = ({ id }) => {
     slideFocus: true,
     focus: true,
   };
-  const videos = ["YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","OG0w_4qDiy8"]
+  //const videos = ["YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","OG0w_4qDiy8"]
+  const videos = ["https://youtu.be/OG0w_4qDiy8?si=Xi9OYYQrRJChJhDW"]
   const options_video = {
     type: 'loop',
     gap: '2rem',
@@ -79,13 +81,13 @@ export const General = ({ id }) => {
 		width: '80%',
     pauseOnHover: true,
     pauseOnFocus: true,
-    interval: 10000
+    interval: 20000
   };
   return (
     <div className="">
       <div className="d-flex flex-row dd_header">
-        <Row className="d-flex flex-row">
-          <div className="col-sm" id="Home">
+        <Row className="d-flex flex-row " style={{width:"100%"}}>
+          <div className="col-sm p-0" id="Home" >
             <img src={cic} className="ddcic" alt="cic" />
             <img src={logo} className="ddlogo" alt="logo" />
             <h1>Laboratorio de Ciencias </h1>
@@ -94,11 +96,15 @@ export const General = ({ id }) => {
             <h2>Comunidad de conocimiento</h2>
           </div>
           <div className="col-sm">
-            {/*<Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
+            <Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
               <div style={{ position: 'relative' }}>
                 <SplideTrack>
                   {videos.map((video) => (
                     <SplideSlide>
+                      <ReactPlayer url='https://youtu.be/OG0w_4qDiy8?si=Xi9OYYQrRJChJhDW'
+                        width={"100%"}
+                      />
+                      {/*<VideoCarousel src={video}/>
                       <iframe
                         className="embed-responsive"
                         src={"https://www.youtube.com/embed/"+video}
@@ -108,20 +114,19 @@ export const General = ({ id }) => {
                         allowFullScreen
                         key={video}
                         name="YT_video"
-                    ></iframe>
+                  ></iframe>*/}
                     </SplideSlide>
                   ))}
                 </SplideTrack>
               </div>
-                  </Splide>*/}
-            <iframe
+            </Splide>
+           {/*} <iframe
               className="embed-responsive"
               src="https://www.youtube.com/embed/OG0w_4qDiy8"
               title="YouTube video player"
-              gesture="media"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+                ></iframe>*/}
           </div>
         </Row>
       </div>
