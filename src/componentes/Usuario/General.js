@@ -10,7 +10,6 @@ import '@splidejs/react-splide/css';
 import '@splidejs/splide/css/skyblue';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import "../../styles/carrusel.css"
-
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
 import "../../styles/DeepDaemon.css";
 import { Container, Nav } from "react-bootstrap";
@@ -372,14 +371,14 @@ export const General = ({ id }) => {
               <Tab.Pane eventKey="congress">
                 <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
-                    <PublicationScreen type="article" />
+                    <PublicationScreen type="conference" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="magazine" >
                 <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
-                    <PublicationScreen type="magazine" />
+                  <PublicationScreen type={["magazine","article"]} />
                   </div>
                 </div>
               </Tab.Pane>

@@ -10,7 +10,7 @@ export const PublicationScreen = ({ type }) => {
   //const [publications, setPublications] = React.useState([]);
 	const user = auth.currentUser;
   const publications  = useSelector(state => state.publications);
-  var publications_type = publications.publications.filter(publications => publications.postType===type);
+  var publications_type = publications.publications.filter(publication => type.includes(publication.postType) && publication.display === "Yes");
 
   /*React.useEffect(() => {
     const getPublications = async () => {
@@ -72,15 +72,15 @@ export const PublicationScreen = ({ type }) => {
                     <div className="card-body" style={{position:"relative",paddingBottom:0,marginBottom:0}}>
                       <h6 className="card-title" style={{
                         display: '-webkit-box',
-                        WebkitLineClamp: 2,
+                        WebkitLineClamp: 5,
                         WebkitBoxOrient: 'vertical',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
-                        maxHeight: '3.6em',
+                        maxHeight: '5.9em',
                       }}>
                         {publication.title}
                       </h6>
-                      <div className="text-right d-flex" style={{position:"relative", justifyContent:"right"}}>
+                      <div className="text-right d-flex" style={{position:"absolute",top:"105px",right:"0px", justifyContent:"right"}}>
                         {!user && <ModalCrearCuenta />}
 												<VerMasPublication publicacion={publication} />
                       </div>

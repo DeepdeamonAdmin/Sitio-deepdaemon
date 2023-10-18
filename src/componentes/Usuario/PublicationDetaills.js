@@ -42,13 +42,14 @@ export const PublicationDetaills = ({ publication }) => {
           <div className="modal-public">
 
             <div className="modalheader bg-primary"> {publication.title} </div>
-            <div className="modalcontent">
+            <div className="modalcontent" style={{ overflow: 'auto', maxHeight: '60vh'}}>
               {' '}
               <div className='d-flex flex-col animate__animated animate__fadeIn'>
                 <ul className="list-group list-group-flush">
                   <li className={`list-group-item`} style={{textAlign:'justify'}}><b>Abstract :</b><i> {publication.descr}</i></li>
                   <li className="list-group-item">Autor : {publication.autor}</li>
                   {publication.postType === 'magazine'? <li className="list-group-item">KeyWords : {publication.keywords}</li>: null}
+                  <li className="list-group-item">Link/DOI : {publication.link}</li>
                 </ul>
               </div>
             </div>
