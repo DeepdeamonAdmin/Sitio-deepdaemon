@@ -109,12 +109,16 @@ export const types = {
 	careerDelete: '[Carreras] Delete Career',
 	careerUpdate: '[Carreras] Update Career',
 
-	// Para las tecnolofias
+	// Para las tecnologias
 	techAddNew: '[Carreras] New Tech',
 	techAllLoad: '[Carreras] All Load Tech',
 	techLoad: '[Carreras] Load Tech',
 	techDelete: '[Carreras] Delete Tech',
 	techUpdate: '[Carreras] Update Tech',
+
+	//Para los videos de YouTube
+	youtubeAddNew: '[YouTube] New Video YouTube',
+	youtubeLoad: '[YouTube] Load Videos Youtube',
 
 	// Para los avisos
 	avisoAddNew: '[Images] New Image', //Agregando imagen con nombre

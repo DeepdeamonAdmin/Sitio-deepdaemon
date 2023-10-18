@@ -22,6 +22,7 @@ import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects
 import { startLoadingTesis, startLoadinTesisAll } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
 import { ExternoDashBoard } from './ExternoDashBoard'
+import { startLoadingYoutube } from '../actions/youtube';
 
 
 
@@ -53,6 +54,7 @@ export const AppRouter = () => {
         dispatch(startLoadingProject());
         dispatch(startLoadingTesis());
         dispatch(startLoadingPublication());
+        dispatch(startLoadingYoutube());
 
         onAuthStateChanged(auth, (user) => {
 

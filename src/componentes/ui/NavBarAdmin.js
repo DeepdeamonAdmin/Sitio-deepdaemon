@@ -135,6 +135,14 @@ export const NavBarAdmin = () => {
 					>
 						Tecnologías
 					</NavLink>
+					<NavLink
+						activeClassName="active"
+						className="nav-item nav-link"
+						exact
+						to="/admin/YouTube"
+					>
+						YouTube
+					</NavLink>
 				</div>
 			</div>
 

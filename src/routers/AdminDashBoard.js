@@ -20,6 +20,7 @@ import AvisosScreen from '../componentes/Admin/Avisos/AvisosScreen';
 import InstitucionesScreen from '../componentes/Admin/Instituciones/InstitucionesScreen';
 import CarrerasScreen from '../componentes/Admin/Carreras/CarrerasScreen';
 import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
+import YouTubeScreen from '../componentes/Admin/Youtube/YouTubeScreen';
 import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 import { General } from '../componentes/Usuario/General'
 import { FormAddRelease } from '../componentes/Admin/Publcaciones/FormAddRelease';
@@ -66,7 +67,7 @@ export const AdminDashBoard = () => {
 					<Route path="Instituciones" element={<InstitucionesScreen />} />
 					<Route path="Carreras" element={<CarrerasScreen />} />
 					<Route path="Tecnologias" element={<TechScreen />} />
-
+					<Route path="YouTube" element={<YouTubeScreen />} />
 					<Route path="*" element={<RutaError />} />
 				</Routes>
 			</div>
