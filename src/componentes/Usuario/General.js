@@ -30,7 +30,6 @@ import { useEffect, useState, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { PublicationScreen } from "./PublicationScreen";
-import ReactPlayer from 'react-player'
 
 export const General = ({ id }) => {
   //Configurar hooks
