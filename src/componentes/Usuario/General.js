@@ -86,13 +86,7 @@ export const General = ({ id }) => {
     slideFocus: true,
     focus: true,
   };
-<<<<<<< HEAD
-  //const videos = ["YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","OG0w_4qDiy8"]
-  const videos = ["https://youtu.be/OG0w_4qDiy8?si=Xi9OYYQrRJChJhDW"]
-  const options_video = {
-=======
   var options_video = {
->>>>>>> gonzalo
     type: 'loop',
     gap: '2rem',
     perPage: 1,
@@ -162,28 +156,9 @@ export const General = ({ id }) => {
             {/*<Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
               <div style={{ position: 'relative' }}>
                 <SplideTrack>
-<<<<<<< HEAD
-                  {videos.map((video) => (
-                    <SplideSlide>
-                      <ReactPlayer url='https://youtu.be/OG0w_4qDiy8?si=Xi9OYYQrRJChJhDW'
-                        width={"100%"}
-                      />
-                      {/*<VideoCarousel src={video}/>
-                      <iframe
-                        className="embed-responsive"
-                        src={"https://www.youtube.com/embed/"+video}
-                        title="YouTube video player"
-                        gesture="media"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        key={video}
-                        name="YT_video"
-                  ></iframe>
-=======
                   {youtubes.map((video, index) => (
                     <SplideSlide key={index}>
                       <ReactPlayer url={video.urlVideo} controls width="100%" height="auto" onPlay={handlePlay} onPause={handlePause}/>
->>>>>>> gonzalo
                     </SplideSlide>
                   ))}
                 </SplideTrack>
