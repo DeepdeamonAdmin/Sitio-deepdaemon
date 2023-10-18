@@ -12,6 +12,7 @@ import { registerReducer } from "../reducers/registerReducer";
 import { uiReduccer } from "../reducers/uiReducer";
 import { tesisReducer } from "../reducers/tesisReducer";
 import { userReducer } from "../reducers/userReduccer";
+import { youtubeReducer } from "../reducers/youtubeReducer";
 
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -31,6 +32,7 @@ const reducers = combineReducers({
 	gallery: galleryReducer,
 	institutions: institucionReducer,
 	tesis: tesisReducer,
+	youtubes: youtubeReducer,
 })
 
 export const store = createStore(

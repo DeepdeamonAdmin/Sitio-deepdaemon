@@ -20,7 +20,7 @@ export const startsNewTech = (formValues) => {
 }
 
 export const addNewTech = (id, inst) => ({
-	type: types.addNewTech,
+	type: types.techAddNew,
 	payload: {
 		id, ...inst
 	}

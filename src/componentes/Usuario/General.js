@@ -13,7 +13,7 @@ import "../../styles/carrusel.css"
 
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
 import "../../styles/DeepDaemon.css";
-import { Container, Nav, Carousel } from "react-bootstrap";
+import { Container, Nav } from "react-bootstrap";
 import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
 import { LeaderScreen } from "./LeaderScreen";
@@ -21,8 +21,12 @@ import { TeamScreen } from "./TeamScreen";
 import { ProjectScreen } from "./ProjectScreen";
 import { TesisScreen } from "./TesisScreen";
 import FormCorreo from "./FormCorreo";
+import ReactPlayer from 'react-player';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useSelector } from 'react-redux';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { PublicationScreen } from "./PublicationScreen";
@@ -41,11 +45,26 @@ export const General = ({ id }) => {
       })
     );
   };
+  const [youtubes, setYoutubes] = useState([]);
+  const youtubeCollection = collection(db, "Youtube");
+  const getYoutubes = async () =>{
+    const datos = await getDocs(youtubeCollection);
+    /*setYoutubes(
+      datos.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      })
+    );*/
+    const reversed = datos.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    })
+    setYoutubes(reversed.reverse());
+  }
   //Función para eliminar un aviso
 
   //Usar useEffect
   useEffect(() => {
     getAvisos();
+    getYoutubes();
   }, []);
 
   //Opciones para configurar el carrusel 
@@ -66,8 +85,7 @@ export const General = ({ id }) => {
     slideFocus: true,
     focus: true,
   };
-  const videos = ["YXeLGIKQ0e0?si=J1iFT1FdytDt6AI7","OnOQ8g0cAfc?si=iPfSb1zdamnIRHGj","OG0w_4qDiy8"]
-  const options_video = {
+  var options_video = {
     type: 'loop',
     gap: '2rem',
     perPage: 1,
@@ -81,6 +99,29 @@ export const General = ({ id }) => {
     pauseOnFocus: true,
     interval: 10000
   };
+  
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const handleSlideChange = (index) => {
+    setCurrentSlide(index);
+  };
+  const [carouselProps, setCarouselProps] = useState({
+    interval:5000
+  });
+  const videoRef = useRef();
+  const handlePlay = () =>{
+    setCarouselProps({
+      ...carouselProps,
+      interval: 300000,
+    });
+  }
+  const handlePause = () =>{
+    setCarouselProps({
+      ...carouselProps,
+      interval: 5000,
+    });
+  }
+
   return (
     <div className="">
       <div className="d-flex flex-row dd_header">
@@ -94,26 +135,35 @@ export const General = ({ id }) => {
             <h2>Comunidad de conocimiento</h2>
           </div>
           <div className="col-sm">
+            <Carousel
+              showArrows
+              selectedItem={currentSlide}
+              onChange={handleSlideChange}
+              width="80%"
+              infiniteLoop="true"
+              autoPlay="true"
+              showThumbs={false}
+              showStatus={false}
+              {...carouselProps}
+            >
+              {youtubes.map((video, index) => (
+                <div key={index}>
+                  <ReactPlayer url={video.urlVideo} controls width="100%" height="auto" onPlay={handlePlay} onPause={handlePause}/>
+                </div>
+              ))}
+            </Carousel>
             {/*<Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
               <div style={{ position: 'relative' }}>
                 <SplideTrack>
-                  {videos.map((video) => (
-                    <SplideSlide>
-                      <iframe
-                        className="embed-responsive"
-                        src={"https://www.youtube.com/embed/"+video}
-                        title="YouTube video player"
-                        gesture="media"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        key={video}
-                        name="YT_video"
-                    ></iframe>
+                  {youtubes.map((video, index) => (
+                    <SplideSlide key={index}>
+                      <ReactPlayer url={video.urlVideo} controls width="100%" height="auto" onPlay={handlePlay} onPause={handlePause}/>
                     </SplideSlide>
                   ))}
                 </SplideTrack>
               </div>
                   </Splide>*/}
+            {/*
             <iframe
               className="embed-responsive"
               src="https://www.youtube.com/embed/OG0w_4qDiy8"
@@ -121,7 +171,7 @@ export const General = ({ id }) => {
               gesture="media"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+                  ></iframe>*/}
           </div>
         </Row>
       </div>

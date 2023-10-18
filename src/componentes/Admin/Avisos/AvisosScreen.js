@@ -10,7 +10,7 @@ export default function AvisosScreen() {
 			<div className="Container">
 				<div className="row">
 					<div className="col mb-3">
-						<h1> AVISOS</h1>
+						<h1> Avisos</h1>
 					</div>
 				</div>
 				<div className="row">
