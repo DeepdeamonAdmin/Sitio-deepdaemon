@@ -371,15 +371,15 @@ export const General = ({ id }) => {
             <Tab.Content>
               <Tab.Pane eventKey="congress">
                 <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
-                    <PublicationScreen type="article" />
+                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px", paddingBottom: "10px" }}>
+                    <PublicationScreen type="conference" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="magazine" >
                 <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
-                    <PublicationScreen type="magazine" />
+                    <PublicationScreen type={["magazine","article"]}  />
                   </div>
                 </div>
               </Tab.Pane>

@@ -10,8 +10,21 @@ export const PublicationScreen = ({ type }) => {
   //const [publications, setPublications] = React.useState([]);
 	const user = auth.currentUser;
   const publications  = useSelector(state => state.publications);
-  var publications_type = publications.publications.filter(publications => publications.postType===type);
-
+  var publications_type = publications.publications.filter(publication => type.includes(publication.postType) && publication.display === "Yes");
+  publications_type = publications_type.slice().sort(compararFechas);
+  function esFechaInvalida(fechaString) {
+    const fecha = new Date(fechaString);
+    return isNaN(fecha) || fecha.toString() === 'Invalid Date';
+  }
+  function compararFechas(a, b) {
+    if (esFechaInvalida(a.yearMonth)) {
+      return 1; // a es inválida, va después de b
+    }
+    if (esFechaInvalida(b.yearMonth)) {
+      return -1; // b es inválida, va después de a
+    }
+    return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
+  }
   /*React.useEffect(() => {
     const getPublications = async () => {
       try {
@@ -48,11 +61,11 @@ export const PublicationScreen = ({ type }) => {
 
   return (
     <>
-    <div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center", flexDirection:"row", maxHeight:"160px",gap:4}}>
+    <div className="container card-columns" style={{display:"flex",position:"relative",flexWrap:"wrap",justifyContent:"center", flexDirection:"row", maxHeight:"160px",gap:4}}>
       {
         publications_type.map(publication=>(
           publication.display==="Yes"&&(
-            <div key={publication.id} className="card mb-3 mr-1 " style={{maxWidth:"400px",minWidth:"300px"}}>
+            <div key={publication.id} className="card mb-3 mr-1 " style={{maxWidth:"400px",minWidth:"300px",minHeight:"130px"}}>
               <div className="row-md-1 mb-1 bg-light d-flex" style={{borderRadius:"5px",height:"160px"}}>
                 <div className="col-4 d-flex" style={{margin:"5px",padding:0,alignItems:"center"}}>
                   <img
@@ -72,15 +85,15 @@ export const PublicationScreen = ({ type }) => {
                     <div className="card-body" style={{position:"relative",paddingBottom:0,marginBottom:0}}>
                       <h6 className="card-title" style={{
                         display: '-webkit-box',
-                        WebkitLineClamp: 2,
+                        WebkitLineClamp: 5,
                         WebkitBoxOrient: 'vertical',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
-                        maxHeight: '3.6em',
+                        maxHeight: '5.9em',
                       }}>
                         {publication.title}
                       </h6>
-                      <div className="text-right d-flex" style={{position:"relative", justifyContent:"right"}}>
+                      <div className="text-right d-flex" style={{position:"absolute", top:"75px", right:"0px",justifyContent:"right"}}>
                         {!user && <ModalCrearCuenta />}
 												<VerMasPublication publicacion={publication} />
                       </div>
