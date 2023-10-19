@@ -61,13 +61,13 @@ export const PublicationScreen = ({ type }) => {
 
   return (
     <>
-    <div className="container card-columns" style={{display:"flex",position:"relative",flexWrap:"wrap",justifyContent:"center", flexDirection:"row", maxHeight:"160px",gap:4}}>
+    {/*<div className="container card-columns col-12" style={{display:"flex",position:"relative",flexWrap:"wrap",justifyContent:"center", flexDirection:"row", maxHeight:"160px",gap:4}}>
       {
         publications_type.map(publication=>(
           publication.display==="Yes"&&(
-            <div key={publication.id} className="card mb-3 mr-1 " style={{maxWidth:"400px",minWidth:"300px",minHeight:"130px"}}>
+            <div key={publication.id} className="card mb-3 mr-1" style={{position:"relative", minWidth:"300px",minHeight:"130px"}}>
               <div className="row-md-1 mb-1 bg-light d-flex" style={{borderRadius:"5px",height:"160px"}}>
-                <div className="col-4 d-flex" style={{margin:"5px",padding:0,alignItems:"center"}}>
+                <div className="col-4 d-flex align-items-center p-0 m-1">
                   <img
                     className="card-img"
                     src={publication.urlImg}
@@ -81,8 +81,8 @@ export const PublicationScreen = ({ type }) => {
                     alt="member"
                   />
                 </div>
-                <div className="col" style={{paddingLeft:0}}>
-                    <div className="card-body" style={{position:"relative",paddingBottom:0,marginBottom:0}}>
+                <div className="col-8 pl-0 mr-0">
+                    <div className="card-body" style={{position:"relative"}}>
                       <h6 className="card-title" style={{
                         display: '-webkit-box',
                         WebkitLineClamp: 5,
@@ -95,7 +95,7 @@ export const PublicationScreen = ({ type }) => {
                       </h6>
                       <div className="text-right d-flex" style={{position:"absolute", top:"75px", right:"0px",justifyContent:"right"}}>
                         {!user && <ModalCrearCuenta />}
-												<VerMasPublication publicacion={publication} />
+                        <VerMasPublication publicacion={publication} />
                       </div>
                     </div>
                 </div>
@@ -104,39 +104,47 @@ export const PublicationScreen = ({ type }) => {
           )
         ))
       }
-    </div>
-    {/*<div className="container">
-      <div className="row">
-        {publications.map(publication => {
+    </div>*/}
+    <div className="container">
+      <div className="row d-flex flex-wrap justify-content-center ml-1">
+        {publications_type.map(publication => {
           return (
             publication.display === "Yes" && (
-              <div className="col-md-4" key={publication.id}>
-                <div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ maxWidth: 400, height: 170, position: 'relative' }}>
-                  <img
-                    className="card-img mt-3 ml-2"
-                    src={publication.urlImg}
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      height: "110px",
-                      width: '110px'
-                    }}
-                    alt="member"
-                  />
-                  <div className="card-body text-dark">
-                    {/* Limitar el título a dos líneas con puntos suspensivos 
-                    <h6 className="card-title" style={{
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      maxHeight: '3.6em',
-                    }}>
-                      {publication.title}
-                    </h6>
-                    <ModalCrearCuenta />
-                    <VerMasPublication publicacion={publication} />
+              <div className="col-4 d-flex" key={publication.id} style={{minWidth:"350px",flexWrap:"wrap",paddingRight:0, paddingLeft:"10px"}}>
+                <div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ height: 170, width:"100%", position: 'relative' }}>
+                  <div className='row' style={{width:"100%"}}>
+                    <div className='col-4 d-flex align-items-center'>
+                    <img
+                      className="card-img ml-3 mr-0 pr-0"
+                      src={publication.urlImg}
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        height: "110px",
+                        width: '110px',
+                        borderRadius: '5px'
+                      }}
+                      alt="member"
+                    />
+                    </div>
+                    <div className='col-8'>
+                      <div className="card-body" style={{position:"relative"}}>
+                        <h6 className="card-title" style={{
+                          display: '-webkit-box',
+                          WebkitLineClamp: 5,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          maxHeight: '5.9em',
+                        }}>
+                          {publication.title}
+                        </h6>
+                        <div className="text-right d-flex" style={{position:"absolute", top:"75px", right:"0px",justifyContent:"right"}}>
+                          {!user && <ModalCrearCuenta />}
+                          <VerMasPublication publicacion={publication} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -144,7 +152,7 @@ export const PublicationScreen = ({ type }) => {
           );
         })}
       </div>
-      </div>*/}
+      </div>
     </>
   );
 };
