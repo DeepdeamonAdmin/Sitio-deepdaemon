@@ -21,10 +21,11 @@ export const FormAddSign = () =>{
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
+		formValues.urlImg=datosMg;
 	}
 
 	const handleSave = () => {
-		formValues.urlImg = datos;
+		//formValues.urlImg = datos;
 		dispatch(startsNewImage(formValues));
 		reset();
 		navigate('/admin/avisos');

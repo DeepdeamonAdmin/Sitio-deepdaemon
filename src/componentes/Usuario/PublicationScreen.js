@@ -112,8 +112,8 @@ export const PublicationScreen = ({ type }) => {
             publication.display === "Yes" && (
               <div className="col-4 d-flex" key={publication.id} style={{minWidth:"350px",flexWrap:"wrap",paddingRight:0, paddingLeft:"10px"}}>
                 <div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ height: 170, width:"100%", position: 'relative' }}>
-                  <div className='row' style={{width:"100%"}}>
-                    <div className='col-4 d-flex align-items-center'>
+                  <div className='row justify-content-left d-flex' style={{width:"100%"}}>
+                    <div className='col-4 col-sm-auto col-md-auto col-lg-auto col-xl-auto d-flex align-items-center pr-0'>
                     <img
                       className="card-img ml-3 mr-0 pr-0"
                       src={publication.urlImg}
@@ -127,7 +127,7 @@ export const PublicationScreen = ({ type }) => {
                       alt="member"
                     />
                     </div>
-                    <div className='col-8'>
+                    <div className='col pl-0 mt-2'>
                       <div className="card-body" style={{position:"relative"}}>
                         <h6 className="card-title" style={{
                           display: '-webkit-box',

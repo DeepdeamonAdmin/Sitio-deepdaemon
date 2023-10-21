@@ -49,15 +49,15 @@ export const General = ({ id }) => {
   const youtubeCollection = collection(db, "Youtube");
   const getYoutubes = async () =>{
     const datos = await getDocs(youtubeCollection);
-    /*setYoutubes(
+    setYoutubes(
       datos.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
       })
-    );*/
-    const reversed = datos.docs.map((doc) => {
+    );
+    /*const reversed = datos.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
     })
-    setYoutubes(reversed.reverse());
+    setYoutubes(reversed.reverse());*/
   }
   //Función para eliminar un aviso
 
@@ -70,7 +70,7 @@ export const General = ({ id }) => {
   //Opciones para configurar el carrusel 
   let lo = 0
   if (avisos.length <= 2) {
-    lo = 2
+    lo = avisos.length;
   }
   if (avisos.length > 2) {
     lo = 4

@@ -44,7 +44,7 @@ export const AppRouterMobile = () => {
     useEffect(() => {
 
         dispatch(startLoadinUsersAll());
-        dispatch(startLoadinProjectsAll());
+        dispatch(startLoadingProject());
 
         onAuthStateChanged(auth, (user) => {
 

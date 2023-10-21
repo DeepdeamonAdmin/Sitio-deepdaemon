@@ -14,10 +14,7 @@ export default function AvisosScreen() {
 					</div>
 				</div>
 				<div className="row">
-					{/* <SearchScreen /> */}
 					<div className="col-md-2 mb-2">
-						{/* <ModalAddSign />
-						<AddNewFab /> */}
 						<Link to={`agregar`} className="btn btn-primary fab">
                         <i className="fas fa-plus"></i>
 						</Link>
