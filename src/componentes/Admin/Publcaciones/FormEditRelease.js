@@ -32,7 +32,7 @@ export const FormEditRelease = () => {
 	const [seriesDisabled, setSeriesDisabled] = useState(true)
 	const [organizationDisabled, setOrganizationDisabled] = useState(true)
 	const [schoolDisabled, setSchoolDisabled] = useState(true)
-	const [linConsultDisabled, setLinkConsultDisabled]=useState(false)
+	const [linkConsultDisabled, setLinkConsultDisabled]=useState(false)
 	const [noteDisabled, setNoteDisabled] = useState(true)
 	const [institutionDisabled, setInstitutionDisabled] = useState(true)
 	const [keywordsDisabled, setKeywordsDisabled] = useState(true)

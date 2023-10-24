@@ -33,6 +33,7 @@ export const FormAddRelease = () => {
 	const [seriesDisabled, setSeriesDisabled] = useState(true)
 	const [organizationDisabled, setOrganizationDisabled] = useState(true)
 	const [schoolDisabled, setSchoolDisabled] = useState(true)
+	const [linkConsultDisabled, setLinkConsultDisabled]=useState(false)
 	const [noteDisabled, setNoteDisabled] = useState(true)
 	const [institutionDisabled, setInstitutionDisabled] = useState(true)
 	const [keywordsDisabled, setKeywordsDisabled] = useState(true)
@@ -54,6 +55,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(true)
@@ -74,6 +76,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -95,6 +98,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(false)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -115,6 +119,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(false)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -135,6 +140,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -155,6 +161,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -175,6 +182,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(false)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -195,6 +203,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(false)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -215,6 +224,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(false)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -235,6 +245,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(false)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(true)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -255,6 +266,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(true)
 				setInstitutionDisabled(false)
 				setKeywordsDisabled(false)
@@ -275,6 +287,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -295,6 +308,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(false)
 				setKeywordsDisabled(false)
@@ -315,6 +329,7 @@ export const FormAddRelease = () => {
 				setSeriesDisabled(true)
 				setOrganizationDisabled(true)
 				setSchoolDisabled(true)
+				setLinkConsultDisabled(false)
 				setNoteDisabled(false)
 				setInstitutionDisabled(true)
 				setKeywordsDisabled(false)
@@ -357,6 +372,7 @@ export const FormAddRelease = () => {
 		series: '',
 		organization: '',
 		school: '',
+		linkConsult: '',
 		note: '',
 		institution: '',
 		display: 'Yes',
@@ -367,7 +383,7 @@ export const FormAddRelease = () => {
 	const { postType,urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
-		organization, school, note, institution, display, keywords, bibtexfile} = formValues;
+		organization, school, linkConsult, note, institution, display, keywords, bibtexfile} = formValues;
 	//Bibtex
 	const [datosbibtex, setDatosBibtex] = useState('');
 	//Galeria
@@ -847,6 +863,21 @@ export const FormAddRelease = () => {
 					/>
 				</div>
 			</div>
+
+			<div className="row">
+				<div className="col mb-3">
+					<label> Link de Consulta </label>
+					<textarea
+						className="form-control"
+						rows='1'
+						name='linkConsult'
+						placeholder=' Link de Consulta'
+						value={linkConsult}
+						onChange={handleInputChange}
+					/>
+				</div>
+			</div>
+
 			<div className="row">
 				<div className="col mb-3">
 					<label> Note </label>
