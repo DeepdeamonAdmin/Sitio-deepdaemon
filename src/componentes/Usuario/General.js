@@ -188,23 +188,6 @@ export const General = ({ id }) => {
             </div>
           </Splide>
         </div>
-
-        {/* <Container>
-            <Carousel>
-              {avisos.map((aviso) => (
-                <Carousel.Item key={aviso.id}>
-                  <Image
-                    src={aviso.photo}
-                    style={{ width: "100%", height: "900px" }}
-                  />
-                  <Carousel.Caption>
-                    <h3>{aviso.name}</h3>
-                    <p>{aviso.desc}</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Container> */}
         <Container className="section" id="Nosotros">
           <h1>Un poco sobre nosotros</h1>
           <hr />
