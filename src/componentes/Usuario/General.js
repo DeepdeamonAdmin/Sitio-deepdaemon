@@ -93,11 +93,12 @@ export const General = ({ id }) => {
     resetProgress: false,
     slideFocus: true,
     focus: true,
-    height: '350px',
-		width: '80%',
+		width: '60%',
+    height: '50%',
     pauseOnHover: true,
     pauseOnFocus: true,
-    interval: 20000
+    interval: 20000,
+    rewind: true
   };
   
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -139,16 +140,15 @@ export const General = ({ id }) => {
               showArrows
               selectedItem={currentSlide}
               onChange={handleSlideChange}
-              width="80%"
+              width="65%"
               infiniteLoop="true"
               autoPlay="true"
-              showThumbs={false}
               showStatus={false}
               {...carouselProps}
             >
               {youtubes.map((video, index) => (
-                <div key={index}>
-                  <ReactPlayer url={video.urlVideo} controls width="100%" height="auto" onPlay={handlePlay} onPause={handlePause}/>
+                <div key={index} style={{position:"relative",height:"400px"}}>
+                  <ReactPlayer url={video.urlVideo} controls width="100%" height="120px" onPlay={handlePlay} onPause={handlePause} />
                 </div>
               ))}
             </Carousel>
@@ -175,7 +175,7 @@ export const General = ({ id }) => {
         </Row>
       </div>
       <div className="embed-responsive">
-      <div className="wrapper" style={{ maxWidth: `${1000 + 200 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
+      <div className="wrapper" style={{ maxWidth: `${1300 + 260 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
           <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
             <div style={{ position: 'relative' }}>
               <SplideTrack>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from "react";
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { AppRouter } from './routers/AppRouter';
@@ -40,6 +41,13 @@ export const AppDeepDaemon = () => {
 
 
     startTimer();
+    /*const [mobileOn,setMobileOn]=useState(true);
+    const changeToDeskVersion = document.getElementById("toDeskVersion");
+    if(changeToDeskVersion!=null)changeToDeskVersion.addEventListener("click", myFunction);
+    function myFunction() {
+
+        document.getElementById("demo").innerHTML = "Hello World";
+    }*/
     if(isMobile){
         return(
 

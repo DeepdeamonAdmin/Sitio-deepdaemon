@@ -235,6 +235,8 @@ export const GeneralMobile = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
+        {/*<Button id="toDeskVersion"> Ir a versión de Escritorio</Button>
+        <p id="demo"></p>*/}
         <br></br>
         <Container fluid className="section sections team_sectionBg" id="Equipo">
           <h1 className="team_title">Equipo</h1>

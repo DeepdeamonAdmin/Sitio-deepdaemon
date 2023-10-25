@@ -9,13 +9,13 @@ export const LeaderScreen = ({ status }) => {
   const { usuarios } = useSelector(state => state.user);
 	return (
 		<>
-			<div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
+			<div className="container card-columns pl-0 pr-0" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
 				{
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
 						(usuario.grado === "leader" && usuario.display === "Y" && usuario.idWork === status) && (
-							<div className= "row mb-4" style={{width:"430px"}} >
-								<div className="col ml-2">
+							<div className= "row" style={{width:"450px"}} >
+								<div className="col-8 pr-0">
 									<img
 										className="imageleader"
 										src={usuario.urlImg}
@@ -23,7 +23,7 @@ export const LeaderScreen = ({ status }) => {
 									/>
 								</div>
 
-								<div className="col pl-0">
+								<div className="col-4 pl-0 pr-0">
 									<br></br>
 									<h5 className=""> {usuario.nombre} </h5>
 									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
