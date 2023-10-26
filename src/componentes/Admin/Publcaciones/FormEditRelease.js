@@ -899,6 +899,7 @@ export const FormEditRelease = () => {
 					<textarea
 						className="form-control"
 						rows='1'
+						id='linkConsult'
 						name='linkConsult'
 						placeholder=' Link de Consulta'
 						value={linkConsult}

@@ -871,6 +871,7 @@ export const FormAddRelease = () => {
 						className="form-control"
 						rows='1'
 						name='linkConsult'
+						id='linkConsult'
 						placeholder=' Link de Consulta'
 						value={linkConsult}
 						onChange={handleInputChange}
