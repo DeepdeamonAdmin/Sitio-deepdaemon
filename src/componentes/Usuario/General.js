@@ -10,7 +10,6 @@ import '@splidejs/react-splide/css';
 import '@splidejs/splide/css/skyblue';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import "../../styles/carrusel.css"
-
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
 import "../../styles/DeepDaemon.css";
 import { Container, Nav } from "react-bootstrap";

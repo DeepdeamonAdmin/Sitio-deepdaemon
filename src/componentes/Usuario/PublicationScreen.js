@@ -93,7 +93,7 @@ export const PublicationScreen = ({ type }) => {
                       }}>
                         {publication.title}
                       </h6>
-                      <div className="text-right d-flex" style={{position:"absolute", top:"75px", right:"0px",justifyContent:"right"}}>
+                      <div className="text-right d-flex" style={{position:"relative", justifyContent:"right"}}>
                         {!user && <ModalCrearCuenta />}
                         <VerMasPublication publicacion={publication} />
                       </div>
