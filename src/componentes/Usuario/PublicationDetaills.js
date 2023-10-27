@@ -49,7 +49,7 @@ export const PublicationDetaills = ({ publication }) => {
                   <li className={`list-group-item`} style={{textAlign:'justify'}}><b>Abstract :</b><i> {publication.descr}</i></li>
                   <li className="list-group-item">Autor : {publication.autor}</li>
                   {publication.postType === 'magazine'? <li className="list-group-item">KeyWords : {publication.keywords}</li>: null}
-                  <li className="list-group-item">Link de Consulta : Link de Consulta : <a href={publication.linkConsult} target="_blank">{publication.linkConsult}</a></li>
+                  <li className="list-group-item">Link de Consulta: <a href={publication.linkConsult} target="_blank">{publication.linkConsult}</a></li>
                 </ul>
               </div>
             </div>
