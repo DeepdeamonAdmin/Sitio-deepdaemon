@@ -12,118 +12,50 @@ export const TeamScreen = ({ status }) => {
 
 	return (
 		<>
-			{/*<div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"center",paddingLeft:0,paddingRight:0}}>
-				{
-					usuarios.map(usuario =>(
-						(usuario.grado===status&&usuario.display==="Y")&&(
-							<div key={usuario.id} className="row">
-								<div className="row mb-4 bg-light ml-4" style={{maxWidth:"350px",minWidth:"100px", height:"130px",borderRadius:"5px"}}>
-									<div className="col-sm-6" style={{marginTop:"5px", marginLeft:"5px", marginRight:0,padding:0,width:"110px"}}>
+			<div className="container">
+				<div className="row d-flex flex-wrap justify-content-center ml-1">
+				{usuarios.map(usuario => usuario.grado===status&&usuario.display==="Y"&&(
+						<div className="col-3 d-flex" key={usuario.id} style={{minWidth:"350px",flexWrap:"wrap",paddingRight:0, paddingLeft:"10px"}}>
+							<div className="d-flex flex-row card animate__animated animate__fadeIn border-primary mb-3" style={{ height: 130, width:"100%", position: 'relative' }}>
+								<div className='row justify-content-left d-flex' style={{width:"100%"}}>
+									<div className='col-4 col-sm-auto col-md-auto col-lg-auto col-xl-auto d-flex align-items-center pr-0'>
 										<img
-											className="card-img"
+											className="card-img ml-3 mr-0 pr-0"
 											src={usuario.urlImg}
-											alt="member"
 											style={{
-												width:"100px",
-												height: "110px",
-												objectFit: "cover",
-												objectPosition: 'center'
+											objectFit: 'cover',
+											objectPosition: 'center',
+											height: "110px",
+											width: '100px',
+											borderRadius: '5px'
 											}}
+											alt="member"
 										/>
 									</div>
-									<div className="col pr-0 pl-0" style={{position:"relative", marginTop:"10px",marginRight:0, marginLeft:0}}>
-										<div className="card-body text-primary d-flex flex-column h-100 pl-0 pr-0" style={{position:"relative"}}>
-											<h5 className="card-title">{usuario.nombre}</h5>
-											<div className="text-right pt-0">
+									<div className='col pl-0 mt-2'>
+										<div className="card-body" style={{position:"relative"}}>
+											<h6 className="card-title" style={{
+												display: '-webkit-box',
+												WebkitLineClamp: 5,
+												WebkitBoxOrient: 'vertical',
+												overflow: 'hidden',
+												textOverflow: 'ellipsis',
+												maxHeight: '5.9em',
+											}}>
+												{usuario.nombre}
+											</h6>
+											<div className="text-right d-flex" style={{position:"absolute", top:"50px", right:"0px",justifyContent:"right"}}>
 												{!user && <ModalCrearCuenta />}
 												<VerMas usuario={usuario} />
 											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-						)
-					))
-				}
-			</div>*/}
-			{/*<div className="container card-columns">
-				<div className="row mb-2" >
-					{usuarios.map((usuario) => (
-					// Imprimir solamente los usuarios del grado que seleccionó
-					usuario.grado === status &&
-					usuario.display === "Y" && (
-						<div key={usuario.id} className="col-md-12 mb-3">
-						<div>
-							<div className="card">
-								<div className="card-body row align-items-center">
-									<div className="col-md-3">
-										<img
-											className="img-fluid"
-											src={usuario.urlImg}
-											alt="member"
-											style={{
-												width:"100px",
-												height: "110px",
-												objectFit: "cover"
-											}}
-										/>
-									</div>
-									<div className="col-md-6">
-										<h5 className="card-title">{usuario.nombre}</h5>
-										
-									</div>
-									<div className="col-md-3 text-right">
-										{!user && <ModalCrearCuenta />}
-										<VerMas usuario={usuario} />
 									</div>
 								</div>
 							</div>
 						</div>
-					  </div>
-					</div>
-				  ))}
-				</div>
-										</div>*/}
-			<div className="container card-colums" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
-				{
-					usuarios.map(usuario=>(
-						usuario.grado===status&&usuario.display==="Y"&&(
-							<div key={usuario.id} className="card w-25 mb-4 mr-2" style={{maxWidth:"400px",minWidth:"300px"}}>
-								<div className="row-md-1 mb-1 bg-light d-flex" style={{borderRadius:"5px",height:"130px"}}>
-									<div className="col-3" style={{margin:"5px",padding:0}}>
-										<img
-											className="card-img"
-											src={usuario.urlImg}
-											alt="member"
-											style={{
-												objectFit: 'cover',
-												objectPosition: 'center',
-												width:"100px",
-												height: "110px",
-												objectFit: "cover",
-												borderRadius: '5px'
-											}}
-										/>
-									</div>
-									<div className="col" style={{maxWidth:"250px",marginLeft:"5%"}}>
-										<div className="card-body" style={{position:"relative",paddingBottom:0,marginBottom:0}}>
-											<h5 className="card-title" style={{height:"50px"}}>
-												{usuario.nombre}
-											</h5>
-											<div className="text-right d-flex" style={{position:"relative",justifyContent:"right"}}>
-												{!user && <ModalCrearCuenta />}
-												<VerMas usuario={usuario} />
-											</div>
-										</div>
-										
-									</div>
-									
-								</div>
-								
-							</div>
-						)
 					))
 				}
+				</div>
 			</div>
 		</>
 	  );	  

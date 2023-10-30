@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import { Provider } from 'react-redux';
 import { store } from './store/store';
@@ -41,14 +41,19 @@ export const AppDeepDaemon = () => {
 
 
     startTimer();
-    /*const [mobileOn,setMobileOn]=useState(true);
-    const changeToDeskVersion = document.getElementById("toDeskVersion");
-    if(changeToDeskVersion!=null)changeToDeskVersion.addEventListener("click", myFunction);
-    function myFunction() {
-
-        document.getElementById("demo").innerHTML = "Hello World";
-    }*/
-    if(isMobile){
+    const [mobileOn,setMobileOn]=useState(true);
+    setTimeout(() => {
+        const changeToDeskVersion = document.getElementById("toDeskVersion");
+        if(changeToDeskVersion!=null)changeToDeskVersion.addEventListener("click", myFunction);
+        function myFunction() {
+            //document.getElementById("demo").innerHTML = "Hello World";
+            setMobileOn(false);
+        }
+    }, 1000);
+    useEffect(() => {
+    },[mobileOn]);
+    
+    if(isMobile&&mobileOn){
         return(
 
             <Provider store={store}>

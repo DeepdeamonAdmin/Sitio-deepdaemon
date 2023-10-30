@@ -235,8 +235,7 @@ export const GeneralMobile = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
-        {/*<Button id="toDeskVersion"> Ir a versión de Escritorio</Button>
-        <p id="demo"></p>*/}
+        
         <br></br>
         <Container fluid className="section sections team_sectionBg" id="Equipo">
           <h1 className="team_title">Equipo</h1>
@@ -275,6 +274,11 @@ export const GeneralMobile = ({ id }) => {
         <br></br>
 
         <br></br>
+        <Container>
+          <h5 style={{textAlign:"center"}}>Para ver más secciones y el contenido completo, dirigete a la versión de escritorio.</h5>
+          <p>Recuerda hacerlo desde un dispositivo con las dimensiones necesarias para poder observar de manera correcta el contenido</p>
+          <Button id="toDeskVersion" style={{width:"100%"}}> Versión de Escritorio</Button>
+        </Container>
         
         <br></br>
 

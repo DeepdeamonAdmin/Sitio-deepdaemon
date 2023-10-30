@@ -68,10 +68,10 @@ export const General = ({ id }) => {
 
   //Opciones para configurar el carrusel 
   let lo = 0
-  if (avisos.length <= 2) {
+  if (avisos.length <= 3) {
     lo = avisos.length;
   }
-  if (avisos.length > 2) {
+  if (avisos.length > 3) {
     lo = 4
   }
   const options = {
@@ -125,15 +125,18 @@ export const General = ({ id }) => {
   return (
     <div className="">
       <div className="d-flex flex-row dd_header">
+        <div className="container">
         <Row className="d-flex flex-row " style={{width:"100%"}}>
-          <div className="col-sm p-0" id="Home" >
-            <img src={cic} className="ddcic" alt="cic" />
-            <img src={logo} className="ddlogo" alt="logo" />
-            <h1>Laboratorio de Ciencias </h1>
-            <h1>Cognitivas Computacionales</h1>
-            <hr />
-            <h2>Comunidad de conocimiento</h2>
-          </div>
+            <div className="col-sm mb-4" id="Home">
+              <div className="content" style={{position:"relative",backgroundColor:"#025E9D", borderRadius:"20px",boxShadow: "2px 2px 15px rgba(0, 0, 0, 0.5)"}}>
+                <img src={cic} className="ddcic" alt="cic" />
+                <img src={logo} className="ddlogo" alt="logo" />
+                <h1>Laboratorio de Ciencias </h1>
+                <h1>Cognitivas Computacionales</h1>
+                <hr />
+                <h2>Comunidad de conocimiento</h2>
+              </div>
+            </div>
           <div className="col-sm">
             <Carousel
               showArrows
@@ -172,6 +175,7 @@ export const General = ({ id }) => {
                   ></iframe>*/}
           </div>
         </Row>
+        </div>
       </div>
       <div className="embed-responsive">
       <div className="wrapper" style={{ maxWidth: `${1300 + 260 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
