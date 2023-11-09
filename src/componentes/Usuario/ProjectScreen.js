@@ -1,16 +1,7 @@
 import React, { useState } from 'react'
-import { useGet } from '../../hooks/useGet';
-import { getProjectStatus } from '../../selectors/get/getProjectStatus';
-import { ProjectDetaills } from './ProjectDetaills';
-import { ModalInfoProject } from './ModalInfoProject';
 import { useSelector, useDispatch } from 'react-redux';
-import { db } from '../../firebase/firebase-config';
-import { collection, getDocs, where, get, query } from "firebase/firestore";
-import { getAuth, } from 'firebase/auth';
 import { VerMasProject } from '../ui/VerMasProject';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
-import { CardColumns } from 'reactstrap';
-import { left } from '@popperjs/core';
 
 
 

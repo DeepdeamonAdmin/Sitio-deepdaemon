@@ -8,12 +8,6 @@ import { useSelector } from 'react-redux';
 
 const TesisList = () => {
 
-    //const dispatch = useDispatch();
-
-    //const { projects } = useSelector( state => state.projects );
-    
-    //const { data:project, loading } = useGet(getProject);
-
     const auth = getAuth();
     const dN = auth.currentUser.displayName;
 

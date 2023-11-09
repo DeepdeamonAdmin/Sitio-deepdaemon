@@ -1,7 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useGet } from '../../../hooks/useGet'
-import { getMember } from '../../../selectors/get/getMember';
 import { LiderCard } from './LiderCard';
 
 export const LiderList = () => {

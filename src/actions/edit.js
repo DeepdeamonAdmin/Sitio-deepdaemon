@@ -267,18 +267,3 @@ const valEditProject = (name) => ({
 		name
 	}
 });
-
-
-export const getProjectsAutor = (idUser) => {
-	return async (dispatch, getState) => {
-
-		// // Create a reference to the projects collection
-		// const  projectRef = db.collection('Proyectos');
-
-		// // Create a query against the collection
-		// const queryRef = projectRef.where('autores', 'array-contains',
-		// idUser).get();
-
-		// console.log(queryRef)
-	}
-}

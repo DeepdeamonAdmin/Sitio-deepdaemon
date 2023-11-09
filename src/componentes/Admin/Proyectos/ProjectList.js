@@ -1,10 +1,6 @@
 import React from 'react'
-import { useGet } from '../../../hooks/useGet'
-import { getProject } from '../../../selectors/get/getProject';
 import ProjectCard from './ProjectCard';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import {db} from '../../../firebase/firebase-config';
 import {
 	getAuth,
 } from 'firebase/auth';

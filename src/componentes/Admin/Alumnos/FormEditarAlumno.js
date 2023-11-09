@@ -3,14 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
-import { useGet } from '../../../hooks/useGet';
-import { getCareer } from '../../../selectors/get/getCareer';
-import { getSchool } from '../../../selectors/get/getSchool';
 import fotoPerfil from '../../../assets/Usuario.jpg'
 import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
 import { startLoadinUsersAll, startUploading } from '../../../actions/user';
-import Form from 'react-bootstrap/Form';
 import { collection, getDocs, deleteDoc, updateDoc, doc, query, where, querySnapshot } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
@@ -135,10 +131,10 @@ export const FormEditarAlumno = (props) => {
 		<div className="container">
 			<div className="app-title">
 				{(alumno.rol === 'externo'||alumno.rol === 'alumno') && (
-					<h2>Editar Alumno </h2>
+					<h2>Editar Alumno</h2>
 				)}
 				{alumno.rol === 'administrador' && (
-					<h2>Editar Líder </h2>
+					<h2>Editar Líder</h2>
 				)}
 				<hr />
 			</div>

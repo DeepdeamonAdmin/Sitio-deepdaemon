@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
-import { MembersScreen } from '../componentes/Admin/Miembros/MembersScreen';
 import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
 import { AlumnoScreen } from '../componentes/Admin/Alumnos/AlumnoScreen';
 import { ExternoScreen} from '../componentes/Admin/Externos/ExternoScreen'
@@ -37,7 +36,6 @@ export const AdminDashBoard = () => {
 			<div>
 				<Routes>
 					<Route path="" element={<General />} />
-					<Route path="members" element={<MembersScreen />} />
 					<Route path="projects" element={<ProjectsScreen />} />
 					<Route path="projects/agregar" element={<FormAddProject />} />
 					<Route path="projects/:idProject/:params" element={<FormEditProject />} />
@@ -58,8 +56,6 @@ export const AdminDashBoard = () => {
 					<Route path="release/editPub/:idRelease" element={<FormEditRelease/>} />
 					<Route path="lideres" element={<LiderScreen />} />
 					<Route path="lideres/agregar" element={<FormAddLider />} />
-					{/*Se reutilizó el formuladrio de editar alumno para el lider*/}
-					{/*<Route path="lideres/editar/:idLider" element={<FormEditLider />} />*/}
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
 					<Route path="avisos/agregar" element={<FormAddSign />} />

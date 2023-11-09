@@ -142,7 +142,7 @@ export const General = ({ id }) => {
               showArrows
               selectedItem={currentSlide}
               onChange={handleSlideChange}
-              width="65%"
+              width="80%"
               infiniteLoop="true"
               autoPlay="true"
               showStatus={false}
@@ -401,14 +401,14 @@ export const General = ({ id }) => {
             <hr />
             <Tab.Content>
               <Tab.Pane eventKey="current">
-                <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 650, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <TeamScreen status="current" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="graduate">
-                <div className="Container section" style={{ height: 560, overflow: "hidden", position: "relative" }}>
+                <div className="Container section" style={{ height: 650, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <TeamScreen status="graduate" />
                   </div>
