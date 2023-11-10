@@ -9,7 +9,7 @@ import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado'
 import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
 import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
 import { EditInfoTesis } from '../componentes/Admin/Tesis/EditInfoTesis';
-import { ReleaseScreen } from '../componentes/Admin/Publcaciones/ReleaseScreen';
+import { ReleaseScreen } from '../componentes/Admin/Publicaciones/ReleaseScreen';
 import { LiderScreen } from '../componentes/Admin/Lideres/LiderScreen';
 import { NavBarAdmin } from '../componentes/ui/NavBarAdmin';
 import { FormEditProject } from '../componentes/Admin/Proyectos/FormEditProject';
@@ -22,11 +22,11 @@ import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
 import YouTubeScreen from '../componentes/Admin/Youtube/YouTubeScreen';
 import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
 import { General } from '../componentes/Usuario/General'
-import { FormAddRelease } from '../componentes/Admin/Publcaciones/FormAddRelease';
+import { FormAddRelease } from '../componentes/Admin/Publicaciones/FormAddRelease';
 import { FormAddSign } from '../componentes/Admin/Avisos/FormAddSign';
 import { FormAddAlumno } from '../componentes/Admin/Alumnos/FormAddAlumno';
 import { FormAddLider } from '../componentes/Admin/Lideres/FormAddLider';
-import { FormEditRelease } from '../componentes/Admin/Publcaciones/FormEditRelease';
+import { FormEditRelease } from '../componentes/Admin/Publicaciones/FormEditRelease';
 
 
 export const AdminDashBoard = () => {

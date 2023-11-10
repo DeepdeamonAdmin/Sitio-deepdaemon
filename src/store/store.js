@@ -1,5 +1,8 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux"; // para autenticación
-import thunk from 'redux-thunk'; //uso de middleware
+//Para autenticación
+import { createStore, combineReducers, applyMiddleware, compose } from "redux"; 
+//Uso de middleware
+import thunk from 'redux-thunk';
+//Reducers
 import { authReducer } from "../reducers/authReducer";
 import { avisoReducer } from "../reducers/avisoReducer";
 import { deleteReducer } from "../reducers/deleteReducer";
@@ -14,17 +17,16 @@ import { tesisReducer } from "../reducers/tesisReducer";
 import { userReducer } from "../reducers/userReduccer";
 import { youtubeReducer } from "../reducers/youtubeReducer";
 
-
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-
 const reducers = combineReducers({
+	//Generales
 	auth: authReducer,
 	ui: uiReduccer,
 	reg: registerReducer,
 	delete: deleteReducer,
 	edit: editReducer,
-	//para perfil individual
+	//Para perfil individual
 	user: userReducer,
 	aviso: avisoReducer,
 	projects: projectsReduccer,
@@ -40,5 +42,4 @@ export const store = createStore(
 	composeEnhancers(
 		applyMiddleware(thunk)
 	)
-
 );

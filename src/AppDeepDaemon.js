@@ -9,17 +9,13 @@ import { isMobile } from 'react-device-detect';
 
 
 export const AppDeepDaemon = () => {
-    /**
-     * Esta constante indica el número de minutos de inactividad
-     */
+
+    //Constante que indica el número de minutos de inactividad
     const MINUTES_TO_EXPIRE = 10;
 
     let timer;
 
-    /**
-     * Esta función se encarga de reestablecer el timer cada que se mande a llamar
-     * en el evento del mousemove
-     */
+    //Función encargada de reestablecer el timer cada que se mande llamar en el evento del mousemove
     const resetTimer = () => {
         // Cada que se entra a esta función se debe limpiar el timer porque si entra a esta función
         // significa que el usuario está moviendo el mouse (o sea, está teniendo actividad en el sitio)
@@ -31,43 +27,46 @@ export const AppDeepDaemon = () => {
         }, MINUTES_TO_EXPIRE * 60 * 1000)
     }
 
-    /**
-     * Esta función inicializa el timer y agrega un evento de mouse
-     */
+    //Esta función inicializa el timer y agrega un evento de mouse
     const startTimer = () => {
         resetTimer();
         document.addEventListener('mousemove', resetTimer);
     }
 
-
+    //Se manda a llamar a la función startTimer.
     startTimer();
+
+    //Constante para cambiar de la versión móvil a la versión de escritorio
     const [mobileOn,setMobileOn]=useState(true);
+
+    //Función que espera 1 segundo a que se rendericen todos los componentes
+    //para después llamar al botón que tenga el id "toDeskVersion" y añadirle el evento de click
+    //Este cambiará el estado de la función que verifica si se quiere seguir en la versión móvil
     setTimeout(() => {
         const changeToDeskVersion = document.getElementById("toDeskVersion");
         if(changeToDeskVersion!=null)changeToDeskVersion.addEventListener("click", myFunction);
         function myFunction() {
-            //document.getElementById("demo").innerHTML = "Hello World";
             setMobileOn(false);
         }
     }, 1000);
+
+    //Hook para renderizar en caso de que cambie el estado de la variable "mobileOn"
     useEffect(() => {
     },[mobileOn]);
     
+    //Verificación de si se trata de la versión móvil o la de escritorio y redirección 
+    //a los componentes específicos de cada una.
     if(isMobile&&mobileOn){
         return(
-
             <Provider store={store}>
                 <AppRouterMobile />
             </Provider>
-
         )
     }else{
         return (
-
             <Provider store={store}>
                 <AppRouter />
             </Provider>
-    
         )
     }
 }

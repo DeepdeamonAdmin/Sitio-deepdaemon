@@ -61,40 +61,17 @@ export const loadImg = (url) => ({
 	payload: url
 });
 
-// export const startLoadingGalleryAll = () => {
-// 	return async (dispatch) => {
-// 		console.log('entra');
-// 		const ruta = '/Gallery'
-// 		const gallery = await loadAllWorks(ruta)
-// 		console.log(gallery);
-// 		if (gallery) {
-// 			dispatch(setAllGallery(gallery))
-// 		} else {
-// 			Swal.fire('Error BD no identificada');
-// 		}
-// 	}
-// }
-
-// export const setAllGallery = (gallery) => ({
-// 	type: types.galleryAllLoad,
-// 	payload: gallery
-// });
-
 export const startLoadingGallery = () => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth
-		const ruta = `Gallery${uid}/Imagenes`
-		const imagenes = await loadWorks(ruta)
-		if (imagenes) {
-			dispatch(setAllImages(imagenes))
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
+		const ruta = `Gallery/${uid}/Imagenes`
+		const gallery = await loadWorks(ruta)
+		await dispatch( setImages( gallery ));
 	}
 
 }
 
-export const setAllImages = (imagenes) => ({
-	type: types.galleryAllLoad,
-	payload: imagenes
+export const setImages = (gallery) => ({
+	type: types.galleryLoad,
+	payload: gallery
 });

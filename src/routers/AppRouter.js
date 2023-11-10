@@ -1,52 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
-//uso de rutas e
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes
-} from 'react-router-dom';
-
-//rutas para sitio de administración
+//Uso de rutas
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+//Rutas para sitio de administración
 import { AdminDashBoard } from './AdminDashBoard';
-
-//proteccion de rutas
+//Proteccion de rutas
 import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 import { HomeRoutes } from './HomeRoutes';
 import { UserDashBoard } from './UserDashBoard';
-import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
 import { login } from '../actions/auth';
-import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
-import { startLoadingTesis, startLoadinTesisAll } from '../actions/tesis';
+//Para cargar datos al estado
+import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
+import { startLoadingProject } from '../actions/projects';
+import { startLoadingTesis } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
 import { ExternoDashBoard } from './ExternoDashBoard'
 import { startLoadingYoutube } from '../actions/youtube';
-
-
-
-
+import { startLoadingGallery } from '../actions/gallery';
 
 export const AppRouter = () => {
-
     const dispatch = useDispatch();
     const auth = getAuth();
-
     const [checking, setChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     const { rol } = useSelector(state => state.user);
-
-    function validar() {
-
-        sendEmailVerification(auth.currentUser)
-
-            .then(() => {
-
-            });
-    }
-    const refresh = () => window.location.reload(true)
 
     useEffect(() => {
 
@@ -55,51 +34,21 @@ export const AppRouter = () => {
         dispatch(startLoadingTesis());
         dispatch(startLoadingPublication());
         dispatch(startLoadingYoutube());
+        
 
         onAuthStateChanged(auth, (user) => {
-
-
-            //Validacion para los usuarios verificados para poder entrar.
-            //if ((user?.uid) && user.emailVerified) {
                 if ( (user?.uid)) {
-                dispatch(login(user.uid, user.displayName));
-                //console.log(user.displayName)
-                setIsLoggedIn(true);
-                dispatch(getUserRolUid());
-                //dispatch(startLoadingProject());
-                
-                //dispatch(startLoadinProjectsAll());
-                //dispatch(startLoadingTesis());
-                //dispatch(startLoadinTesisAll());
-
+                    dispatch(login(user.uid, user.displayName));
+                    setIsLoggedIn(true);
+                    dispatch(getUserRolUid());
+                    dispatch(startLoadingGallery());
                 if (user.emailVerified) {
                     console.log("Verificado")
                 } else {
                     console.log("No verificado")
                 }
-
-
             } else {
                 setIsLoggedIn(false);
-                /*Swal.fire({
-                    title: 'Verificar Cuenta',
-                    text: "Se enviará un correo de verificación",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Enviar Confirmación'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        validar();
-                        Swal.fire(
-                            'Enviado!',
-                            'Se envió el correo de verificación.',
-                            'success'
-                        )
-                    }
-                })*/
-                console.log("Verificar usuario")
             }
 
             setChecking(false);

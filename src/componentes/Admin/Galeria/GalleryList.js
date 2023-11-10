@@ -9,7 +9,7 @@ export default function GalleryList() {
 
 	const { uid } = useSelector(state => state.auth)
 	// console.log(uid);
-	const [gallery, setGallery] = useState([])
+	/*const [gallery, setGallery] = useState([])
 
 	const galleryCollection = collection(db, `Gallery/${uid}/Imagenes`);
 
@@ -19,22 +19,23 @@ export default function GalleryList() {
 		setGallery(
 			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
 		);
-	}
+	}*/
 
 	const deleteImagen = async (id) => {
 		const imagenDoc = doc(db, `Gallery/${uid}/Imagenes`, id);
 		await deleteDoc(imagenDoc);
 		Swal.fire('Imagen eliminada', 'Éxito');
-		getGallery();
+		//getGallery();
 	}
 
 	useEffect(() => {
-		getGallery()
+		//getGallery()
 	}, [])
+	var gallery = useSelector(state => state.gallery);
 	return (
 		<>
 			{
-				gallery.map(imagen => (
+				gallery.gallery.map(imagen => (
 					<div className="card p-2 border-primary mb-3" key={imagen.id} style={{ width: 14 + "rem" }}>
 						<img
 							className='card-img'

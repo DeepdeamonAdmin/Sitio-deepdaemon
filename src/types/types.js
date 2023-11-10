@@ -89,7 +89,7 @@ export const types = {
 	// Para la galería
 	galleryAddNew: '[Images] New Image', //Agregando imagen con nombre
 	galleryAddNewPhoto: '[Images] New Photo', //Solamente imagen
-	galleryLoad: '[Images] Load Image',
+	galleryLoad: '[Images] Load Images',
 	galleryAllLoad: '[Images] All Load Images',
 	galleryDelete: '[Images] Delete Image',
 	galleryUpdate: '[Images] Update Image',
