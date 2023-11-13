@@ -8,30 +8,22 @@ import Swal from "sweetalert2";
 export default function GalleryList() {
 
 	const { uid } = useSelector(state => state.auth)
+	var gallery = useSelector(state => state.gallery);
 	// console.log(uid);
-	/*const [gallery, setGallery] = useState([])
-
+	//const [gallery, setGallery] = useState([])
 	const galleryCollection = collection(db, `Gallery/${uid}/Imagenes`);
-
 	const getGallery = async () => {
 		const datos = await getDocs(galleryCollection);
-		console.log("Get gallery");
-		setGallery(
-			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
-		);
-	}*/
-
+		gallery=datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
+	}
 	const deleteImagen = async (id) => {
 		const imagenDoc = doc(db, `Gallery/${uid}/Imagenes`, id);
 		await deleteDoc(imagenDoc);
 		Swal.fire('Imagen eliminada', 'Éxito');
-		//getGallery();
+		getGallery();
 	}
-
 	useEffect(() => {
-		//getGallery()
 	}, [])
-	var gallery = useSelector(state => state.gallery);
 	return (
 		<>
 			{

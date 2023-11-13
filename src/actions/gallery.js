@@ -11,11 +11,11 @@ import { uiCloseModal } from "./ui";
 export const startsNewImage = (formValues) => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
-		const { img } = getState().gallery;
+		const { image } = getState().gallery;
 
 		const newImage = {
 			name: formValues.name,
-			photo: img,
+			photo: image,
 		}
 
 		const docRef = await addDoc(collection(db, `Gallery/${uid}/Imagenes`), newImage);
