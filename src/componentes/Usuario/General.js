@@ -352,6 +352,11 @@ export const General = ({ id }) => {
                   <h2 className="team_title">Libro</h2>
                 </Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="inbook">
+                  <h2 className="team_title">Capítulos de libro</h2>
+                </Nav.Link>
+              </Nav.Item>
             </Nav>
             <hr />
             <Tab.Content>
@@ -373,6 +378,13 @@ export const General = ({ id }) => {
                 <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
                   <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
                     <PublicationScreen type="book" />
+                  </div>
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="inbook" >
+                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
+                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
+                    <PublicationScreen type="inbook" />
                   </div>
                 </div>
               </Tab.Pane>
