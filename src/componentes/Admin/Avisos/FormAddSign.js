@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { startsNewImage, startUploadingImage } from '../../../actions/avisos'
 import { useForm } from '../../../hooks/useForm'
-import { ModalGalleryAddAvisos } from './ModalGalleryAddAvisos';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +48,7 @@ export const FormAddSign = () =>{
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddAvisos MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

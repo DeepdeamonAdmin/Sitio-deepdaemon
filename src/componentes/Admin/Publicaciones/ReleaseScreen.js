@@ -13,8 +13,6 @@ export const ReleaseScreen = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-2 mb-2">
-                        {/* <ModalAddProject />
-                        <AddNewFab />  */}
                         <Link to={`agregar`} className="btn btn-primary fab">
                         <i className="fas fa-plus"></i>
 						</Link>

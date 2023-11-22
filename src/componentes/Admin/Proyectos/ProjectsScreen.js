@@ -1,6 +1,5 @@
 import React from 'react'
 import { AddNewFab } from '../../ui/AddNewFab'
-import { ModalAddProject } from './ModalAddProject'
 import ProjectList from './ProjectList'
 import { Link } from 'react-router-dom';
 
@@ -16,8 +15,6 @@ export const ProjectsScreen = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-2 mb-2">
-                        {/* <ModalAddProject />
-                        <AddNewFab />  */}
                         <Link to={`agregar`} className="btn btn-primary fab">
                         <i className="fas fa-plus"></i>
 						</Link>

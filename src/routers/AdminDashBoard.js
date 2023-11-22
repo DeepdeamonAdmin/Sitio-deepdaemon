@@ -59,7 +59,6 @@ export const AdminDashBoard = () => {
 					<Route path="galery" element={<GalleryScreen />} />
 					<Route path="avisos" element={<AvisosScreen />} />
 					<Route path="avisos/agregar" element={<FormAddSign />} />
-					{/* <Route path="other" element={<OtherScreen />} /> */}
 					<Route path="Instituciones" element={<InstitucionesScreen />} />
 					<Route path="Carreras" element={<CarrerasScreen />} />
 					<Route path="Tecnologias" element={<TechScreen />} />

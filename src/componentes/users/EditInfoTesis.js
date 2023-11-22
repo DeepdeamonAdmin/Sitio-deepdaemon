@@ -2,13 +2,11 @@ import React from 'react'
 import Select from 'react-select'
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 //import { startNewProject, startUploadingProject } from '../../actions/projects';
 import { useForm } from '../../hooks/useForm';
-import { getAuth } from 'firebase/auth';
 import { useState } from 'react';
-import { ModalGalleryAddTesis } from '../../../src/componentes/users/ModalGalleryAddTesis';
+import { ModalGalleryAdd } from '../Admin/Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../ui/FotosGalleryChoose';
 import { editTesisGrado, editTesisPosgrado } from '../../actions/edit';
 
@@ -305,7 +303,7 @@ export const EditInfoTesis = () => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

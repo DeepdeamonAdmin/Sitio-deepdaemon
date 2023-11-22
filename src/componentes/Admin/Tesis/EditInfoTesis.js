@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
 import { useState } from 'react';
-import { ModalGalleryAddTesis } from '../../../../src/componentes/users/ModalGalleryAddTesis';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { editTesisGrado, editTesisPosgrado } from '../../../actions/edit';
 import { db } from '../../../firebase/firebase-config'
@@ -325,7 +325,7 @@ export const EditInfoTesis = () => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

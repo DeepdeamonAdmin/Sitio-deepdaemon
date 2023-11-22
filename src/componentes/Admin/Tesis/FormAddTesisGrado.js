@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { startNewTesisGrado } from '../../../actions/tesis';
 import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
-import { ModalGalleryAddTesis } from '../../users/ModalGalleryAddTesis';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useSelector } from 'react-redux';
 import { db } from '../../../firebase/firebase-config'
@@ -259,7 +259,7 @@ export const FormAddTesisGrado = () => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddTesis MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

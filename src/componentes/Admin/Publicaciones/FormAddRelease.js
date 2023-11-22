@@ -8,7 +8,7 @@ import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 import { editPublication } from '../../../actions/edit';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
-import { ModalGalleryAddProjects } from '../Proyectos/ModalGalleryAddProjects';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 
 export const FormAddRelease = () => {
 	const auth = getAuth();
@@ -601,7 +601,7 @@ export const FormAddRelease = () => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

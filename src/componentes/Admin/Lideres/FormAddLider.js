@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { activeData, startSaveData, startUploading } from '../../../actions/user';
 import { useForm } from '../../../hooks/useForm';
 import validator from 'validator';
-import { ModalGalleryAddLideres } from './ModalGalleryAddLideres';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { registrarLider } from '../../../actions/auth';
 import { removeError, setError } from '../../../actions/ui';
 import { useState } from 'react';
 
-//importar todas las imagenes de la galeria
-import azul from "../../../assets/azul.jpg";
-import verde from "../../../assets/verde.jpg";
+
 
 export const FormAddLider = () => {
 
@@ -37,7 +35,7 @@ export const FormAddLider = () => {
 
   const { name, email, password, password2, display, esAutor, idWork, urlImg } = formValues;
 
-  const handleRegistrer = (e) => {
+  const handleRegistrer = e => {
 
     e.preventDefault();
     if (isFormValid()) {
@@ -141,7 +139,7 @@ export const FormAddLider = () => {
                 <label> Imagen desde Galeria </label>
                 <div className="card">
                   <img className='foto' src={urlImg || datos} alt="Imagen" />
-                  <ModalGalleryAddLideres MgAFAP={MgAFAP} />
+                  <ModalGalleryAdd MgAFAP={MgAFAP} />
                   <FotosGalleryChoose />
                 </div>
               </div>
@@ -187,6 +185,7 @@ export const FormAddLider = () => {
                 type="submit"
                 className="btn btn-primary btn-registro"
                 disabled={loading}
+                onclikc={handleRegistrer}
               >
                 Registrar
               </button>

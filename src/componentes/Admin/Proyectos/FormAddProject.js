@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form'
 import { startNewProject } from '../../../../src/actions/projects';
 import { useForm } from '../../../../src/hooks/useForm';
 import { getAuth } from 'firebase/auth';
-import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useSelector } from 'react-redux';
 import { db } from '../../../firebase/firebase-config'
@@ -231,7 +231,7 @@ export const FormAddProject = () => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

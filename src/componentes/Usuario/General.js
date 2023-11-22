@@ -46,17 +46,29 @@ export const General = ({ id }) => {
   };
   const [youtubes, setYoutubes] = useState([]);
   const youtubeCollection = collection(db, "Youtube");
+  //var youtubes=[];
   const getYoutubes = async () =>{
     const datos = await getDocs(youtubeCollection);
-    setYoutubes(
+    /*youtubes = datos.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    })*/
+    var youtube = datos.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    })
+    //console.log(youtube);
+    for(var i=0; i<youtube.length; i++){
+      const regex = /(?:live|be)\/([a-zA-Z0-9_-]+)/;
+      const url = youtube[i].urlVideo;
+      const match = regex.exec(url);
+      //console.log(match[1]);
+      youtube[i].urlVideo = match[1];
+    }
+    setYoutubes(youtube);
+    /*setYoutubes(
       datos.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
       })
-    );
-    /*const reversed = datos.docs.map((doc) => {
-      return { ...doc.data(), id: doc.id };
-    })
-    setYoutubes(reversed.reverse());*/
+    );*/
   }
   //Función para eliminar un aviso
 
@@ -128,7 +140,7 @@ export const General = ({ id }) => {
         <div className="container">
         <Row className="d-flex flex-row " style={{width:"100%"}}>
             <div className="col-sm mb-4" id="Home">
-              <div className="content" style={{position:"relative",backgroundColor:"#025E9D", borderRadius:"20px",boxShadow: "2px 2px 15px rgba(0, 0, 0, 0.5)"}}>
+              <div className="content" style={{position:"relative"}}>
                 <img src={cic} className="ddcic" alt="cic" />
                 <img src={logo} className="ddlogo" alt="logo" />
                 <h1>Laboratorio de Ciencias </h1>
@@ -137,7 +149,7 @@ export const General = ({ id }) => {
                 <h2>Comunidad de conocimiento</h2>
               </div>
             </div>
-          <div className="col-sm">
+          {/*<div className="col-sm">
             <Carousel
               showArrows
               selectedItem={currentSlide}
@@ -154,7 +166,7 @@ export const General = ({ id }) => {
                 </div>
               ))}
             </Carousel>
-            {/*<Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
+            <Splide options={options_video} aria-labelledby="autoplay-example-heading" hasTrack={false}>
               <div style={{ position: 'relative' }}>
                 <SplideTrack>
                   {youtubes.map((video, index) => (
@@ -164,16 +176,16 @@ export const General = ({ id }) => {
                   ))}
                 </SplideTrack>
               </div>
-                  </Splide>*/}
-            {/*
+                  </Splide>
+            
             <iframe
               className="embed-responsive"
               src="https://www.youtube.com/embed/OG0w_4qDiy8"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-                  ></iframe>*/}
-          </div>
+                  ></iframe>
+                  </div>*/}
         </Row>
         </div>
       </div>
@@ -187,6 +199,17 @@ export const General = ({ id }) => {
                     <img src={aviso.photo} key={aviso.photo}/>
                   </SplideSlide>
                 ))}
+                {youtubes.map((video, index) => (
+                  <SplideSlide>
+                    <iframe
+                      className="embed-responsive"
+                      src={"https://www.youtube.com/embed/"+video.urlVideo}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </SplideSlide>
+              ))}
               </SplideTrack>
             </div>
           </Splide>
