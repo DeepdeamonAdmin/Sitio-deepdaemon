@@ -10,97 +10,27 @@ import { uiCloseModal } from "./ui";
 import { loadAllUsers } from '../helpers/loadAllUsers';
 
 
-export const startsNewImage = (formValues) => {
+export const startsNewSign = (formValues) => {
 	return async (dispatch, getState) => {
-		const { img } = getState().gallery;
-
-		const newImage = {
+		const newSign = {
 			name: formValues.name,
 			desc: formValues.desc,
-
-			photo: img || formValues.urlImg
+			photo: formValues.urlImg
 		}
-
-		const docRef = await addDoc(collection(db, `Avisos/`), newImage);
-
+		const docRef = await addDoc(collection(db, `Avisos/`), newSign);
 		if (docRef) {
 			Swal.fire('Aviso guardado', 'Éxito');
-			dispatch(addNewtoGallery(docRef.id, newImage));
+			dispatch(addNewSign(docRef.id, newSign));
 			dispatch(uiCloseModal())
 		} else {
 			Swal.fire('Error al guardar el aviso');
 		}
 	}
 }
-
-export const addNewtoGallery = (id, image) => ({
-	type: types.galleryAddNew,
+export const addNewSign = (id, sign) => ({
+	type: types.avisoAddNew,
 	payload: {
-		id, ...image
+		id, ...sign
 	}
 })
-
-export const startUploadingImage = (file) => {
-	return async (dispatch) => {
-
-		Swal.fire({
-			title: 'Uploading...',
-			text: 'Please wait...',
-			allowOutsideClick: false,
-			onBeforeOpen: () => {
-				Swal.showLoading();
-			}
-		});
-
-		const ruta = ''
-		const fileUrl = await fileUpload(ruta, file);
-		dispatch(loadImg(fileUrl));
-		Swal.close();
-	}
-}
-
-export const loadImg = (url) => ({
-	type: types.galleryAddNewPhoto,
-	payload: url
-});
-
-
-export const startLoadingGallery = () => {
-	return async (dispatch, getState) => {
-		const { uid } = getState().auth
-		const ruta = `Gallery${uid}/Imagenes`
-		const imagenes = await loadWorks(ruta)
-		if (imagenes) {
-			dispatch(setAllImages(imagenes))
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
-	}
-
-}
-
-export const setAllImages = (imagenes) => ({
-	type: types.galleryAllLoad,
-	payload: imagenes
-});
-
-//Obtener todos los uasuarios 
-export const startLoadinUsersAll = () => {
-	return async (dispatch) => {
-		const ruta = '/Avisos'
-		const avisos = await loadAllUsers(ruta);
-		//verificamos que obtenimos el documento 
-		if (avisos) {
-			dispatch(setUsers(avisos));
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
-	}
-}
-
-//mandar a redux los usuarios
-export const setUsers = (avisos) => ({
-	type: types.usersLoad,
-	payload: avisos
-});
 

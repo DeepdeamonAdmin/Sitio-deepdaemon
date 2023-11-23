@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { startsNewImage, startUploadingImage } from '../../../actions/avisos'
+import { startsNewSign } from '../../../actions/avisos'
 import { useForm } from '../../../hooks/useForm'
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
@@ -25,8 +25,7 @@ export const FormAddSign = () =>{
 	}
 
 	const handleSave = () => {
-		//formValues.urlImg = datos;
-		dispatch(startsNewImage(formValues));
+		dispatch(startsNewSign(formValues));
 		reset();
 		navigate('/admin/avisos');
 	}
@@ -62,7 +61,7 @@ export const FormAddSign = () =>{
 					<button
 						className="btn btn-primary btn-large"
 						onClick={handleSave}>
-						Subir imagen
+						Crear Aviso
 					</button>
 				</div>
 			</div>

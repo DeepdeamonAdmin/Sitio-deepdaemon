@@ -54,27 +54,41 @@ export const GalleryScreen = () => {
 					</Nav.Item>
 				</Nav>
 				<hr />
-				<Tab.Content>
+				<Tab.Content style={{marginLeft:"20px"}}>
 					<Tab.Pane eventKey="Alumno">
-						<GalleryList status="Alumno" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Alumno" />
+						</div>
 					</Tab.Pane>
 					<Tab.Pane eventKey="Aviso">
-						<GalleryList status="Aviso" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Aviso" />
+						</div>
 					</Tab.Pane>
 					<Tab.Pane eventKey="Externo">
-						<GalleryList status="Externo" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Externo" />
+						</div>
 					</Tab.Pane>
 					<Tab.Pane eventKey="Lider">
-						<GalleryList status="Lider" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Lider" />
+						</div>
 					</Tab.Pane>
 					<Tab.Pane eventKey="Proyecto">
-						<GalleryList status="Proyecto" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Proyecto" />
+						</div>
 					</Tab.Pane>
 					<Tab.Pane eventKey="Publicacion">
-						<GalleryList status="Publicacion" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Publicacion" />
+						</div>
 					</Tab.Pane>
 					<Tab.Pane eventKey="Tesis">
-						<GalleryList status="Tesis" />
+						<div className="row d-flex" style={{gap:"5px"}}>
+								<GalleryList status="Tesis" />
+						</div>
 					</Tab.Pane>
 				</Tab.Content>
 			</Tab.Container>

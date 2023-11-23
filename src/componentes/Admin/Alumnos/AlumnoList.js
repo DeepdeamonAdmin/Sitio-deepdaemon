@@ -9,7 +9,7 @@ export const AlumnoList = () => {
 			<div className="card-columns cards-cols animate__animated animate__fadeIn px-5">
 				{
 					//Solo los usuarios con el grado de current
-					usuarios.filter(usuario => (usuario.grado === 'current'&&usuario.rol === "alumno")).map(usuario => (
+					usuarios.filter(usuario => (usuario.grado != 'graduate'&&usuario.rol === "alumno")).map(usuario => (
 						<AlumnoCard
 							key={usuario.id}
 							{...usuario}
