@@ -10,7 +10,7 @@ import { startLoadinUsersAll, startUploading } from '../../../actions/user';
 import { collection, getDocs, deleteDoc, updateDoc, doc, query, where, querySnapshot } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
-import { ModalFoto } from './ModalFoto';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGallery } from '../../ui/FotosGallery';
 
 export const FormEditarAlumno = (props) => {
@@ -28,7 +28,12 @@ export const FormEditarAlumno = (props) => {
 	const [formValues, handleInputChange] = useForm(alumno);
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
-
+	const [datos, setDatos] = useState('');
+	const MgAFAP = (datosMg) => {
+		setDatos(datosMg);
+		formValues.urlImg=datosMg;
+		//console.log(formValues.urlImg)
+	}
 	useEffect(() => {
 		setOldPassword(alumno.password)
 	}, [usuarios]);
@@ -71,7 +76,8 @@ export const FormEditarAlumno = (props) => {
 		const data = {
 			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
 		};
-		if(alumno.rol==="alumno"||alumno.rol==="externo")data.idWork="";
+		if(alumno.rol==="administrador"){data.idSchool="";data.idCareer="";data.github="";}
+		if(alumno.rol==="alumno"||alumno.rol==="externo"){data.idWork="";}
 		//data.ss = isChecked
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
@@ -142,7 +148,7 @@ export const FormEditarAlumno = (props) => {
 				<div className='col-md-3 mb-3'>
 					<div className="card">
 						<img className='foto' src={urlImg || fotoPerfil} alt="Foto de Perfil" />
-						<ModalFoto id={alumno.id} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGallery />
 					</div>
 				</div>

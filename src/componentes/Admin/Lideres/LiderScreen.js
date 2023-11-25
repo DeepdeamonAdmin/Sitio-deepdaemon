@@ -1,6 +1,4 @@
 import React from 'react';
-import { ModalAddLider } from './ModalAddLider';
-import { AddNewFab } from '../../ui/AddNewFab';
 //import { SearchScreen } from '../../ui/SearchScreen';
 import { LiderList } from './LiderList';
 import { Link } from 'react-router-dom';
@@ -23,8 +21,6 @@ export const LiderScreen = () => {
             <div className="row">
                 {/* <SearchScreen /> */}
                 <div className="col-md-2 mb-2">
-                    {/* <ModalAddLider />
-                    <AddNewFab />  */}
                     <Link to={`agregar`} className="btn btn-primary fab">
                         <i className="fas fa-plus"></i>
 						</Link>

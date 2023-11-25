@@ -121,12 +121,8 @@ export const types = {
 	youtubeLoad: '[YouTube] Load Videos Youtube',
 
 	// Para los avisos
-	avisoAddNew: '[Images] New Image', //Agregando imagen con nombre
-	avisoAddNewPhoto: '[Images] New Photo', //Solamente imagen
+	avisoAddNew: '[Sign] New Sign', //Agregando aviso
 	avisoLoad: '[Images] Load Image',
-	avisoAllLoad: '[Images] All Load Images',
-	avisoDelete: '[Images] Delete Image',
-	avisoUpdate: '[Images] Update Image',
 
 	// Para los comentarios
 	commentAddNew: '[Images] New Image', //Agregando imagen con nombre

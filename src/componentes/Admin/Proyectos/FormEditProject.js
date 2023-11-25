@@ -6,7 +6,7 @@ import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { editProject } from '../../../actions/edit';
-import { ModalGalleryAddProjects } from './ModalGalleryAddProjects';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
@@ -234,7 +234,7 @@ export const FormEditProject = ({ history }) => {
 					<label> Imagen desde Galeria </label>
 					<div className="card">
 						<img className='foto' src={formValues.urlImg || datos} alt="Imagen" />
-						<ModalGalleryAddProjects MgAFAP={MgAFAP} />
+						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGalleryChoose />
 					</div>
 				</div>

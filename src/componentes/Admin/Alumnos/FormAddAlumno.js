@@ -8,7 +8,7 @@ import { registroDesdeLider } from '../../../actions/auth';
 import { useForm } from '../../../hooks/useForm';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { ModalGalleryAddAlumnos } from './ModalGalleryAddAlumnos';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useNavigate } from 'react-router-dom';
 
@@ -100,7 +100,7 @@ export const FormAddAlumno = () => {
 	return (
 		<div className="container">
 			<div className="app-title">
-				<h2>Agregar Alumno </h2>
+				<h2>Agregar Alumno</h2>
 				<hr />
 			</div>
 			<form onSubmit={handleSubmit}>
@@ -340,7 +340,7 @@ export const FormAddAlumno = () => {
 						<label> Imagen desde Galeria </label>
 						<div className="card">
 							<img className='foto' src={urlImg || datos} alt="Imagen" />
-							<ModalGalleryAddAlumnos MgAFAP={MgAFAP} />
+							<ModalGalleryAdd MgAFAP={MgAFAP} />
 							<FotosGalleryChoose />
 						</div>
 					</div>

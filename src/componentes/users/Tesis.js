@@ -1,6 +1,4 @@
 import React from 'react'
-//import { AddNewFab } from '../../ui/AddNewFab'
-//import { ModalAddProject } from './ModalAddProject'
 import TesisListUser from './TesisListUser'
 import { Link } from 'react-router-dom';
 

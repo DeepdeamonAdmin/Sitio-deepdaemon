@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { startsNewImage, startUploadingImage } from '../../../actions/gallery'
 import { useForm } from '../../../hooks/useForm'
@@ -6,26 +6,41 @@ import { useForm } from '../../../hooks/useForm'
 export const FormAddGalery = () => {
 	const dispatch = useDispatch()
 	const [formValues, handleInputChange, reset] = useForm({
-		name: ''
+		name: '',
+		type: '',
+		ext: ''
 	})
 	const { name } = formValues
-
+	const [file,setFile]=useState('');
+	const [selectValue, setSelectValue] = useState('')
+	const handleSelectChange = (event) => {
+		const { target } = event;
+		setSelectValue(target.value);
+		handleInputChange(event);
+	}
 	const handleFileChange = (e) => {
-		const file = e.target.files[0];
+		setFile(e.target.files[0]);
+	}
+	const handleSave =  async () => {
+		var name_without_spaces;
 		if (file) {
 			if (name == '') {
-				dispatch(startUploadingImage(file));
+				const typeFile = file.name.split('.')[1]
+				formValues.ext = typeFile;
+				await dispatch(startUploadingImage(file,formValues.type));
 			} else {
 				const typeFile = file.name.split('.')[1]
-				const fileName = name + '.' + typeFile
+				formValues.ext = typeFile;
+				name_without_spaces = formValues.name.replaceAll(/\s/g,"_")
+				const fileName = name_without_spaces + '.' + typeFile
 				const auxFile = new File([file], fileName)
-				dispatch(startUploadingImage(auxFile));
+				await dispatch(startUploadingImage(auxFile,formValues.type));
 			}
 
+		}else{
+			console.log("Error al cargar el archivo");
 		}
-	}
-
-	const handleSave = () => {
+		formValues.name = name_without_spaces;
 		dispatch(startsNewImage(formValues));
 		reset();
 	}
@@ -46,6 +61,26 @@ export const FormAddGalery = () => {
 						accept="image/png, image/jpeg"
 						onChange={handleFileChange}
 					/>
+				</div>
+			</div>
+			<div className='form-row'>
+				<div className='col-md-6 mb-3'>
+				<label> Type </label>
+					<select
+						value={selectValue}
+						className="form-control"
+						name='type'
+						onChange={handleSelectChange}
+					>
+						<option value=''>Selecciona una opción</option>
+						<option value='Aviso'>Aviso</option>
+						<option value='Alumno'>Alumno</option>
+						<option value='Externo'>Externo</option>
+						<option value='Lider'>Líder</option>
+						<option value='Proyecto'>Proyecto</option>
+						<option value='Publicacion'>Publicación</option>
+						<option value='Tesis'>Tesis</option>
+					</select>
 				</div>
 			</div>
 			<div className="form-row">

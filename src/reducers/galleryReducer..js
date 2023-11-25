@@ -9,9 +9,11 @@ const initialState = {
 export const galleryReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case types.galleryAddNew:
+			const gallery_unique = state.gallery.find((gallery_unique) => gallery_unique.id === action.payload.type);
+			gallery_unique.gallery = [action.payload, ...gallery_unique.gallery];
 			return {
 				...state,
-				gallery: [action.payload, ...state.gallery]
+				gallery: [...state.gallery]
 			}
 		case types.galleryAddNewPhoto:
 			return {

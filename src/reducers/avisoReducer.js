@@ -5,8 +5,7 @@ import { types } from '../types/types';
 const initialState = {
 	name: "",
     desc: "",
-	imagenes: [],
-	imagenesAll: []
+	avisos: [],
 }
 
 export const avisoReducer = (state = initialState, action) => {
@@ -14,22 +13,12 @@ export const avisoReducer = (state = initialState, action) => {
 		case types.avisoAddNew:
 			return {
 				...state,
-				imagenes: [action.payload, ...state.imagenes]
-			}
-		case types.avisoAddNewPhoto:
-			return {
-				...state,
-				img: action.payload
+				avisos: [action.payload, ...state.avisos]
 			}
 		case types.avisoLoad:
 			return {
 				...state,
-				imagenes: [...action.payload]
-			}
-		case types.avisoAllLoad:
-			return {
-				...state,
-				imagenesAll: [...action.payload]
+				avisos: [...action.payload]
 			}
 		default:
 			return state

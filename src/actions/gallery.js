@@ -10,15 +10,16 @@ import { uiCloseModal } from "./ui";
 
 export const startsNewImage = (formValues) => {
 	return async (dispatch, getState) => {
-		const { uid } = getState().auth;
+		//const { uid } = getState().auth;
 		const { image } = getState().gallery;
-
 		const newImage = {
 			name: formValues.name,
+			type: formValues.type,
+			ext: formValues.ext,
 			photo: image,
 		}
-
-		const docRef = await addDoc(collection(db, `Gallery/${uid}/Imagenes`), newImage);
+		var collection_name = 'Gallery/'+formValues.type+'/Imagenes';
+		const docRef = await addDoc(collection(db, collection_name), newImage);
 
 		if (docRef) {
 			Swal.fire('Imagen salvada', 'Éxito');
@@ -37,7 +38,7 @@ export const addNewtoGallery = (id, image) => ({
 	}
 })
 
-export const startUploadingImage = (file) => {
+export const startUploadingImage = (file,type) => {
 	return async (dispatch) => {
 
 		Swal.fire({
@@ -49,7 +50,7 @@ export const startUploadingImage = (file) => {
 			}
 		});
 
-		const ruta = ''
+		const ruta = 'Gallery/'+type+'/';
 		const fileUrl = await fileUpload(ruta, file);
 		dispatch(loadImg(fileUrl));
 		Swal.close();
@@ -63,9 +64,13 @@ export const loadImg = (url) => ({
 
 export const startLoadingGallery = () => {
 	return async (dispatch, getState) => {
-		const { uid } = getState().auth
-		const ruta = `Gallery/${uid}/Imagenes`
-		const gallery = await loadWorks(ruta)
+		var ruta = 'Gallery'
+		var gallery = await loadWorks(ruta);
+		console.log(gallery);
+		for (const item of gallery) {
+			ruta='Gallery/'+item.id+"/Imagenes";
+			item["gallery"] = await loadWorks(ruta);
+		}
 		await dispatch( setImages( gallery ));
 	}
 
