@@ -76,7 +76,8 @@ export const FormEditarAlumno = (props) => {
 		const data = {
 			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
 		};
-		if(alumno.rol==="alumno"||alumno.rol==="externo")data.idWork="";
+		if(alumno.rol==="administrador"){data.idSchool="";data.idCareer="";data.github="";}
+		if(alumno.rol==="alumno"||alumno.rol==="externo"){data.idWork="";}
 		//data.ss = isChecked
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
