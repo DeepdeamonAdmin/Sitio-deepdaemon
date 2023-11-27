@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const ReleaseScreen = () => {
     return (
         <>
-            <div className='Container'>
+            <div className='container'>
                 <div className='row'>
                     <div className='col-mb-3'>
                         <h1> Publicaciones DeepDaemon</h1>
@@ -18,12 +18,12 @@ export const ReleaseScreen = () => {
 						</Link>
                     </div>    
                 </div>
-                {/*<ModalAddrelease />
-                <AddNewFab />*/} 
             </div>
-            <div>
-                {/*<Publications />*/}
-                <PublicacionesList/>
+            <div className=''>
+                <div className='column'>
+                    <PublicacionesList/>
+                </div>
+                
             </div>
         </>
         

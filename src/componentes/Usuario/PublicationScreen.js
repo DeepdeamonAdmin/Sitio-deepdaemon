@@ -25,35 +25,6 @@ export const PublicationScreen = ({ type }) => {
     }
     return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
   }
-  /*React.useEffect(() => {
-    const getPublications = async () => {
-      try {
-        const ref = collection(db, "Publicaciones");
-        const q = query(ref, where("postType", '==', type));
-        const Data = await getDocs(q);
-        const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        function esFechaInvalida(fechaString) {
-          const fecha = new Date(fechaString);
-          return isNaN(fecha) || fecha.toString() === 'Invalid Date';
-        }
-        
-        function compararFechas(a, b) {
-          if (esFechaInvalida(a.yearMonth)) {
-            return 1; // a es inválida, va después de b
-          }
-          if (esFechaInvalida(b.yearMonth)) {
-            return -1; // b es inválida, va después de a
-          }
-          return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
-        }
-        const fechasOrdenadas = arrayData.slice().sort(compararFechas);
-        setPublications(fechasOrdenadas);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getPublications();
-  }, [type]);*/
 
   if (publications.length === 0) {
     return <p className="team_title">No hay publicaciones disponibles por el momento.</p>;
