@@ -2,7 +2,7 @@ import React from 'react'
 import { AddNewFab } from '../../ui/AddNewFab'
 import { ModalAddGalery } from './ModalAddGalery'
 import GalleryList from './GalleryList';
-import { Container, Nav, Tab } from "react-bootstrap";
+import { Nav, Tab } from "react-bootstrap";
 
 export const GalleryScreen = () => {
 	return (
@@ -54,7 +54,7 @@ export const GalleryScreen = () => {
 					</Nav.Item>
 				</Nav>
 				<hr />
-				<Tab.Content style={{marginLeft:"20px"}}>
+				<Tab.Content style={{marginLeft:"30px",marginRight:"30px"}}>
 					<Tab.Pane eventKey="Alumno">
 						<div className="row d-flex" style={{gap:"5px"}}>
 								<GalleryList status="Alumno" />
@@ -80,7 +80,7 @@ export const GalleryScreen = () => {
 								<GalleryList status="Proyecto" />
 						</div>
 					</Tab.Pane>
-					<Tab.Pane eventKey="Publicacion">
+					<Tab.Pane eventKey="Publicacion" className=''>
 						<div className="row d-flex" style={{gap:"5px"}}>
 								<GalleryList status="Publicacion" />
 						</div>
@@ -92,11 +92,6 @@ export const GalleryScreen = () => {
 					</Tab.Pane>
 				</Tab.Content>
 			</Tab.Container>
-			{/*<div className='section' style={{position: 'static'}}>
-				<div className="card-columns " style={{display: 'flex', flexWrap: "wrap"}}>
-					<GalleryList />
-				</div>
-	</div>*/}
 		</div>
 	)
 }
