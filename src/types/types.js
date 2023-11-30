@@ -123,12 +123,4 @@ export const types = {
 	// Para los avisos
 	avisoAddNew: '[Sign] New Sign', //Agregando aviso
 	avisoLoad: '[Images] Load Image',
-
-	// Para los comentarios
-	commentAddNew: '[Images] New Image', //Agregando imagen con nombre
-	commentAddNewPhoto: '[Images] New Photo', //Solamente imagen
-	commentLoad: '[Images] Load Image',
-	commentAllLoad: '[Images] All Load Images',
-	commentDelete: '[Images] Delete Image',
-	commentUpdate: '[Images] Update Image',
 }

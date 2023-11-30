@@ -1,14 +1,11 @@
 import Swal from 'sweetalert2';
 
-import { doc, updateDoc } from "firebase/firestore";
-import { getAuth, updateProfile } from "firebase/auth";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import { types } from '../types/types';
 
 // import { fileUpload } from '../helpers/fileUpload';
-import { loadUser } from '../helpers/loadUser';
 import { fileUpload } from '../helpers/fileUpload';
-import { loadAllUsers } from '../helpers/loadAllUsers';
 
 import { loadWorks } from '../helpers/loadWorks';
 
@@ -18,7 +15,10 @@ export const getUserRolUid = () => {
 
 		//obtenermos el uid 
 		const { uid } = getState().auth;
-		const user = await loadUser(uid);
+
+		const docRef = doc(db, 'Usuarios', uid);
+    	const docSnap = await getDoc(docRef);
+    	const user = docSnap.data();
 
 		//verificamos que obtenimos el documento 
 		if (user !== '') {
@@ -99,19 +99,14 @@ export const startUploading = (file) => {
 	}
 }
 
-
-//Obtener todos los uasuarios 
-export const startLoadinUsersAll = () => {
-	return async (dispatch) => {
-		const ruta = '/Usuarios'
-		const users = await loadAllUsers(ruta);
-		//verificamos que obtenemos el documento 
-		if (users) {
-			dispatch(setUsers(users));
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
-	}
+//Obtener los usuarios
+export const startLoadingUsers = () => {
+    return async( dispatch, getState ) => {
+        const { uid } = getState().auth;
+        const ruta =`Usuarios`;
+        const users = await loadWorks( ruta );
+        await dispatch( setUsers( users ));
+    }
 }
 
 //mandar a redux los usuarios
@@ -120,12 +115,3 @@ export const setUsers = (users) => ({
 	payload: users
 });
 
-export const startLoadinUserExt = () => {
-    return async( dispatch, getState ) => {
-        const { uid } = getState().auth;
-        const ruta =`Usuarios`;
-        const userExt = await loadAllUsers( ruta );
-        dispatch( setUsers( userExt ));
-        
-    }
-}

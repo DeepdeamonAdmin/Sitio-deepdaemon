@@ -5,7 +5,7 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { db } from "../../../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { deleteUserExt } from '../../../actions/delete';
-import { startLoadinUserExt } from '../../../actions/user';
+import { startLoadingUsers } from '../../../actions/user';
 
 
 export const ExternoCard = (item) => {
@@ -25,7 +25,7 @@ export const ExternoCard = (item) => {
             if (result.isConfirmed) {
                 console.log(item.id)
                 dispatch(deleteUserExt(item));
-                dispatch(startLoadinUserExt());
+                dispatch(startLoadingUsers());
             }
         })
     }

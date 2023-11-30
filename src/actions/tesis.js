@@ -4,7 +4,7 @@ import { db } from "../firebase/firebase-config";
 import { uiCloseModal } from './ui';
 import { types } from '../types/types';
 import { loadWorks } from '../helpers/loadWorks';
-import { loadAllWorks } from '../helpers/loadAllWorks';
+
 
 
 
@@ -187,13 +187,6 @@ export const setTesis = (tesis) => ({
 	payload: tesis
 });
 
-export const startLoadinTesisAll = () => {
-	return async (dispatch) => {
-		const ruta = `Tesis`;
-		const tesis = await loadAllWorks(ruta);
-		dispatch(setAllTesis(tesis));
-	}
-}
 
 export const setAllTesis = (tesis) => ({
 	type: types.tesisAllLoad,

@@ -10,7 +10,7 @@ export default function GalleryListModal({GlAMg,status}) {
 		<>
 			{
 				gallery.gallery.map(category => category.id==status && category.gallery.map(imagen =>(
-					<div className="card p-2 border-primary mb-3" key={imagen.id} style={{ width: 12 + "rem" }}>
+					<div className="card p-2 border-primary mb-3" key={imagen.id} style={{ width: 220 }}>
 						<img
 							className='card-img'
 							src={imagen.photo}

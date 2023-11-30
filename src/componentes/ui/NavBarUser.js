@@ -49,11 +49,6 @@ export const NavBarUser = () => {
                     to="/user/publicaciones">
                         Publicaciones
                 </NavLink>
-                <NavLink 
-                    className="nav-item nav-link" 
-                    to="/user/blog">
-                        Blog
-                </NavLink>
             </div>    
         </div>
         

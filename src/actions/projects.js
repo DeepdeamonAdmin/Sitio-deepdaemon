@@ -6,9 +6,7 @@ import { db } from "../firebase/firebase-config";
 import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadWorks } from '../helpers/loadWorks';
-import { loadAllWorks } from '../helpers/loadAllWorks';
 import { uiCloseModal } from './ui';
-import { useNavigate } from 'react-router-dom';
 
 export const startNewProject = (formValues) => {
 	return async (dispatch, getState) => {
@@ -131,19 +129,6 @@ export const setProjects = (projects) => ({
 	payload: projects
 });
 
-
-
-export const startLoadinProjectsAll = () => {
-	return async (dispatch) => {
-		const ruta = 'Projects'
-		const projects = await loadAllWorks(ruta);
-		if (projects) {
-			dispatch(setAllProjects(projects));
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
-	}
-}
 
 //mandar a redux los usuarios
 export const setAllProjects = (projects) => ({

@@ -59,10 +59,8 @@ export const ModalGalleryAdd = ({MgAFAP}) => {
                     <option value='Tesis'>Tesis</option>
                 </select>
 			</div>
-            <div className='section'>
-                <div className="card-columns ">
-                    <GalleryListModal GlAMg={GlAMg} status={selectValue}/>
-                </div>
+            <div className="row d-flex ml-3" style={{gap:"10px"}}>
+                <GalleryListModal GlAMg={GlAMg} status={selectValue}/>
             </div>
             <button
                 className="btn2 btn-primary btn-large btn-block"

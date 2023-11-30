@@ -2,7 +2,6 @@ import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { fileUpload } from '../helpers/fileUpload';
-import { loadAllWorks } from "../helpers/loadAllWorks";
 import { loadWorks } from "../helpers/loadWorks";
 import { types } from "../types/types";
 import { uiCloseModal } from "./ui";
@@ -66,7 +65,6 @@ export const startLoadingGallery = () => {
 	return async (dispatch, getState) => {
 		var ruta = 'Gallery'
 		var gallery = await loadWorks(ruta);
-		console.log(gallery);
 		for (const item of gallery) {
 			ruta='Gallery/'+item.id+"/Imagenes";
 			item["gallery"] = await loadWorks(ruta);

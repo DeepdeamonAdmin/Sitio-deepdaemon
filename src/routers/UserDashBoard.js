@@ -8,7 +8,6 @@ import { Perfil } from '../componentes/users/Perfil';
 import { Tesis } from '../componentes/users/Tesis';
 import { Publications } from '../componentes/users/Publications';
 import { User } from '../componentes/users/User';
-import { Blog } from '../componentes/users/Blog';
 import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
 import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
 import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
@@ -22,7 +21,6 @@ export const UserDashBoard = () => {
                     <Route  path="" element={ <User /> } />
                     <Route path='tesis' element={ <Tesis/> } />
                     <Route path='publicaciones' element={ <Publications/> } />
-                    <Route path='blog' element={ <Blog /> } />
                     <Route path='perfil' element={ <Perfil /> } />
                     <Route path='addTesisGrado' element={ <FormAddTesisGrado /> } />
                     <Route path='addTesisMaestria' element={ <FormAddTesisMaestria /> } />

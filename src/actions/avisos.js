@@ -1,13 +1,9 @@
 import { addDoc, collection } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
-import { fileUpload } from '../helpers/fileUpload';
-import { loadWorks } from "../helpers/loadWorks";
 import { types } from "../types/types";
 import { uiCloseModal } from "./ui";
 
-// import { fileUpload } from '../helpers/fileUpload';
-import { loadAllUsers } from '../helpers/loadAllUsers';
 
 
 export const startsNewSign = (formValues) => {

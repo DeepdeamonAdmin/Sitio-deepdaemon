@@ -7,7 +7,6 @@ import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
 import { loadWorks } from '../helpers/loadWorks';
 import { uiCloseModal } from './ui';
-import { loadAllWorks } from '../helpers/loadAllWorks';
 import { getStorage, ref, deleteObject } from "firebase/storage";
 
 
@@ -154,18 +153,6 @@ export const setPublications = ( publications ) => ({
     type: types.publicationsLoad,
     payload: publications
 })
-
-export const startLoadinPublicationsAll = () => {
-	return async (dispatch) => {
-		const ruta = 'Publications'
-		const publications = await loadAllWorks(ruta);
-		if (publications) {
-			dispatch(setAllPublications(publications));
-		} else {
-			Swal.fire('Error BD no identificada');
-		}
-	}
-}
 
 //mandar a redux los usuarios
 export const setAllPublications = (publications) => ({

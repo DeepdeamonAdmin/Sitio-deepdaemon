@@ -12,7 +12,7 @@ import { HomeRoutes } from './HomeRoutes';
 import { UserDashBoard } from './UserDashBoard';
 import { login } from '../actions/auth';
 //Para cargar datos al estado
-import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
+import { getUserRolUid, startLoadingUsers } from '../actions/user';
 import { startLoadingProject } from '../actions/projects';
 import { startLoadingTesis } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
@@ -29,7 +29,7 @@ export const AppRouter = () => {
 
     useEffect(() => {
 
-        dispatch(startLoadinUsersAll());
+        dispatch(startLoadingUsers());
         dispatch(startLoadingProject());
         dispatch(startLoadingTesis());
         dispatch(startLoadingPublication());
@@ -43,9 +43,9 @@ export const AppRouter = () => {
                     dispatch(getUserRolUid());
                     dispatch(startLoadingGallery());
                 if (user.emailVerified) {
-                    console.log("Verificado")
+                    //console.log("Verificado")
                 } else {
-                    console.log("No verificado")
+                    //console.log("No verificado")
                 }
             } else {
                 setIsLoggedIn(false);

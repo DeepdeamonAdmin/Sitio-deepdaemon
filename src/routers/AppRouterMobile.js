@@ -11,9 +11,9 @@ import {
 //proteccion de rutas
 import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
-import { getUserRolUid, startLoadinUsersAll } from '../actions/user';
+import { getUserRolUid, startLoadingUsers } from '../actions/user';
 import { login } from '../actions/auth';
-import { startLoadingProject, startLoadinProjectsAll } from '../actions/projects';
+import { startLoadingProject } from '../actions/projects';
 import { MobileDashBoardSinAuth } from './MobileDashBoardSinAuth';
 import { MobileDashBoardAuth } from './MobileDashBoardAuth';
 
@@ -43,7 +43,7 @@ export const AppRouterMobile = () => {
 
     useEffect(() => {
 
-        dispatch(startLoadinUsersAll());
+        dispatch(startLoadingUsers());
         dispatch(startLoadingProject());
 
         onAuthStateChanged(auth, (user) => {
@@ -53,7 +53,6 @@ export const AppRouterMobile = () => {
                 setIsLoggedIn(true);
                 dispatch(getUserRolUid());
                 dispatch(startLoadingProject());
-                dispatch(startLoadinProjectsAll());
 
                 if (user.emailVerified) {
                     console.log("Verificado")

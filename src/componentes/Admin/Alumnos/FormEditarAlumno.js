@@ -6,7 +6,7 @@ import { useForm } from '../../../hooks/useForm';
 import fotoPerfil from '../../../assets/Usuario.jpg'
 import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
-import { startLoadinUsersAll, startUploading } from '../../../actions/user';
+import { startLoadingUsers, startUploading } from '../../../actions/user';
 import { collection, getDocs, deleteDoc, updateDoc, doc, query, where, querySnapshot } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";
@@ -82,7 +82,7 @@ export const FormEditarAlumno = (props) => {
 		updateDoc(memberRef, data);
 		//mostrar mensaje de confirmacion
 		Swal.fire('Usuario editado', 'Éxito');
-		dispatch(startLoadinUsersAll())
+		dispatch(startLoadingUsers())
 		//ir a admin/alumnos para ver los cambios
 		navigate(`/admin/alumnos`);
 	}
