@@ -143,7 +143,7 @@ export const loadImgPublication= ( url ) => ({
 export const startLoadingPublication = () => {
     return async( dispatch, getState ) => {
         const { uid } = getState().auth;
-        const ruta =`Publicaciones`;
+        const ruta ='Publicaciones';
         const publications = await loadWorks( ruta );
         await dispatch( setPublications( publications ));
     }

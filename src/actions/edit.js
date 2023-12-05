@@ -11,10 +11,10 @@ export const editProject = (idProject, formValues) => {
 	return async (dispatch, getState) => {
 
 		const dataToFirestore = { ...formValues }
-		const projectUpdate = updateDoc(doc(db, 'Proyectos', idProject), dataToFirestore)
+		await updateDoc(doc(db, 'Proyectos', idProject), dataToFirestore)
 
 		//dispatch(refreshData(dataToFirestore))
-		dispatch(startLoadingProject())
+		await dispatch(startLoadingProject())
 		Swal.fire('Informacion actualizada:', formValues.name, 'success')
 
 	}
@@ -212,7 +212,7 @@ export const editPublication = (idPublication, formValues, bibtex_File) => {
 			//console.log(url);
 		}
 		const dataToFirestore = { ...formValues };
-		const publicationUpdate = updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore);
+		await updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore);
 
 		await dispatch(startLoadingPublication());
 		Swal.fire('Informacion actualizada:', formValues.name, 'success')
@@ -228,7 +228,7 @@ export const editUser = (formValues, oldPassword) => {
 				updatePassword(user, formValues.password).then(() => {
 					if (!formValues.foto_perfil) delete formValues.foto_perfil;
 
-					const dataToFirestore = { ...formValues }
+					const dataToFirestore = { ...formValues };
 					updateDoc(doc(db, 'Usuarios', formValues.id), dataToFirestore)
 
 					dispatch(refreshData(dataToFirestore))
