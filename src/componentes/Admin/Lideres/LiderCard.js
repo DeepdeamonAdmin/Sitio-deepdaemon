@@ -1,63 +1,39 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteMember } from '../../../actions/delete';
-
-import { useEffect, useState } from 'react';
-import { updateDoc, doc } from 'firebase/firestore';
-import { useNavigate, useParams } from "react-router-dom";
-import { db } from "../../../firebase/firebase-config";
-import Swal from "sweetalert2";
 
 export const LiderCard = (item) => {
-	const dispatch = useDispatch();
+    return (
+            <div className="card" style={{ maxWidth: 400, height: 180, minWidth: 350 }}>
+                <div className="row no-gutters">
+                    <div className="col-4 d-flex align-items-stretch" >
+                        <img src={item.urlImg} 
+                            className="imageleader d-inline-flex p-2" 
+                            alt="..."
 
-	const handleDelete = (e) => {
-		e.preventDefault();
-        const memberRef = doc(db, 'Usuarios', item.id);
-        const data = {display: 'N'};
-        updateDoc (memberRef, data);
-        //mostrar mensaje de confirmacion
-        Swal.fire('Usuario eliminado', 'Éxito');
-	}
-	return (
-		<div className="card ms-3" style={{ maxWidth: 540, height: 250  }}>
-			<div className="row no-gutters">
-				<div className="col-md-4 d-flex align-items-stretch">
-					<img
-						src={item.urlImg}
-						alt="member"
-						className="imageleader2"
-					/>
-				</div>
-				<div className="col-md-5">
-					<div className="card-body">
-						<h5 className="card-title"> {item.nombre} </h5>
-						<p className="card-text"> {item.email} </p>
-					</div>
-				</div>
-				<div className="col-md-1">
-					<p>
-						<Link to={`../lideres/editar/${item.id}`} className="btn btn-primary">
-							Editar
-						</Link>
-					</p>
+                            style={{
+                                marginLeft : '10%',
+                                width : '95%',
+                                height : '90%',
+                                borderRadius : "7%"
+                            }}  
+                        />
+                    </div>
+                    <div className="col-8 d-flex flex-column">
+                        <div className="card-body p-1 mr-2">
+                            <h5 className="card-title ml-2 mt-2" style={{height:40}}> {item.nombre} </h5>
+                            <p className="card-text"> {item.email} </p>
+                            
+                        </div>
+                        <div className='card-body d-grid gap-2 d-md-flex justify-content-md-end mr-2'>
+                            <Link to={`editar/${item.id}`} className="btn btn-primary btn-sm p-2">
+                                Editar
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div >
 
-					{/* <p>
-						<button
-							type="button"
-							className="btn btn-success btn-sm"
-							onClick={handleDelete}>Eliminar</button>
-					</p>
-					<p>
-						<button
-							type="button"
-							className="btn btn-secondary btn-sm"
-						>Proyectos</button>
-					</p> */}
-				</div>
-
-			</div>
-		</div>
-	)
+    )
 }
+
+
