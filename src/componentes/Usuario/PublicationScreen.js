@@ -45,7 +45,6 @@ export const PublicationScreen = ({ type }) => {
                         className="card-img ml-3 mr-0 pr-0"
                         src={publication.urlImg}
                         style={{
-                          objectFit: 'cover',
                           objectPosition: 'center',
                           height: "110px",
                           width: '110px',
