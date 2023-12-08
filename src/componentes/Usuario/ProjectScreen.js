@@ -24,7 +24,7 @@ export const ProjectScreen = ({ status1, status2 }) => {
 					project.display==="Yes"&&(
 						<div key={project.id} className="card-row">
 							<div className="row mb-4 bg-light ml-2" style={{maxWidth:"500px",minWidth:"200px", height:"130px",borderRadius:"5px"}}>
-								<div className="col-sm-6" style={{margin:"0px",padding:0,width:"110px"}}>
+								<div className="col-sm-6 mt-2 ml-2" style={{margin:"0px",padding:0,width:"110px"}}>
 									<img
 										className="card-img"
 										src={project.urlImg}
@@ -38,7 +38,7 @@ export const ProjectScreen = ({ status1, status2 }) => {
 										alt="member"
 									/>
 								</div>
-								<div className="col" style={{position:"relative"}}>
+								<div className="col mt-2" style={{position:"relative"}}>
 									<div className="card-body text-primary d-flex flex-column h-100">
 										<h6 className="card-title" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>
 											{project.name}

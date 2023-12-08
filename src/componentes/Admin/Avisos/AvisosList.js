@@ -34,15 +34,17 @@ export default function AvisosList() {
 
 	return (
 		<>
-			<div className="card-columns cards-cols animate__animated animate__fadeIn px-5">
-				{
-					avisos.map(aviso => (
-						<SignCard
-							key={aviso.id}
-							{...aviso}
-						/>
-					))
-				}
+			<div className='row'>
+				<div className="card-columns cards-cols animate__animated animate__fadeIn px-5 d-flex direction-columns flex-wrap" style={{gap:"5px"}}>
+					{
+						avisos.map(aviso => (
+							<SignCard
+								key={aviso.id}
+								{...aviso}
+							/>
+						))
+					}
+				</div>
 			</div>
 		</>
 	)

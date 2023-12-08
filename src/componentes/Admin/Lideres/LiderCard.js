@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const LiderCard = (item) => {
     return (
-            <div className="card" style={{ maxWidth: 400, height: 180, minWidth: 350 }}>
+            <div className="card" style={{ maxWidth: 450, height: 180, minWidth: 350 }}>
                 <div className="row no-gutters">
                     <div className="col-4 d-flex align-items-stretch" >
                         <img src={item.urlImg} 
@@ -12,9 +12,9 @@ export const LiderCard = (item) => {
 
                             style={{
                                 marginLeft : '10%',
-                                width : '95%',
-                                height : '90%',
-                                borderRadius : "7%"
+                                width : '160px',
+                                height : '180px',
+                                borderRadius : "10%"
                             }}  
                         />
                     </div>

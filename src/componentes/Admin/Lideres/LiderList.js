@@ -7,17 +7,19 @@ export const LiderList = () => {
 	const { usuarios } = useSelector(state => state.user);
 	return (
 		<>
-			<div className="card-columns cards-cols animate__animated animate__fadeIn px-5">
-				{
-					//Solo los usuarios con el grado de leader
-					usuarios.filter(usuario => usuario.grado === 'leader' ).map(usuario => (
+			<div className='row'>
+				<div className="card-columns cards-cols animate__animated animate__fadeIn px-5 d-flex direction-columns flex-wrap" style={{gap:"5px"}}>
+					{
+						//Solo los usuarios con el grado de leader
+						usuarios.filter(usuario => usuario.grado === 'leader' ).map(usuario => (
 
-						<LiderCard
-							key={usuario.id}
-							{...usuario}
-						/>
-					)
-					)}
+							<LiderCard
+								key={usuario.id}
+								{...usuario}
+							/>
+						)
+						)}
+				</div>
 			</div>
 		</>
 	)

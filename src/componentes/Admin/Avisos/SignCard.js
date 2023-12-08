@@ -30,7 +30,7 @@ const SignCard = (item) => {
 
     
     return (
-        <div className="card animate__animated animate__fadeIn" style={{ maxWidth: 400, height: 180, minWidth:350 }}>
+        <div className="card animate__animated animate__fadeIn" style={{ maxWidth: 450, height: 150, minWidth:350 }}>
             <div className="row no-gutters">
                 <div className="col-4 d-flex align-items-stretch">
                     <img
@@ -39,15 +39,15 @@ const SignCard = (item) => {
                         alt="..."
                         style={{
                             marginLeft : '10%',
-                            width : '95%',
-                            height : '90%',
+                            width : '150px',
+                            height : '150px',
                             borderRadius : "7%"
                         }} 
                     />
                 </div>
                 <div className="col-8 d-flex flex-column">
-                    <div className="card-body p-1 mr-2">
-                        <h5 className="card-title ml-2 mt-2" style={{height:40}}> {item.name} </h5>
+                    <div className="card-body p-1 mr-2" style={{maxHeight:90}}>
+                        <h5 className="card-title ml-2 mt-1" style={{height:35}}> {item.name} </h5>
                         <p className="card-text"> {item.desc} </p>
                     </div>
                     <div className='card-body d-grid gap-2 d-md-flex justify-content-md-end mr-2'style={{ paddingTop: '0px' }}>

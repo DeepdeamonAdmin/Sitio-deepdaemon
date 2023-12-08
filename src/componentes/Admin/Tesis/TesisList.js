@@ -16,17 +16,17 @@ const TesisList = () => {
     
     return (
         <>
-            {/* { loading && <p className="animate__animated animate__flash">Loading</p> } */}
-        
-            <div className="card-columns animate__animated animate__fadeIn">
-                {
-                    tesis.map(item => (
-                        <TesisCard
-                            key={item.id}
-                            {...item}
-                        />
-                    ))
-                }
+            <div className='row'>
+                <div className="card-columns cards-cols animate__animated animate__fadeIn px-5 d-flex direction-columns flex-wrap justify-content-between" style={{gap:"5px"}}>
+                    {
+                        tesis.map(item => (
+                            <TesisCard
+                                key={item.id}
+                                {...item}
+                            />
+                        ))
+                    }
+                </div>
             </div>
         </>
     )

@@ -32,7 +32,7 @@ export const ExternoCard = (item) => {
 
 
 	return (
-		<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
+		<div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 450 }}>
 			<div className="row no-gutters">
 				{/* <ModalEditarAlumno item={item.nombre} /> */}
 				<div className="col-md-4">
@@ -40,15 +40,16 @@ export const ExternoCard = (item) => {
 						className="card-img" 
 						alt="..."  
 						style={{
-							height: "200px",
-							width: '200px'
+							marginLeft : '15px',
+							height: "150px",
+							width: '150px'
 						}}
 					/>
 				</div>
 				<div className="col-md-5">
-					<div className="card-body">
+					<div className="card-body l-0 mr-0">
 						<h5 className="card-title"> {item.nombre} </h5>
-						<p className="card-text"> {item.email} </p>
+						<p className="card-text" style={{fontSize:15}}> {item.email} </p>
 					</div>
 				</div>
 				<div className="col-md-1">
