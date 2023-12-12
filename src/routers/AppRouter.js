@@ -9,7 +9,7 @@ import { AdminDashBoard } from './AdminDashBoard';
 import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 import { HomeRoutes } from './HomeRoutes';
-import { UserDashBoard } from './UserDashBoard';
+import { AlumnoDashBoard } from './AlumnoDashBoard';
 import { login } from '../actions/auth';
 //Para cargar datos al estado
 import { getUserRolUid, startLoadingUsers } from '../actions/user';
@@ -88,7 +88,7 @@ export const AppRouter = () => {
                     path="user/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
-                            <UserDashBoard />
+                            <AlumnoDashBoard />
                         </ProtectedRoute>
                     }
                 />

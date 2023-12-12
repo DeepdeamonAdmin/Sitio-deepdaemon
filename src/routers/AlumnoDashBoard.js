@@ -2,17 +2,17 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { NavBarUser } from '../componentes/ui/NavBarUser';
 import { RutaError } from '../componentes/ui/RutaError';
-import { EditInfoTesis } from '../componentes/users/EditInfoTesis';
-import { FormAddRelease } from '../componentes/users/FormAddRelease';
-import { Perfil } from '../componentes/users/Perfil';
-import { Tesis } from '../componentes/users/Tesis';
-import { Publications } from '../componentes/users/Publications';
-import { User } from '../componentes/users/User';
+import { EditInfoTesis } from '../componentes/Alumno/EditInfoTesis';
+import { FormAddRelease } from '../componentes/Alumno/FormAddRelease';
+import { Perfil } from '../componentes/Alumno/Perfil';
+import { Tesis } from '../componentes/Alumno/Tesis';
+import { Publications } from '../componentes/Alumno/Publications';
+import { User } from '../componentes/Alumno/User';
 import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
 import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
 import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
 
-export const UserDashBoard = () => {
+export const AlumnoDashBoard = () => {
   return (
     <>
         <NavBarUser/>

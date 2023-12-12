@@ -1,5 +1,4 @@
 import React from 'react'
-import { AddNewFab } from '../../ui/AddNewFab'
 import ProjectList from './ProjectList'
 import { Link } from 'react-router-dom';
 

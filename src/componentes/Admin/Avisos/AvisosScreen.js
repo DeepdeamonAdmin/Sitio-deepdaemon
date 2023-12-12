@@ -1,6 +1,4 @@
 import React from 'react'
-import ModalAddSign from './ModalAddSign'
-import { AddNewFab } from '../../ui/AddNewFab';
 import AvisosList from './AvisosList';
 import { Link } from 'react-router-dom';
 
