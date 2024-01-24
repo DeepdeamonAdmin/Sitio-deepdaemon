@@ -89,8 +89,7 @@ export const types = {
 	// Para la galería
 	galleryAddNew: '[Images] New Image', //Agregando imagen con nombre
 	galleryAddNewPhoto: '[Images] New Photo', //Solamente imagen
-	galleryLoad: '[Images] Load Images',
-	galleryAllLoad: '[Images] All Load Images',
+	galleryLoad: '[Images] Load Images', 
 	galleryDelete: '[Images] Delete Image',
 	galleryUpdate: '[Images] Update Image',
 
@@ -122,5 +121,5 @@ export const types = {
 
 	// Para los avisos
 	avisoAddNew: '[Sign] New Sign', //Agregando aviso
-	avisoLoad: '[Images] Load Image',
+	avisoLoad: '[Sign] Load Signs', //Cargar Avisos
 }

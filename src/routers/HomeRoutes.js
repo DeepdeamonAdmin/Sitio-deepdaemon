@@ -1,12 +1,25 @@
+//Uso de React
 import React from 'react'
+
+//Uso de rutas
 import { Route, Routes } from 'react-router-dom';
+
+//Uso de rutas hacia inicio de sesión y registro
 import { Login } from '../componentes/auth/Login';
 import { Registrer } from '../componentes/auth/Registrer';
+
+//Uso de rutas hacia la barra de navegación
 import { NavBar } from '../componentes/ui/NavBar'
+
+//Uso de ruta de error
 import { RutaError } from '../componentes/ui/RutaError'
+
+//Uso de ruta hacia la página general (principal)
 import { General } from '../componentes/Usuario/General'
 
 export const HomeRoutes = () => {
+
+  //Redirección de rutas hacia los componentes.
   return (
     <>
         <NavBar />

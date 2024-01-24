@@ -1,26 +1,35 @@
+//Uso de React
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
+
+//Uso de Firebase
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 //Uso de rutas
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-//Rutas para sitio de administración
+
+//Rutas para sitios de los diferentes usuarios
 import { AdminDashBoard } from './AdminDashBoard';
+import { ExternoDashBoard } from './ExternoDashBoard';
+import { AlumnoDashBoard } from './AlumnoDashBoard';
+
 //Proteccion de rutas
 import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 import { HomeRoutes } from './HomeRoutes';
-import { AlumnoDashBoard } from './AlumnoDashBoard';
 import { login } from '../actions/auth';
+
 //Para cargar datos al estado
 import { getUserRolUid, startLoadingUsers } from '../actions/user';
 import { startLoadingProject } from '../actions/projects';
 import { startLoadingTesis } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
-import { ExternoDashBoard } from './ExternoDashBoard'
 import { startLoadingYoutube } from '../actions/youtube';
 import { startLoadingGallery } from '../actions/gallery';
 
 export const AppRouter = () => {
+
+    //Declaración de variables y obtención de datos
     const dispatch = useDispatch();
     const auth = getAuth();
     const [checking, setChecking] = useState(true);
@@ -29,42 +38,55 @@ export const AppRouter = () => {
 
     useEffect(() => {
 
+        //Cargar usuarios al estado
         dispatch(startLoadingUsers());
+
+        //Cargar proyectos al estado
         dispatch(startLoadingProject());
+
+        //Cargar tesis al estado
         dispatch(startLoadingTesis());
+
+        //Cargar publicaciones al estado
         dispatch(startLoadingPublication());
+
+        //Cargar videos de youtube al estado
         dispatch(startLoadingYoutube());
         
-
+        //Verficar si ha cambiado el tipo de autenticación
         onAuthStateChanged(auth, (user) => {
-                if ( (user?.uid)) {
-                    dispatch(login(user.uid, user.displayName));
-                    setIsLoggedIn(true);
-                    dispatch(getUserRolUid());
-                    dispatch(startLoadingGallery());
-                if (user.emailVerified) {
-                    //console.log("Verificado")
-                } else {
-                    //console.log("No verificado")
-                }
+            if ( (user?.uid)) {
+
+                //Cargar al estado los datos de identificación de usuario
+                dispatch(login(user.uid, user.displayName));
+
+                //Cambiar el estado de logeo a verdadero
+                setIsLoggedIn(true);
+
+                //Cargar el rol del usuario al estado
+                dispatch(getUserRolUid());
+
+                //Cargar galería al estado
+                dispatch(startLoadingGallery());
             } else {
+
+                //Cambiar el estado de logeo a falso
                 setIsLoggedIn(false);
             }
 
+            //Termino de verificación de la información del usuario
             setChecking(false);
-
         });
-
     }, [dispatch, auth, setChecking, setIsLoggedIn])
 
-
+    //Pantalla de espera
     if (checking) {
         return (
             <h1>Espere...</h1>
         )
     }
 
-
+    //Despliegue de las rutas (version desktop)
     return (
         <Router>
             <Routes>
@@ -77,7 +99,7 @@ export const AppRouter = () => {
                     }
                 />
                 <Route
-                    path="Admin/*"
+                    path="admin/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador'}>
                             <AdminDashBoard />
@@ -85,7 +107,7 @@ export const AppRouter = () => {
                     }
                 />
                 <Route
-                    path="user/*"
+                    path="alumno/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
                             <AlumnoDashBoard />

@@ -3,7 +3,6 @@ import { types } from "../types/types";
 const initialState = {
 	name: "",
 	gallery: [],
-	galleryAll: []
 }
 
 export const galleryReducer = (state = initialState, action) => {
@@ -24,11 +23,6 @@ export const galleryReducer = (state = initialState, action) => {
 			return {
 				...state,
 				gallery: [...action.payload]
-			}
-		case types.galleryAllLoad:
-			return {
-				...state,
-				galleryAll: [...action.payload]
 			}
 		default:
 			return state

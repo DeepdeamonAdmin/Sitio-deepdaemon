@@ -1,85 +1,73 @@
+//Uso de React
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
-//uso de rutas e
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes
-} from 'react-router-dom';
+
+//Uso de Firebase
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+//Uso de rutas
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 //proteccion de rutas
 import { PublicRoute } from './PublicRoute';
 import { ProtectedRoute } from './ProtectedRoute';
-import { getUserRolUid, startLoadingUsers } from '../actions/user';
 import { login } from '../actions/auth';
-import { startLoadingProject } from '../actions/projects';
+
+//Rutas para sitios de los diferentes usuarios
 import { MobileDashBoardSinAuth } from './MobileDashBoardSinAuth';
 import { MobileDashBoardAuth } from './MobileDashBoardAuth';
 
-
-
-
+//Para cargar datos al estado
+import { getUserRolUid, startLoadingUsers } from '../actions/user';
+import { startLoadingProject } from '../actions/projects';
 
 export const AppRouterMobile = () => {
 
+    //Declaración de variables y obtención de datos
     const dispatch = useDispatch();
     const auth = getAuth();
-
     const [checking, setChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     const { rol } = useSelector(state => state.user);
-
-    function validar() {
-
-        sendEmailVerification(auth.currentUser)
-
-            .then(() => {
-
-            });
-    }
-    const refresh = () => window.location.reload(true)
 
     useEffect(() => {
 
+        //Cargar usuarios al estado
         dispatch(startLoadingUsers());
+
+        //Cargar proyectos al estado
         dispatch(startLoadingProject());
 
+        //Verficar si ha cambiado el tipo de autenticación
         onAuthStateChanged(auth, (user) => {
+            if ( (user?.uid)) {
 
-                if ( (user?.uid)) {
+                //Cargar al estado los datos de identificación de usuario
                 dispatch(login(user.uid, user.displayName));
+
+                //Cambiar el estado de logeo a verdadero
                 setIsLoggedIn(true);
+
+                //Cargar el rol del usuario al estado
                 dispatch(getUserRolUid());
-                dispatch(startLoadingProject());
-
-                if (user.emailVerified) {
-                    console.log("Verificado")
-                } else {
-                    console.log("No verificado Mobile")
-                }
-
-
             } else {
+
+                //Cambiar el estado de logeo a falso
                 setIsLoggedIn(false);
-                console.log("Verificar usuario")
             }
-
+            //Termino de verificación de la información del usuario
             setChecking(false);
-
         });
-
     }, [dispatch, auth, setChecking, setIsLoggedIn])
 
-
+    //Pantalla de espera
     if (checking) {
         return (
             <h1>Espere...</h1>
         )
     }
 
-
+    //Despliegue de las rutas (version mobile)
     return (
         <Router>
             <Routes>
@@ -92,7 +80,7 @@ export const AppRouterMobile = () => {
                     }
                 />
                 <Route
-                    path="Admin/*"
+                    path="admin/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador'}>
                             <MobileDashBoardAuth />
@@ -100,7 +88,7 @@ export const AppRouterMobile = () => {
                     }
                 />
                 <Route
-                    path="user/*"
+                    path="alumno/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
                             <MobileDashBoardAuth />

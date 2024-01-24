@@ -2,17 +2,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Hojas de estilo
+//Hojas de estilo
 import './styles/index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//Caché del sitio
 import * as serviceWorker from './serviceWorker';
+
+//Componente principal
 import { AppDeepDaemon } from './AppDeepDaemon.js';
 
-// indicamos la seccion en index.html
+//Indicamos la seccion en index.html
 const divRoot = document.querySelector('#app')  
 
-// mandamos los elementos
+//Cargar elementos al DOM
 ReactDOM.render(
     <AppDeepDaemon />, 
 divRoot);   

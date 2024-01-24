@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import '../../users/users.css'
+import '../../Alumno/users.css'
 import fotoPerfil from '../../../assets/Usuario.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { activeData, startSaveData, startUploading } from '../../../actions/user';

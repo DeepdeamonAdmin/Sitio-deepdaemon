@@ -25,6 +25,7 @@ import { useEffect, useState, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { PublicationScreen } from "./PublicationScreen";
+import { Carousel } from "./Carousel";
 
 export const General = ({ id }) => {
   //Configurar hooks
@@ -55,11 +56,16 @@ export const General = ({ id }) => {
     }
     setYoutubes(youtube);
   }
-
   //Usar useEffect
-  useEffect(() => {
-    getAvisos();
-    getYoutubes();
+  useEffect(async() => {
+    await getAvisos();
+    await getYoutubes();
+    /*const datos = await getDocs(avisosCollection);
+    setAvisos(
+      datos.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      })
+    );*/
   }, []);
 
   //Opciones para configurar el carrusel 
@@ -70,18 +76,16 @@ export const General = ({ id }) => {
   if (avisos.length > 3) {
     lo = 4
   }
-  const options = {
+  const options_carousel = {
     type: 'loop',
     gap: '2rem',
     perPage: lo,
     autoplay: true,
     pauseOnHover: true,
     resetProgress: false,
-    slideFocus: true,
+    slideFocus: false,
     focus: true,
   };
-
-
 
   return (
     <div className="">
@@ -103,9 +107,10 @@ export const General = ({ id }) => {
       </div>
       <div className="embed-responsive">
       <div className="wrapper" style={{ maxWidth: `${1300 + 260 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
-          <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
+        <Carousel avisos ={avisos} youtubes={youtubes}/>
+          {/*<Splide options={options_carousel} aria-labelledby="autoplay-example-heading" hasTrack={false} >
             <div style={{ position: 'relative' }}>
-              <SplideTrack>
+              {/*<SplideTrack>
                 {avisos.map((aviso) => (
                   <SplideSlide>
                     <img src={aviso.photo} key={aviso.photo}/>
@@ -121,10 +126,10 @@ export const General = ({ id }) => {
                       allowFullScreen
                     ></iframe>
                   </SplideSlide>
-              ))}
-              </SplideTrack>
+                ))}
+                </SplideTrack>
             </div>
-          </Splide>
+                </Splide>*/}
         </div>
         <Container className="section" id="Nosotros">
           <h1>Un poco sobre nosotros</h1>

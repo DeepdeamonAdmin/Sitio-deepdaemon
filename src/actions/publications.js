@@ -1,7 +1,5 @@
-// allow read, write: if request.auth != null;
-
 import Swal from 'sweetalert2';
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import { types } from '../types/types';
 import { fileUpload } from '../helpers/fileUpload';
@@ -154,13 +152,11 @@ export const setPublications = ( publications ) => ({
     payload: publications
 })
 
-//mandar a redux los usuarios
 export const setAllPublications = (publications) => ({
 	type: types.publicationsAllLoad,
 	payload: publications
 });
 
-/****************************** */
 export const startsNewBibtex = (formValues,bibtex_File) => {
     let fileUrl='';
     return async( dispatch, getState ) => {
@@ -180,41 +176,15 @@ export const startsNewBibtex = (formValues,bibtex_File) => {
 			const information = formValues.bibtexfile.match(textRegexString);
             const desertRef = ref(storage, information[1]);
             deleteObject(desertRef).then(() => {
-                // File deleted successfully
-                //console.log("Borrado exitosamente");
             }).catch((error) => {
-                //console.log("Fallo al borrar");
-                // Uh-oh, an error occurred!
             });
-            //const bibtexDoc = doc(db, formValues.bibtexfile);
-            //await deleteDoc(bibtexDoc);
         }
         fileUrl = await fileUpload(ruta, bibtex_File);
         dispatch(loadBibtex(fileUrl));
-        //dispatch(changeUrl(formValues,fileUrl));
         formValues.bibtexfile = fileUrl;
         Swal.close();
         
     }
-	/*return async (dispatch, getState) => {
-		const { uid } = getState().auth;
-		const { bibtexprueba } = getState().publications;
-
-		const newBibtex = {
-			name: formValues.name,
-			file: bibtexprueba,
-		}
-
-		const docRef = await addDoc(collection(db, `Bibtex/${uid}/Files`), newBibtex);
-
-		if (docRef) {
-			Swal.fire('Archivo guardado', 'Éxito');
-			dispatch(addNewtoBibtex(docRef.id, newBibtex));
-			dispatch(uiCloseModal())
-		} else {
-			Swal.fire('Error al enviar archivo');
-		}
-	}*/
 }
 export const startUploadingBibtex = (file) => {
 	return async (dispatch) => {
