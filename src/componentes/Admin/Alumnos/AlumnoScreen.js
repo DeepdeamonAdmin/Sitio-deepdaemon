@@ -1,8 +1,15 @@
+//Uso de React
 import React from 'react';
-import { AlumnoList } from './AlumnoList';
+
+//Uso de Link para la navegación
 import { Link } from 'react-router-dom';
 
+//Componentes necesarios
+import { AlumnoList } from './AlumnoList';
+
 export const AlumnoScreen = () => {
+
+	//Pantalla principal del apartado de alumnos
 	return (
 		<>
 			<div className="Container">

@@ -1,34 +1,23 @@
+//Uso de React
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import Swal from "sweetalert2";
-import { useEffect, useState } from 'react';
-import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+
+//Uso de Firestore
+import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
+
+//Uso de Swal para las alertas
+import Swal from "sweetalert2";
 
 const SignCard = (item) => {
 
-    const dispatch = useDispatch();
-
-    //Configurar hooks
-    const [avisos, setAvisos] = useState([]);
-    //Referenciar db de firebase
-    const avisosCollection = collection(db, 'Avisos');
-    //Función para obtener todos los avisos
-    const getAvisos = async () => {
-        const datos = await getDocs(avisosCollection);
-        //console.log(datos.docs)
-        setAvisos(
-            datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
-        );
-    }
-
+    //Función para eliminar un aviso
     const deleteAviso = async (id) => {
         const avisoDoc = doc(db, 'Avisos', id);
         await deleteDoc(avisoDoc);
-        Swal.fire('Imagen eliminada', 'Éxito');
+        Swal.fire('Aviso eliminado', 'Éxito');
     }
 
-    
+    //Despliegue de la tarjeta del aviso
     return (
         <div className="card animate__animated animate__fadeIn" style={{ maxWidth: 450, height: 150, minWidth:350 }}>
             <div className="row no-gutters">
@@ -57,7 +46,6 @@ const SignCard = (item) => {
                             onClick={() => {deleteAviso(item.id)}}>Borrar</button>
                     </div>
                 </div> 
-                
             </div>
         </div>
     );

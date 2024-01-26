@@ -1,37 +1,38 @@
+//Uso de React
 import React from 'react'
-import SignCard from './SignCard'
-import { useSelector } from 'react-redux'
-
 import { useEffect, useState } from 'react';
-import { collection, getDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+
+//Uso de Firestore
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
+
+//Componentes necesarios
+import SignCard from './SignCard'
 
 export default function AvisosList() {
 
 	//Configurar hooks
 	const [avisos, setAvisos] = useState([]);
+
 	//Referenciar db de firebase
 	const avisosCollection = collection(db, 'Avisos');
+
 	//Función para obtener todos los avisos
 	const getAvisos = async () => {
+
+		//Consulta asíncrona 
 		const datos = await getDocs(avisosCollection);
-		//console.log(datos.docs)
 		setAvisos(
 			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
 		);
 	}
 	
-	//Función para eliminar un aviso
-	const deleteAviso = async (id) => {
-		const avisoDoc = doc(db, 'Avisos', id);
-		await deleteDoc(avisoDoc);
-		getAvisos();
-	}
-	//Usar useEffect
+	//Usar para obtener los avisos de la BD
 	useEffect(() => {
-		getAvisos()
+		getAvisos();
 	}, [])
 
+	//Despliegue de la cantidad de avisos en BD
 	return (
 		<>
 			<div className='row'>

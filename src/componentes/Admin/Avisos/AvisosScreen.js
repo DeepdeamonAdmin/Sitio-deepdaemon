@@ -1,8 +1,15 @@
+//Uso de React
 import React from 'react'
-import AvisosList from './AvisosList';
+
+//Uso de Link para la navegación
 import { Link } from 'react-router-dom';
 
+//Componentes necesarios
+import AvisosList from './AvisosList';
+
 export default function AvisosScreen() {
+
+	//Contenedor donde se desplegarán los avisos
 	return (
 		<>
 			<div className="Container">

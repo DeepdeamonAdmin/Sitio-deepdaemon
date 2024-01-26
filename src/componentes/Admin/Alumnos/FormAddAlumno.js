@@ -1,13 +1,24 @@
+//Uso de React
 import React from 'react';
-import validator from 'validator';
-import { removeError, setError } from '../../../actions/ui';
+import { useState } from 'react';
+
+//Uso de Firestore
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
+
+//Uso de Redux
 import { useDispatch } from 'react-redux';
-import { registroDesdeLider } from '../../../actions/auth';
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
+
+//Uso de Form de Bootstrap
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+
+import { registroDesdeLider } from '../../../actions/auth';
+
+
+
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { useNavigate } from 'react-router-dom';

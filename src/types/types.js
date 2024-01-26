@@ -103,10 +103,7 @@ export const types = {
 
 	// Para las carreras
 	careerAddNew: '[Carreras] New Career',
-	careerAllLoad: '[Carreras] All Load Career',
 	careerLoad: '[Carreras] Load Career',
-	careerDelete: '[Carreras] Delete Career',
-	careerUpdate: '[Carreras] Update Career',
 
 	// Para las tecnologias
 	techAddNew: '[Carreras] New Tech',

@@ -15,7 +15,7 @@ export const startsNewYoutube = (formValues) =>{
 			Swal.fire('Video guardado con éxito', 'Éxito');
         	dispatch(youtubeAddNew(newYoutube.id, newInst));
 		} else {
-			Swal.fire('Error al agrega la tecnología', 'error')
+			Swal.fire('Error al agregar nuevo video de Youtube', 'error')
 		}
 	}
 }
