@@ -1,25 +1,36 @@
+//Uso de React
 import React from 'react'
+
+//Uso de Redux
 import { useDispatch } from 'react-redux';
-import { startsNewInstitution } from '../../../actions/institutions';
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
+
+//Componentes necesarios
+import { startsNewInstitution } from '../../../actions/institutions';
 
 const FormAddInstitution = () => {
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
 
+	//Contenido del formulario para una nueva institución
 	const [formValues, handleInputChange] = useForm({
 		name: '',
 		shortName: ''
 	});
-
 	const { name, shortName } = formValues;
 
-	//envio a la api
+	//Función para subir una nuve institución
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		//Envio al estado la nueva institución
 		dispatch(startsNewInstitution(formValues))
 	}
 
+	//Despliegue del formulario para ñadir una nueva institución
 	return (
 		<div className="login">
 			<form onSubmit={handleSubmit}>
@@ -30,7 +41,6 @@ const FormAddInstitution = () => {
 						type='text'
 						name='name'
 						placeholder='Institución'
-						// value={name}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -41,7 +51,6 @@ const FormAddInstitution = () => {
 						type='text'
 						name='shortName'
 						placeholder='Siglas'
-						// value={shortName}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -53,7 +62,6 @@ const FormAddInstitution = () => {
 				</button>
 			</form>
 		</div>
-
 	)
 }
 

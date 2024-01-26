@@ -24,8 +24,3 @@ export const addNewTech = (id, inst) => ({
 		id, ...inst
 	}
 })
-
-export const setAlltechs = (tech) => ({
-	type: types.institucionAllLoad,
-	payload: tech
-});

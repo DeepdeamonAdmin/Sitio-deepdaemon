@@ -60,12 +60,6 @@ export const General = ({ id }) => {
   useEffect(async() => {
     await getAvisos();
     await getYoutubes();
-    /*const datos = await getDocs(avisosCollection);
-    setAvisos(
-      datos.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      })
-    );*/
   }, []);
 
   //Opciones para configurar el carrusel 
@@ -88,6 +82,7 @@ export const General = ({ id }) => {
   };
 
   return (
+    
     <div className="">
       <div className="d-flex flex-row dd_header">
         <div className="container">

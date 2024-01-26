@@ -1,28 +1,34 @@
-import React, { useEffect } from 'react'
-import '../../Alumno/users.css'
-import fotoPerfil from '../../../assets/Usuario.jpg';
+//Uso de React
+import { useState } from 'react';
+
+//Uso de Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { activeData, startSaveData, startUploading } from '../../../actions/user';
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
+
+//Uso de CSS
+import '../../Alumno/users.css'
+
+//Componentes necesarios
 import validator from 'validator';
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { registrarLider } from '../../../actions/auth';
 import { removeError, setError } from '../../../actions/ui';
-import { useState } from 'react';
-
-
 
 export const FormAddLider = () => {
 
-  //Funcion de registro de usuarios
+  //Declaración del dispatch
   const dispatch = useDispatch();
+
+  //Obtención del mensaje de error del estado
   const { msgError } = useSelector(state => state.ui);
 
+  //Obtención del estado de carga del estado
   const { loading } = useSelector(state => state.ui);
 
   const [formValues, handleInputChange] = useForm({
-
     name: '',
     email: '',
     password: '',
@@ -130,11 +136,6 @@ export const FormAddLider = () => {
             </div>
 
             <div className='row'>
-              {/* <div className='mb-2 col-sm-6'>
-            <label className="form-label">Seleccionar una foto de la galeria</label>
-            <input type="file" className="form-control" name="fotoPerfil" onChange={ handleInputChange } />
-            <img src={ fotoPerfil } alt="fotoPerfil" className="img-fluid" />
-          </div> */}
               <div className="col-md-3 mb-3">
                 <label> Imagen desde Galeria </label>
                 <div className="card">

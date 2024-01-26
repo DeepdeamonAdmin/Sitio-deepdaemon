@@ -1,31 +1,61 @@
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+//Uso de React
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+
+//Uso de Firestore
+import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import { startLoadingGallery } from '../../../actions/gallery';
+
+//Uso de Redux
+import { useSelector, useDispatch } from 'react-redux';
+
+//Uso de Swal para las alertas de las ejecuciones
 import Swal from "sweetalert2";
+
+//Componentes necesarios
+import { startLoadingGallery } from '../../../actions/gallery';
 
 export default function GalleryList({status}) {
 
-	const { uid } = useSelector(state => state.auth)
+	//Obtención de la galería dle estado
 	var gallery = useSelector(state => state.gallery);
+
+	//Declaración del dispatch
 	const dispatch = useDispatch();
-	const galleryCollection = collection(db, `Gallery/${uid}/Imagenes`);
+
+	//Función para eliminar una imagen 
 	const deleteImagen = async (imagen) => {
+
+		//Obtenemos el almacenamiento 
 		const storage = getStorage();
+
+		//Construir la dirección de la imagen a eliminar
 		const information = "Gallery/"+imagen.type+"/"+imagen.name+"."+imagen.ext;
+
+		//Obtener su referencia
 		const desertRef = ref(storage, information);
+
+		//Eliminar la imagen (Archivo) (Falta configurar detalles de error o éxito)
 		deleteObject(desertRef).then(() => {
 		}).catch((error) => {
 		});
+
+		//Eliminar la imagen (Documento)
 		const imagenDoc = doc(db, 'Gallery/'+imagen.type+'/Imagenes', imagen.id);
 		await deleteDoc(imagenDoc);
+
+		//Alerta de eliminación
 		Swal.fire('Imagen eliminada', 'Éxito');
+
+		//Solicitar al estado cargar nuevamente la galería
 		dispatch(startLoadingGallery());
 	}
+
+	//useEffect para cargar la galería antes de renderizar el componente
 	useEffect(() => {
 	}, [])
+
+	//Despliegue de las tarjetas de cada imagen
 	return (
 		<>
 			{

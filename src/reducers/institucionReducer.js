@@ -3,7 +3,6 @@ import { types } from "../types/types";
 const initialState = {
 	name: '',
 	instituciones: [],
-	institucionesAll: []
 }
 
 export const institucionReducer = (state = initialState, action) => {
@@ -12,11 +11,6 @@ export const institucionReducer = (state = initialState, action) => {
 			return {
 				...state,
 				instituciones: [action.payload, ...state.instituciones]
-			}
-		case types.institucionAllLoad:
-			return {
-				...state,
-				institucionesAll: [...action.payload]
 			}
 		case types.institucionLoad:
 			return {

@@ -1,50 +1,93 @@
-import React, { useState, useEffect } from 'react'
+//Uso de React
+import React, { useState } from 'react'
+
+//Uso de Redux
 import { useDispatch } from 'react-redux'
-import { startsNewImage, startUploadingImage } from '../../../actions/gallery'
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm'
 
+//Componentes necesarios
+import { startsNewImage, startUploadingImage } from '../../../actions/gallery'
+
 export const FormAddGalery = () => {
+
+	//Declaración del dispatch
 	const dispatch = useDispatch()
+
+	//Contenido del formulario para una nueva imagen
 	const [formValues, handleInputChange, reset] = useForm({
 		name: '',
 		type: '',
 		ext: ''
 	})
 	const { name } = formValues
+
+	//Declaración para el almacenamiento del archivo cargado
 	const [file,setFile]=useState('');
+
+	//Delcaración para seleccionar el tipo de imagen
 	const [selectValue, setSelectValue] = useState('')
+
+	//Función para controlar el cambio del tipo de imagen
 	const handleSelectChange = (event) => {
 		const { target } = event;
 		setSelectValue(target.value);
 		handleInputChange(event);
 	}
+
+	//Función para cargar el archivo
 	const handleFileChange = (e) => {
 		setFile(e.target.files[0]);
 	}
+
+	//Función par salvar la imagen en la galería
 	const handleSave =  async () => {
 		var name_without_spaces;
 		if (file) {
+
+			//Condición si no se le ha asignado un nombre
 			if (name == '') {
 				const typeFile = file.name.split('.')[1]
+
+				//Obtener la extensión de la imagen
 				formValues.ext = typeFile;
+
+				//Enviar al estado la imagen (archivo)
 				await dispatch(startUploadingImage(file,formValues.type));
 			} else {
 				const typeFile = file.name.split('.')[1]
+
+				//Obtener la extensión de la imagen
 				formValues.ext = typeFile;
+
+				//Eliminar los espacio y sustituirlos por '_'
 				name_without_spaces = formValues.name.replaceAll(/\s/g,"_")
 				const fileName = name_without_spaces + '.' + typeFile
+
+				//Construir el archivo con su nuevo nombre
 				const auxFile = new File([file], fileName)
+
+				//Enviar al estado la imagen (archivo)
 				await dispatch(startUploadingImage(auxFile,formValues.type));
 			}
 
 		}else{
+			//Mensaje de error al cargar el archivo
 			console.log("Error al cargar el archivo");
 		}
+
+		//Actualización del nombre con el nuevo sin espacios
 		formValues.name = name_without_spaces;
+
+		//Enviar el contenido del formulario.
 		dispatch(startsNewImage(formValues));
+
+		//Limpiar el formulario
 		reset();
 	}
 
+	//Despliegue del formulario para añadir una nueva imagen a la galería
 	return (
 		<div>
 			<div className="form-row">

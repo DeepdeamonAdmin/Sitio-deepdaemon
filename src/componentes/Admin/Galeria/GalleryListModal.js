@@ -1,11 +1,20 @@
+//Uso de React
 import React, { useEffect } from 'react'
+
+//Uso de Redux
 import { useSelector } from 'react-redux';
 
 
 export default function GalleryListModal({GlAMg,status}) {
+
+	//Obtención de la galería del estado
 	var gallery = useSelector(state => state.gallery);
+
+	//useEffect para cargar la galería
 	useEffect(() => {
 	}, [])
+
+	//Despliegue de la galería dentro de un modal
 	return (
 		<>
 			{

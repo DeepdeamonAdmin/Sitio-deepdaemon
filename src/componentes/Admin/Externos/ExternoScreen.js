@@ -1,12 +1,14 @@
+//Uso de React
 import React from 'react';
+
+//Componentes necesarios
 import { ModalAddAlumno } from '../Alumnos/ModalAddAlumno';
 import { AddNewFab } from '../../ui/AddNewFab';
 import { ExternoList } from './ExternoList';
 
 export const ExternoScreen = () => {
     
-    
-    
+    //Despliegue de la lista de los usuarios externos
     return (
         <>
 			<div className="Container">

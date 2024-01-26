@@ -1,36 +1,52 @@
-
+//Uso de React
 import React from 'react'
+import { useState } from 'react';
+
+//Uso de Redux
 import { useSelector, useDispatch } from 'react-redux';
+
+//Uso de Modal
 import Modal from 'react-modal';
+
+//Uso de Swal para las alertas de las ejecuciones
+import Swal from 'sweetalert2';
+
+//Componentes necesarios
 import { uiCloseModal } from '../../../actions/ui';
 import { customStyles } from '../../../helpers/modalCustomStyles';
 import GalleryListModal from './GalleryListModal';
-import { useState } from 'react';
-import Swal from 'sweetalert2';
 
 export const ModalGalleryAdd = ({MgAFAP}) => {
 
+    //Indicar al estado la paertura del modal
     const { modalOpen } = useSelector(state => state.ui);
+
+    //Declaración del dispatch
     const dispatch = useDispatch();
 
-    
-
+    //Varibales para almacenar la infomación de la imagen seleccionada
     const [datos, setDatos] = useState('');
-
     const GlAMg = (datosGl) => {
         setDatos(datosGl);
         Swal.fire('Imagen seleccionada')
     }
+
+    //Función de cierre del modal
     const closeModal = () => {
-        // TODO: cerrar el modal
         MgAFAP(datos)
+
+        //Enviar al estado el cierre del modal
         dispatch(uiCloseModal());
     }
+
+    //Funci´n para controlar el cambio del tipo de imagen
     const [selectValue, setSelectValue] = useState('')
 	const handleSelectChange = (event) => {
 		const { target } = event;
 		setSelectValue(target.value);
 	}
+
+    //Despliegue del modal
     return (
         <Modal
             isOpen={modalOpen}
@@ -68,7 +84,6 @@ export const ModalGalleryAdd = ({MgAFAP}) => {
             >
                 Cerrar
             </button>
-
         </Modal>
     )
 }

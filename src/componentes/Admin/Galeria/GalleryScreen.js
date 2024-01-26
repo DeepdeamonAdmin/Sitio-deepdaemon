@@ -1,12 +1,18 @@
+//Uso de React
 import React from 'react'
+
+//Uso de Bootstrap
+import { Nav, Tab } from "react-bootstrap";
+
+//Componentes necesarios
 import { AddNewFab } from '../../ui/AddNewFab'
 import { ModalAddGalery } from './ModalAddGalery'
 import GalleryList from './GalleryList';
-import { Nav, Tab } from "react-bootstrap";
 
 export const GalleryScreen = () => {
-	return (
 
+	//Despliegue de la galería con sus distintas categorías
+	return (
 		<div>
 			<h1>Pagina Galeria</h1>
 			<ModalAddGalery />
