@@ -1,19 +1,18 @@
+//Uso de React
 import React from 'react'
-import TesisCard from './TesisCard';
-import {db} from '../../../firebase/firebase-config';
-import {
-	getAuth,
-} from 'firebase/auth';
+
+//Uso de Redux
 import { useSelector } from 'react-redux';
+
+//Componentes necesarios
+import TesisCard from './TesisCard';
 
 const TesisList = () => {
 
-    const auth = getAuth();
-    const dN = auth.currentUser.displayName;
-
+    //Obtención de las tesis del estado
     const { tesis } = useSelector(state => state.tesis);
-    console.log(tesis)
     
+    //Despliegue de las tarjetas de las tesis
     return (
         <>
             <div className='row'>

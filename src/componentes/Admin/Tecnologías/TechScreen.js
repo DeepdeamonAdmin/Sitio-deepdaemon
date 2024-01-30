@@ -1,7 +1,12 @@
+//Uso de React
 import React from 'react';
+
+//Componentes necesarios
 import FormAddTech from './FormAddTech';
 
 const TechScreen = () => {
+
+	//Pantalla principal de las tecnologías
 	return (
 		<div className='row'>
 			<div>

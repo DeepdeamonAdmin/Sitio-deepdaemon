@@ -1,9 +1,15 @@
+//Uso de React
 import React from 'react'
-import TesisList from './TesisList'
+
+//Uso de Link para la navegación en el sitio
 import { Link } from 'react-router-dom';
+
+//Componentes necesarios
+import TesisList from './TesisList'
 
 export const TesisScreen = () => {
 
+    //Pantalla principal de las tesis
     return (
         <>
             <div className="container">

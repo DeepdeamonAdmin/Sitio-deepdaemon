@@ -23,7 +23,7 @@ export const ModalAddGalery = () => {
 	//Declaración del dispatch
 	const dispatch = useDispatch();
 
-	//Función para el 
+	//Función para el cierre del modal
 	const closeModal = () => {
 
 		//Indicar al estado el cierre del modal

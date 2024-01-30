@@ -1,11 +1,13 @@
+//Uso de React
 import React from 'react';
-import { useDispatch } from 'react-redux';
+
+//Uso de Link para la navegación en el sitio
 import { Link } from 'react-router-dom';
 
 const PublicacionesCard = (item) => {
-    const dispatch = useDispatch();
-    return (
 
+    //Despliegue de las tarjetas de las publicaciones
+    return (
         <div className="card ms-3" style={{ maxWidth: 450, height: 290 }}>
             <div className="row no-gutters pl-2 mr-2" style={{height:80}}>
                 <h6 className="card-title mt-3 text-sm" style={{textAlign:'center'}}>{item.title}</h6>

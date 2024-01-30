@@ -96,10 +96,7 @@ export const types = {
 
 	// Para las instituciones
 	institucionAddNew: '[instituciones] new institution',
-	institucionAllLoad: '[instituciones] All Load Institution',
 	institucionLoad: '[instituciones] Load Institution',
-	institucionDelete: '[instituciones] Delete institution',
-	institucionUpdate: '[instituciones] Update institution',
 
 	// Para las carreras
 	careerAddNew: '[Carreras] New Career',

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Select from 'react-select'
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { editProject } from '../../../actions/edit';

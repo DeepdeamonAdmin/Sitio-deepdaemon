@@ -1,10 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import Form from 'react-bootstrap/Form'
 import { startNewProject } from '../../../../src/actions/projects';
 import { useForm } from '../../../../src/hooks/useForm';
 import { getAuth } from 'firebase/auth';

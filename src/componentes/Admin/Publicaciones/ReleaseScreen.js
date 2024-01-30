@@ -1,8 +1,15 @@
+//Uso de React
 import React from 'react'
-import PublicacionesList from './PublicacionesList'
+
+//Uso de Link para la navegación en el sitio
 import { Link } from 'react-router-dom';
 
+//Componentes necesarios
+import PublicacionesList from './PublicacionesList'
+
 export const ReleaseScreen = () => {
+
+    //Pantalla principal de las publicaciones
     return (
         <>
             <div className='container'>

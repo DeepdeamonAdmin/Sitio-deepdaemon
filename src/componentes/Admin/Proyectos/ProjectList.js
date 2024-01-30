@@ -1,17 +1,18 @@
+//Uso de React
 import React from 'react'
-import ProjectCard from './ProjectCard';
+
+//Uso de Redux
 import { useSelector } from 'react-redux';
-import {
-	getAuth,
-} from 'firebase/auth';
+
+//Componentes necesarios
+import ProjectCard from './ProjectCard';
 
 const ProjectList = () => {
 
-    const auth = getAuth();
-    const dN = auth.currentUser.displayName;
-
+    //Obtención de los proyectos del estado
     const { projects } = useSelector(state => state.projects);
     
+    //Despliegue de las tarjetas de los proyectos
     return (
         <>
             <div className='row'>

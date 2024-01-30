@@ -1,55 +1,87 @@
-import React, { useEffect, useState } from 'react'
+//Uso de React
+import React, { useEffect } from 'react'
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
+
+//Uso de Firestore
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
+
+//Uso de Swal para las alertas en las ejecuciones
 import Swal from "sweetalert2";
+
+//Uso de REdux
 import { useSelector, useDispatch } from 'react-redux';
+
+//Componentes necesarios
 import InfoVideo from './InfoVideo';
 import { startsNewYoutube, startLoadingYoutube } from '../../../actions/youtube';
-import { get } from 'react-scroll/modules/mixins/scroller';
-
 
 const FormEditVideo = () =>{
-    const { uid } = useSelector(state => state.auth);
+
+    //Delcaración del dispatch
     const dispatch = useDispatch();
-    const [videos, setVideos] = useState("false");
+
+    //Delcaración de la colección en Firestore
     const videosCollection = collection(db, `Youtube`);
+
+    //Obtención de los videos del estado
     var youtubes = useSelector(state => state.youtubes);
+
+    //Selección de los videos
     youtubes = youtubes.videos;
     
+    //Función para obtener los videos de la BD
 	const getVideos = async () => {
 		const datos = await getDocs(videosCollection);
-		/*setVideos(
-			datos.docs.map(doc => { return { ...doc.data(), id: doc.id } })
-		);*/
         youtubes = datos.docs.map(doc => { return { ...doc.data(), id: doc.id } });
 	}
+
+    //Contenido del formulario para agregar un nuevo video
     const [formValues, handleInputChange] = useForm({
         urlVideo: '',
         title:''
     });
     const { urlVideo, title } = formValues;
+
+    //Función para manejar la subida de un nuevo video
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        //Envio al estado de un nuevo video
         dispatch(startsNewYoutube(formValues));
+
+        //Llamada a la función para obtener los videos de la BD
         getVideos();
+
+        //Limpiar parámetros del formulario
         formValues.urlVideo="";
         formValues.title="";
-        setVideos("true");
     }
+
+    //Uso de useEffect para cargar los videos
     useEffect(() => {
-        //setVideos(youtubes.videos);
-		//getVideos();
 	}, [])
+
+    //función para eliminar un video
     const deleteVideo = async (id) => {
-        console.log(id);
-        console.log(youtubes);
+
+        //Construcción de la dirección del video
 		const youtubeDoc = doc(db, `Youtube/${id}`);
+
+        //Esperar a ser eliminado
 		await deleteDoc(youtubeDoc);
 		Swal.fire('Video Eliminado', 'Éxito');
+
+        //Enviar al estado la petición de carga de los videos
         dispatch(startLoadingYoutube());
+
+        //Llamada a la función para obtener los videos de la BD
 		getVideos();
 	}
+
+    //Despliegue del formulario y la lista de los videos
     return(
         <>
         <div className="container">

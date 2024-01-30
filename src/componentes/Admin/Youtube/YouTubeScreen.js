@@ -1,8 +1,12 @@
+//Uso de React
 import React from 'react'
+
+//Componentes necesarios
 import FormEditVideo from './FormEditVideo'
 
-
 const YouTubeScreen = () => {
+
+	//Pantalla principal de los videos de YouTube
 	return (
 		<div className='row'>
 			<div>

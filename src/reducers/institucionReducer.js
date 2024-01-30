@@ -17,7 +17,6 @@ export const institucionReducer = (state = initialState, action) => {
 				...state,
 				instituciones: [...action.payload]
 			}
-
 		default:
 			return state;
 	}

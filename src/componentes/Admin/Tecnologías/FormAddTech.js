@@ -1,25 +1,36 @@
+//Uso de React
 import React from 'react'
+
+//Uso de Redux
 import { useDispatch } from 'react-redux'
-import { startsNewTech } from '../../../actions/tecnologias';
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
+
+//Componentes necesarios
+import { startsNewTech } from '../../../actions/tecnologias';
 
 const FormAddTech = () => {
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
 
+	//Contenido del formulario para una nueva tecnología
 	const [formValues, handleInputChange] = useForm({
 		name: ''
 	});
-
 	const { name } = formValues;
 
 
-	//envio a la api
+	//Función para subir una nueva tecnología
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		//Enviar al estado la nueva tecnología
 		dispatch(startsNewTech(formValues));
 	}
 
+	//Despliegue del formulario para una nueva tecnología
 	return (
 		<div className="login">
 			<hr />
