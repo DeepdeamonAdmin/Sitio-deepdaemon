@@ -2,11 +2,8 @@ import React from 'react'
 import Select from 'react-select'
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-//import { startNewProject, startUploadingProject } from '../../actions/projects';
 import { useForm } from '../../../hooks/useForm';
-import { getAuth } from 'firebase/auth';
 import { useState } from 'react';
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';

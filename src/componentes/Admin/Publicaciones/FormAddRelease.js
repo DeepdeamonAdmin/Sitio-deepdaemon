@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
 import { useNavigate, useParams } from 'react-router-dom';
-import { startNewPublication, startUploadingPublication, startUploadingBibtex, startsNewBibtex } from '../../../actions/publications';
+import { startNewPublication } from '../../../actions/publications';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 import { editPublication } from '../../../actions/edit';
@@ -393,42 +393,18 @@ export const FormAddRelease = () => {
 		formValues.urlImg=datosMg;
 	}
 
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			dispatch(startUploadingPublication(file));
-		}
-	}
-	/***************************/
-	/*const [formValuesBibtex, handleInputBibtexChange, resetBibtex] = useForm({
-		name: ''
-	})*/
 	const handleFileBibtexChange = (e) => {
 		bibtex_File = e.target.files[0];
 		setDatosBibtex(bibtex_File);
 		if (bibtex_File!=null) {
-			/*if (Bibtex_File.name == '') {
-				dispatch(startUploadingBibtex(Bibtex_File));
-			} else {
-				const typeFile = Bibtex_File.name.split('.')[1]
-				const fileName = Bibtex_File.name + '.' + typeFile
-				const auxFile = new File([Bibtex_File], fileName)
-				dispatch(startUploadingBibtex(auxFile));
-			}*/
 			const reader = new FileReader();
 			reader.onload = function (e) {
                 const content = e.target.result;
-                //console.log(content); // Muestra el contenido en la consola
 				get_data(content);
             };
 			reader.readAsText(bibtex_File);
 		}
 	}
-	/*const handleSave = () => {
-		dispatch(startsNewBibtex(formValuesBibtex));
-		resetBibtex();
-
-	}*/
 	const [funcionEjecutada, setFuncionEjecutada] = useState(false);
 	function get_data(content){
 		const text = content.split();

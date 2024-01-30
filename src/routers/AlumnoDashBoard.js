@@ -10,11 +10,13 @@ import { NavBarUser } from '../componentes/ui/NavBarUser';
 //Uso de ruta de error
 import { RutaError } from '../componentes/ui/RutaError';
 
+//Uso de ruta hacia la página general (principal)
+import { General } from '../componentes/Usuario/General'
+
 //Uso de rutas hacia pantallas principales de cada categoría
 import { Perfil } from '../componentes/Alumno/Perfil';
 import { Tesis } from '../componentes/Alumno/Tesis';
 import { Publications } from '../componentes/Alumno/Publications';
-import { User } from '../componentes/Alumno/User';
 
 //Uso de rutas hacia formularios
 import { FormAddRelease } from '../componentes/Alumno/FormAddRelease';
@@ -31,7 +33,7 @@ export const AlumnoDashBoard = () => {
         <NavBarUser/>
         <div>
                 <Routes>
-                    <Route  path="" element={ <User /> } />
+                    <Route path="" element={ <General /> } />
                     <Route path='tesis' element={ <Tesis/> } />
                     <Route path='publicaciones' element={ <Publications/> } />
                     <Route path='perfil' element={ <Perfil /> } />

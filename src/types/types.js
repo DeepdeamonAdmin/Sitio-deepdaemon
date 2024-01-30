@@ -2,34 +2,23 @@
 
 export const types = {
 
+	//Para el inicio de sesión
 	login: '[Auth] Login',
 	logout: '[Auth] Logout',
 
+	//Para la muestra de errores
 	uiSetError: '[UI] Set Error',
 	uiRemoveError: '[UI] Remove Error',
 
+	//Para la carga del sitio
 	uiStartLoading: '[UI] Start loading',
 	uiFinishLoading: '[UI] Finish loading',
 
+	//Para el estado de los modales
 	uiOpenModal: '[UI] Open modal',
 	uiCloseModal: '[UI] Close modal',
-//-----------
-	uiOpenModalInfo: '[UI] Open modal info',
-	uiCloseModalInfo: '[UI] Close modal info',
-//-----------
-	uiOpenModalEdit: '[UI] Open modal edit',
-	uiCloseModalEdit: '[UI] Close modal edit',
 
 	accesoRol: '[Acceso] Dato Obtenido',
-
-	regMember: '[REG] Register member',
-	regProject: '[REG] Register Project',
-	regRelease: '[REG] Register publication',
-	regInstitution: '[REG] Register Institution',
-	regCareer: '[REG] Register Career',
-	regTeach: '[REG] Register Teach',
-	regComment: '[REG] Register Comment',
-
 
 	editMember: '[EDIT] Edit member',
 	editProject: '[EDIT] Edit project',
@@ -37,7 +26,6 @@ export const types = {
 
 
 	delMember: '[DEL] Delete member',
-	delProject: '[DEL] Delete project',
 	delPublication: '[DEL] Delete publication',
 
 
@@ -50,7 +38,6 @@ export const types = {
 	userUpdate: '[User] Update',
 	//para la carga de imaganes del perfil
 	userFileLoad: '[User] Load File User url ',
-	userAddNew: '[Users] New User',
 	usersLoad: '[Users] Load Users',
 	usersUpdate: '[Users] Update User',
 	usersDelete: '[Users] Delete User',
@@ -60,29 +47,21 @@ export const types = {
 	//Para los proyectos
 	//Solo enviar projecto nuevo y cargar los proyectos
 	projectGet:'[Project] Get',
-	projectImgAddNew: '[Project] New Img Project',
 	projectAddNew: '[Project] New Project',
 	projectActive: '[Project] Set Project active',
 	projectsLoad: '[Project] Load Projects',
-	projectsAllLoad: '[Projects] All Load Projects',
 
 		//Para las tesis
 	//Solo enviar tesis nuevo y cargar las tesis
-	tesisGet:'[Tesis] Get',
-	tesisImgAddNew: '[Tesis] New Img Tesis',
 	tesisAddNew: '[Tesis] New Tesis',
 	tesisActive: '[Tesis] Set Tesis active',
 	tesisLoad: '[Tesis] Load Tesis',
-	tesisAllLoad: '[Tesis] All Load Tesis',
 
 	//Para las publicaciones
 	//solo enviar publicaion nueva y cargas las publicaciones
-	publicationImgAddNew: '[Publication] New Img Publication',
 	publicationAddNew: '[Publication] New Publication',
 	publicationActive: '[Publication] Set Publication active',
 	publicationsLoad: '[Publication] Load Publications',
-	publicationsAllLoad: '[Publications] All Load Publications',
-	//publicationsBibtexAddNewBibtex: '[Publication] New Bibtex Publication',
 	publicationsBibtexAddNew: '[Publication] New Bibtex Publication',
 	loadBibtex: '[Publication] Loading Bibtex',
 

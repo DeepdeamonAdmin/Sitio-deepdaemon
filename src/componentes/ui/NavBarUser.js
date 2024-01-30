@@ -31,7 +31,7 @@ export const NavBarUser = () => {
             <div className="navbar-nav">
                 <NavLink
                     className="nav-item nav-link"
-                    to='/user'> 
+                    to='/alumno'> 
                         DeepDaemon 
                 </NavLink>
             </div>
@@ -41,12 +41,12 @@ export const NavBarUser = () => {
             <div className="navbar-nav">
                 <NavLink 
                     className="nav-item nav-link"
-                    to="/user/tesis">
+                    to="/alumno/tesis">
                         Tesis
                 </NavLink>
                 <NavLink 
                     className="nav-item nav-link" 
-                    to="/user/publicaciones">
+                    to="/alumno/publicaciones">
                         Publicaciones
                 </NavLink>
             </div>    
@@ -56,7 +56,7 @@ export const NavBarUser = () => {
     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul className="navbar-nav ml-auto">
             <Link
-                to ='/user/perfil'
+                to ='/alumno/perfil'
                 className="btn btn-outline-secondary nav-item nav-link"
 
             >

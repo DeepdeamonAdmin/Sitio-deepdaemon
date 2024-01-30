@@ -3,7 +3,6 @@ import Select from 'react-select'
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-//import { startNewProject, startUploadingProject } from '../../actions/projects';
 import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
 import { ModalGalleryAdd } from '../Admin/Galeria/ModalGalleryAdd';

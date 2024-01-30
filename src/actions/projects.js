@@ -86,34 +86,6 @@ export const addNewProject = (id, project) => ({
 })
 
 
-export const startUploadingProject = (file) => {
-	return async (dispatch, getState) => {
-
-		const { uid } = getState().auth;
-
-		Swal.fire({
-			title: 'Uploading...',
-			text: 'Please wait...',
-			allowOutsideClick: false,
-			onBeforeOpen: () => {
-				Swal.showLoading();
-			}
-		});
-
-		const ruta = `${uid}/imgProject`;
-		const fileUrl = await fileUpload(ruta, file);
-		dispatch(loadImgProject(fileUrl));
-		Swal.close();
-	}
-}
-
-export const loadImgProject = (url) => ({
-	type: types.projectImgAddNew,
-	payload: url
-});
-
-
-
 export const startLoadingProject = () => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
@@ -128,11 +100,3 @@ export const setProjects = (projects) => ({
 	type: types.projectsLoad,
 	payload: projects
 });
-
-
-//mandar a redux los usuarios
-export const setAllProjects = (projects) => ({
-	type: types.projectsAllLoad,
-	payload: projects
-});
-

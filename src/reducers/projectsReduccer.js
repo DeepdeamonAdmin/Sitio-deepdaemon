@@ -1,25 +1,9 @@
-/*
-    {
-        projects: [],
-        active: null,
-        project: {
-            id: 'KASKLDJALKSDJ129387123',
-            name:'',
-            descripcion: '',
-            impact: '',
-            urlImg: '',
-            urlModalMedia: '',
-            link: '',
-            nameTech: '',
-        }
-    }
-*/
-
+//Uso de Types
 import { types } from '../types/types';
 
+//Definición del estado de los proyectos
 const initialState = {
     projects: [],
-    projectsAll: [],
     active: null
 }
 
@@ -27,6 +11,7 @@ export const projectsReduccer = ( state = initialState, action ) => {
     
     switch (action.type) {
 
+        //Set proyecto activo
         case types.projectActive:
             return {
                 ...state,
@@ -35,29 +20,20 @@ export const projectsReduccer = ( state = initialState, action ) => {
                 }
 
             }
+
+        //Set nuevo proyecto
         case  types.projectAddNew:
             return {
                 ...state,
                 projects: [ action.payload, ...state.projects ]
             }
-        case types.projectImgAddNew:
-            return {
-                ...state,
-                img: action.payload
-            }
+
+        //Set cargar proyectos
         case types.projectsLoad:
             return {
                 ...state,
                 projects: [...action.payload ]
             }
-            
-        case types.projectsAllLoad:
-            return {
-                ...state,
-                projectsAll: [...action.payload ]
-            }
-    
-            
         default:
             return state
     }

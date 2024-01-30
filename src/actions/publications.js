@@ -110,32 +110,6 @@ export const addNewPublication = ( id, publication ) => ({
 })
 
 
-export const startUploadingPublication = ( file ) => {
-    return async( dispatch, getState ) => {
-
-        const { uid } = getState().auth;
-
-        Swal.fire({
-            title: 'Uploading...',
-            text: 'Please wait...',
-            allowOutsideClick: false,
-            onBeforeOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
-        const ruta =`${uid}/imgPublication`;
-        const fileUrl = await fileUpload( ruta ,file );
-        dispatch(loadImgPublication(fileUrl));
-        Swal.close();
-    }
-}
-
-export const loadImgPublication= ( url ) => ({
-    type: types.publicationImgAddNew,
-    payload:url 
-});
-
 
 
 export const startLoadingPublication = () => {
@@ -152,10 +126,6 @@ export const setPublications = ( publications ) => ({
     payload: publications
 })
 
-export const setAllPublications = (publications) => ({
-	type: types.publicationsAllLoad,
-	payload: publications
-});
 
 export const startsNewBibtex = (formValues,bibtex_File) => {
     let fileUrl='';
@@ -186,24 +156,6 @@ export const startsNewBibtex = (formValues,bibtex_File) => {
         
     }
 }
-export const startUploadingBibtex = (file) => {
-	return async (dispatch) => {
-
-		Swal.fire({
-			title: 'Uploading...',
-			text: 'Please wait...',
-			allowOutsideClick: false,
-			onBeforeOpen: () => {
-				Swal.showLoading();
-			}
-		});
-
-		const ruta = ''
-		const fileUrl = await fileUpload(ruta, file);
-		dispatch(loadBibtex(fileUrl));
-		Swal.close();
-	}
-}
 
 export const loadBibtex = (url) => ({
 	type: types.publicationsBibtexAddNew,
@@ -212,9 +164,3 @@ export const loadBibtex = (url) => ({
 export const changeUrl = (formValues,fileUrl) =>{
     formValues.bibtexfile = fileUrl;
 }
-export const addNewtoBibtex = (id, bibtex) => ({
-	type: types.publicationsBibtexAddNew,
-	payload: {
-		id, bibtex
-	}
-})

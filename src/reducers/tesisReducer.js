@@ -1,25 +1,9 @@
-/*
-    {
-        projects: [],
-        active: null,
-        project: {
-            id: 'KASKLDJALKSDJ129387123',
-            name:'',
-            descripcion: '',
-            impact: '',
-            urlImg: '',
-            urlModalMedia: '',
-            link: '',
-            nameTech: '',
-        }
-    }
-*/
-
+//Uso de Types
 import { types } from '../types/types';
 
+//Definición del estado de las tesis
 const initialState = {
     tesis: [],
-    tesisAll: [],
     active: null
 }
 
@@ -27,6 +11,7 @@ export const tesisReducer = ( state = initialState, action ) => {
     
     switch (action.type) {
 
+        //Set tesis activa
         case types.tesisActive:
             return {
                 ...state,
@@ -35,29 +20,20 @@ export const tesisReducer = ( state = initialState, action ) => {
                 }
 
             }
+
+        //Set nueva tesis
         case  types.tesisAddNew:
             return {
                 ...state,
                 tesis: [ action.payload, ...state.tesis ]
             }
-        case types.tesisImgAddNew:
-            return {
-                ...state,
-                img: action.payload
-            }
+
+        //Set cargar tesis
         case types.tesisLoad:
             return {
                 ...state,
                 tesis: [...action.payload ]
-            }
-            
-        case types.tesisAllLoad:
-            return {
-                ...state,
-                tesisAll: [...action.payload ]
-            }
-    
-            
+            } 
         default:
             return state
     }

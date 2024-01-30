@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { getAuth } from 'firebase/auth';
 import { useNavigate, useParams } from 'react-router-dom';
-import { startNewPublication, startUploadingPublication } from '../../actions/publications';
+import { startNewPublication } from '../../actions/publications';
 import { db } from '../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 import { editPublication } from '../../actions/edit';
@@ -328,12 +328,6 @@ export const FormAddRelease = () => {
 		address, howpublished, booktitle, editor, series,
 		organization, school, note, institution, display } = formValues;
 
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			dispatch(startUploadingPublication(file));
-		}
-	}
 	//envio a la api
 	const navigate = useNavigate();
 	const handleSubmit = (e) => {

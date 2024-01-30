@@ -186,9 +186,3 @@ export const setTesis = (tesis) => ({
 	type: types.tesisLoad,
 	payload: tesis
 });
-
-
-export const setAllTesis = (tesis) => ({
-	type: types.tesisAllLoad,
-	payload: tesis
-});

@@ -6,7 +6,7 @@ import { useForm } from '../../../hooks/useForm';
 import fotoPerfil from '../../../assets/Usuario.jpg'
 import { editUser, startEditingPicture } from '../../../actions/edit';
 import Swal from 'sweetalert2';
-import { startLoadingUsers, startUploading } from '../../../actions/user';
+import { startLoadingUsers } from '../../../actions/user';
 import { collection, getDocs, deleteDoc, updateDoc, doc, query, where, querySnapshot } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase-config";

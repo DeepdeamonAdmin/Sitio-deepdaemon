@@ -13,7 +13,6 @@ export const editProject = (idProject, formValues) => {
 		const dataToFirestore = { ...formValues }
 		await updateDoc(doc(db, 'Proyectos', idProject), dataToFirestore)
 
-		//dispatch(refreshData(dataToFirestore))
 		await dispatch(startLoadingProject())
 		Swal.fire('Informacion actualizada:', formValues.name, 'success')
 
@@ -206,10 +205,7 @@ export const editPublication = (idPublication, formValues, bibtex_File) => {
 	return async (dispatch, getState) => {
 		if(bibtex_File){
 			const { url } = getState().publications;
-			//console.log("Si hay bibtex");
 			await dispatch(startsNewBibtex(formValues,bibtex_File));
-			//console.log(formValues.bibtexfile);
-			//console.log(url);
 		}
 		const dataToFirestore = { ...formValues };
 		await updateDoc(doc(db, 'Publicaciones', idPublication), dataToFirestore);
@@ -260,10 +256,3 @@ const refreshData = (data) => ({
 	type: types.userUpdate,
 	payload: { ...data }
 })
-
-const valEditProject = (name) => ({
-	type: types.editProject,
-	payload: {
-		name
-	}
-});
