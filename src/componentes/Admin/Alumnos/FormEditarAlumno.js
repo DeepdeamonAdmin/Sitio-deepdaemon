@@ -152,7 +152,6 @@ export const FormEditarAlumno = (props) => {
 						<FotosGallery />
 					</div>
 				</div>
-				{/* <div className="col custom-file"> */}
 				<input
 					id='fileSelector'
 					className="custom-file-input"

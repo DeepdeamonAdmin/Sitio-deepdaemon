@@ -1,5 +1,4 @@
-
-
+//Definición de los tipos de acciones en el estado
 export const types = {
 
 	//Para el inicio de sesión
@@ -18,47 +17,27 @@ export const types = {
 	uiOpenModal: '[UI] Open modal',
 	uiCloseModal: '[UI] Close modal',
 
-	accesoRol: '[Acceso] Dato Obtenido',
-
-	editMember: '[EDIT] Edit member',
-	editProject: '[EDIT] Edit project',
-	editPublication: '[EDIT] Edit publication',
-
-
-	delMember: '[DEL] Delete member',
-	delPublication: '[DEL] Delete publication',
-
-
-
-
-	//para los datos de perfil actualizar y obtener
+	//Para los datos de perfil (actualizar y obtener)
 	dataActive: '[User] Datos',
 	userGet: '[User] Get',
 	userRolGet: '[User] GetRol', //para el rol
 	userUpdate: '[User] Update',
-	//para la carga de imaganes del perfil
-	userFileLoad: '[User] Load File User url ',
+
+	//Para la carga de los usuarios
 	usersLoad: '[Users] Load Users',
-	usersUpdate: '[Users] Update User',
-	usersDelete: '[Users] Delete User',
-	usersLogutCleaning: '[Users] Logout Cleanind',
 
 
 	//Para los proyectos
-	//Solo enviar projecto nuevo y cargar los proyectos
-	projectGet:'[Project] Get',
 	projectAddNew: '[Project] New Project',
 	projectActive: '[Project] Set Project active',
 	projectsLoad: '[Project] Load Projects',
 
-		//Para las tesis
-	//Solo enviar tesis nuevo y cargar las tesis
+	//Para las tesis
 	tesisAddNew: '[Tesis] New Tesis',
 	tesisActive: '[Tesis] Set Tesis active',
 	tesisLoad: '[Tesis] Load Tesis',
 
 	//Para las publicaciones
-	//solo enviar publicaion nueva y cargas las publicaciones
 	publicationAddNew: '[Publication] New Publication',
 	publicationActive: '[Publication] Set Publication active',
 	publicationsLoad: '[Publication] Load Publications',
@@ -70,8 +49,6 @@ export const types = {
 	galleryAddNewPhoto: '[Images] New Photo', //Solamente imagen
 	galleryLoad: '[Images] Load Images', 
 	galleryDelete: '[Images] Delete Image',
-	galleryUpdate: '[Images] Update Image',
-
 
 	// Para las instituciones
 	institucionAddNew: '[instituciones] new institution',
@@ -83,10 +60,6 @@ export const types = {
 
 	// Para las tecnologias
 	techAddNew: '[Carreras] New Tech',
-	techAllLoad: '[Carreras] All Load Tech',
-	techLoad: '[Carreras] Load Tech',
-	techDelete: '[Carreras] Delete Tech',
-	techUpdate: '[Carreras] Update Tech',
 
 	//Para los videos de YouTube
 	youtubeAddNew: '[YouTube] New Video YouTube',

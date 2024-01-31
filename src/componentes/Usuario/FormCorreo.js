@@ -1,4 +1,7 @@
+//Uso de React
 import React from 'react'
+
+//Uso de Email
 import emailjs from "emailjs-com";
 
 const FormCorreo = () => {
@@ -9,18 +12,7 @@ const FormCorreo = () => {
         document.getElementById("botonoculta").style.display = "none";
     }
 
-    //Función para ocultar el div con id "formulario"
-    const ocultarForm = () => {
-        document.getElementById("formulario").style.display = "none";
-        document.getElementById("botonoculta").style.display = "block";
-    }
-
-    //Función on submit para enviar el formulario
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert("Formulario enviado");
-    }
-
+    //Función para el envio de correos
     function sendEmail(e) {
         e.preventDefault();
         emailjs.sendForm('gmailMessage', 'template_1q4f1nf', e.target, 'zJ3yCb5fjplDGCKWP')
@@ -30,36 +22,12 @@ const FormCorreo = () => {
             alert(error.message)
         });
         e.target.reset();
-
-        //No funciono, es para el envio de correo con la api
-        /*
-        e.preventDefault();
-        //Post a la api
-        fetch("/api/correos", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nombre: nombre,
-                correo: correo,
-                mensaje: mensaje
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        }
-        )
-        .catch(err => console.log(err));
-        */
     }
         
+  //DEspliegue del formulario para el envio de un correo
   return (
     <div>
-
         <button className="btn2 btn-primary btn-large btn-block mb-3" onClick={mostrarForm} id="botonoculta">Contactanos</button>
-
         <div id="formulario" style={{display: "none"}}>
             <form onSubmit={sendEmail}>
                 <table>

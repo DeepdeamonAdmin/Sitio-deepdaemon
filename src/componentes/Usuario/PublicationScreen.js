@@ -1,21 +1,37 @@
+//Uso de React
 import React from 'react';
-import { db } from '../../firebase/firebase-config';
-import { collection, getDocs, where, query } from "firebase/firestore";
-import { VerMasPublication } from '../ui/VerMasPublication';
-import { ModalCrearCuenta } from './ModalCrearCuenta';
-import { auth } from '../../firebase/firebase-config';
+
+//Uso de Redux
 import { useSelector } from 'react-redux';
 
+//Uso de Firestore
+import { auth } from '../../firebase/firebase-config';
+
+//Componentes necesarios
+import { VerMasPublication } from '../ui/VerMasPublication';
+import { ModalCrearCuenta } from './ModalCrearCuenta';
+
 export const PublicationScreen = ({ type }) => {
-  //const [publications, setPublications] = React.useState([]);
+
+  //Obtención del usuario
 	const user = auth.currentUser;
+
+  //Obtención de las publicaciones del estado
   const publications  = useSelector(state => state.publications);
+
+  //Filtrar por tipo de publicación solicitado
   var publications_type = publications.publications.filter(publication => type.includes(publication.postType) && publication.display === "Yes");
+
+  //Dividir y ordenar de acuerdo a sus fechas
   publications_type = publications_type.slice().sort(compararFechas);
+
+  //Función para verificar si cuenat con una fecha válida
   function esFechaInvalida(fechaString) {
     const fecha = new Date(fechaString);
     return isNaN(fecha) || fecha.toString() === 'Invalid Date';
   }
+
+  //Función para comparar las fechas
   function compararFechas(a, b) {
     if (esFechaInvalida(a.yearMonth)) {
       return 1; // a es inválida, va después de b
@@ -26,10 +42,12 @@ export const PublicationScreen = ({ type }) => {
     return new Date(b.yearMonth) - new Date(a.yearMonth); // Ordenar fechas válidas
   }
 
+  //Verificación si existen publicaciones
   if (publications.length === 0) {
     return <p className="team_title">No hay publicaciones disponibles por el momento.</p>;
   }
 
+  //DEspliegue de las tarjetas de publicaciones
   return (
     <>
       <div className="container">

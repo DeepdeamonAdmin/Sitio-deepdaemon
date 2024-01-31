@@ -1,31 +1,30 @@
+//Uso de React
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { uiCurrentModal, uiOpenModal } from "../../actions/ui";
-import { ModalInfoProject } from "./ModalInfoProject";
-import { uiCloseModal } from '../../actions/ui';
 
+//Uso de Modal
 import Modal from 'react-modal';
+
+//Uso de Popup
 import Popup from 'reactjs-popup';
+
+//Componentes necesarios
 import 'reactjs-popup/dist/index.css';
 import "../../styles/DeepDaemon.css";
 
+//Configuración del modal
 Modal.setAppElement('#app');
 
 export const ProjectDetaills = ({project }) => {
-  const dispatch = useDispatch();
-  const [currentModal, setCurrentModal] = useState(null);
+
+  //Configuración del hook para mostrar la información
   const [showInf, setShowInfo] = useState(false);
 
-  const closeModal = () => {
-    // TODO: cerrar el modal
-    dispatch(uiCloseModal());
-  }
-
+  //Función para el manejo del clic
   const handleClickNew = () => {
-    // dispatch(uiOpenModal());
     setShowInfo(!showInf);
   };
 
+  //Despliegue de los detalles del proyecto
   return (
   <>
     <Popup //aqui inicia el modal que abrira la informacion de los lideres
@@ -50,7 +49,6 @@ export const ProjectDetaills = ({project }) => {
             <div style={{textAlign: "center", height:"300px"}}>
                 <hr />
                 <iframe
-                  //src="https://www.youtube.com/embed/OG0w_4qDiy8"
                   src={project.url}
                   title="YouTube video player"
                   gesture="media"

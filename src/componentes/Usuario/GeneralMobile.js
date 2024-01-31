@@ -1,4 +1,29 @@
+//Uso de React
 import React from "react";
+import { useEffect, useState } from "react";
+
+//Uso de Splide
+import '@splidejs/react-splide/css';
+import '@splidejs/splide/css/skyblue';
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+
+//Uso de Firestore
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase/firebase-config";
+
+//Componentes necesarios
+import { LeaderScreen } from "./LeaderScreen";
+import { TeamScreen } from "./TeamScreen";
+import { ProjectScreen } from "./ProjectScreen";
+import FormCorreo from "./FormCorreo";
+
+//Uso de Bootstrap y CSS
+import "../../styles/carrusel.css"
+import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
+import "../../styles/DeepDaemon.css";
+import { Container, Nav, Carousel } from "react-bootstrap";
+import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
+import { Tab } from "react-bootstrap";
 
 //imagenes fijas
 import join from "../../styles/assets/img/sitio/mastermind.png";
@@ -6,30 +31,13 @@ import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
 import QR from "../../assets/QR_Actualizado.jpeg";
 
-import '@splidejs/react-splide/css';
-import '@splidejs/splide/css/skyblue';
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import "../../styles/carrusel.css"
-
-import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
-import "../../styles/DeepDaemon.css";
-import { Container, Nav, Carousel } from "react-bootstrap";
-import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
-import { Tab } from "react-bootstrap";
-import { LeaderScreen } from "./LeaderScreen";
-import { TeamScreen } from "./TeamScreen";
-import { ProjectScreen } from "./ProjectScreen";
-import FormCorreo from "./FormCorreo";
-
-import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebase-config";
-
 export const GeneralMobile = ({ id }) => {
-  //Configurar hooks
+  //Configurar hooks para los avisos
   const [avisos, setAvisos] = useState([]);
+
   //Referenciar db de firebase
   const avisosCollection = collection(db, "Avisos");
+
   //Función para obtener todos los avisos
   const getAvisos = async () => {
     const datos = await getDocs(avisosCollection);
@@ -39,24 +47,21 @@ export const GeneralMobile = ({ id }) => {
       })
     );
   };
-  //Función para eliminar un aviso
 
   //Usar useEffect
   useEffect(() => {
+
+    //Obtención de los avisos de la BD
     getAvisos();
   }, []);
 
-  //Opciones para configurar el carrusel
+  //Opciones para configurar las ventanas el carrusel
   let lo = 0
   if(window.innerWidth<700||avisos.length<2)lo=1;
   else if(window.innerWidth<1000&&avisos.length>2)lo=2;
   else lo=3;
-  {/*if (avisos.length <= 2) {
-    lo = 1
-  }
-  if (avisos.length > 2) {
-    lo = 1
-  }*/}
+
+  //Configuración de las propiedades del carousel
   const options = {
     type: 'loop',
     gap: '2rem',
@@ -68,6 +73,7 @@ export const GeneralMobile = ({ id }) => {
     focus: true,
   };
 
+  //Despliegue de la pantalla principal de la versión mobile
   return (
     <div className="">
       <div className="d-flex flex-row dd_header" style={{overflow:"hidden"}}>
@@ -106,7 +112,6 @@ export const GeneralMobile = ({ id }) => {
             industrial.
           </p>
         </Container>
-
         <Container className="section">
           <Row>
             <Col className="col-12 p-1">
@@ -146,7 +151,6 @@ export const GeneralMobile = ({ id }) => {
             </Col>
           </Row>
         </Container>
-
         <br></br>
         <Container fluid className="academy">
           <Container className="section white">
@@ -160,10 +164,8 @@ export const GeneralMobile = ({ id }) => {
             </p>
           </Container>
         </Container>
-
         <br></br>
         <br></br>
-
         <Container>
           <h1>LOS LÍDERES</h1>
           <hr />
@@ -198,15 +200,12 @@ export const GeneralMobile = ({ id }) => {
                 </div>
               </Tab.Pane>
             </Tab.Content>
-            
-
             <br></br>
             <br></br>
             <br></br>
             <br></br>
           </Tab.Container>
         </Container>
-
         <Container fluid className="section portfolio proy_sectionBg" id="Proyectos">
           <h1 className="separator2 team_title"> Proyectos </h1>
           <hr />
@@ -235,7 +234,6 @@ export const GeneralMobile = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
-        
         <br></br>
         <Container fluid className="section sections team_sectionBg" id="Equipo">
           <h1 className="team_title">Equipo</h1>
@@ -272,16 +270,13 @@ export const GeneralMobile = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
-
         <br></br>
         <Container>
           <h5 style={{textAlign:"center"}}>Para ver más secciones y el contenido completo, dirigete a la versión de escritorio.</h5>
           <p>Recuerda hacerlo desde un dispositivo con las dimensiones necesarias para poder observar de manera correcta el contenido</p>
           <Button id="toDeskVersion" style={{width:"100%"}}> Versión de Escritorio</Button>
         </Container>
-        
         <br></br>
-
         <br></br>
         <Container fluid className="team_separator">
           <Container className="section white">
@@ -294,7 +289,6 @@ export const GeneralMobile = ({ id }) => {
           </Container>
         </Container>
         <br></br>
-
         <br></br>
         <Container className="section">
           <Row>
@@ -313,12 +307,10 @@ export const GeneralMobile = ({ id }) => {
               <div className="text-center">
                 <Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
                 <br />
-                {/*<Button variant="secondary ">Contáctanos</Button>*/}
               </div>
             </Col>
           </Row>
         </Container>
-
         <Container fluid className="section contact white" id="Contacto">
           <h1>Hecho en la Ciudad de México</h1>
           <hr />
@@ -347,7 +339,5 @@ export const GeneralMobile = ({ id }) => {
         </Container>
       </div>
     </div>
-
-
   );
 };

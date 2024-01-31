@@ -1,25 +1,41 @@
+//Uso de React
 import React from "react";
-import { Link } from "react-scroll";
-import { useDispatch,  useSelector} from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { startLogout } from '../../actions/auth';
 
+//Uso de Link, NavLink y useNavigate para la navegación en el sitio
+import { Link } from "react-scroll";
+import { NavLink, useNavigate } from 'react-router-dom';
+
+//Uso de Redux
+import { useDispatch,  useSelector} from 'react-redux';
+
+//Componentes necesarios
+import { startLogout } from '../../actions/auth';
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 
 export const NavBarExterno = () => {
+
+  //Declaración del dispatch
   const dispatch = useDispatch();
+
+  //Declaración del useNavigate
 	const history = useNavigate();
 
+  //Función para manejar el cierre de sesión
 	const handleLogout = () => {
+
+    //Envio al estado el cierre de sesión
 		dispatch(startLogout());
 		history('/', {replace: true});
-
 	}
-    const { datos }  = useSelector( state => state.user );
-    let nombre;
-    if(datos){
-        nombre = datos.nombre
-    }
+
+  //Obtención de los datos del estado
+  const { datos }  = useSelector( state => state.user );
+  let nombre;
+  if(datos){
+      nombre = datos.nombre
+  }
+  
+  //Despliegue del navbar de los externos
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
       <NavLink to="/">
@@ -53,7 +69,6 @@ export const NavBarExterno = () => {
           >
             Nosotros
           </Link>
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -65,17 +80,6 @@ export const NavBarExterno = () => {
           >
             Proyectos
           </Link>
-
-          {/* <Link activeClass="active"
-						className="nav-item nav-link"
-						to='Publicaciones'
-						spy={true}
-						smooth={true}
-						offset={-70}
-						duration={500}>
-						Publicaciones
-					</Link> */}
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -87,7 +91,6 @@ export const NavBarExterno = () => {
           >
             Lideres
           </Link>
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -99,7 +102,6 @@ export const NavBarExterno = () => {
           >
             Equipo
           </Link>
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -118,7 +120,6 @@ export const NavBarExterno = () => {
             <Link
                 to ='/user/perfil'
                 className="btn btn-outline-secondary nav-item nav-link"
-
             >
                 { nombre }
             </Link>
@@ -130,7 +131,7 @@ export const NavBarExterno = () => {
               Logout
           </button>
         </ul>
-    </div>
+      </div>
     </nav>
   );
 };

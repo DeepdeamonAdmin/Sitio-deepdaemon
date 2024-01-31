@@ -1,12 +1,19 @@
+//Uso de React
 import React from 'react';
+
+//Uso de Redux
 import { useSelector } from 'react-redux';
+
+//Componentes necesarios
 import { ModalCrearCuenta } from './ModalCrearCuenta';
 import { VerMas } from '../ui/VerMas';
-import { auth } from '../../firebase/firebase-config';
 
 export const LeaderScreen = ({ status }) => {
 
+	//Obtención de los usuarios del estado
   const { usuarios } = useSelector(state => state.user);
+
+	//Despliegue de la pantalla de los líderes
 	return (
 		<>
 			<div className="container card-columns pl-0 pr-0" style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
@@ -22,11 +29,9 @@ export const LeaderScreen = ({ status }) => {
 										alt="leader"
 									/>
 								</div>
-
 								<div className="col-4 pl-0 pr-0">
 									<br></br>
 									<h5 className=""> {usuario.nombre} </h5>
-									{/* <TeamDetaills color={"dark"} usuario={usuario} /> */}
 									<ModalCrearCuenta />
 									<VerMas usuario = {usuario}/>
 								</div>

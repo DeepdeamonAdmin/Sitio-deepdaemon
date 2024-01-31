@@ -1,20 +1,31 @@
+//Uso de React
 import React, {useState} from "react";
-import { Link } from "react-scroll";
-import { NavLink, Link2 } from 'react-router-dom';
-import styled from 'styled-components'
 
+//Uso de Link y NavLink para la navegación en el sitio
+import { Link } from "react-scroll";
+import { NavLink } from 'react-router-dom';
+
+//Componentes necesarios
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import BurguerButton from "./BurgerButton";
 
 export const NavBarMobileSinAuth = () => {
+
+    //Configuración de hook para verificar el clic y el estado
     const [clicked,setClicked] = useState(false);
     const [omed,setOmed] = useState(false);
+
+    //Función para manejar el cicl
     const handleClick = () =>{
         setClicked(!clicked)
     }
+
+    //función para manejar el menú
     const handleMenu = () =>{
         if(omed==false)setOmed(!omed)
     }
+
+    //Despliegue de la navbar sin autenticación en la versión mobile
     return (
       <>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark d-flex" id="navbar">
@@ -25,13 +36,10 @@ export const NavBarMobileSinAuth = () => {
                 <NavLink to="/" className="navbar-brand mb-0">
                     Lab. CCC
                 </NavLink>
-                
             </div>
-            
             <div className={`links_mobile ${clicked ? 'active' : ''}`}>
                 <div className="navbar-collapse" id="navbarNavAltMarkup" style={{justifyContent:"center"}}>
                     <div className="navbar-nav" id="links_items_mobile" style={{display: "flex", flexDirection:"column"}}>
-                        
                         {(omed)?
                             <NavLink
                                 activeClass="active"
@@ -123,11 +131,6 @@ export const NavBarMobileSinAuth = () => {
                         </NavLink>
                     </div>
                 </div>
-                {/*<a href="/" className="links_items_mobile">Nosotros</a>
-                <a href="/" className="links_items_mobile">Lideres</a>
-                <a href="/" className="links_items_mobile">Proyectos</a>
-                <a href="/" className="links_items_mobile">Equipo</a>
-                <a href="/" className="links_items_mobile">Contacto</a>*/}
             </div>
             <div className="nav-item" style={{position:"absolute", right:"10px"}}>
                 <BurguerButton clicked={clicked} handleClick={handleClick}/>
@@ -139,20 +142,3 @@ export const NavBarMobileSinAuth = () => {
       </>
     );
   };
-  const Bgdiv = styled.div`
-  position: absolute;
-  background-color: #212529;
-  top:-1000px;
-  left:-1000px;
-  width: 100%;
-  height: 100%
-  z-index: -1;
-  transition: all .6s ease;
-  &.active{
-    top:50px;
-    left:0;
-    border-radius: 0 0 100% 0;
-    width: 100%;
-    height: 100%
-  }
-  `

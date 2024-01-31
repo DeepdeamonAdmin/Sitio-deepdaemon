@@ -1,10 +1,16 @@
+//Uso de React
 import React from "react";
+
+//Uso de NavLink y Link para la navegación en el sitio
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
 
+//Componentes necesarios
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 
 export const NavBar = () => {
+
+  //Despliegue del navbar general 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
       <NavLink to="/">
@@ -38,7 +44,6 @@ export const NavBar = () => {
           >
             Nosotros
           </Link>
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -50,8 +55,6 @@ export const NavBar = () => {
           >
             Lideres
           </Link>
-
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -63,7 +66,6 @@ export const NavBar = () => {
           >
             Proyectos
           </Link>
-
           <Link activeClass="active"
 						className="nav-item nav-link"
 						to='Publicaciones'
@@ -73,7 +75,6 @@ export const NavBar = () => {
 						duration={500}>
 						Publicaciones
 					</Link>
-
           <Link
             activeClass="active"
             className="nav-item nav-link"
@@ -85,7 +86,6 @@ export const NavBar = () => {
           >
             Equipo
           </Link>
-
           <Link
             activeClass="active"
             className="nav-item nav-link"

@@ -7,7 +7,6 @@ import thunk from 'redux-thunk';
 //Reducers
 import { authReducer } from "../reducers/authReducer";
 import { avisoReducer } from "../reducers/avisoReducer";
-import { editReducer } from "../reducers/editReducer";
 import { galleryReducer } from "../reducers/galleryReducer.";
 import { institucionReducer } from "../reducers/institucionReducer";
 import { projectsReduccer } from "../reducers/projectsReduccer";
@@ -24,7 +23,6 @@ const reducers = combineReducers({
 	//Generales
 	auth: authReducer,
 	ui: uiReduccer,
-	edit: editReducer,
 	//Para perfil individual
 	user: userReducer,
 	aviso: avisoReducer,

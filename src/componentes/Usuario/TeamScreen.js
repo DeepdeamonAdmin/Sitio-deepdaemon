@@ -1,15 +1,23 @@
+//Uso de React
 import React from 'react';
+
+//Uso de REdux
 import { useSelector } from 'react-redux';
-import { ModalCrearCuenta } from './ModalCrearCuenta';
-import { VerMas } from '../ui/VerMas';
+
+//Uso de Firestore
 import { auth } from '../../firebase/firebase-config';
 
+//Componentes necesarios
+import { ModalCrearCuenta } from './ModalCrearCuenta';
+import { VerMas } from '../ui/VerMas';
 
 export const TeamScreen = ({ status }) => {
 
+	//Obtención de los usuarios del estado
 	const { usuarios } = useSelector(state => state.user);
 	const user = auth.currentUser;
 
+	//Despliegue de las tarjetas del equipo
 	return (
 		<>
 			<div className="container">

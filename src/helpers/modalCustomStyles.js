@@ -1,4 +1,4 @@
-//configuracion Modal
+//Configuracion Modal
 export const customStyles = {
     content : {
       top                   : '50%',

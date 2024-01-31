@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
+//Uso de React
+import React from 'react'
+
+//Uso de Redux
+import { useSelector } from 'react-redux';
+
+//Componentes necesarios
 import { ProjectDetaills } from './ProjectDetaills';
-import { useSelector, useDispatch } from 'react-redux';
-
-
 
 export const TesisScreen = ({ status1, status2 }) => {
 
-	const dispatch = useDispatch();
-	const [currentModal, setCurrentModal] = useState(null);
-	const [showInf, setShowInfo] = useState(false);
-
-	//const [tesis, setTesis] = React.useState([])
+	//Obtención d elas tesis del estado
 	const tesis  = useSelector(state => state.tesis);
+
+	//Filtrado de las tesis
 	var tesis_type = tesis.tesis.filter(tesis => (tesis.estado===status1||tesis.estado===status2));
 
+	//Despliegue de las tarjetas de las tesis
 	return (
 		<div className="container">
 			{tesis_type.length === 0 && <p>No se encontraron tesis por el momento.</p>}

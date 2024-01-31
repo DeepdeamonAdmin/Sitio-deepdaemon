@@ -1,11 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+//Uso de React
+import React, { useEffect, useRef } from "react";
+
+//Uso de Splide
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 export const Carousel = ({avisos, youtubes}) => {
+
+  //Tiempo entre cada transición del Carousel
   let tiempo = 5000;
+
+  //Obtención de la referencia del Splide
   const splideRef = useRef();
+
+  //useEffect para cargar los datos del Carousel
   useEffect(() => {
   }, []);
+
+  //Configuración de avisos en la pantalla
   let lo = 0
   if (avisos.length <= 3) {
     lo = avisos.length;
@@ -13,6 +24,8 @@ export const Carousel = ({avisos, youtubes}) => {
   if (avisos.length > 3) {
     lo = 4
   }
+
+  //Configuración de las propiedades del carousel
   const options = {
     type: 'loop',
     gap: '2rem',
@@ -23,6 +36,8 @@ export const Carousel = ({avisos, youtubes}) => {
     slideFocus: true,
     focus: true,
   };
+
+  //Despliegue del carousel
   return (
     <Splide  options={options} ref={splideRef} onmouseover={tiempo=100000} autoPlay={true}>
         {avisos.map((aviso) => (

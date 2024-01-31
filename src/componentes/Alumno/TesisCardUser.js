@@ -1,49 +1,17 @@
+//Uso de React
 import React from 'react';
-import Swal from 'sweetalert2';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
+//Uso de Link para la navegación en el sitio
 import { Link } from 'react-router-dom';
-import { startNewTesis } from '../../../src/actions/tesis';
-import { deleteTesisUser} from '../../../src/actions/delete';
-import { useNavigate } from 'react-router-dom';
-import { startLoadingTesis } from '../../actions/tesis';
 
 const TesisCardUser = (item) => {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const uid = useParams();
-    /*const handleAddProject = (e) => {
-        e.preventDefault();
-        dispatch( deleteProject(item.id) );
-    }*/
-
-    const handleDelete = (e) => {
-        e.preventDefault();
-        Swal.fire({
-            title: '¿Estás seguro de eliminar esta tesis?',
-            text: "No podrás revertir esto",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Continuar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-                console.log(item.id)
-                dispatch( deleteTesisUser(item) );        
-                dispatch(startLoadingTesis())        
-                //navigate('/user/tesis');
-            }
-          })
-    }
-
+    //Despliegue de las tarjetas de las tesis de los alumnos
     return (
         <div className="card ms-3 animate__animated animate__fadeIn" style={{ maxWidth: 540 }}>
             <div className="row no-gutters">
                 <div className="col-md-4">
                     <img
-                        //src={`../../../../media/proyectos/project.png`}
                         src={item.urlImg}
                         alt="project"
                         className="card-img"
@@ -64,7 +32,6 @@ const TesisCardUser = (item) => {
                         </Link>
                     </p>
                 </div>
-
             </div>
         </div>
     )

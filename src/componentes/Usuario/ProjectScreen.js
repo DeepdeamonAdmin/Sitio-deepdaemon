@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+//Uso de React
+import React from 'react'
+
+//Uso de Redux
+import { useSelector } from 'react-redux';
+
+//Componentes necesarios
 import { VerMasProject } from '../ui/VerMasProject';
 import { ModalCrearCuenta } from './ModalCrearCuenta';
 
-
-
 export const ProjectScreen = ({ status1, status2 }) => {
 
-	const dispatch = useDispatch();
-	const [currentModal, setCurrentModal] = useState(null);
-	const [showInf, setShowInfo] = useState(false);
-
-	//const [projects, setProjects] = React.useState([])
+	//Obtención de los proyectos del estado
 	const projects  = useSelector(state => state.projects);
+
+	//Filtrado de proyectos
 	var projects_type = projects.projects.filter(projects => (projects.estado===status1||projects.estado===status2));
 
+	//Despliegue de las tarjetas de los proyectos
 	return (
 		<>
 		<div className="container card-columns" style={{display:"flex",flexWrap:"wrap",justifyContent:"left",marginLeft:"-20px"}}>

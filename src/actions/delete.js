@@ -76,10 +76,4 @@ export const deleteTesisUser = (item) => {
     }
 }
 
-const valDelMember = (id) => ({
-    type: types.delMember,
-    payload: {
-        id
-    }
-})
 

@@ -1,29 +1,47 @@
+//Uso de React
 import React, {useState} from "react";
-import { Link } from "react-scroll";
-import { useDispatch,  useSelector} from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { startLogout } from '../../actions/auth';
-import styled from 'styled-components'
 
+//Uso de Link, NavLink y useNavigate para la navegación en el sitio
+import { Link } from "react-scroll";
+import { NavLink, useNavigate } from 'react-router-dom';
+
+//Uso de Redux
+import { useDispatch,  useSelector} from 'react-redux';
+
+//Componentes necesarios
+import { startLogout } from '../../actions/auth';
 import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import BurguerButton from "./BurgerButton";
 
 export const NavBarMobileAuth = () => {
+
+    //Declaración del hook y función para los clics en los links
     const [clicked,setClicked] = useState(false);
     const handleClick = () =>{
         setClicked(!clicked)
     }
+
+    //Declaración del dispatch
     const dispatch = useDispatch();
+
+    //Declaración del useNavigate
     const history = useNavigate();
   
+    //Función del cierre de sesión
     const handleLogout = () => {
+
+        //Enviar al estado el cierre de sesión
         dispatch(startLogout());
         history('/', {replace: true});
   
     }
+
+    //Obtener los datos del estado
     const { datos }  = useSelector( state => state.user );
     let nombre;
     if(datos)nombre = datos.nombre;
+
+    //Despliegue de la navbar en la versión mobile
     return (
       <>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark d-flex" id="navbar">
@@ -34,9 +52,7 @@ export const NavBarMobileAuth = () => {
                 <NavLink to="/" className="navbar-brand mb-0">
                     Lab. CCC
                 </NavLink>
-                
             </div>
-            
             <div className={`links_mobile ${clicked ? 'active' : ''}`}>
                 <div className="navbar-collapse" id="navbarNavAltMarkup" style={{justifyContent:"center"}}>
                     <div className="navbar-nav" id="links_items_mobile" style={{display: "flex", flexDirection:"column"}}>
@@ -107,21 +123,8 @@ export const NavBarMobileAuth = () => {
                                 Logout
                             </button>
                         </div>
-                        {/*<a href="/" onClick={handleLogout} className="text-white" style={{textDecoration:"none"}}>Logout</a>
-                        <NavLink
-                            activeClass="active"
-                            className="nav-item nav-link text-white"
-                            onClick={handleLogout}
-                        >
-                            Logout
-    </NavLink>*/}
                     </div>
                 </div>
-                {/*<a href="/" className="links_items_mobile">Nosotros</a>
-                <a href="/" className="links_items_mobile">Lideres</a>
-                <a href="/" className="links_items_mobile">Proyectos</a>
-                <a href="/" className="links_items_mobile">Equipo</a>
-                <a href="/" className="links_items_mobile">Contacto</a>*/}
             </div>
             <div className="nav-item" style={{position:"absolute", right:"10px"}}>
                 <BurguerButton clicked={clicked} handleClick={handleClick}/>
@@ -133,20 +136,3 @@ export const NavBarMobileAuth = () => {
       </>
     );
   };
-  const Bgdiv = styled.div`
-  position: absolute;
-  background-color: #212529;
-  top:-1000px;
-  left:-1000px;
-  width: 100%;
-  height: 100%
-  z-index: -1;
-  transition: all .6s ease;
-  &.active{
-    top:50px;
-    left:0;
-    border-radius: 0 0 100% 0;
-    width: 100%;
-    height: 100%
-  }
-  `

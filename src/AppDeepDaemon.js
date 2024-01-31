@@ -1,11 +1,20 @@
+//Uso de React
 import React, { useEffect } from 'react';
 import { useState } from "react";
+
+//Uso de Redux
 import { Provider } from 'react-redux';
+
+//Uso de Google Analytics
+import ReactGA from "react-ga";
+
+//Componentes necesarios
 import { store } from './store/store';
 import { AppRouter } from './routers/AppRouter';
 import { AppRouterMobile } from './routers/AppRouterMobile';
 import { startLogout } from './actions/auth';
 import { isMobile } from 'react-device-detect';
+
 
 export const AppDeepDaemon = () => {
 
@@ -54,6 +63,7 @@ export const AppDeepDaemon = () => {
 
     //Hook para renderizar en caso de que cambie el estado de la variable "mobileOn"
     useEffect(() => {
+        ReactGA.initialize('G-STVJ91NMJ5');
     },[mobileOn]);
     
     //Verificación de si se trata de la versión móvil o la de escritorio y redirección 

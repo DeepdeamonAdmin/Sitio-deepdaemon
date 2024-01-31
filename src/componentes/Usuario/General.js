@@ -1,4 +1,13 @@
+//Uso de React
 import React from "react";
+import { useEffect, useState } from "react";
+
+//Uso de Firestore
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase/firebase-config";
+
+//Uso de ReactGA
+import ReactGA from "react-ga";
 
 //imagenes fijas
 import join from "../../styles/assets/img/sitio/mastermind.png";
@@ -6,32 +15,31 @@ import logo from "../../styles/assets/img/sitio/deepdaemon.png";
 import cic from "../../styles/assets/img/sitio/cic.png";
 import QR from "../../assets/QR_20_07_2023.jpeg";
 
-import '@splidejs/react-splide/css';
-import '@splidejs/splide/css/skyblue';
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import "../../styles/carrusel.css"
+//Uso de Bootstrap y CSS
 import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
 import "../../styles/DeepDaemon.css";
 import { Container, Nav } from "react-bootstrap";
-import { Row, Col, Button, Image, Ratio } from "react-bootstrap";
+import { Row, Col, Image } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+//Componentes necesario
 import { LeaderScreen } from "./LeaderScreen";
 import { TeamScreen } from "./TeamScreen";
 import { ProjectScreen } from "./ProjectScreen";
 import { TesisScreen } from "./TesisScreen";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-import { useEffect, useState, useRef } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebase-config";
 import { PublicationScreen } from "./PublicationScreen";
 import { Carousel } from "./Carousel";
 
 export const General = ({ id }) => {
-  //Configurar hooks
+
+  //Configurar hooks para los avisos y videos
   const [avisos, setAvisos] = useState([]);
+  const [youtubes, setYoutubes] = useState([]);
+
   //Referenciar db de firebase
   const avisosCollection = collection(db, "Avisos");
+
   //Función para obtener todos los avisos
   const getAvisos = async () => {
     const datos = await getDocs(avisosCollection);
@@ -41,8 +49,11 @@ export const General = ({ id }) => {
       })
     );
   };
-  const [youtubes, setYoutubes] = useState([]);
+
+  //Colección en la BD de los videos de YouTube
   const youtubeCollection = collection(db, "Youtube");
+
+  //Obtención de los videos de la BD
   const getYoutubes = async () =>{
     const datos = await getDocs(youtubeCollection);
     var youtube = datos.docs.map((doc) => {
@@ -56,33 +67,22 @@ export const General = ({ id }) => {
     }
     setYoutubes(youtube);
   }
+
   //Usar useEffect
   useEffect(async() => {
+
+    //Esperar a obtener avisos
     await getAvisos();
+
+    //Esperar a obtener videos
     await getYoutubes();
+
+    //Tracking con Google Analytics
+    ReactGA.pageview('/General');
   }, []);
 
-  //Opciones para configurar el carrusel 
-  let lo = 0
-  if (avisos.length <= 3) {
-    lo = avisos.length;
-  }
-  if (avisos.length > 3) {
-    lo = 4
-  }
-  const options_carousel = {
-    type: 'loop',
-    gap: '2rem',
-    perPage: lo,
-    autoplay: true,
-    pauseOnHover: true,
-    resetProgress: false,
-    slideFocus: false,
-    focus: true,
-  };
-
+  //Despliegue de la página principal
   return (
-    
     <div className="">
       <div className="d-flex flex-row dd_header">
         <div className="container">
@@ -103,28 +103,6 @@ export const General = ({ id }) => {
       <div className="embed-responsive">
       <div className="wrapper" style={{ maxWidth: `${1300 + 260 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
         <Carousel avisos ={avisos} youtubes={youtubes}/>
-          {/*<Splide options={options_carousel} aria-labelledby="autoplay-example-heading" hasTrack={false} >
-            <div style={{ position: 'relative' }}>
-              {/*<SplideTrack>
-                {avisos.map((aviso) => (
-                  <SplideSlide>
-                    <img src={aviso.photo} key={aviso.photo}/>
-                  </SplideSlide>
-                ))}
-                {youtubes.map((video, index) => (
-                  <SplideSlide>
-                    <iframe
-                      className="embed-responsive"
-                      src={"https://www.youtube.com/embed/"+video.urlVideo}
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </SplideSlide>
-                ))}
-                </SplideTrack>
-            </div>
-                </Splide>*/}
         </div>
         <Container className="section" id="Nosotros">
           <h1>Un poco sobre nosotros</h1>
@@ -136,7 +114,6 @@ export const General = ({ id }) => {
             industrial.
           </p>
         </Container>
-
         <Container className="section">
           <Row>
             <Col>
@@ -176,7 +153,6 @@ export const General = ({ id }) => {
             </Col>
           </Row>
         </Container>
-
         <br></br>
         <Container fluid className="academy">
           <Container className="section white">
@@ -190,11 +166,8 @@ export const General = ({ id }) => {
             </p>
           </Container>
         </Container>
-
         <br></br>
         <br></br>
-
-
         <Container>
           <h1>LOS LÍDERES</h1>
           <hr />
@@ -229,8 +202,6 @@ export const General = ({ id }) => {
                 </div>
               </Tab.Pane>
             </Tab.Content>
-            
-
             <br></br>
             <br></br>
             <br></br>
@@ -266,8 +237,6 @@ export const General = ({ id }) => {
         </Container>
         <br></br>
         <br></br>
-
-
         <Container fluid className="section portfolio pub_sectionBg" id="Publicaciones">
           <h1 className="separator"> Publicaciones </h1>
           <Tab.Container defaultActiveKey="magazine">
@@ -328,7 +297,6 @@ export const General = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
-
         <br></br>
         <Container fluid className="section sections team_sectionBg" id="Equipo">
           <h1 className="team_title">Equipo</h1>
@@ -365,7 +333,6 @@ export const General = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
-
         <br></br>
         <Container fluid className="section portfolio" id="Tesis">
           <h1 className="separator"> Tesis </h1>
@@ -394,7 +361,6 @@ export const General = ({ id }) => {
           </Tab.Container>
         </Container>
         <br></br>
-
         <br></br>
         <Container fluid className="team_separator">
           <Container className="section white">
@@ -407,7 +373,6 @@ export const General = ({ id }) => {
           </Container>
         </Container>
         <br></br>
-
         <br></br>
         <Container className="section">
           <Row>
@@ -426,12 +391,10 @@ export const General = ({ id }) => {
               <div className="text-center">
                 <Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
                 <br />
-                {/*<Button variant="secondary ">Contáctanos</Button>*/}
               </div>
             </Col>
           </Row>
         </Container>
-
         <Container fluid className="section contact white" id="Contacto">
           <h1>Hecho en la Ciudad de México</h1>
           <hr />
@@ -441,11 +404,6 @@ export const General = ({ id }) => {
             <br />
             Col. Nueva Industrial Vallejo, Delegación Gustavo A. Madero. CDMX
           </p>
-          {/*<p>
-            <FormCorreo />
-            <span className="icon icon-envelop" />
-            <a href="mailto:contacto@deepdaemon.org">contacto@deepdaemon.org </a>
-        </p>*/}
           <p>
             <a href="">
               <span className="icon icon-twitter" />
@@ -459,7 +417,5 @@ export const General = ({ id }) => {
         </Container>
       </div>
     </div>
-
-
   );
 };

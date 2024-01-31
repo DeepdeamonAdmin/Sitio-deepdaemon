@@ -1,5 +1,10 @@
+//Uso de React
 import React from 'react'
+
+//Uso de Styled Componentes para la adicicón de código CSS
 import styled from 'styled-components'
+
+//Despliegue del Burguer Button en la versión mobile 
 export default function BurguerButton(props){
     return(
         <Burguer>
@@ -11,6 +16,8 @@ export default function BurguerButton(props){
         </Burguer>
     )
 }
+
+//Código CSS
 const Burguer = styled.div`
   .nav-icon-5{
     width: 35px;

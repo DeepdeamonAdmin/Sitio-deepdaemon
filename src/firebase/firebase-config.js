@@ -1,8 +1,9 @@
+//Firestore
 import 'firebase/firestore';
 import 'firebase/auth';
 
 
-// Import the functions you need from the SDKs you need
+//Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -20,13 +21,15 @@ const firebaseConfig = {
   measurementId: "G-STVJ91NMJ5"
 };
 
-// Initialize Firebase
+//Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const app2 = initializeApp(firebaseConfig, "Secondary"); 
 //const analytics = getAnalytics(app)
- 
+
+//App connection
 const db = getFirestore(app);
- 
+
+//Google use
 const googleAuthProvider = new GoogleAuthProvider();
 const auth = getAuth();
 

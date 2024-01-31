@@ -1,28 +1,27 @@
+//Uso de React
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { uiCurrentModal, uiOpenModal } from '../../actions/ui';
-import { ModalInfoProject } from './ModalInfoProject';
+
+//Uso de Popup
 import Popup from 'reactjs-popup';
+
+//Componentes necesarios
 import 'reactjs-popup/dist/index.css';
-import { uiCloseModal } from '../../actions/ui';
 import "../../styles/DeepDaemon.css";
 
-import Modal from 'react-modal';
-import { TeamScreen } from './TeamScreen';
-
-
 export const TeamDetaills = ({usuario }) => {
-	const dispatch = useDispatch();
-	const [currentModal, setCurrentModal] = useState(null)
+
+	//Configuración del hook para mostrar información
 	const [showInf, setShowInfo] = useState(false)
+
+	//Obtención del usuario
 	const usuarioF = usuario.usuario;
 
+	//Función para manejar el clic
 	const handleClickNew = () => {
-		// dispatch(uiOpenModal());
-		console.log(usuarioF);
 		setShowInfo(!showInf)
 	}
 
+	//Despliegue de los detalles de los alumnos
 	return (
 		<>
 			<Popup //aqui inicia el modal que abrira la informacion de los alumnos
@@ -71,7 +70,6 @@ export const TeamDetaills = ({usuario }) => {
                 </div>
             )}
         </Popup>
-			
 		</>
 	)
 }

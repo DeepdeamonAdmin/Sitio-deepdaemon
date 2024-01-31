@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react'
-import validator from 'validator';
-import { removeError, setError } from '../../actions/ui';
 import Form from 'react-bootstrap/Form';
 import './users.css'
 import fotoPerfil from '../../assets/Usuario.jpg';
@@ -138,18 +136,6 @@ export const Perfil = () => {
 						</td>
 					</tr>
 					<tr>
-						{/* <td>
-							<div className='container'>
-								<input
-									type='date'
-									className='form-control datos'
-									name='fechaNac'
-									required
-									value={fechaNac}
-									onChange={handleInputChange}
-								/>
-							</div>
-						</td> */}
 						<td>
 							<div className='container'>
 								<select
@@ -198,13 +184,6 @@ export const Perfil = () => {
 						</td>
 						<td colSpan={2}>
 							<div className='container'>
-								{/* <label> S.S. </label>
-								<input
-									type='checkbox'
-									name='ss'
-									value='1'
-									onChange={handleInputChange}
-								/> */}
 								<Form.Check
 									type="checkbox"
 									id="ss"
@@ -284,21 +263,6 @@ export const Perfil = () => {
 							</div>
 						</td>
 					</tr>
-					{/* <tr>
-						<td colspan={3}>
-							<div className='container'>
-								<input
-									type='label'
-									placeholder='Titulo:'
-									className='form-control datos'
-									name='titulo'
-									required
-									value={titulo}
-									onChange={handleInputChange}
-								/>
-							</div>
-						</td>
-					</tr> */}
 					<tr>
 						<td colSpan={3}>
 							<hr />
