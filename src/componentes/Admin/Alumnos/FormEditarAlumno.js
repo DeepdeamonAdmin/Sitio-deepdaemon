@@ -117,10 +117,6 @@ export const FormEditarAlumno = (props) => {
 		obtenerCarrera()
 	}, [])
 
-	const handlePictureClick = () => {
-		document.querySelector('#fileSelector').click();
-	}
-
 	const handleFileChange = (e) => {
 		const file = e.target.files[0];
 		if (file) {
@@ -128,10 +124,6 @@ export const FormEditarAlumno = (props) => {
 		}
 	}
 
-	const handleOnChange = () => {
-		setIsChecked(!isChecked);
-
-	};
 
 	return (
 		<div className="container">

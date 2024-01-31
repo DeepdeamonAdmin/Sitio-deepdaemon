@@ -33,7 +33,7 @@ export const startsNewCareer = (formValues) => {
 }
 
 //Función para actualizar el estado de tal manera que muestra la inserción de una nueva "Career"
-//(Si se desea tener en el estado las carreras y ver sus actualizaciones, faltaría por implementar su reducer)
+//(Si se desea tener en el estado las carreras y ver sus actualizaciones, faltaría por implementar su reducer y sus actualizaciones en el estado)
 export const addNewCareer = (id, inst) => ({
 	type: types.careerAddNew,
 	payload: {

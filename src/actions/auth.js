@@ -1,37 +1,28 @@
-import Swal from 'sweetalert2';
-import {
-	getAuth,
-	signInWithPopup,
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	signOut,
-	updateProfile,
-	sendEmailVerification
-} from 'firebase/auth';
-
-import { doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-
+//Uso de Firestore
+import { getAuth, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, sendEmailVerification } from 'firebase/auth';
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, app2 } from "../firebase/firebase-config";
 import { googleAuthProvider } from '../firebase/firebase-config';
 
+//Uso de Swal para las alertas en las ejecuciones
+import Swal from 'sweetalert2';
+
+//Componentes necesarios
 import { types } from '../types/types';
 import { startLoading, finishLoading, uiCloseModal } from './ui';
+
 //Registrar usuario por correo
 export const startRegisterWithEmailPassword = (formValues) => {
-
 	return (dispatch) => {
-
 		const auth = getAuth();
 		createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
 			.then(async ({ user }) => {
 				await updateProfile(user, { displayName: formValues.name });
-
 				completarDatos(user.uid, formValues);
 				validar(auth);
 
-				dispatch(
-					uiCloseModal()
-				);
+				//Envio al estado el cierre del modal
+				dispatch(uiCloseModal());
 			})
 			.catch(e => {
 				console.log(e);
@@ -43,20 +34,18 @@ export const startRegisterWithEmailPassword = (formValues) => {
 
 //Funcion que envia un correo electronico para validar la cuenta.
 function validar(auth) {
-	
 	sendEmailVerification(auth.currentUser)
 		.then(() => {
-
 		});
 }
+
+//Función para completar los datos del usuario
 const completarDatos = async (uid, formvalues) => {
-	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
 		"rol": formvalues.rol,
 		"nombre": formvalues.name,
 		"email": formvalues.email,
 		"password": formvalues.password,
-		// "password2": formvalues.password2,
 		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/user.png?alt=media&token=d78d67df-1b61-4b47-8eb1-1a18ae83e340',
 		'display': 'Y',
 		'grado': 'current',
@@ -64,7 +53,6 @@ const completarDatos = async (uid, formvalues) => {
 		"idSchool": 'vacio',
 		"idCareer": 'vacio',
 		"ss": '',
-		// "titulo": '',
 		"nivel": 'vacio',
 		"esAutor": 'Y',
 		"idWork":'',
@@ -72,10 +60,9 @@ const completarDatos = async (uid, formvalues) => {
 		"facebook": '',
 		"github": '',
 	})
-	console.log('Se agrego la bd');
-
 }
 
+//Función para el registro de un usuario del tipo lider
 export const registroDesdeLider = (formValues) => {
 	const auth = getAuth();
 	return (dispatch) => {
@@ -85,12 +72,10 @@ export const registroDesdeLider = (formValues) => {
 				await updateProfile(user, { displayName: formValues.name }).then(
 					auth2.signOut()
 				);
-
 				completarDatosDesdeForm(user.uid, formValues);
-
-				dispatch(
-					uiCloseModal(),
-				);
+				
+				//envio al estado del cierre del modal
+				dispatch(uiCloseModal());
 			})
 			.catch(e => {
 				console.log(e);
@@ -100,8 +85,8 @@ export const registroDesdeLider = (formValues) => {
 	}
 }
 
+//Función para completar los datos desde el formualrio
 const completarDatosDesdeForm = async (uid, formValues) => {
-	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
 		"rol": formValues.rol,
 		"nombre": formValues.nombre,
@@ -114,7 +99,6 @@ const completarDatosDesdeForm = async (uid, formValues) => {
 		"idSchool": formValues.idSchool,
 		"idCareer": formValues.idCareer,
 		"ss": formValues.ss,
-		// "titulo": '',
 		"nivel": formValues.nivel,
 		"esAutor": formValues.esAutor,
 		"idWork":formValues.idWork,
@@ -124,20 +108,17 @@ const completarDatosDesdeForm = async (uid, formValues) => {
 	})
 }
 
+//Función para registrar un usuario del tipo lider
 export const registrarLider = (formValues) => {
-
 	return (dispatch) => {
 		const auth = getAuth();
 		createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
 			.then(async ({ user }) => {
 				await updateProfile(user, { displayName: formValues.name });
-
 				completarDatosDeLider(user.uid, formValues);
 
-				dispatch(
-					uiCloseModal()
-					// login(user.uid, user.displayName)
-				);
+				//Envio al estado el cierre del modal
+				dispatch(uiCloseModal());
 			})
 			.catch(e => {
 				console.log(e);
@@ -146,8 +127,8 @@ export const registrarLider = (formValues) => {
 	}
 }
 
+//Función para completar los datos del lider
 const completarDatosDeLider = async (uid, formValues) => {
-	//agregamos los datos en fireStore
 	await setDoc(doc(db, 'Usuarios', uid), {
 		"rol": 'administrador',
 		"nombre": formValues.name,
@@ -165,24 +146,20 @@ const completarDatosDeLider = async (uid, formValues) => {
 		"facebook": '',
 		"Github": '',
 	})
-	console.log('Se agrego la bd');
 }
 
+//Función para completar los datos de Google
 const completarDatosGoogle = async (uid, name, email) => {
-	//Obtenemos el rol de la base si existe
 	const docRef = doc(db, 'Usuarios', uid);
 	const docSnap = await getDoc(docRef);
 	const data = docSnap.data();
-
 	if (docSnap.exists()) {
-		//agregamos los datos en fireStore
 		if (data.rol === 'administrador') {
 			await updateDoc(doc(db, 'Usuarios', uid), {
 				"nombre": name,
 				"email": email
 			})
 		} else {
-
 			await setDoc(doc(db, 'Usuarios', uid), {
 				"rol": 'other',
 				"nombre": name,
@@ -201,25 +178,30 @@ const completarDatosGoogle = async (uid, name, email) => {
 				"facebook": '',
 				"Github": '',
 			})
-			console.log('Se agrego la bd');
 		}
 	}
-
 }
 
-
-
+//Función para iniciar sesión con correo y contraseña
 export const startLoginEmailPassword = (email, password) => {
 	return (dispatch) => {
 		const auth = getAuth();
+
+		//Envio al estado el inicio de carga
 		dispatch(startLoading());
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
+
+				//Envio al estado el inicio de sesión
 				dispatch(login(user.uid, user.displayName));
+
+				//Envio al estado la finalización de carga
 				dispatch(finishLoading());
 			})
 			.catch(e => {
 				console.log(e);
+
+				//Envio al estado la finalización de carga
 				dispatch(finishLoading());
 				Swal.fire('Error', e.message, 'error');
 			})
@@ -227,19 +209,21 @@ export const startLoginEmailPassword = (email, password) => {
 	}
 }
 
-
-//accion para acceder por google
+//función para acceder por Google
 export const startGoogleLogin = () => {
 	return (dispatch) => {
 		const auth = getAuth();
 		signInWithPopup(auth, googleAuthProvider)
 			.then(({ user }) => {
 				completarDatosGoogle(user.uid, user.displayName, user.email);
+
+				//Enviar al estado el inicio de sesión
 				dispatch(login(user.uid, user.displayName))
 			});
 	}
 }
 
+//Publicar en el estado el inicio de sesión
 export const login = (uid, displayName) => ({
 	type: types.login,
 	payload: {
@@ -248,20 +232,18 @@ export const login = (uid, displayName) => ({
 	}
 });
 
-
+//Función para iniciar el cierre de sesión
 export const startLogout = () => {
 	const auth = getAuth();
 	return async (dispatch) => {
 		await signOut(auth);
 
+		//Envio al estado el cierre de sesión
 		dispatch(logout());
 	}
 }
 
-// const closeModal = () => {
-// 	dispatch(uiCloseModal());
-// }
-
+//Publicación en el estado el cierre de sesión
 export const logout = () => ({
 	type: types.logout
 })

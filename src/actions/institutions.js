@@ -29,7 +29,7 @@ export const startsNewInstitution = (formValues) => {
 	}
 }
 
-//Función para actualizar el estado de tal manera que muestra la inserción de una nueva "Intitución"
+//Publicación en el estado de una nueva "Intitución"
 export const addNewInstitution = (id, inst) => ({
 	type: types.institucionAddNew,
 	payload: {
