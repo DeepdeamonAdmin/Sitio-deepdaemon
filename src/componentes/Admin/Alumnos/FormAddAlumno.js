@@ -15,64 +15,60 @@ import { useForm } from '../../../hooks/useForm';
 //Uso de Form de Bootstrap
 import Form from 'react-bootstrap/Form';
 
+//Uso de useNavigate para la navegación en el sitio
+import { useNavigate } from 'react-router-dom';
+
+//Componentes necesarios
 import { registroDesdeLider } from '../../../actions/auth';
-
-
-
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
-import { useNavigate } from 'react-router-dom';
 
 export const FormAddAlumno = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [formValues, handleInputChange, reset] = useForm({
 		nombre: '',
-		// lastname: '',
 		password: '',
 		linkedin: '',
 		facebook: '',
 		github: '',
 		email: '',
 		descripcion: '',
-		// shortDesc: '',
-		// longDesc: '',
-		grado: 'vacio',
+		grado: 'current',
 		urlImg: '',
 		ss: false,
-		nivel: 'vacio',
+		nivel: '',
 		start: '',
 		end: '',
-		idSchool: 'vacio',
-		idCareer: 'vacio',
+		idSchool: '',
+		idCareer: '',
 		esAutor: 'Y',
 		display: 'Y',
-		idWork: '',
+		idWork: 'student',
 		rol: 'alumno'
 	});
+	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, start, end, password, rol, ss, esAutor, display} = formValues;
 
-	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, start, end, password, rol, ss, esAutor, display, idWork } = formValues;
-	//console.log(formValues)
-
-	//envio a la api
+	//Función para insertar en usuairo en la BD
 	const handleSubmit = (e) => {
-		formValues.urlImg = datos;
-		formValues.ss = isChecked;
 		e.preventDefault();
+
+		//Envio al estado el registro del alumno desde el lider
 		dispatch(registroDesdeLider(formValues));
 		reset();
 		navigate('/admin/alumnos');
 	}
-	//info firebase escuela
+
+	//Configuración del hook useState para la selección de escuela
 	const [escuela, setEscuela] = React.useState([])
+
+	//useEffect para cargar los datos de la escuela
 	React.useEffect(() => {
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
-
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setEscuela(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
@@ -80,15 +76,16 @@ export const FormAddAlumno = () => {
 		obtenerEscuela()
 	}, [])
 
-	//info firebase carrera
+	//Configuración del hook useState para la selección de carrera
 	const [carrera, setCarrera] = React.useState([])
+
+	//useEffect para cargar los datos de la carrera
 	React.useEffect(() => {
 		const obtenerCarrera = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Carrera"));
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setCarrera(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
@@ -96,18 +93,21 @@ export const FormAddAlumno = () => {
 		obtenerCarrera()
 	}, [])
 
+	//Función y hook para el campo de SS
 	const [isChecked, setIsChecked] = useState(ss);
 	const handleOnChange = () => {
 		setIsChecked(!isChecked);
-
+		formValues.ss=isChecked;
 	}
 
-	//Galeria
+	//Función y hook para obtener la imagen
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
+		formValues.urlImg = datos;
 	}
 
+	//Despliegue del formulario para añadir un alumno
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -140,17 +140,6 @@ export const FormAddAlumno = () => {
 							onChange={handleInputChange}
 						/>
 					</div>
-					{/* <div className="col mb-3">
-						<label> Apellidos </label>
-						<input
-							className="form-control"
-							type='text'
-							name='lastname'
-							placeholder='Lastname'
-							value={lastname}
-							onChange={handleInputChange}
-						/>
-					</div> */}
 				</div>
 				<div className="row">
 					<div className="col mb-3">
@@ -173,24 +162,12 @@ export const FormAddAlumno = () => {
 							value={grado}
 							onChange={handleInputChange}
 						>
-							<option value="vacio"> No se ha seleccionado ninguna opcion </option>
-							<option value='current' > Current </option>
+							<option value='current' selected> Current </option>
 							<option value='graduate' > Graduate </option>
-							<option value='Leader' > Leader </option>
-							<option value='out' > Out </option>
 						</select>
 					</div>
 					<div className="col-md-2 mb-5">
 						<div className="input-group-prepend">
-							{/* <div className="input-group-text col-12">
-								<label> S.S. </label>
-								<input
-									type='checkbox'
-									name='ss'
-									value='1'
-									onChange={handleInputChange}
-								/>
-							</div> */}
 							<Form.Check
 								type="checkbox"
 								id="ss"
@@ -240,9 +217,6 @@ export const FormAddAlumno = () => {
 						>
 							<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
 							{
-								/*dataSchool.map(item => (
-									<option key={item.id} value={item.id}> {item.name} </option>
-								))*/
 								escuela.map(item => (
 									<option key={item.id} value={item.id}> {item.name} </option>
 								))
@@ -260,9 +234,6 @@ export const FormAddAlumno = () => {
 						>
 							<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
 							{
-								/*dataCareer.map(item => (
-									<option key={item.id} value={item.id}> {item.name} </option>
-								))*/
 								carrera.map(item => (
 									<option key={item.id} value={item.name}> {item.name} </option>
 								))
@@ -305,22 +276,6 @@ export const FormAddAlumno = () => {
 						/>
 					</div>
 				</div>
-
-				{/* <div className="row">
-					<div className="col mb-3">
-						<label>Descripción </label>
-						<textarea
-							className="form-control"
-							rows='10' cols='40'
-							name='longDesc'
-							placeholder='Desciption'
-							value={longDesc}
-							onChange={handleInputChange}
-						/>
-					</div>
-				</div> */}
-
-
 				<div className="row">
 					<div className="col-md-6 mb-5">
 						<label> Fecha de Inicio </label>
@@ -402,5 +357,4 @@ export const FormAddAlumno = () => {
 			</form>
 		</div>
 	)
-
 }
