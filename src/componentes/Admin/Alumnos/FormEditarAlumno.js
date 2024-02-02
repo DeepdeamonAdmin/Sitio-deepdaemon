@@ -40,7 +40,7 @@ export const FormEditarAlumno = () => {
 	const alumno = alumnoO[0]
 
 	//Contenido del formulario de edición
-	const [formValues, handleInputChange] = useForm(alumno);
+	const [formValues, handleInputChange, reset] = useForm(alumno);
 	const {
 		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
 	} = formValues;
@@ -126,9 +126,10 @@ export const FormEditarAlumno = () => {
 		if(alumno.rol==="alumno"||alumno.rol==="externo"){data.idWork="student";}
 		updateDoc(memberRef, data);
 		Swal.fire('Usuario editado', 'Éxito');
+		reset();
 
 		//Envio al estaod de la carga de los usuarios
-		dispatch(startLoadingUsers())
+		dispatch(startLoadingUsers());
 		if(alumno.rol === 'administrador'){
 			navigate(`/admin/lideres`);
 		}else if (alumno.rol === 'alumno'){
