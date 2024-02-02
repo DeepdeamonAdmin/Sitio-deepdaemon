@@ -131,8 +131,10 @@ export const FormEditarAlumno = () => {
 		dispatch(startLoadingUsers())
 		if(alumno.rol === 'administrador'){
 			navigate(`/admin/lideres`);
-		}else{
+		}else if (alumno.rol === 'alumno'){
 			navigate(`/admin/alumnos`);
+		}else{
+			navigate(`/admin/externos`);
 		}
 	}
 

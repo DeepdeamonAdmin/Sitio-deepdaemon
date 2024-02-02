@@ -7,6 +7,9 @@ import { useDispatch } from 'react-redux'
 //Uso del hook useForm
 import { useForm } from '../../../hooks/useForm'
 
+//Uso de Swal para las alertas de las ejecuciones
+import Swal from "sweetalert2";
+
 //Componentes necesarios
 import { startsNewImage, startUploadingImage } from '../../../actions/gallery'
 
@@ -48,13 +51,9 @@ export const FormAddGalery = () => {
 
 			//Condición si no se le ha asignado un nombre
 			if (name == '') {
-				const typeFile = file.name.split('.')[1]
 
-				//Obtener la extensión de la imagen
-				formValues.ext = typeFile;
-
-				//Enviar al estado la imagen (archivo)
-				await dispatch(startUploadingImage(file,formValues.type));
+				//Alerta de nombre
+				Swal.fire('Debes colocar un nombre a la imagen');
 			} else {
 				const typeFile = file.name.split('.')[1]
 
@@ -70,21 +69,20 @@ export const FormAddGalery = () => {
 
 				//Enviar al estado la imagen (archivo)
 				await dispatch(startUploadingImage(auxFile,formValues.type));
-			}
 
+				//Actualización del nombre con el nuevo sin espacios
+				formValues.name = name_without_spaces;
+
+				//Enviar el contenido del formulario.
+				dispatch(startsNewImage(formValues));
+
+				//Limpiar el formulario
+				reset();
+			}
 		}else{
 			//Mensaje de error al cargar el archivo
 			console.log("Error al cargar el archivo");
 		}
-
-		//Actualización del nombre con el nuevo sin espacios
-		formValues.name = name_without_spaces;
-
-		//Enviar el contenido del formulario.
-		dispatch(startsNewImage(formValues));
-
-		//Limpiar el formulario
-		reset();
 	}
 
 	//Despliegue del formulario para añadir una nueva imagen a la galería

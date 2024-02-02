@@ -403,7 +403,7 @@ export const FormEditRelease = () => {
 		handleInputChange(event);
 	}
 
-	//función para manejar el cambio de bibtex
+	//Función para manejar el cambio de bibtex
 	let bibtex_File;
 	const [datosbibtex, setDatosBibtex] = useState('');
 	const handleFileBibtexChange = (e) => {
@@ -470,9 +470,11 @@ export const FormEditRelease = () => {
 	//función para descargar el archivo bibtex
 	const handleDownload = () =>{
 		const storage = getStorage();
-		const textRegexString = new RegExp("/([^\/?]+)\\?","i");
+		const textRegexString = new RegExp("/Bibtex%2F([^\/?]+)\\?","i");
 		const information = formValues.bibtexfile.match(textRegexString);
-		const pathReference = ref(storage, information[1]);
+		const ruta = 'Bibtex/'+information[1];
+		console.log(ruta);
+		const pathReference = ref(storage, ruta);
 		getDownloadURL(pathReference).then((url) => {
 			const anchor = document.createElement('a');
 			anchor.setAttribute('href', url);
@@ -522,7 +524,7 @@ export const FormEditRelease = () => {
 
 	//Función para obtener el nombre del archivo bibtex
 	function getname(){
-		const textRegexString = new RegExp("/([^\/?]+)\\?","i");
+		const textRegexString = new RegExp("/Bibtex%2F([^\/?]+)\\?","i");
 		const information = formValues.bibtexfile.match(textRegexString);
 		return(information[1]);
 	}

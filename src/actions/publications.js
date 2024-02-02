@@ -27,8 +27,16 @@ export const startNewPublication = ( formValues,bibtex_File) => {
                     Swal.showLoading();
                 }
             });
-            const ruta = ''
-            fileUrl = await fileUpload(ruta, bibtex_File);
+            const ruta = 'Bibtex/'
+
+            //Eliminar los espacio y sustituirlos por '_'
+            const name_without_spaces = bibtex_File.name.split('.')[0].replaceAll(/\s/g,"_")
+            const fileName = name_without_spaces + '.txt';
+
+            //Construir el archivo con su nuevo nombre
+            const auxFile = new File([bibtex_File], fileName)
+
+            fileUrl = await fileUpload(ruta, auxFile);
 
             //Envio al estado la cargar del archivo Bibtex
             dispatch(loadBibtex(fileUrl));
@@ -132,14 +140,22 @@ export const startsNewBibtex = (formValues,bibtex_File) => {
         const ruta = 'Bibtex/'
         if(formValues.bibtexfile){
             const storage = getStorage();
-            const textRegexString = new RegExp("/([^\/?]+)\\?","i");
+            const textRegexString = new RegExp("/Bibtex%2F([^\/?]+)\\?","i");
 			const information = formValues.bibtexfile.match(textRegexString);
-            const desertRef = ref(storage, information[1]);
+            const desertRef = ref(storage, ruta+information[1]);
             deleteObject(desertRef).then(() => {
             }).catch((error) => {
             });
         }
-        fileUrl = await fileUpload(ruta, bibtex_File);
+
+        //Eliminar los espacio y sustituirlos por '_'
+        const name_without_spaces = bibtex_File.name.split('.')[0].replaceAll(/\s/g,"_")
+        const fileName = name_without_spaces + '.txt';
+
+        //Construir el archivo con su nuevo nombre
+        const auxFile = new File([bibtex_File], fileName)
+
+        fileUrl = await fileUpload(ruta, auxFile);
 
         //Envio al estado la carga de un nuevo Bibtex
         dispatch(loadBibtex(fileUrl));
