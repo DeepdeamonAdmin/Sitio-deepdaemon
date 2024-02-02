@@ -77,9 +77,10 @@ export const General = ({ id }) => {
     //Esperar a obtener videos
     await getYoutubes();
 
-    //Tracking con Google Analytics
-    ReactGA.pageview('/General');
   }, []);
+
+  //Tracking con Google Analytics
+  ReactGA.send(document.location.pathname);
 
   //Despliegue de la página principal
   return (

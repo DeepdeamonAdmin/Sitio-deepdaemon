@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Provider } from 'react-redux';
 
 //Uso de Google Analytics
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 //Componentes necesarios
 import { store } from './store/store';
@@ -63,9 +63,15 @@ export const AppDeepDaemon = () => {
 
     //Hook para renderizar en caso de que cambie el estado de la variable "mobileOn"
     useEffect(() => {
-        ReactGA.initialize('G-STVJ91NMJ5');
     },[mobileOn]);
-    
+
+    //Inicialización de Google Analytics
+    const TRACKING_ID = 'G-STVJ91NMJ5';
+    ReactGA.initialize(TRACKING_ID);
+
+    //Tracking con Google Analytics
+    ReactGA.send(document.location.pathname);
+
     //Verificación de si se trata de la versión móvil o la de escritorio y redirección 
     //a los componentes específicos de cada una.
     if(isMobile&&mobileOn){
