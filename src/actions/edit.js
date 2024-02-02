@@ -209,18 +209,6 @@ export const editUser = (formValues, oldPassword) => {
 	}
 }
 
-//Función para la edición de una foto
-export const startEditingPicture = (formValues) => {
-	return async () => {
-		const auth = getAuth()
-		signInWithEmailAndPassword(auth, formValues.email, formValues.password)
-			.then(({ user }) => {
-			}).catch((error) => {
-				console.log(error);
-			});
-	}
-}
-
 //Publicación de las actualizaciones de los datos en el estado
 const refreshData = (data) => ({
 	type: types.userUpdate,

@@ -1,19 +1,32 @@
+//Uso de React
 import React, { useEffect, useState } from 'react'
+
+//Uso de Redux
 import { useDispatch, useSelector } from 'react-redux';
+
+//Uso del hook useForm
 import { useForm } from '../../hooks/useForm';
+
+//Uso de Firestore
 import { getAuth } from 'firebase/auth';
-import { useNavigate, useParams } from 'react-router-dom';
-import { startNewPublication } from '../../actions/publications';
 import { db } from '../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
+
+//Uso de useNavigate y useParams para la navegación en el sitio
+import { useNavigate, useParams } from 'react-router-dom';
+
+//Componentes necesarios
+import { startNewPublication } from '../../actions/publications';
 import { editPublication } from '../../actions/edit';
 
 export const FormAddRelease = () => {
 	const auth = getAuth();
 	const currentUser = auth.currentUser.displayName;
-	// UseState para el select
+
+	//UseState para el select
 	const [selectValue, setSelectValue] = useState('')
-	// UseState para cada input
+
+	//UseState para cada input
 	const [autorDisabled, setAutorDisabled] = useState(false)
 	const [titleDisabled, setTitleDisabled] = useState(false)
 	const [journalDisabled, setJournalDisabled] = useState(true)
@@ -31,6 +44,8 @@ export const FormAddRelease = () => {
 	const [schoolDisabled, setSchoolDisabled] = useState(true)
 	const [noteDisabled, setNoteDisabled] = useState(true)
 	const [institutionDisabled, setInstitutionDisabled] = useState(true)
+
+	//Configuración de cada elemento para cada tipo de publicación
 	useEffect(() => {
 		switch (selectValue) {
 			case 'article':
@@ -284,17 +299,20 @@ export const FormAddRelease = () => {
 		}
 	}, [selectValue])
 
-	// * Aquí obtenemos el ID de la publicación para usar este formulario para editarla
+	//Aquí obtenemos el ID de la publicación para usar este formulario para editarla
 	const {idRelease} = useParams()
 	const publications = useSelector(state => state.publications)
 	const publication = publications["publications"].find(p => p.id === idRelease)
 
-	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
+	//Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
 	const handleSelectChange = ({target}) => {
 		setSelectValue(target.value)
 	}
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Contendio del formulario para insertar una nueva publicación
 	const [formValues, handleInputChange, reset] = useForm({
 		postType: '',
 		descr: '',
@@ -322,32 +340,33 @@ export const FormAddRelease = () => {
 		institution: '',
 		display: 'Yes'
 	}, publication);
-
-	const { postType, descr, tech, frontImg, modalMedia, link, autor, title,
+	const { descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
 		organization, school, note, institution, display } = formValues;
 
-	//envio a la api
+	//Declaración del useNavigate
 	const navigate = useNavigate();
+
+	//función para insertar una nueva publicación a la BD
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		//Envio al estado la nueva publicación
 		dispatch(startNewPublication(formValues));
 		reset();
 		navigate('/admin/publications');
 	}
 
-	/**
-	 * Esta función se encarga de manejar la actualización de una publicación
-	 * recibe como parámetro el evento para prevenir la acción por default
-	 * @param {event} e 
-	 */
+	//Función para actualizar las publicaciones
 	const handleUpdatePublication = e => {
 		e.preventDefault()
+
+		//Envio al estado la actualización de una publicación
 		dispatch(editPublication(publication.id, formValues))
 	}
 
-	//tech infor firebase
+	//Función y hook para la obtención de las tecnologías
 	const [techOption, setTech] = useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -355,7 +374,6 @@ export const FormAddRelease = () => {
 				const Data = await getDocs(collection(db, "Tecnologias"));
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setTech(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
@@ -363,11 +381,11 @@ export const FormAddRelease = () => {
 		obtenerTech()
 	}, [])
 
+	//Despliegue del formulario de creación y edición de publicaciones para los alumnos
 	return (
 		<div className="container">
 			<h2>{publication ? 'Editar publicación' : 'Agregar publicación'}</h2>
 			<hr />
-
 			<div className="row">
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
@@ -394,7 +412,6 @@ export const FormAddRelease = () => {
 						<option value='unpublished' > unpublished </option>
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Front Image </label>
 					<input
@@ -457,9 +474,6 @@ export const FormAddRelease = () => {
 					}
 				</select>
 			</div>
-
-
-
 			<div className="row">
 				<div className="col mb-3">
 					<label> Autor </label>
@@ -617,7 +631,6 @@ export const FormAddRelease = () => {
 						disabled={booktitleDisabled}
 					/>
 				</div>
-
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -644,7 +657,6 @@ export const FormAddRelease = () => {
 						disabled={seriesDisabled}
 					/>
 				</div>
-
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -685,7 +697,6 @@ export const FormAddRelease = () => {
 						disabled={noteDisabled}
 					/>
 				</div>
-
 				<div className="col mb-3">
 					<label> Institution </label>
 					<input className="form-control"
@@ -718,8 +729,6 @@ export const FormAddRelease = () => {
 			>
 				{publication ? 'Guardar cambios' : 'Agregar'}
 			</button>
-
-
 		</div>
 	)
 }

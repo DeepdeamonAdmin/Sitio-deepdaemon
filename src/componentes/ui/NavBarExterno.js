@@ -118,7 +118,7 @@ export const NavBarExterno = () => {
       <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul className="navbar-nav ml-auto">
             <Link
-                to ='/user/perfil'
+                to ='/externo/perfil'
                 className="btn btn-outline-secondary nav-item nav-link"
             >
                 { nombre }

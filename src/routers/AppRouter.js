@@ -26,6 +26,7 @@ import { startLoadingTesis } from '../actions/tesis';
 import { startLoadingPublication } from '../actions/publications';
 import { startLoadingYoutube } from '../actions/youtube';
 import { startLoadingGallery } from '../actions/gallery';
+import { startLoadingAvisos } from '../actions/avisos';
 
 export const AppRouter = () => {
 
@@ -52,6 +53,9 @@ export const AppRouter = () => {
 
         //Cargar videos de youtube al estado
         dispatch(startLoadingYoutube());
+
+        //Cargar avisos al estado
+        dispatch(startLoadingAvisos());
         
         //Verficar si ha cambiado el tipo de autenticación
         onAuthStateChanged(auth, (user) => {

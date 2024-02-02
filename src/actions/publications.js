@@ -129,7 +129,7 @@ export const startsNewBibtex = (formValues,bibtex_File) => {
                 Swal.showLoading();
             }
         });
-        const ruta = ''
+        const ruta = 'Bibtex/'
         if(formValues.bibtexfile){
             const storage = getStorage();
             const textRegexString = new RegExp("/([^\/?]+)\\?","i");

@@ -1,29 +1,45 @@
+//Uso de React
 import React from 'react'
-import Select from 'react-select'
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { startNewProject } from '../../../../src/actions/projects';
-import { useForm } from '../../../../src/hooks/useForm';
+
+//Uso de Select
+import Select from 'react-select'
+
+//Uso de useNavigate para la navegación en el sitio
+import { useNavigate } from 'react-router-dom';
+
+//Uso de Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+//Uso de Firestore
 import { getAuth } from 'firebase/auth';
-import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
-import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
-import { useSelector } from 'react-redux';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
+//Componentes necesarios
+import { startNewProject } from '../../../../src/actions/projects';
+import { useForm } from '../../../../src/hooks/useForm';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+
+
+
 export const FormAddProject = () => {
 
-
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Obtención de la autenticación
 	const auth = getAuth();
 	const dN = auth.currentUser.displayName;
+
+	//Declaración del useNavigate
 	const navigate = useNavigate();
 
-	//Traemos la información de los usuarios de firebase
+	//Obtención de los usuarios del estado
 	const { usuarios } = useSelector(state => state.user);
 
-	//Formulario
+	//Contenido del formulario para añadir un nuevo proyecto
 	const [formValues, handleInputChange, reset] = useForm({
 		name: '',
 		correo: '',
@@ -40,13 +56,13 @@ export const FormAddProject = () => {
 	});
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, colaboradoresLista } = formValues;
 
-	//Galeria
+	//Obtención de la galería
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 	}
 
-	//tech infor firebase
+	//useEffect y hook para obtener las tecnologías
 	const [techOption, setTech] = React.useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -62,35 +78,34 @@ export const FormAddProject = () => {
 		obtenerTech()
 	}, [])
 
-	//Checkbox directores
+	//Checkbox para los directores
 	const optionsD = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
 		optionsD.push({ value: u.id, label: u.nombre })
 	))
-
 	const optionsA = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
 		optionsA.push({ value: u.id, label: u.nombre })
 	))
 
+	//Función y hook para añadir a los directores
 	const [directores, setDirectores] = useState({
 		selectedOption: null
 	})
-
 	const handleChangeDirectores = selectedOption => {
 		setDirectores({ selectedOption });
 	}
-	//Checkbox alumnos
+
+	//Función y hook para añadir a los colaboradores
 	const [colaboradores, setColaboradores] = useState({
 		selectedOption: null
 	})
-
 	const handleChangeColaboradores = selectedOption => {
 		setColaboradores({ selectedOption });
 	}
-	//envio a la api
-	const handleEnvProyect = () => {
 
+	//Función para registrar proyecto
+	const handleEnvProyect = () => {
 		const selectedDirectores = [];
 		const selectedColaboradores = [];
 		if (directores.selectedOption != null) {
@@ -106,11 +121,14 @@ export const FormAddProject = () => {
 		formValues.directoresLista = selectedDirectores;
 		formValues.colaboradoresLista = selectedColaboradores;
 		formValues.urlImg = datos;
+
+		//Envio al estado el registro de un nuevo proyecto
 		dispatch(startNewProject(formValues));
 		reset();
 		navigate('/admin/projects');
 	}
 
+	//Despliegue del formulario para el registro de un proyecto
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -148,17 +166,14 @@ export const FormAddProject = () => {
 						name='nameTech'
 						value={nameTech}
 						onChange={handleInputChange}
-
 					>
 						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
 						{
 							techOption.map(item => (
 								<option key={item.id} value={item.id}> {item.nombre} </option>
 							))
-
 						}
 					</select>
-
 				</div>
 				<div className="col mb-3">
 					<label>Status del proyecto</label>
@@ -196,7 +211,6 @@ export const FormAddProject = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label>Agregar Directores</label>
@@ -223,7 +237,6 @@ export const FormAddProject = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="row mb-12">
 				<div className="col-md-3 mb-3">
 					<label> Imagen desde Galeria </label>
@@ -233,7 +246,6 @@ export const FormAddProject = () => {
 						<FotosGalleryChoose />
 					</div>
 				</div>
-
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -246,7 +258,6 @@ export const FormAddProject = () => {
 						<option value='No' > No </option>
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Liga del video</label>
 					<input
@@ -259,7 +270,6 @@ export const FormAddProject = () => {
 					/>
 				</div>
 			</div>
-
 			<div class="text-center">
 				<button
 					className="btn btn-primary btn-large"
@@ -268,8 +278,6 @@ export const FormAddProject = () => {
 					Agregar
 				</button>
 			</div>
-
-
 		</div>
 	)
 }

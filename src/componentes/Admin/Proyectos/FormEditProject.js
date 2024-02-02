@@ -10,24 +10,25 @@ import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
-export const FormEditProject = ({ history }) => {
+export const FormEditProject = () => {
 
-	//const dN = auth.currentUser.displayName;
-	//const auth = getAuth();
-
-	//Traemos la información de los usuarios de firebase
+	//Obtención de los usuarios del estado
 	const { usuarios } = useSelector(state => state.user);
 
-	//Traemos la información del proyecto de firebase
+	//Obtención de la información del proyecto
 	const { idProject } = useParams();
+
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Obtención de los proyectos dle estado
 	const { projects } = useSelector(state => state.projects);
-	const pojectO = projects.filter(p => {
+	const projectO = projects.filter(p => {
 		return p.id === idProject
 	})
-	const project = pojectO[0]
+	const project = projectO[0]
 
-	//tech infor firebase
+	//useEfect y hook para obtener las tecnologías
 	const [techOption, setTech] = React.useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -35,7 +36,6 @@ export const FormEditProject = ({ history }) => {
 				const Data = await getDocs(collection(db, "Tecnologias"));
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setTech(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
@@ -43,59 +43,53 @@ export const FormEditProject = ({ history }) => {
 		obtenerTech()
 	}, [])
 
-	//se muestra la informacion en el formulario
+	//Contenido del formulario para editar el proyecto
 	const [formValues, handleInputChange] = useForm(project)
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, colaboradoresLista } = formValues;
 
-	//Galeria
+	//Obtención de la galería
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 		formValues.urlImg=datos;
 	}
 	
-	
-
+	//Checkbox para los directores
 	const selectedDirectores = [];
 	const selectedColaboradores = [];
-
-	//Checkbox directores
 	directoresLista.map((u) => (
 		selectedDirectores.push({ value: u, label: u })
 	))
-
 	const optionsD = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
 		optionsD.push({ value: u.id, label: u.nombre })
 	))
-
 	const optionsA = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
 		optionsA.push({ value: u.id, label: u.nombre })
 	))
 
+	//Función y hook para añadir a los directores
 	const [directores, setDirectores] = useState({
 		selectedOption: selectedDirectores
 	})
-
 	const handleChangeDirectores = selectedOption => {
 		setDirectores({ selectedOption });
 	}
-	//Checkbox alumnos
+	
+	//Función y hook para añadir a los colaboradores
 	colaboradoresLista.map((u) => (
 		selectedColaboradores.push({ value: u, label: u })
 	))
-
 	const [colaboradores, setColaboradores] = useState({
 		selectedOption: selectedColaboradores
 	})
-
 	const handleChangeColaboradores = selectedOption => {
 		setColaboradores({ selectedOption });
 	}
-	//envio a la api
+
+	//Función para registrar proyecto
 	const handleSubmit = () => {
-		//e.preventDefault();
 		const selectedDirectores = [];
 		const selectedColaboradores = [];
 		if (directores.selectedOption != null) {
@@ -112,9 +106,12 @@ export const FormEditProject = ({ history }) => {
 		formValues.directoresLista = selectedDirectores;
 		formValues.colaboradoresLista = selectedColaboradores;
 		if(datos!="")formValues.urlImg = datos;
+
+		//Envio al estado el registro de un nuevo proyecto
 		dispatch(editProject(idProject, formValues));
 	}
 
+	//Despliegue del formulario de edición de un proyecto
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -145,7 +142,6 @@ export const FormEditProject = ({ history }) => {
 				</div>
 			</div>
 			<div className="form-group row">
-
 				<div className="col mb-2">
 					<label> Tecnología utilizada </label>
 					<select
@@ -163,7 +159,6 @@ export const FormEditProject = ({ history }) => {
 						}
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Status del proyecto </label>
 					<select
@@ -178,7 +173,6 @@ export const FormEditProject = ({ history }) => {
 					</select>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label>Descripción</label>
@@ -201,7 +195,6 @@ export const FormEditProject = ({ history }) => {
 					/>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label>Agregar Directores</label>
@@ -237,7 +230,6 @@ export const FormEditProject = ({ history }) => {
 						<FotosGalleryChoose />
 					</div>
 				</div>
-
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -250,7 +242,6 @@ export const FormEditProject = ({ history }) => {
 						<option value='No' > No </option>
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Liga del video</label>
 					<input
@@ -263,7 +254,6 @@ export const FormEditProject = ({ history }) => {
 					/>
 				</div>
 			</div>
-
 			<div class="text-center">
 				<button
 					className="btn btn-primary btn-large"
@@ -272,7 +262,6 @@ export const FormEditProject = ({ history }) => {
 					Guardar
 				</button>
 			</div>
-
 		</div>
 	)
 }

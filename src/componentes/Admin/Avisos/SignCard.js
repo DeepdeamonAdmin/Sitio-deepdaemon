@@ -1,6 +1,9 @@
 //Uso de React
 import React from 'react';
 
+//Uso de Redux
+import { useDispatch } from 'react-redux';
+
 //Uso de Firestore
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
@@ -8,13 +11,22 @@ import { db } from '../../../firebase/firebase-config';
 //Uso de Swal para las alertas
 import Swal from "sweetalert2";
 
+//Componentes necesario
+import { startLoadingAvisos } from '../../../actions/avisos';
+
 const SignCard = (item) => {
+
+    //Delcaración del dispatch
+    const dispatch = useDispatch();
 
     //Función para eliminar un aviso
     const deleteAviso = async (id) => {
         const avisoDoc = doc(db, 'Avisos', id);
         await deleteDoc(avisoDoc);
         Swal.fire('Aviso eliminado', 'Éxito');
+
+        //Envio al estado la petición de carga de los avisos
+        dispatch(startLoadingAvisos());
     }
 
     //Despliegue de la tarjeta del aviso

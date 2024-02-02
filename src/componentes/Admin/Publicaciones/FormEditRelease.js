@@ -1,22 +1,35 @@
+//Uso de React
 import React, { useState, useEffect } from 'react'
+
+//Uso de Redux
 import { useDispatch, useSelector } from 'react-redux';
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
+
+//Uso de Firestore
 import { getAuth } from 'firebase/auth';
-import { useNavigate, useParams } from 'react-router-dom';
-import { startNewPublication } from '../../../actions/publications';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+//Uso de useNavigate y useParams para la navegación en el sitio
+import { useNavigate, useParams } from 'react-router-dom';
+
+//Componentes necesarios
+import { startNewPublication } from '../../../actions/publications';
 import { editPublication } from '../../../actions/edit';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 export const FormEditRelease = () => {
 	const auth = getAuth();
 	const currentUser = auth.currentUser.displayName;
-	// UseState para el select
+
+	//UseState para el select
 	const [selectValue, setSelectValue] = useState('')
-	// UseState para cada input
+
+	//UseState para cada input
 	const [autorDisabled, setAutorDisabled] = useState(false)
 	const [titleDisabled, setTitleDisabled] = useState(false)
 	const [journalDisabled, setJournalDisabled] = useState(true)
@@ -36,6 +49,8 @@ export const FormEditRelease = () => {
 	const [noteDisabled, setNoteDisabled] = useState(true)
 	const [institutionDisabled, setInstitutionDisabled] = useState(true)
 	const [keywordsDisabled, setKeywordsDisabled] = useState(true)
+
+	//Configuración de cada elemento para cada tipo de publicación
 	useEffect(() => {
 		switch (selectValue) {
 			case 'article':
@@ -336,12 +351,15 @@ export const FormEditRelease = () => {
 		}
 	}, [selectValue])
 
-	// * Aquí obtenemos el ID de la publicación para usar este formulario para editarla
+	//Aquí obtenemos el ID de la publicación para usar este formulario para editarla
 	const { idRelease } = useParams()
 	const publications = useSelector(state => state.publications)
 	const publication = publications["publications"].find(p => p.id === idRelease)
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Contenido del formulario para añadir una publicación
 	const [formValues, handleInputChange, reset] = useForm({
 		postType: '',
 		urlImg: '',
@@ -373,24 +391,23 @@ export const FormEditRelease = () => {
 		keywords: '',
 		bibtexfile: '',
 	}, publication);
-
-	const { postType, urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
+	const { urlImg, descr, tech, frontImg, modalMedia, link, autor, title,
 		journal, yearMonth, volume, number, pages, publisher,
 		address, howpublished, booktitle, editor, series,
 		organization, school, linkConsult, note, institution, display, keywords, bibtexfile } = formValues;
 
-	// Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
+	//Esta función maneja el cambio en el select y obtiene su valor para que el useEffect trabaje
 	const handleSelectChange = (event) => {
 		const { target } = event;
 		setSelectValue(target.value);
 		handleInputChange(event);
 	}
-	//Bibtex
+
+	//función para manejar el cambio de bibtex
 	let bibtex_File;
 	const [datosbibtex, setDatosBibtex] = useState('');
 	const handleFileBibtexChange = (e) => {
 		bibtex_File = e.target.files[0];
-		//if(e.target.files.length===0)setFuncionEjecutada(false);
 		setDatosBibtex(bibtex_File);
 		if (bibtex_File!=null) {
 			const reader = new FileReader();
@@ -403,6 +420,8 @@ export const FormEditRelease = () => {
 			setFuncionEjecutada(false);
 		}
 	}
+
+	//Función y hook para obtener los datos de un archivo bibtex
 	const [funcionEjecutada, setFuncionEjecutada] = useState(false);
 	function get_data(content){
 		const text = content.split();
@@ -447,62 +466,41 @@ export const FormEditRelease = () => {
 	}
 	useEffect(() => {
 	}, [funcionEjecutada]);
+
+	//función para descargar el archivo bibtex
 	const handleDownload = () =>{
 		const storage = getStorage();
 		const textRegexString = new RegExp("/([^\/?]+)\\?","i");
 		const information = formValues.bibtexfile.match(textRegexString);
-		//console.log(information[1]);
 		const pathReference = ref(storage, information[1]);
 		getDownloadURL(pathReference).then((url) => {
-			// File deleted successfully
-			//console.log("Descarga exitosa");
-			//console.log(url);
 			const anchor = document.createElement('a');
 			anchor.setAttribute('href', url);
 			anchor.setAttribute('target','_blank');
 			anchor.setAttribute('download', information[1]+".txt");
 			anchor.click();
 		}).catch((error) => {
-			//console.log("Fallo al descargar");
-			// Uh-oh, an error occurred!
 		});
-		/*const a = document.createElement('a');
-		a.href = pathReference; // Set the file path or URL
-		a.download = information[1]; // Set the desired file name for download
-		a.click();*/
 	}
-	//Galeria
+
+	//Obtención de la galería
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 		formValues.urlImg=datosMg;
-		//console.log(formValues.urlImg)
 	}
 
-	//envio a la api
-	const navigate = useNavigate();
-	const handleSubmit = () => {
-		formValues.urlImg = datos;
-		formValues.postType = selectValue;
-		//console.log(formValues.postType);
-		dispatch(startNewPublication(formValues));
-		reset();
-		navigate('/admin/release');
-	}
-
-	/**
-	 * Esta función se encarga de manejar la actualización de una publicación
-	 * recibe como parámetro el evento para prevenir la acción por default
-	 * @param {event} e 
-	 */
+	//función para actualizar la publicación
 	const handleUpdatePublication = e => {
 		e.preventDefault()
 		bibtex_File = datosbibtex;
+
+		//Envio al estado la actualización de la publicación
 		dispatch(editPublication(publication.id, formValues, bibtex_File))
 		setFuncionEjecutada(false);
 	}
 
-	//tech infor firebase
+	//Función y hook para obtener las tecnologías
 	const [techOption, setTech] = useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -510,7 +508,6 @@ export const FormEditRelease = () => {
 				const Data = await getDocs(collection(db, "Tecnologias"));
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setTech(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
@@ -518,17 +515,19 @@ export const FormEditRelease = () => {
 		obtenerTech()
 	}, [])
 
-
-	//setSelectValue(formValues.postType = selectValue);
+	//useEffect para actualizar el valor del tipo de publicación
 	useEffect(()=>{
-		//setSelectValue(formValues.postType = selectValue);
 		setSelectValue(formValues.postType);
 	},[]);
+
+	//Función para obtener el nombre del archivo bibtex
 	function getname(){
 		const textRegexString = new RegExp("/([^\/?]+)\\?","i");
 		const information = formValues.bibtexfile.match(textRegexString);
 		return(information[1]);
 	}
+
+	//Despliegue del formulario de edición
 	return (
 		<div className="container mb-5">
 			<div className="app-title">
@@ -559,7 +558,6 @@ export const FormEditRelease = () => {
 						<div></div>
 					)}
 				</div>
-				
 				<div className="col-md-2 mb-3">
 					<label> Type </label>
 					<select
@@ -585,7 +583,6 @@ export const FormEditRelease = () => {
 						<option value='unpublished' > unpublished </option>
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Front Image </label>
 					<input
@@ -596,7 +593,6 @@ export const FormEditRelease = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
-
 				<div className="col mb-3">
 					<label>Modal Media </label>
 					<input
@@ -619,7 +615,6 @@ export const FormEditRelease = () => {
 						<option value='embed' > embed </option>
 					</select>
 				</div>
-
 				<div className="col-md-3 mb-3">
 					<label> Imagen desde Galeria </label>
 					<div className="card">
@@ -671,9 +666,6 @@ export const FormEditRelease = () => {
 					}
 				</select>
 			</div>
-
-
-
 			<div className="row">
 				<div className="col mb-3">
 					<label> Autor </label>
@@ -715,7 +707,6 @@ export const FormEditRelease = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
-
 				<div className="col mb-3">
 					<label>Journal</label>
 					<input className="form-control"
@@ -831,7 +822,6 @@ export const FormEditRelease = () => {
 						disabled={booktitleDisabled}
 					/>
 				</div>
-
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -858,7 +848,6 @@ export const FormEditRelease = () => {
 						disabled={seriesDisabled}
 					/>
 				</div>
-
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -886,7 +875,6 @@ export const FormEditRelease = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="row">
 				<div className="col mb-3">
 					<label> Link de Consulta </label>
@@ -901,7 +889,6 @@ export const FormEditRelease = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="row">
 				<div className="col mb-3">
 					<label> Note </label>
@@ -915,7 +902,6 @@ export const FormEditRelease = () => {
 						disabled={noteDisabled}
 					/>
 				</div>
-
 				<div className="col mb-3">
 					<label> Institution </label>
 					<input className="form-control"
@@ -948,8 +934,6 @@ export const FormEditRelease = () => {
 			>
 				{'Guardar cambios'}
 			</button>
-
-
 		</div>
 	)
 }

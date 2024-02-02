@@ -1,29 +1,47 @@
+//Uso de React
 import React from 'react'
-import Select from 'react-select'
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { startNewTesisGrado } from '../../../actions/tesis';
-import { useForm } from '../../../hooks/useForm';
-import { getAuth } from 'firebase/auth';
-import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
-import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+
+//Uso de Select
+import Select from 'react-select'
+
+//Uso de Swal para las alertas en las ejecuciones
+import Swal from 'sweetalert2';
+
+//Uso de useNavigate para la navegación en el sitio
+import { useNavigate } from 'react-router-dom';
+
+//Uso de Redux
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+
+//Uso del hook useForm
+import { useForm } from '../../../hooks/useForm';
+
+//Uso de Firestore
+import { getAuth } from 'firebase/auth';
 import { db } from '../../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
 
+//Componentes necesarios
+import { startNewTesisGrado } from '../../../actions/tesis';
+import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
+import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
+
 export const FormAddTesisGrado = () => {
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
 	const auth = getAuth();
 	const dN = auth.currentUser.displayName;
+
+	//Declaración del useNavigate
 	const navigate = useNavigate();
 
 	//Traemos la información de los usuarios de firebase
 	const { usuarios } = useSelector(state => state.user);
 
-	//Formulario
+	//Contenido del formulario
 	const [formValues, handleInputChange, reset] = useForm({
 		name: '',
 		correo: '',
@@ -41,13 +59,13 @@ export const FormAddTesisGrado = () => {
 	});
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, alumnosLista, grado } = formValues;
 
-	//Galeria
+	//Obtención de la galería
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 	}
 
-	//tech
+	//useEffect y hook para la obtención de las tecnologías
 	const [techOption, setTech] = React.useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -63,6 +81,7 @@ export const FormAddTesisGrado = () => {
 		obtenerTech()
 	}, [])
 
+	//Configuración de las tecnologías
 	const techoptions = []
 	techOption.map(item => (
 		techoptions.push({ value: item.id, label: item.nombre })
@@ -71,38 +90,40 @@ export const FormAddTesisGrado = () => {
 		selectedOption: null
 	})
 
+	//Función para la selección de tecnologías
 	const handleChangeTecnos = selectedOption => {
 		setTecnos({ selectedOption });
 	}
 
-	//Checkbox directores
+	//Checkbox para los directores
 	const optionsD = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
 		optionsD.push({ value: u.id, label: u.nombre })
 	))
-
 	const optionsA = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
 		optionsA.push({ value: u.id, label: u.nombre })
 	))
-
 	const [directores, setDirectores] = useState({
 		selectedOption: null
 	})
 
+	//Función para la selección de los directores
 	const handleChangeDirectores = selectedOption => {
 		setDirectores({ selectedOption });
 	}
-	//Checkbox alumnos
+
+	//Checkbox para los alumnos
 	const [alumnos, setAlumnos] = useState({
 		selectedOption: null
 	})
 
+	//Función para la selección de los alumnos
 	const handleChangeAlumnos = selectedOption => {
 		setAlumnos({ selectedOption });
 	}
 
-	//envio a la api
+	//Función para la inserción de la tesis en la BD
 	const handleEnvTesis = () => {
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
@@ -131,6 +152,8 @@ export const FormAddTesisGrado = () => {
 					formValues.alumnosLista = selectedAlumnos;
 					formValues.nameTech = selectedTecnos;
 					formValues.urlImg = datos;
+
+					//Envio al estado de una nueva tesis de grado
 					dispatch(startNewTesisGrado(formValues));
 					reset();
 					navigate('/admin/Tesis');
@@ -143,16 +166,15 @@ export const FormAddTesisGrado = () => {
 		}else{
 			Swal.fire('Error al agregar tesis,', 'Debe tener al menos un director y un alumno agregado', 'error');
 		}
-
 	}
 
+	//Despliegue del formulario para añadir una tesis de grado
 	return (
 		<div className="container">
 			<div className="app-title">
 				<h2>Agregar Tesis Licenciatura</h2>
 				<hr />
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label> Nombre de tesis </label>
@@ -189,7 +211,6 @@ export const FormAddTesisGrado = () => {
 						onChange={handleChangeTecnos}
 					/>
 				</div>
-
 				<div className="col mb-3">
 					<label>Status de la tesis </label>
 					<select
@@ -226,7 +247,6 @@ export const FormAddTesisGrado = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label>Agregar Directores</label>
@@ -253,7 +273,6 @@ export const FormAddTesisGrado = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="row mb-12">
 				<div className="col-md-3 mb-3">
 					<label> Imagen desde Galeria </label>
@@ -263,7 +282,6 @@ export const FormAddTesisGrado = () => {
 						<FotosGalleryChoose />
 					</div>
 				</div>
-
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -276,7 +294,6 @@ export const FormAddTesisGrado = () => {
 						<option value='No' > No </option>
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Liga del video</label>
 					<input
@@ -288,9 +305,7 @@ export const FormAddTesisGrado = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
-
 			</div>
-
 			<div class="text-center">
 				<button
 					className="btn btn-primary btn-large"
@@ -299,7 +314,6 @@ export const FormAddTesisGrado = () => {
 					Agregar
 				</button>
 			</div>
-
 		</div>
 	)
 }

@@ -5,13 +5,13 @@ import React, { useEffect } from 'react'
 import { useForm } from '../../../hooks/useForm';
 
 //Uso de Firestore
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase-config';
 
 //Uso de Swal para las alertas en las ejecuciones
 import Swal from "sweetalert2";
 
-//Uso de REdux
+//Uso de Redux
 import { useSelector, useDispatch } from 'react-redux';
 
 //Componentes necesarios
@@ -23,20 +23,11 @@ const FormEditVideo = () =>{
     //Delcaración del dispatch
     const dispatch = useDispatch();
 
-    //Delcaración de la colección en Firestore
-    const videosCollection = collection(db, `Youtube`);
-
     //Obtención de los videos del estado
     var youtubes = useSelector(state => state.youtubes);
 
     //Selección de los videos
     youtubes = youtubes.videos;
-    
-    //Función para obtener los videos de la BD
-	const getVideos = async () => {
-		const datos = await getDocs(videosCollection);
-        youtubes = datos.docs.map(doc => { return { ...doc.data(), id: doc.id } });
-	}
 
     //Contenido del formulario para agregar un nuevo video
     const [formValues, handleInputChange] = useForm({
@@ -51,9 +42,6 @@ const FormEditVideo = () =>{
 
         //Envio al estado de un nuevo video
         dispatch(startsNewYoutube(formValues));
-
-        //Llamada a la función para obtener los videos de la BD
-        getVideos();
 
         //Limpiar parámetros del formulario
         formValues.urlVideo="";
@@ -76,9 +64,6 @@ const FormEditVideo = () =>{
 
         //Enviar al estado la petición de carga de los videos
         dispatch(startLoadingYoutube());
-
-        //Llamada a la función para obtener los videos de la BD
-		getVideos();
 	}
 
     //Despliegue del formulario y la lista de los videos

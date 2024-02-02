@@ -1,113 +1,90 @@
+//Uso de React
 import React, { useEffect } from 'react'
-import Form from 'react-bootstrap/Form';
+
+//Uso de CSS
 import './users.css'
-import fotoPerfil from '../../assets/Usuario.jpg';
+
+//Uso de Firestore
 import { db } from '../../firebase/firebase-config'
 import { collection, getDocs } from "firebase/firestore";
+
+//Uso de Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { activeData, startSaveData, startUploading } from '../../actions/user';
+
+//Uso de hook useForm
 import { useForm } from '../../hooks/useForm';
-import { useState } from 'react';
+
+//Componentes necearios
+import fotoPerfil from '../../assets/Usuario.jpg';
+import { activeData, startSaveData } from '../../actions/user';
+
 
 export const Perfil = () => {
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
 
+	//Obtención del usuario del estado
 	const { datos: datoUser } = useSelector(state => state.user);
+
+	//Contenido del formulario de edición del perfil
 	const [formValues, handleInputChange] = useForm(datoUser);
-	// console.log(datoUser)
+	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password } = formValues;
 
-	const { nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, ss } = formValues;
-
-	const { active } = useSelector(state => state.user);
-	const [isChecked, setIsChecked] = useState(ss);
-
-	console.log(formValues)
-
+	//UseEffect para obtener la información activa
 	useEffect(() => {
-
 		dispatch(activeData({ ...formValues }));
-
 	}, [formValues, dispatch])
 
-	//traer datos de escuelas y carreras
+	//Función y hook para obtener las carreras y las escuelas
 	const [escuela, setEscuela] = React.useState([])
+	const [carrera, setCarrera] = React.useState([])
 	React.useEffect(() => {
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setEscuela(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
 		}
-		obtenerEscuela()
-	}, [])
-
-	const [carrera, setCarrera] = React.useState([])
-	React.useEffect(() => {
 		const obtenerCarrera = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Carrera"));
 				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setCarrera(arrayData)
-
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		obtenerCarrera()
-	}, [])
+		obtenerEscuela()
+	}, [])	
 
-	//Guardar informacion editada
+	//Función para guardar la información actualizada
 	const handleSave = () => {
-			formValues.ss = isChecked;
-			dispatch(startSaveData(formValues)); //tenia antes active
+
+		//Envio al estado de la información a actualizar
+		dispatch(startSaveData(formValues));
 	}
 
-	//carga de imagenes
-	const handlePictureClick = () => {
-		document.querySelector('#fileSelector').click();
-	}
-
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			dispatch(startUploading(file));
-		}
-	}
-
-	const handleOnChange = () => {
-		setIsChecked(!isChecked);
-
-	};
-
+	//Despliegue del formulario de edición del perfil del alumno
 	return (
 		<div className='container'>
 			<div className="center-user">
 				<table className='tb-user'>
 					<tr>
 						<td rowSpan={3}>
-							<div onClick={handlePictureClick}>
+							<div>
 								<img className='foto' src={urlImg || fotoPerfil} alt="Foto de Perfil" />
 							</div>
-						</td>
-						<td colSpan={2}>
-							<input
-								id="fileSelector"
-								type="file"
-								name="file"
-								style={{ display: 'none' }}
-								onChange={handleFileChange}
-							/>
-							<p className='titulo'>Información Básica </p>
 						</td>
 					</tr>
 					<tr>
 						<td colspan={2}>
 							<div className='container'>
+								<label> Nombre </label>
 								<input
 									type='label'
 									placeholder='Nombre:'
@@ -123,8 +100,9 @@ export const Perfil = () => {
 					<tr>
 						<td colspan={2}>
 							<div className='container'>
+								<label> Contraseña </label>
 								<input
-									type='label'
+									type='password'
 									placeholder='Password:'
 									className='form-control datos'
 									name='password'
@@ -138,60 +116,31 @@ export const Perfil = () => {
 					<tr>
 						<td>
 							<div className='container'>
+								<label> Nivel </label>
 								<select
 									className="form-control datos"
 									name='nivel'
 									value={nivel}
 									onChange={handleInputChange}
-								><option value="vacio"> No se ha seleccionado ninguna opcion </option>
+								><option value="vacio"> Nivel </option>
 									<option value='bachelor' > Bachelor </option>
 									<option value='masters' > Masters </option>
 									<option value='phd' > PHD </option>
-									<option value='work' > Work </option>
 								</select>
 							</div>
 						</td>
 						<td>
 							<div className='container'>
+								<label> Estado </label>
 								<select
 									className="form-control datos"
 									name='grado'
 									value={grado}
 									onChange={handleInputChange}
 								>
-									<option value="vacio"> No se ha seleccionado ninguna opcion </option>
 									<option value='current' > Current </option>
 									<option value='graduate' > Graduate </option>
-									<option value='Leader' > Leader </option>
-									<option value='out' > Out </option>
 								</select>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colSpan={2}>
-							<div className='container'>
-								<select
-									className="form-control datos"
-									name='rol'
-									value={rol}
-									onChange={handleInputChange}
-								>
-									<option value='alumno' > Alumno </option>
-									<option value='other' > other </option>
-								</select>
-							</div>
-						</td>
-						<td colSpan={2}>
-							<div className='container'>
-								<Form.Check
-									type="checkbox"
-									id="ss"
-									label="ss"
-									checked={isChecked}
-									onChange={handleOnChange}
-								/>
-
 							</div>
 						</td>
 					</tr>
@@ -209,7 +158,6 @@ export const Perfil = () => {
 							</div>
 						</td>
 					</tr>
-
 					<tr>
 						<td colSpan={3}>
 							<hr />
@@ -225,18 +173,12 @@ export const Perfil = () => {
 									name='idSchool'
 									value={idSchool}
 									onChange={handleInputChange}
-
 								>
 									<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-									{
-
-										escuela.map(item => (
+									{escuela.map(item => (
 											<option key={item.id} value={item.id}> {item.name} </option>
 										))
-
-
 									}
-
 								</select>
 							</div>
 						</td>
@@ -252,13 +194,10 @@ export const Perfil = () => {
 									onChange={handleInputChange}
 								>
 									<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-									{
-
-										carrera.map(item => (
+									{carrera.map(item => (
 											<option key={item.id} value={item.name}> {item.name} </option>
 										))
 									}
-
 								</select>
 							</div>
 						</td>

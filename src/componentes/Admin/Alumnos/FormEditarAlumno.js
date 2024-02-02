@@ -1,45 +1,68 @@
+//Uso de React
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
+//Uso de Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+//Uso de useParams y useNavigate para la navegación en el sitio
+import { useParams, useNavigate } from 'react-router-dom';
+
+//Uso del hook useForm
 import { useForm } from '../../../hooks/useForm';
-import fotoPerfil from '../../../assets/Usuario.jpg'
-import { editUser, startEditingPicture } from '../../../actions/edit';
+
+//Uso de Swal para las laertas en las ejecuciones
 import Swal from 'sweetalert2';
-import { startLoadingUsers } from '../../../actions/user';
-import { collection, getDocs, deleteDoc, updateDoc, doc, query, where, querySnapshot } from 'firebase/firestore';
-import { useNavigate } from "react-router-dom";
+
+//Uso de Firestore
+import { collection, getDocs, updateDoc, doc, query, where } from 'firebase/firestore';
 import { db } from "../../../firebase/firebase-config";
+
+//Componentes necesarios
+import { editUser } from '../../../actions/edit';
+import { startLoadingUsers } from '../../../actions/user';
 import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGallery } from '../../ui/FotosGallery';
 
-export const FormEditarAlumno = (props) => {
+export const FormEditarAlumno = () => {
 
+	//Declaración de useNavigate
 	const navigate = useNavigate();
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Obtención del usuario del estado
 	const { usuarios } = useSelector(state => state.user)
 	const { idAlumno } = useParams()
 	const alumnoO = usuarios.filter(alumno => {
 		return alumno.id === idAlumno
 	})
 	const alumno = alumnoO[0]
-	//console.log(alumno)
+
+	//Contenido del formulario de edición
 	const [formValues, handleInputChange] = useForm(alumno);
+	const {
+		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
+	} = formValues;
 	const [password2, setPassword2] = useState('')
 	const [oldPassword, setOldPassword] = useState('')
+
+	//Obtener los datos de la galería
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
 		formValues.urlImg=datosMg;
-		//console.log(formValues.urlImg)
 	}
+
+	//useEffect para obtener la contraseña
 	useEffect(() => {
 		setOldPassword(alumno.password)
 	}, [usuarios]);
 
-	//proyectos donde el lider es autor
+	//Alamacenar los proyectos donde el usuario es autor, las escuelas y carreras
 	const [listProject, setListProject] = React.useState([])
+	const [escuela, listEscuela] = React.useState([])
+	const [carrera, listCarrera] = React.useState([]);
 	React.useEffect(() => {
 		const obtenerProject = async () => {
 			try {
@@ -47,48 +70,22 @@ export const FormEditarAlumno = (props) => {
 				const queryRef = query(projectRef, where("autores", "array-contains",
 					alumno.nombre));;
 				const q = await getDocs(queryRef);
-
 				const arrayData = q.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setListProject(arrayData)
 			} catch (error) {
 				console.log(error)
 			}
 		}
-		obtenerProject()
-	}, [])
+		const obtenerCarrera = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Carrera"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				listCarrera(arrayData)
 
-
-	const {
-		nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
-	} = formValues;
-	const [isChecked, setIsChecked] = useState(formValues.ss);
-
-	const handleContra = (e) => {
-		if (password == password2) dispatch(editUser(formValues, oldPassword));
-		else Swal.fire('Contraseñas no corresponden')
-	}
-
-
-	const handleSave = (e) => {
-		//alumno.ss = isChecked;
-		e.preventDefault();
-		const memberRef = doc(db, 'Usuarios', alumno.id);
-		const data = {
-			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
-		};
-		if(alumno.rol==="administrador"){data.idSchool="";data.idCareer="";data.github="";}
-		if(alumno.rol==="alumno"||alumno.rol==="externo"){data.idWork="";}
-		//data.ss = isChecked
-		updateDoc(memberRef, data);
-		//mostrar mensaje de confirmacion
-		Swal.fire('Usuario editado', 'Éxito');
-		dispatch(startLoadingUsers())
-		//ir a admin/alumnos para ver los cambios
-		navigate(`/admin/alumnos`);
-	}
-
-	const [escuela, listEscuela] = React.useState([])
-	React.useEffect(() => {
+			} catch (error) {
+				console.log(error)
+			}
+		}
 		const obtenerEscuela = async () => {
 			try {
 				const Data = await getDocs(collection(db, "Escuela"));
@@ -100,31 +97,46 @@ export const FormEditarAlumno = (props) => {
 			}
 		}
 		obtenerEscuela()
-	}, [])
-
-	const [carrera, listCarrera] = React.useState([])
-	React.useEffect(() => {
-		const obtenerCarrera = async () => {
-			try {
-				const Data = await getDocs(collection(db, "Carrera"));
-				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-				listCarrera(arrayData)
-
-			} catch (error) {
-				console.log(error)
-			}
-		}
 		obtenerCarrera()
+		obtenerProject()
 	}, [])
 
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			dispatch(startEditingPicture(formValues, file));
+	//Función para manejar el cambio de contraseña
+	const handleContra = (e) => {
+		if (password === password2) {
+
+			//Envio al estado la edición de la contraseña
+			dispatch(editUser(formValues, oldPassword));
+		}
+		else {
+			Swal.fire('Contraseñas no corresponden');
 		}
 	}
 
+	//Función para manejar el guardado del formulario
+	const handleSave = (e) => {
 
+		//Faltaría colocar este código en las actions para mayor limpieza
+		e.preventDefault();
+		const memberRef = doc(db, 'Usuarios', alumno.id);
+		const data = {
+			nombre, email, urlImg, grado, descripcion, idSchool, idCareer, facebook, github, linkedin, nivel, password, rol, esAutor, display, idWork 
+		};
+		if(alumno.rol==="administrador"){data.idSchool="";data.idCareer="";data.github="";}
+		if(alumno.rol==="alumno"||alumno.rol==="externo"){data.idWork="student";}
+		updateDoc(memberRef, data);
+		Swal.fire('Usuario editado', 'Éxito');
+
+		//Envio al estaod de la carga de los usuarios
+		dispatch(startLoadingUsers())
+		if(alumno.rol === 'administrador'){
+			navigate(`/admin/lideres`);
+		}else{
+			navigate(`/admin/alumnos`);
+		}
+	}
+
+	//Despliegue del formulario de edición
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -139,25 +151,13 @@ export const FormEditarAlumno = (props) => {
 			<div className="row mb-12">
 				<div className='col-md-3 mb-3'>
 					<div className="card">
-						<img className='foto' src={urlImg || fotoPerfil} alt="Foto de Perfil" />
+						<img className='foto' src={urlImg} alt="Foto de Perfil" />
 						<ModalGalleryAdd MgAFAP={MgAFAP} />
 						<FotosGallery />
 					</div>
 				</div>
-				<input
-					id='fileSelector'
-					className="custom-file-input"
-					type='file'
-					name='file'
-					style={{ display: 'none' }}
-					onChange={handleFileChange}
-				/>
-				{/* </div> */}
-
 			</div>
-
 			<div className="row">
-
 				<div className="col mb-3">
 					<label> Nombre* </label>
 					<input
@@ -184,7 +184,6 @@ export const FormEditarAlumno = (props) => {
 				</div>
 				<div className='col mb-3'>
 					<div className="card">
-
 						<div className="col mb-3">
 							<label> Contraseña </label>
 							<input
@@ -215,13 +214,10 @@ export const FormEditarAlumno = (props) => {
 						>
 							Cambiar
 						</button>
-
 					</div>
 				</div>
-
 			</div>
 			<div className="row">
-
 				<div className="col mb-3" style={{ display: 'none' }}>
 					<label> Contraseña* </label>
 					<input
@@ -247,7 +243,6 @@ export const FormEditarAlumno = (props) => {
 				</div>
 			</div>
 			<div className="row">
-
 				<div className="col mb-3">
 					<label>Tipo de usuario</label>
 					<select
@@ -282,11 +277,8 @@ export const FormEditarAlumno = (props) => {
 						value={grado}
 						onChange={handleInputChange}
 					>
-						<option value="vacio"> No se ha seleccionado ninguna opcion </option>
 						<option value='current' > Current </option>
 						<option value='graduate' > Graduate </option>
-						<option value='Leader' > Leader </option>
-						<option value='out' > Out </option>
 					</select>
 				</div>
 				<div className="col mb-3">
@@ -303,7 +295,6 @@ export const FormEditarAlumno = (props) => {
 						<option value='work' > Work </option>
 					</select>
 				</div>
-
 			</div>
 			<div className="row">
 				<div className="col mb-3">
@@ -313,18 +304,12 @@ export const FormEditarAlumno = (props) => {
 						name='idSchool'
 						value={idSchool}
 						onChange={handleInputChange}
-
 					>
 						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-						{
-
-							escuela.map(item => (
+						{escuela.map(item => (
 								<option key={item.id} value={item.id}> {item.name} </option>
 							))
-
-
 						}
-
 					</select>
 				</div>
 				<div className="col mb-3">
@@ -336,13 +321,10 @@ export const FormEditarAlumno = (props) => {
 						onChange={handleInputChange}
 					>
 						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-						{
-
-							carrera.map(item => (
+						{carrera.map(item => (
 								<option key={item.id} value={item.name}> {item.name} </option>
 							))
 						}
-
 					</select>
 				</div>
 				<div className="col mb-3">
@@ -384,19 +366,6 @@ export const FormEditarAlumno = (props) => {
 					</div>
 				)}
 			</div>
-			{/* <div className="row"> */}
-			{/* {alumno.rol === 'other' && ( */}
-
-			{/* // )} */}
-			{/* </div> */}
-			{/* <div className="row"> */}
-			{/* {alumno.rol === 'other' && ( */}
-
-			{/* // )} */}
-			{/* </div> */}
-			{/* <div className="row">
-				
-			</div> */}
 			<div className="row">
 				<div className="col mb-3">
 					<label>Descripción </label>
@@ -445,8 +414,6 @@ export const FormEditarAlumno = (props) => {
 					/>
 				</div>
 			</div>
-
-
 			<div className="row">
 				<div className="col-md-6 mb-5">
 					<label> Proyectos </label>
@@ -457,7 +424,6 @@ export const FormEditarAlumno = (props) => {
 					</ul>
 				</div>
 			</div>
-
 			<div class="text-center">
 				<button
 					className="btn btn-primary btn-large"
@@ -466,8 +432,6 @@ export const FormEditarAlumno = (props) => {
 					Guardar
 				</button>
 			</div>
-
-
 		</div>
 	)
 }

@@ -1,23 +1,40 @@
+//Uso de React
 import React from 'react'
-import Select from 'react-select'
-import Swal from 'sweetalert2';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
+
+//Uso de Select
+import Select from 'react-select'
+
+//Uso de Swal para las alertas en las ejecuciones
+import Swal from 'sweetalert2';
+
+//Uso de Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+//Uso de useParams para la navegación en el sitio
+import { useParams } from 'react-router-dom';
+
+//Uso del hook useForm
+import { useForm } from '../../hooks/useForm';
+
+//Uso de Firestore
+import { db } from '../../firebase/firebase-config'
+import { collection, getDocs } from "firebase/firestore";
+
+//Componentes necesarios
 import { ModalGalleryAdd } from '../Admin/Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../ui/FotosGalleryChoose';
 import { editTesisGrado, editTesisPosgrado } from '../../actions/edit';
-
-import { db } from '../../firebase/firebase-config'
-import { collection, getDocs } from "firebase/firestore";
 
 export const EditInfoTesis = () => {
 
 	//Traemos la información de los usuarios de firebase
 	const { usuarios } = useSelector(state => state.user);
 
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Traemos la información de la tesis de firebase
 	const { idTesis } = useParams();
 	const { tesis } = useSelector(state => state.tesis);
 	console.log(idTesis)
@@ -25,9 +42,8 @@ export const EditInfoTesis = () => {
 		return t.id === idTesis
 	})
 	const tesisObj = tesisO[0]
-	console.log(tesisObj);
 
-	//tech infor firebase
+	//useEffect y hook para la obtención de las tecnologías6
 	const [techOption, setTech] = React.useState([])
 	React.useEffect(() => {
 		const obtenerTech = async () => {
@@ -43,6 +59,7 @@ export const EditInfoTesis = () => {
 		obtenerTech()
 	}, [])
 
+	//Obtención de alumnos en tesis
 	const alumnosListaInitAux = [];
 	var alumnoAux = "";
 	if (tesisObj.grado == "Licenciatura") {
@@ -53,41 +70,41 @@ export const EditInfoTesis = () => {
 		alumnoAux = tesisObj.alumnosLista;
 	}
 
+	//Contenido del formulario de edición de tesis
 	const [formValues, handleInputChange] = useForm(tesisObj)
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, directoresLista, alumnosLista, grado, alumnosListaInit } = formValues;
+	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, directoresLista, alumnosLista, grado, alumnosListaInit } = formValues;
 
+	//Función para manejar el cambio de opción de tecnología
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		formValues.urlImg = "";
 		setDatos(datosMg);
 	}
-
 	const selectedDirectores = [];
 	const selectedAlumnos = [];
 
-	//Checkbox directores
+	//Checkbox para los directores
 	directoresLista.map((u) => (
 		selectedDirectores.push({ value: u, label: u })
 	))
-
 	const optionsD = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
 		optionsD.push({ value: u.id, label: u.nombre })
 	))
-
 	const optionsA = []
 	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
 		optionsA.push({ value: u.id, label: u.nombre })
 	))
 
+	//Función y hook para seleccionar a los directores
 	const [directores, setDirectores] = useState({
 		selectedOption: selectedDirectores
 	})
-
 	const handleChangeDirectores = selectedOption => {
 		setDirectores({ selectedOption });
 	}
-	//Checkbox alumnos
+
+	//Checkbox para los alumnos
 	if (formValues.grado == "Licenciatura") {
 		alumnosLista.map((u) => (
 			selectedAlumnos.push({ value: u, label: u })
@@ -96,22 +113,21 @@ export const EditInfoTesis = () => {
 		selectedAlumnos.push({ value: alumnosLista, label: alumnosLista })
 	}
 
+	//Función y hook para seleccionar a los alumnos
 	const [alumnos, setAlumnos] = useState({
 		selectedOption: selectedAlumnos
 	})
-
 	const handleChangeAlumnos = selectedOption => {
 		setAlumnos({ selectedOption });
 	}
 
-	//envio a la api
+	//Función para realizar la inserción de las actualizaciones en la BD
 	const handleSubmit = () => {
 		if (datos != "") {
 			formValues.urlImg = datos;
 		}
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
-
 		if (directores.selectedOption != null && alumnos.selectedOption != null) {
 			if (directores.selectedOption.length <= 2) {
 				if (directores.selectedOption != null) {
@@ -130,6 +146,8 @@ export const EditInfoTesis = () => {
 						formValues.alumnosLista = selectedAlumnos;
 						formValues.urlImg = datos;
 						formValues.alumnosListaInit = alumnosListaInitAux;
+
+						//Envio al estado la actualización de una tesis de grado
 						dispatch(editTesisGrado(idTesis, formValues));
 					} else {
 						Swal.fire('Error al agregar tesis, sólo se admiten máximo 4 alumnos');
@@ -139,9 +157,10 @@ export const EditInfoTesis = () => {
 					formValues.alumnosLista = alumnos.selectedOption.label;
 					formValues.urlImg = datos;
 					formValues.alumnosListaInit = alumnoAux;
+
+					//Envio al estado la actualización de una tesis de posgrado
 					dispatch(editTesisPosgrado(idTesis, formValues));
 				}
-
 			} else {
 				Swal.fire('Error al agregar tesis, sólo se admiten máximo 2 Directores');
 			}
@@ -150,7 +169,7 @@ export const EditInfoTesis = () => {
 		}
 	}
 
-
+	//DEspliegue del formulario para editar la información de las tesis
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -183,7 +202,6 @@ export const EditInfoTesis = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-2">
 					<label> Tecnología utilizada </label>
@@ -194,11 +212,9 @@ export const EditInfoTesis = () => {
 						onChange={handleInputChange}
 					>
 						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
-						{
-							techOption.map(item => (
+						{techOption.map(item => (
 								<option key={item.id} value={item.id}> {item.nombre} </option>
 							))
-
 						}
 					</select>
 				</div>
@@ -216,7 +232,6 @@ export const EditInfoTesis = () => {
 					</select>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				<div className="col mb-3">
 					<label>Descripción</label>
@@ -239,7 +254,6 @@ export const EditInfoTesis = () => {
 					/>
 				</div>
 			</div>
-
 			<div className="form-group row">
 				{grado === "Licenciatura" ? (
 					<div className="col mb-3">
@@ -268,7 +282,6 @@ export const EditInfoTesis = () => {
 						/>
 					</div>
 				)}
-
 				{grado === "Licenciatura" ? (
 					<div className="col mb-3">
 						<label>Agregar alumnos</label>
@@ -296,7 +309,6 @@ export const EditInfoTesis = () => {
 					</div>
 				)}
 			</div>
-
 			<div className="row mb-12">
 				<div className="col-md-3 mb-3">
 					<label> Imagen desde Galeria </label>
@@ -306,8 +318,6 @@ export const EditInfoTesis = () => {
 						<FotosGalleryChoose />
 					</div>
 				</div>
-
-
 				<div className="col mb-3">
 					<label>Mostrar en página principal</label>
 					<select
@@ -320,7 +330,6 @@ export const EditInfoTesis = () => {
 						<option value='No' > No </option>
 					</select>
 				</div>
-
 				<div className="col mb-3">
 					<label>Liga del video</label>
 					<input
@@ -332,9 +341,7 @@ export const EditInfoTesis = () => {
 						onChange={handleInputChange}
 					/>
 				</div>
-
 			</div>
-
 			<div class="text-center">
 				<button
 					className="btn btn-primary btn-large"
@@ -343,7 +350,6 @@ export const EditInfoTesis = () => {
 					Guardar
 				</button>
 			</div>
-
 		</div>
 	)
 }

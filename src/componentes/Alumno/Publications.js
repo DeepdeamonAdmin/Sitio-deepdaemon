@@ -63,7 +63,7 @@ export const Publications = () => {
                         <tr key={publication.id} >
                             <td className='td-project'>
                                 <img 
-                                    src={ publication.frontImg } 
+                                    src={ publication.urlImg } 
                                     className='foto-project'
                                     alt="foto-perfil" />
                             </td>
@@ -78,7 +78,7 @@ export const Publications = () => {
                             </td>
                             <td className='td-project'>
                                 <Link
-                                    to ={rol === 'administrador' ? `editPub/${publication.id}` : `/user/editPublication/${publication.id}`}
+                                    to ={`/alumno/editPublication/${publication.id}`}
                                     className="btn btn-outline-secondary nav-item nav-link"
                                 >
                                     Editar

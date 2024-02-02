@@ -25,7 +25,7 @@ const reducers = combineReducers({
 	ui: uiReduccer,
 	//Para perfil individual
 	user: userReducer,
-	aviso: avisoReducer,
+	avisos: avisoReducer,
 	projects: projectsReduccer,
 	publications: publicationsReduccer,
 	gallery: galleryReducer,

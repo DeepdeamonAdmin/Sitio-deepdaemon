@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 //Componentes necesarios
 import { types } from '../types/types';
 import { startLoading, finishLoading, uiCloseModal } from './ui';
+import { startLoadingUsers } from './user';
 
 //Registrar usuario por correo
 export const startRegisterWithEmailPassword = (formValues) => {
@@ -40,22 +41,21 @@ function validar(auth) {
 }
 
 //Función para completar los datos del usuario
-const completarDatos = async (uid, formvalues) => {
+const completarDatos = async (uid, formValues) => {
 	await setDoc(doc(db, 'Usuarios', uid), {
-		"rol": formvalues.rol,
-		"nombre": formvalues.name,
-		"email": formvalues.email,
-		"password": formvalues.password,
-		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/user.png?alt=media&token=d78d67df-1b61-4b47-8eb1-1a18ae83e340',
+		"rol": formValues.rol,
+		"nombre": formValues.name,
+		"email": formValues.email,
+		"password": formValues.password,
+		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/Gallery%2FAlumno%2FUser_Default.jpg?alt=media&token=ad597d38-45dc-4495-bdd3-0816f91e88e7',
 		'display': 'Y',
 		'grado': 'current',
 		"descripcion": '',
 		"idSchool": 'vacio',
 		"idCareer": 'vacio',
-		"ss": '',
 		"nivel": 'vacio',
 		"esAutor": 'Y',
-		"idWork":'',
+		"idWork":'student',
 		"linkedin": '',
 		"facebook": '',
 		"github": '',
@@ -76,6 +76,10 @@ export const registroDesdeLider = (formValues) => {
 				
 				//envio al estado del cierre del modal
 				dispatch(uiCloseModal());
+				Swal.fire('Alumno agregado con éxito');
+
+				//Cargar usuarios al estado
+				dispatch(startLoadingUsers());
 			})
 			.catch(e => {
 				console.log(e);
@@ -92,13 +96,12 @@ const completarDatosDesdeForm = async (uid, formValues) => {
 		"nombre": formValues.nombre,
 		"email": formValues.email,
 		"password": formValues.password,
-		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/user.png?alt=media&token=d78d67df-1b61-4b47-8eb1-1a18ae83e340',
+		'urlImg': formValues.urlImg || 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/Gallery%2FAlumno%2FUser_Default.jpg?alt=media&token=ad597d38-45dc-4495-bdd3-0816f91e88e7',
 		'display': formValues.display,
 		'grado': formValues.grado,
 		"descripcion": formValues.descripcion,
 		"idSchool": formValues.idSchool,
 		"idCareer": formValues.idCareer,
-		"ss": formValues.ss,
 		"nivel": formValues.nivel,
 		"esAutor": formValues.esAutor,
 		"idWork":formValues.idWork,
@@ -117,8 +120,12 @@ export const registrarLider = (formValues) => {
 				await updateProfile(user, { displayName: formValues.name });
 				completarDatosDeLider(user.uid, formValues);
 
+				Swal.fire('Usuario líder registrado', 'Éxito');
 				//Envio al estado el cierre del modal
 				dispatch(uiCloseModal());
+
+				//Cargar usuarios al estado
+				dispatch(startLoadingUsers());
 			})
 			.catch(e => {
 				console.log(e);
@@ -134,7 +141,7 @@ const completarDatosDeLider = async (uid, formValues) => {
 		"nombre": formValues.name,
 		"email": formValues.email,
 		"password": formValues.password,
-		'urlImg': 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/oQKZ628qIJS3YIlV2VjZHW6ZSXQ2%2FfotoPerfilUsuario.jpg?alt=media&token=baf1bfc7-944d-4683-a998-8b730fa9c891',
+		'urlImg': formValues.urlImg || 'https://firebasestorage.googleapis.com/v0/b/deepdaemon-bf419.appspot.com/o/oQKZ628qIJS3YIlV2VjZHW6ZSXQ2%2FfotoPerfilUsuario.jpg?alt=media&token=baf1bfc7-944d-4683-a998-8b730fa9c891',
 		'grado': 'leader',
 		'display': formValues.display,
 		'esAutor': formValues.esAutor,

@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 //Componentes necesarios
 import { types } from "../types/types";
 import { uiCloseModal } from "./ui";
+import { loadWorks } from '../helpers/loadWorks';
 
 //Función para insertar un nuevo aviso en la BD
 export const startsNewSign = (formValues) => {
@@ -32,6 +33,17 @@ export const startsNewSign = (formValues) => {
 	}
 }
 
+//Carga de todos los avisos
+export const startLoadingAvisos = () => {
+	return async (dispatch) => {
+		const ruta = "Avisos";
+		const avisos = await loadWorks(ruta);
+
+		//Envio al estado de los videos obtenidos
+		dispatch(setAvisos(avisos));
+	}
+}
+
 //Publicación en el estado del nuevo anuncio
 export const addNewSign = (id, sign) => ({
 	type: types.avisoAddNew,
@@ -40,3 +52,8 @@ export const addNewSign = (id, sign) => ({
 	}
 })
 
+//Envio al estado de los videos de YouTube cargados
+export const setAvisos = (avisos) => ({
+	type: types.avisoLoad,
+	payload: avisos
+});
