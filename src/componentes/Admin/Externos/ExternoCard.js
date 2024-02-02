@@ -36,7 +36,6 @@ export const ExternoCard = (item) => {
 
 			//En caso de aceptarse la eliminación
             if (result.isConfirmed) {
-                console.log(item.id)
 
 				//Enviar al estado la eliminación del usuario
                 dispatch(deleteUserExt(item));
