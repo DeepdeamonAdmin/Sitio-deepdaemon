@@ -27,6 +27,7 @@ import { startLoadingPublication } from '../actions/publications';
 import { startLoadingYoutube } from '../actions/youtube';
 import { startLoadingGallery } from '../actions/gallery';
 import { startLoadingAvisos } from '../actions/avisos';
+import { GoogleAnalytics } from './GoogleAnalytics';
 
 export const AppRouter = () => {
 
@@ -98,6 +99,7 @@ export const AppRouter = () => {
                     path='/*'
                     element={
                         <PublicRoute isAuthenticade={isLoggedIn} rol={rol} >
+                            <GoogleAnalytics />
                             <HomeRoutes />
                         </PublicRoute>
                     }
@@ -106,6 +108,7 @@ export const AppRouter = () => {
                     path="admin/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador'}>
+                            <GoogleAnalytics />
                             <AdminDashBoard />
                         </ProtectedRoute>
                     }
@@ -114,6 +117,7 @@ export const AppRouter = () => {
                     path="alumno/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
+                            <GoogleAnalytics />
                             <AlumnoDashBoard />
                         </ProtectedRoute>
                     }
@@ -122,6 +126,7 @@ export const AppRouter = () => {
                     path="externo/*"
                     element={
                         <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'externo'}>
+                            <GoogleAnalytics />
                             <ExternoDashBoard />
                         </ProtectedRoute>
                     }

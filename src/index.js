@@ -15,7 +15,6 @@ import { AppDeepDaemon } from './AppDeepDaemon.js';
 //Indicamos la seccion en index.html
 const divRoot = document.querySelector('#app')
 
-
 //Cargar elementos al DOM
 ReactDOM.render(
     <AppDeepDaemon />, 

@@ -66,7 +66,7 @@ export const AppDeepDaemon = () => {
     },[mobileOn]);
 
     //Inicialización de Google Analytics
-    const TRACKING_ID = 'G-STVJ91NMJ5';
+    const TRACKING_ID = 'G-K9L3VEPV7R';
     ReactGA.initialize(TRACKING_ID);
 
     //Tracking con Google Analytics
