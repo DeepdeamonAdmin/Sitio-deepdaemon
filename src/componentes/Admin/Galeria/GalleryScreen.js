@@ -4,12 +4,18 @@ import React from 'react'
 //Uso de Bootstrap
 import { Nav, Tab } from "react-bootstrap";
 
+//Uso de Redux
+import { useSelector } from 'react-redux';
+
 //Componentes necesarios
 import { AddNewFab } from '../../ui/AddNewFab'
 import { ModalAddGalery } from './ModalAddGalery'
 import GalleryList from './GalleryList';
 
 export const GalleryScreen = () => {
+
+	//Obtención del ususario del estado
+	var user = useSelector(state => state.user);
 
 	//Despliegue de la galería con sus distintas categorías
 	return (
@@ -21,7 +27,8 @@ export const GalleryScreen = () => {
 					<AddNewFab/>
 				</div>
 			</div>
-			<Tab.Container defaultActiveKey="Publicacion">
+			<Tab.Container defaultActiveKey="Tesis">
+			{(user.rol==="administrador")&&(
 				<Nav className="projects">
 					<Nav.Item>
 						<Nav.Link eventKey="Alumno">
@@ -59,6 +66,16 @@ export const GalleryScreen = () => {
 						</Nav.Link>
 					</Nav.Item>
 				</Nav>
+			)}
+			{(user.rol!="administrador")&&(
+				<Nav className="projects">
+					<Nav.Item>
+						<Nav.Link eventKey="Tesis">
+							<h4 className="">Tesis</h4>
+						</Nav.Link>
+					</Nav.Item>
+				</Nav>
+			)}
 				<hr />
 				<Tab.Content style={{marginLeft:"30px",marginRight:"30px"}}>
 					<Tab.Pane eventKey="Alumno">

@@ -17,6 +17,7 @@ import { General } from '../componentes/Usuario/General'
 import { Perfil } from '../componentes/Alumno/Perfil';
 import { Tesis } from '../componentes/Alumno/Tesis';
 import { Publications } from '../componentes/Alumno/Publications';
+import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
 
 //Uso de rutas hacia formularios
 import { FormAddRelease } from '../componentes/Alumno/FormAddRelease';
@@ -43,6 +44,7 @@ export const AlumnoDashBoard = () => {
                     <Route path='addpublication' element={ <FormAddRelease /> } />
                     <Route path='editPublication/:idRelease' element={ <FormAddRelease /> } exact/>
                     <Route path='tesis/:idTesis/:params' element={ <EditInfoTesis /> } exact/>
+                    <Route path="galery" element={<GalleryScreen />} />
                     <Route path="*" element={ <RutaError />} />
                 </Routes>
         </div>

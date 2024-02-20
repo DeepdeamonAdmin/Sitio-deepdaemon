@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 //Uso de Redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 //Uso del hook useForm
 import { useForm } from '../../../hooks/useForm'
@@ -17,6 +17,9 @@ export const FormAddGalery = () => {
 
 	//Declaración del dispatch
 	const dispatch = useDispatch()
+
+	//Obtención del ususario del estado
+	var user = useSelector(state => state.user);
 
 	//Contenido del formulario para una nueva imagen
 	const [formValues, handleInputChange, reset] = useForm({
@@ -67,6 +70,7 @@ export const FormAddGalery = () => {
 				//Construir el archivo con su nuevo nombre
 				const auxFile = new File([file], fileName)
 
+				if(user.rol!="administrador")formValues.type="Tesis";
 				//Enviar al estado la imagen (archivo)
 				await dispatch(startUploadingImage(auxFile,formValues.type));
 
@@ -105,6 +109,7 @@ export const FormAddGalery = () => {
 				</div>
 			</div>
 			<div className='form-row'>
+				{(user.rol==="administrador")&&(
 				<div className='col-md-6 mb-3'>
 				<label> Type </label>
 					<select
@@ -122,7 +127,23 @@ export const FormAddGalery = () => {
 						<option value='Publicacion'>Publicación</option>
 						<option value='Tesis'>Tesis</option>
 					</select>
+				
 				</div>
+				)}
+				{(user.rol!=="administrador")&&(
+				<div className='col-md-6 mb-3'>
+				<label> Type </label>
+					<select
+						value={selectValue}
+						className="form-control"
+						name='type'
+						onChange={handleSelectChange}
+					>
+						<option value='Tesis'>Tesis</option>
+					</select>
+				
+				</div>
+				)}
 			</div>
 			<div className="form-row">
 				<div className="col-md-6 mb-3">

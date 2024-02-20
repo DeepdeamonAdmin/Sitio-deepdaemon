@@ -59,6 +59,14 @@ export const NavBarUser = () => {
                     to="/alumno/publicaciones">
                         Publicaciones
                 </NavLink>
+                <NavLink
+						activeClassName="active"
+						className="nav-item nav-link"
+						exact
+						to="/alumno/galery"
+					>
+						Galeria
+				</NavLink>
             </div>    
         </div>
     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -66,7 +74,6 @@ export const NavBarUser = () => {
             <Link
                 to ='/alumno/perfil'
                 className="btn btn-outline-secondary nav-item nav-link"
-
             >
                 { nombre }
             </Link>

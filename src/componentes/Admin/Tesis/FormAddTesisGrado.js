@@ -146,8 +146,6 @@ export const FormAddTesisGrado = () => {
 							selectedTecnos.push(u.label)
 						))
 					}
-					console.log(selectedDirectores);
-					console.log(selectedAlumnos);
 					formValues.directoresLista = selectedDirectores;
 					formValues.alumnosLista = selectedAlumnos;
 					formValues.nameTech = selectedTecnos;

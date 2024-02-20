@@ -77,8 +77,8 @@ export const EditInfoTesis = () => {
 	//Función para manejar el cambio de opción de tecnología
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
-		formValues.urlImg = "";
 		setDatos(datosMg);
+		formValues.urlImg = datos;
 	}
 	const selectedDirectores = [];
 	const selectedAlumnos = [];
@@ -123,9 +123,7 @@ export const EditInfoTesis = () => {
 
 	//Función para realizar la inserción de las actualizaciones en la BD
 	const handleSubmit = () => {
-		if (datos != "") {
-			formValues.urlImg = datos;
-		}
+		if(datos!="")formValues.urlImg = datos;
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
 		if (directores.selectedOption != null && alumnos.selectedOption != null) {
@@ -144,7 +142,6 @@ export const EditInfoTesis = () => {
 						}
 						formValues.directoresLista = selectedDirectores;
 						formValues.alumnosLista = selectedAlumnos;
-						formValues.urlImg = datos;
 						formValues.alumnosListaInit = alumnosListaInitAux;
 
 						//Envio al estado la actualización de una tesis de grado
@@ -155,7 +152,6 @@ export const EditInfoTesis = () => {
 				} else {
 					formValues.directoresLista = selectedDirectores;
 					formValues.alumnosLista = alumnos.selectedOption.label;
-					formValues.urlImg = datos;
 					formValues.alumnosListaInit = alumnoAux;
 
 					//Envio al estado la actualización de una tesis de posgrado

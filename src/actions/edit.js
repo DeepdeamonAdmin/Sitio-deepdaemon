@@ -45,7 +45,7 @@ export const editTesisGrado = (idTesis, formValues) => {
 				const docRefdelete = await deleteDoc(doc(db, "Niveles/Grado/Licenciatura/" + alumnosDelete[i]));
 			}
 		}
-		for (let i = 0; i < alumnosNuevos.length; i++) {
+		/*for (let i = 0; i < alumnosNuevos.length; i++) {
 			const docRef = doc(db, "Niveles/Grado/Licenciatura", alumnosNuevos[i]);
 			try {
 				const docSnap = await getDoc(docRef);
@@ -57,7 +57,7 @@ export const editTesisGrado = (idTesis, formValues) => {
 			} catch (error) {
 				console.log("Error:", error);
 			}
-		}
+		}*/
 		if (alumnosArray.length == 0) {
 			const dataToFirestore = {
 				name: formValues.name,
@@ -74,6 +74,7 @@ export const editTesisGrado = (idTesis, formValues) => {
 				alumnosLista: formValues.alumnosLista ? formValues.alumnosLista : 'Sin autores',
 				grado: formValues.grado
 			}
+			await updateDoc(doc(db, 'Tesis', idTesis), dataToFirestore);
 
 			//Envio al estado la carga de las tesis
 			dispatch(startLoadingTesis())
@@ -94,6 +95,7 @@ export const editTesisGrado = (idTesis, formValues) => {
 				alumnosLista: formValues.alumnosLista ? formValues.alumnosLista : 'Sin autores',
 				grado: formValues.grado
 			}
+			await updateDoc(doc(db, 'Tesis', idTesis), dataToFirestore);
 
 			//Envio al estado la carga de las tesis
 			dispatch(startLoadingTesis())
@@ -105,7 +107,7 @@ export const editTesisGrado = (idTesis, formValues) => {
 //Función para la edidión de una tesis de posgrado
 export const editTesisPosgrado = (idTesis, formValues) => {
 	return async (dispatch) => {
-		const alumnoNuevo = false;
+		var alumnoNuevo = false;
 		var ruta = "";
 		var alumno = "";
 		switch (formValues.grado) {
@@ -119,7 +121,7 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 		if (formValues.alumnosListaInit != formValues.alumnosLista) {
 			alumnoNuevo = true;
 		}
-		const docRef = doc(db, ruta, formValues.alumnosLista);
+		/*const docRef = doc(db, ruta, formValues.alumnosLista);
 		try {
 			const docSnap = await getDoc(docRef);
 			if (docSnap.exists()) {
@@ -127,8 +129,8 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 			}
 		} catch (error) {
 			console.log("Error:", error);
-		}
-		if (alumno != "exist") {
+		}*/
+		if (true) {
 			const dataToFirestore = {
 				name: formValues.name,
 				correo: formValues.correo,
@@ -144,6 +146,7 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 				alumnosLista: formValues.alumnosLista ? formValues.alumnosLista : 'Sin autores',
 				grado: formValues.grado
 			}
+			await updateDoc(doc(db, 'Tesis', idTesis), dataToFirestore);
 
 			//Envio al estado la carga de las tesis
 			dispatch(startLoadingTesis())
@@ -164,6 +167,7 @@ export const editTesisPosgrado = (idTesis, formValues) => {
 				alumnosLista: formValues.alumnosLista ? formValues.alumnosLista : 'Sin autores',
 				grado: formValues.grado
 			}
+			await updateDoc(doc(db, 'Tesis', idTesis), dataToFirestore);
 
 			//Envio al estado la carga de las tesis
 			dispatch(startLoadingTesis())

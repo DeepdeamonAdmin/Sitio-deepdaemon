@@ -31,14 +31,34 @@ export const EditInfoTesis = () => {
 	//Traemos la información de los usuarios de firebase
 	const { usuarios } = useSelector(state => state.user);
 
-	//Traemos la información de la tesis de firebase
+	//Declaración del dispatch
 	const dispatch = useDispatch();
+
+	//Traemos la información de la tesis de firebase
 	const { idTesis } = useParams();
 	const { tesis } = useSelector(state => state.tesis);
 	const tesisO = tesis.filter(t => {
 		return t.id === idTesis
 	})
 	const tesisObj = tesisO[0]
+
+	//useEffect y hook para la obtención de las tecnologías6
+	const [techOption, setTech] = React.useState([])
+	React.useEffect(() => {
+		const obtenerTech = async () => {
+			try {
+				const Data = await getDocs(collection(db, "Tecnologias"));
+				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+				setTech(arrayData)
+
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		obtenerTech()
+	}, [])
+
+	//Obtención de alumnos en tesis
 	const alumnosListaInitAux = [];
 	var alumnoAux = "";
 	if (tesisObj.grado == "Licenciatura") {
@@ -49,50 +69,15 @@ export const EditInfoTesis = () => {
 		alumnoAux = tesisObj.alumnosLista;
 	}
 
-	//Se muestra la informacion en el formulario
+	//Contenido del formulario de edición de tesis
 	const [formValues, handleInputChange] = useForm(tesisObj)
 	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, directoresLista, alumnosLista, grado, alumnosListaInit } = formValues;
 
-	//Obtención de la galería
+	//Función para manejar el cambio de opción de tecnología
 	const [datos, setDatos] = useState('');
 	const MgAFAP = (datosMg) => {
 		setDatos(datosMg);
-		formValues.urlImg=datos;
-	}
-
-	//useEffect y hook para la obtención de las tecnologías
-	const [techOption, setTech] = React.useState([])
-	React.useEffect(() => {
-		const obtenerTech = async () => {
-			try {
-				const Data = await getDocs(collection(db, "Tecnologias"));
-				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-				setTech(arrayData)
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		obtenerTech()
-	}, [])
-
-	//Función y variables para el almacenamiento de las tecnologías
-	const selectedTecnos = [];
-	const techoptions = []
-	techOption.map(item => (
-		techoptions.push({ value: item.id, label: item.nombre })
-	))
-	nameTech.map((u) => (
-		selectedTecnos.push({ value: u, label: u })
-	))
-
-	//Hook para el cambio de tecnología
-	const [tecnos, setTecnos] = useState({
-		selectedOption: selectedTecnos
-	})
-
-	//Función para manejar el cambio de opción de tecnología
-	const handleChangeTecnos = selectedOption => {
-		setTecnos({ selectedOption });
+		formValues.urlImg = datos;
 	}
 	const selectedDirectores = [];
 	const selectedAlumnos = [];
@@ -101,19 +86,23 @@ export const EditInfoTesis = () => {
 	directoresLista.map((u) => (
 		selectedDirectores.push({ value: u, label: u })
 	))
-
-	//Almacenamiento de los posibles autores
-	const options = []
-	usuarios.filter(u => u.esAutor === 'Y').map((u) => (
-		options.push({ value: u.id, label: u.nombre })
+	const optionsD = []
+	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
+		optionsD.push({ value: u.id, label: u.nombre })
+	))
+	const optionsA = []
+	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
+		optionsA.push({ value: u.id, label: u.nombre })
 	))
 
 	//Función y hook para seleccionar a los directores
+	const [change, setChange] = useState(false);
 	const [directores, setDirectores] = useState({
 		selectedOption: selectedDirectores
 	})
 	const handleChangeDirectores = selectedOption => {
 		setDirectores({ selectedOption });
+		setChange(true);
 	}
 
 	//Checkbox para los alumnos
@@ -130,15 +119,14 @@ export const EditInfoTesis = () => {
 		selectedOption: selectedAlumnos
 	})
 	const handleChangeAlumnos = selectedOption => {
-		setAlumnos({ selectedOption });
+		setAlumnos( {selectedOption });
 	}
 
-	//Función para subir las actualizaciones de las tesis a la BD
+	//Función para realizar la inserción de las actualizaciones en la BD
 	const handleSubmit = () => {
 		if(datos!="")formValues.urlImg = datos;
 		const selectedDirectores = [];
 		const selectedAlumnos = [];
-		const selectedTecnos = [];
 		if (directores.selectedOption != null && alumnos.selectedOption != null) {
 			if (directores.selectedOption.length <= 2) {
 				if (directores.selectedOption != null) {
@@ -153,30 +141,22 @@ export const EditInfoTesis = () => {
 								selectedAlumnos.push(u.label)
 							))
 						}
-						if (tecnos.selectedOption != null) {
-							tecnos.selectedOption.map((u) => (
-								selectedTecnos.push(u.label)
-							))
-						}
 						formValues.directoresLista = selectedDirectores;
 						formValues.alumnosLista = selectedAlumnos;
-						formValues.nameTech = selectedTecnos;
 						formValues.alumnosListaInit = alumnosListaInitAux;
-
+						
 						//Envio al estado la actualización de una tesis de grado
 						dispatch(editTesisGrado(idTesis, formValues));
 					} else {
 						Swal.fire('Error al agregar tesis, sólo se admiten máximo 4 alumnos');
 					}
 				} else {
-					if (tecnos.selectedOption != null) {
-						tecnos.selectedOption.map((u) => (
-							selectedTecnos.push(u.label)
-						))
-					}
 					formValues.directoresLista = selectedDirectores;
-					formValues.alumnosLista = alumnos.selectedOption[0].label;
-					formValues.nameTech = selectedTecnos;
+					formValues.alumnosLista={}
+					if(change)formValues.alumnosLista = alumnos.selectedOption[0].label;
+					else{
+						formValues.alumnosLista=alumnos.selectedOption.label;
+					}
 					formValues.alumnosListaInit = alumnoAux;
 
 					//Envio al estado la actualización de una tesis de posgrado
@@ -190,7 +170,7 @@ export const EditInfoTesis = () => {
 		}
 	}
 
-	//Despliegue del formulario para editar una tesis
+	//Despliegue del formulario para editar la información de las tesis
 	return (
 		<div className="container">
 			<div className="app-title">
@@ -225,16 +205,19 @@ export const EditInfoTesis = () => {
 			</div>
 			<div className="form-group row">
 				<div className="col mb-2">
-					<label>Tecnología utilizada</label>
-					<Select
-						isMulti
-						name="nameTech"
-						options={techoptions}
-						className="basic-multi-select"
-						classNamePrefix="select"
-						value={tecnos.selectedOption}
-						onChange={handleChangeTecnos}
-					/>
+					<label> Tecnología utilizada </label>
+					<select
+						className="form-control"
+						name='nameTech'
+						value={nameTech}
+						onChange={handleInputChange}
+					>
+						<option key="vacio" value="vacio"> No se ha seleccionado ninguna opcion </option>
+						{techOption.map(item => (
+								<option key={item.id} value={item.id}> {item.nombre} </option>
+							))
+						}
+					</select>
 				</div>
 				<div className="col mb-3">
 					<label>Status del proyecto</label>
@@ -279,7 +262,7 @@ export const EditInfoTesis = () => {
 						<Select
 							isMulti
 							name="directores"
-							options={options}
+							options={optionsD}
 							className="basic-multi-select"
 							classNamePrefix="select"
 							value={directores.selectedOption}
@@ -292,7 +275,7 @@ export const EditInfoTesis = () => {
 						<Select
 							isMulti
 							name="directores"
-							options={options}
+							options={optionsD}
 							className="basic-multi-select"
 							classNamePrefix="select"
 							value={directores.selectedOption}
@@ -306,7 +289,7 @@ export const EditInfoTesis = () => {
 						<Select
 							isMulti
 							name="alumnos"
-							options={options}
+							options={optionsA}
 							className="basic-multi-select"
 							classNamePrefix="select"
 							value={alumnos.selectedOption}
@@ -318,7 +301,7 @@ export const EditInfoTesis = () => {
 						<label>Agregar alumno</label>
 						<Select
 							name="alumno"
-							options={options}
+							options={optionsA}
 							className="basic-single"
 							classNamePrefix="select"
 							value={alumnos.selectedOption}
@@ -371,3 +354,4 @@ export const EditInfoTesis = () => {
 		</div>
 	)
 }
+
