@@ -12,13 +12,12 @@ import * as serviceWorker from './serviceWorker';
 //Componente principal
 import { AppDeepDaemon } from './AppDeepDaemon.js';
 
-//Indicamos la seccion en index.html
-const divRoot = document.querySelector('#app')
-
-//Cargar elementos al DOM
-ReactDOM.render(
-    <AppDeepDaemon />, 
-divRoot);   
+//Renderizado del componente principal
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+			<AppDeepDaemon />
+    </React.StrictMode>
+  );
 
 //Script generado por default al crear una aplicación en React.
 //No contribuye nada las páginas o en el DOM, sin embargo, sirve para funciones extras como caché
