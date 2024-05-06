@@ -1,6 +1,6 @@
 //Uso de React
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 //Hojas de estilo
 import './styles/index.css'
@@ -10,10 +10,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
 //Componente principal
-import { AppDeepDaemon } from './AppDeepDaemon.js';
+import { AppDeepDaemon } from './AppDeepDaemon';
 
 //Renderizado del componente principal
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("app")).render(
     <React.StrictMode>
 			<AppDeepDaemon />
     </React.StrictMode>

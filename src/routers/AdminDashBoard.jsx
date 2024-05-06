@@ -5,41 +5,41 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 //Uso de ruta de la barra de navegación del administrador
-import { NavBarAdmin } from '../componentes/ui/NavBarAdmin';
+import { NavBarAdmin } from '../components/ui/NavBarAdmin';
 
 //Uso de ruta de error
-import { RutaError } from '../componentes/ui/RutaError';
+import { RutaError } from '../components/ui/RutaError';
 
 //Uso de ruta hacia la página general (principal)
-import { General } from '../componentes/Usuario/General'
+import { General } from '../components/Usuario/General'
 
 //Uso de rutas hacia pantallas principales de cada categoría
-import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
-import { ProjectsScreen } from '../componentes/Admin/Proyectos/ProjectsScreen';
-import { AlumnoScreen } from '../componentes/Admin/Alumnos/AlumnoScreen';
-import { ExternoScreen} from '../componentes/Admin/Externos/ExternoScreen'
-import { TesisScreen } from '../componentes/Admin/Tesis/TesisScreen';
-import { ReleaseScreen } from '../componentes/Admin/Publicaciones/ReleaseScreen';
-import { LiderScreen } from '../componentes/Admin/Lideres/LiderScreen';
-import AvisosScreen from '../componentes/Admin/Avisos/AvisosScreen';
-import InstitucionesScreen from '../componentes/Admin/Instituciones/InstitucionesScreen';
-import CarrerasScreen from '../componentes/Admin/Carreras/CarrerasScreen';
-import TechScreen from '../componentes/Admin/Tecnologías/TechScreen';
-import YouTubeScreen from '../componentes/Admin/Youtube/YouTubeScreen';
+import { GalleryScreen } from '../components/Admin/Galeria/GalleryScreen';
+import { ProjectsScreen } from '../components/Admin/Proyectos/ProjectsScreen';
+import { AlumnoScreen } from '../components/Admin/Alumnos/AlumnoScreen';
+import { ExternoScreen} from '../components/Admin/Externos/ExternoScreen'
+import { TesisScreen } from '../components/Admin/Tesis/TesisScreen';
+import { ReleaseScreen } from '../components/Admin/Publicaciones/ReleaseScreen';
+import { LiderScreen } from '../components/Admin/Lideres/LiderScreen';
+import AvisosScreen from '../components/Admin/Avisos/AvisosScreen';
+import InstitucionesScreen from '../components/Admin/Instituciones/InstitucionesScreen';
+import CarrerasScreen from '../components/Admin/Carreras/CarrerasScreen';
+import TechScreen from '../components/Admin/Tecnologías/TechScreen';
+import YouTubeScreen from '../components/Admin/Youtube/YouTubeScreen';
 
 //Uso de rutas hacia formularios
-import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
-import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
-import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
-import { FormEditProject } from '../componentes/Admin/Proyectos/FormEditProject';
-import { FormEditarAlumno } from '../componentes/Admin/Alumnos/FormEditarAlumno';
-import { FormAddProject } from '../componentes/Admin/Proyectos/FormAddProject';
-import { FormAddRelease } from '../componentes/Admin/Publicaciones/FormAddRelease';
-import { FormAddSign } from '../componentes/Admin/Avisos/FormAddSign';
-import { FormAddAlumno } from '../componentes/Admin/Alumnos/FormAddAlumno';
-import { FormAddLider } from '../componentes/Admin/Lideres/FormAddLider';
-import { FormEditRelease } from '../componentes/Admin/Publicaciones/FormEditRelease';
-import { EditInfoTesis } from '../componentes/Admin/Tesis/EditInfoTesis';
+import { FormAddTesisGrado } from '../components/Admin/Tesis/FormAddTesisGrado';
+import { FormAddTesisMaestria } from '../components/Admin/Tesis/FormAddTesisMaestria';
+import { FormAddTesisDoctorado } from '../components/Admin/Tesis/FormAddTesisDoctorado';
+import { FormEditProject } from '../components/Admin/Proyectos/FormEditProject';
+import { FormEditarAlumno } from '../components/Admin/Alumnos/FormEditarAlumno';
+import { FormAddProject } from '../components/Admin/Proyectos/FormAddProject';
+import { FormAddRelease } from '../components/Admin/Publicaciones/FormAddRelease';
+import { FormAddSign } from '../components/Admin/Avisos/FormAddSign';
+import { FormAddAlumno } from '../components/Admin/Alumnos/FormAddAlumno';
+import { FormAddLider } from '../components/Admin/Lideres/FormAddLider';
+import { FormEditRelease } from '../components/Admin/Publicaciones/FormEditRelease';
+import { EditInfoTesis } from '../components/Admin/Tesis/EditInfoTesis';
 
 export const AdminDashBoard = () => {
 

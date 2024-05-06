@@ -5,26 +5,26 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 //Uso de ruta de la barra de navegación del alumno
-import { NavBarUser } from '../componentes/ui/NavBarUser';
+import { NavBarUser } from '../components/ui/NavBarUser';
 
 //Uso de ruta de error
-import { RutaError } from '../componentes/ui/RutaError';
+import { RutaError } from '../components/ui/RutaError';
 
 //Uso de ruta hacia la página general (principal)
-import { General } from '../componentes/Usuario/General'
+import { General } from '../components/Usuario/General'
 
 //Uso de rutas hacia pantallas principales de cada categoría
-import { Perfil } from '../componentes/Alumno/Perfil';
-import { Tesis } from '../componentes/Alumno/Tesis';
-import { Publications } from '../componentes/Alumno/Publications';
-import { GalleryScreen } from '../componentes/Admin/Galeria/GalleryScreen';
+import { Perfil } from '../components/Alumno/Perfil';
+import { Tesis } from '../components/Alumno/Tesis';
+import { Publications } from '../components/Alumno/Publications';
+import { GalleryScreen } from '../components/Admin/Galeria/GalleryScreen';
 
 //Uso de rutas hacia formularios
-import { FormAddRelease } from '../componentes/Alumno/FormAddRelease';
-import { FormAddTesisGrado } from '../componentes/Admin/Tesis/FormAddTesisGrado';
-import { FormAddTesisMaestria } from '../componentes/Admin/Tesis/FormAddTesisMaestria';
-import { FormAddTesisDoctorado } from '../componentes/Admin/Tesis/FormAddTesisDoctorado';
-import { EditInfoTesis } from '../componentes/Alumno/EditInfoTesis';
+import { FormAddRelease } from '../components/Alumno/FormAddRelease';
+import { FormAddTesisGrado } from '../components/Admin/Tesis/FormAddTesisGrado';
+import { FormAddTesisMaestria } from '../components/Admin/Tesis/FormAddTesisMaestria';
+import { FormAddTesisDoctorado } from '../components/Admin/Tesis/FormAddTesisDoctorado';
+import { EditInfoTesis } from '../components/Alumno/EditInfoTesis';
 
 export const AlumnoDashBoard = () => {
 

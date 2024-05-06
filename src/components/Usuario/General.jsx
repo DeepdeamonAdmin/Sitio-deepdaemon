@@ -32,7 +32,6 @@ import { PublicationScreen } from "./PublicationScreen";
 import { Carousel } from "./Carousel";
 
 export const General = ({ id }) => {
-
   //Configurar hooks para los avisos y videos
   const [avisos, setAvisos] = useState([]);
   const [youtubes, setYoutubes] = useState([]);
@@ -54,29 +53,28 @@ export const General = ({ id }) => {
   const youtubeCollection = collection(db, "Youtube");
 
   //Obtención de los videos de la BD
-  const getYoutubes = async () =>{
+  const getYoutubes = async () => {
     const datos = await getDocs(youtubeCollection);
     var youtube = datos.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
-    })
-    for(var i=0; i<youtube.length; i++){
+    });
+    for (var i = 0; i < youtube.length; i++) {
       const regex = /(?:live|be)\/([a-zA-Z0-9_-]+)/;
       const url = youtube[i].urlVideo;
       const match = regex.exec(url);
       youtube[i].urlVideo = match[1];
     }
     setYoutubes(youtube);
-  }
+  };
 
   //Usar useEffect
-  useEffect(async() => {
+  useEffect(() => {
+    const fetchData = async () => {
+      await getAvisos();
+      await getYoutubes();
+    };
 
-    //Esperar a obtener avisos
-    await getAvisos();
-
-    //Esperar a obtener videos
-    await getYoutubes();
-
+    fetchData();
   }, []);
 
   //Tracking con Google Analytics
@@ -87,9 +85,9 @@ export const General = ({ id }) => {
     <div className="">
       <div className="d-flex flex-row dd_header">
         <div className="container">
-        <Row className="d-flex flex-row " style={{width:"100%"}}>
+          <Row className="d-flex flex-row " style={{ width: "100%" }}>
             <div className="col-sm mb-4" id="Home">
-              <div className="content" style={{position:"relative"}}>
+              <div className="content" style={{ position: "relative" }}>
                 <img src={cic} className="ddcic" alt="cic" />
                 <img src={logo} className="ddlogo" alt="logo" />
                 <h1>Laboratorio de Ciencias </h1>
@@ -98,21 +96,28 @@ export const General = ({ id }) => {
                 <h2>Comunidad de conocimiento</h2>
               </div>
             </div>
-        </Row>
+          </Row>
         </div>
       </div>
       <div className="embed-responsive">
-      <div className="wrapper" style={{ maxWidth: `${1300 + 260 * (avisos.length - 4)}px`, margin: 'auto', marginTop: 4 }}>
-        <Carousel avisos ={avisos} youtubes={youtubes}/>
+        <div
+          className="wrapper"
+          style={{
+            maxWidth: `${1300 + 260 * (avisos.length - 4)}px`,
+            margin: "auto",
+            marginTop: 4,
+          }}
+        >
+          <Carousel avisos={avisos} youtubes={youtubes} />
         </div>
         <Container className="section" id="Nosotros">
           <h1>Un poco sobre nosotros</h1>
           <hr />
           <p>
-            Somos un grupo de trabajo que busca vincular el desarrollo científico
-            con el desarrollo de soluciones industriales para generar tecnología
-            de punta y capital humano de alto impacto en el ámbito académico e
-            industrial.
+            Somos un grupo de trabajo que busca vincular el desarrollo
+            científico con el desarrollo de soluciones industriales para generar
+            tecnología de punta y capital humano de alto impacto en el ámbito
+            académico e industrial.
           </p>
         </Container>
         <Container className="section">
@@ -125,8 +130,8 @@ export const General = ({ id }) => {
               <p>
                 Que el grupo de trabajo y sus integrantes sean un referente a
                 nivel mundial en el desarrollo de tecnologías de punta a nivel
-                científico, académico y comercial, capacitando a capital humano de
-                excelente calidad y desarrollando proyectos con alto impacto
+                científico, académico y comercial, capacitando a capital humano
+                de excelente calidad y desarrollando proyectos con alto impacto
                 comercial y social.
               </p>
             </Col>
@@ -138,8 +143,8 @@ export const General = ({ id }) => {
               <p>
                 Desarrollar sistemas inteligentes basados en redes neuronales
                 profundas que puedan ser distribuidos a usuarios reales, con el
-                objetivo de favorecer una educación integral a los estudiantes del
-                grupo de trabajo.
+                objetivo de favorecer una educación integral a los estudiantes
+                del grupo de trabajo.
               </p>
             </Col>
             <Col>
@@ -148,8 +153,8 @@ export const General = ({ id }) => {
               </div>
               <h2>Valores</h2>
               <p>
-                Intregridad, Confianza, Comunicaciones honestas y abiertas, Pasión
-                por trabajar para hacer un cambio en el mundo.
+                Intregridad, Confianza, Comunicaciones honestas y abiertas,
+                Pasión por trabajar para hacer un cambio en el mundo.
               </p>
             </Col>
           </Row>
@@ -162,8 +167,8 @@ export const General = ({ id }) => {
             <hr />
             <p>
               Por eso creamos un grupo de investigación que tiene como objetivo
-              usar la inteligencia artificial <br></br> para resolver problemas de la
-              industria.
+              usar la inteligencia artificial <br></br> para resolver problemas
+              de la industria.
             </p>
           </Container>
         </Container>
@@ -189,16 +194,16 @@ export const General = ({ id }) => {
             <hr />
             <Tab.Content>
               <Tab.Pane eventKey="leader">
-                <div className="Container" id="Lideres"> 
+                <div className="Container" id="Lideres">
                   <div className="row">
-                    <LeaderScreen status="leader"/>
+                    <LeaderScreen status="leader" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="colaborator">
-                <div className="Container" id="Lideres"> 
+                <div className="Container" id="Lideres">
                   <div className="row">
-                    <LeaderScreen status="colaborator"/>
+                    <LeaderScreen status="colaborator" />
                   </div>
                 </div>
               </Tab.Pane>
@@ -209,7 +214,11 @@ export const General = ({ id }) => {
             <br></br>
           </Tab.Container>
         </Container>
-        <Container fluid className="section portfolio proy_sectionBg" id="Proyectos">
+        <Container
+          fluid
+          className="section portfolio proy_sectionBg"
+          id="Proyectos"
+        >
           <h1 className="separator2 team_title"> Proyectos </h1>
           <hr />
           <Tab.Container defaultActiveKey="indevelop">
@@ -238,7 +247,11 @@ export const General = ({ id }) => {
         </Container>
         <br></br>
         <br></br>
-        <Container fluid className="section portfolio pub_sectionBg" id="Publicaciones">
+        <Container
+          fluid
+          className="section portfolio pub_sectionBg"
+          id="Publicaciones"
+        >
           <h1 className="separator"> Publicaciones </h1>
           <Tab.Container defaultActiveKey="magazine">
             <Nav className="projects">
@@ -266,29 +279,94 @@ export const General = ({ id }) => {
             <hr />
             <Tab.Content>
               <Tab.Pane eventKey="congress">
-                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px", paddingBottom: "10px" }}>
+                <div
+                  className="Container section"
+                  style={{
+                    height: 620,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    className="row overflow-scroll"
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      bottom: -20,
+                      left: 0,
+                      right: "3px",
+                      paddingBottom: "10px",
+                    }}
+                  >
                     <PublicationScreen type="conference" />
                   </div>
                 </div>
               </Tab.Pane>
-              <Tab.Pane eventKey="magazine" >
-                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
-                    <PublicationScreen type={["magazine","article"]}  />
+              <Tab.Pane eventKey="magazine">
+                <div
+                  className="Container section"
+                  style={{
+                    height: 620,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    className="row overflow-scroll"
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      bottom: -20,
+                      left: 0,
+                      right: "3px",
+                    }}
+                  >
+                    <PublicationScreen type={["magazine", "article"]} />
                   </div>
                 </div>
               </Tab.Pane>
-              <Tab.Pane eventKey="book" >
-                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
+              <Tab.Pane eventKey="book">
+                <div
+                  className="Container section"
+                  style={{
+                    height: 620,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    className="row overflow-scroll"
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      bottom: -20,
+                      left: 0,
+                      right: "3px",
+                    }}
+                  >
                     <PublicationScreen type="book" />
                   </div>
                 </div>
               </Tab.Pane>
-              <Tab.Pane eventKey="inbook" >
-                <div className="Container section" style={{ height: 620, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
+              <Tab.Pane eventKey="inbook">
+                <div
+                  className="Container section"
+                  style={{
+                    height: 620,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    className="row overflow-scroll"
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      bottom: -20,
+                      left: 0,
+                      right: "3px",
+                    }}
+                  >
                     <PublicationScreen type="inbook" />
                   </div>
                 </div>
@@ -299,7 +377,11 @@ export const General = ({ id }) => {
         </Container>
         <br></br>
         <br></br>
-        <Container fluid className="section sections team_sectionBg" id="Equipo">
+        <Container
+          fluid
+          className="section sections team_sectionBg"
+          id="Equipo"
+        >
           <h1 className="team_title">Equipo</h1>
           <Tab.Container defaultActiveKey="current">
             <Nav className="projects">
@@ -317,15 +399,47 @@ export const General = ({ id }) => {
             <hr />
             <Tab.Content>
               <Tab.Pane eventKey="current">
-                <div className="Container section" style={{ height: 650, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
+                <div
+                  className="Container section"
+                  style={{
+                    height: 650,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    className="row overflow-scroll"
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      bottom: -20,
+                      left: 0,
+                      right: "3px",
+                    }}
+                  >
                     <TeamScreen status="current" />
                   </div>
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="graduate">
-                <div className="Container section" style={{ height: 650, overflow: "hidden", position: "relative" }}>
-                  <div className="row overflow-scroll" style={{ position: "absolute", top: 80, bottom: -20, left: 0, right: "3px" }}>
+                <div
+                  className="Container section"
+                  style={{
+                    height: 650,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    className="row overflow-scroll"
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      bottom: -20,
+                      left: 0,
+                      right: "3px",
+                    }}
+                  >
                     <TeamScreen status="graduate" />
                   </div>
                 </div>

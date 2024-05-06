@@ -5,17 +5,17 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom';
 
 //Uso de rutas hacia inicio de sesión y registro
-import { Login } from '../componentes/auth/Login';
-import { Registrer } from '../componentes/auth/Registrer';
+import { Login } from '../components/auth/Login';
+import { Registrer } from '../components/auth/Registrer';
 
 //Uso de rutas hacia la barra de navegación
-import { NavBar } from '../componentes/ui/NavBar'
+import { NavBar } from '../components/ui/NavBar'
 
 //Uso de ruta de error
-import { RutaError } from '../componentes/ui/RutaError'
+import { RutaError } from '../components/ui/RutaError'
 
 //Uso de ruta hacia la página general (principal)
-import { General } from '../componentes/Usuario/General'
+import { General } from '../components/Usuario/General'
 
 export const HomeRoutes = () => {
 

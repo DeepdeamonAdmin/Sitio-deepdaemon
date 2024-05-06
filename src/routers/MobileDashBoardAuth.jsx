@@ -5,10 +5,10 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 //Uso de ruta hacia la página general (principal) de la version mobile
-import { GeneralMobile } from '../componentes/Usuario/GeneralMobile';
+import { GeneralMobile } from '../components/Usuario/GeneralMobile';
 
 //Uso de ruta de la barra de navegación de algun usuario autenticado en la version mobile
-import { NavBarMobileAuth } from '../componentes/ui/NavBarMobileAuth';
+import { NavBarMobileAuth } from '../components/ui/NavBarMobileAuth';
 
 export const MobileDashBoardAuth = () => {
 

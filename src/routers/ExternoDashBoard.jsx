@@ -5,10 +5,10 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 //Uso de ruta hacia la página general (principal)
-import { General } from '../componentes/Usuario/General';
+import { General } from '../components/Usuario/General';
 
 //Uso de ruta de la barra de navegación del usuario externo
-import { NavBarExterno } from '../componentes/ui/NavBarExterno';
+import { NavBarExterno } from '../components/ui/NavBarExterno';
 
 export const ExternoDashBoard = () => {
 
