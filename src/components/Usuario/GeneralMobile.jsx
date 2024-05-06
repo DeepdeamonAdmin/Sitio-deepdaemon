@@ -93,8 +93,8 @@ export const GeneralMobile = ({ id }) => {
             <Splide options={options} aria-labelledby="autoplay-example-heading" hasTrack={false}>
               <div style={{ position: 'relative' }}>
                 <SplideTrack>
-                  {avisos.map((aviso) => (
-                    <SplideSlide>
+                  {avisos.map((aviso, index) => (
+                    <SplideSlide key={index}>
                       <img src={aviso.photo} />
                     </SplideSlide>
                   ))}

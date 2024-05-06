@@ -39,23 +39,23 @@ export const Carousel = ({avisos, youtubes}) => {
 
   //Despliegue del carousel
   return (
-    <Splide  options={options} ref={splideRef} onmouseover={tiempo=100000} autoPlay={true}>
-        {avisos.map((aviso) => (
-          <SplideSlide >
-            <img src={aviso.photo}/>
-          </SplideSlide>
-        ))}
-        {youtubes.map((video) => (
-            <SplideSlide> 
-            <iframe
-                className="embed-responsive"
-                src={"https://www.youtube.com/embed/"+video.urlVideo}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-            ></iframe>
-            </SplideSlide>
-        ))}
+    <Splide options={options} ref={splideRef} onMouseOver={() => tiempo = 100000} autoPlay={true}>
+      {avisos.map((aviso, index) => (
+        <SplideSlide key={index}>
+          <img src={aviso.photo} alt={`Aviso ${index}`} />
+        </SplideSlide>
+      ))}
+      {youtubes.map((video, index) => (
+        <SplideSlide key={index}>
+          <iframe
+            className="embed-responsive"
+            src={"https://www.youtube.com/embed/" + video.urlVideo}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </SplideSlide>
+      ))}
     </Splide>
   );
 };

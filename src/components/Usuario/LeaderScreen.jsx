@@ -21,7 +21,7 @@ export const LeaderScreen = ({ status }) => {
 					usuarios.map(usuario => (
 						//Imprimir solamente los usuarios leader	
 						(usuario.grado === "leader" && usuario.display === "Y" && usuario.idWork === status) && (
-							<div className= "row" style={{width:"450px"}} >
+							<div className= "row" style={{width:"450px"}} key={usuario.id}>
 								<div className="col-8 pr-0">
 									<img
 										className="imageleader"

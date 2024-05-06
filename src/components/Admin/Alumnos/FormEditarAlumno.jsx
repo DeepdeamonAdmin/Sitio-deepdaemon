@@ -68,7 +68,7 @@ export const FormEditarAlumno = () => {
 			try {
 				const projectRef = collection(db, "Proyectos");
 				const queryRef = query(projectRef, where("autores", "array-contains",
-					alumno.nombre));;
+					alumno.nombre));
 				const q = await getDocs(queryRef);
 				const arrayData = q.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 				setListProject(arrayData)
@@ -422,7 +422,7 @@ export const FormEditarAlumno = () => {
 					<label> Proyectos </label>
 					<ul>
 						{listProject.map(item => (
-							<li>{item.name}</li>
+							<li key={item.id}>{item.name}</li>
 						))}
 					</ul>
 				</div>
