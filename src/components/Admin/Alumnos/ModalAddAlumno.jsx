@@ -1,5 +1,5 @@
 //Uso de React
-import React from 'react'
+import React from 'react';
 
 //Uso de Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,32 +16,29 @@ import { FormAddAlumno } from './FormAddAlumno';
 Modal.setAppElement('#app');
 
 export const ModalAddAlumno = () => {
+  //Obtener el estatus del modal en el estado global
+  const { modalOpen } = useSelector((state) => state.ui);
 
-	//Obtener el estatus del modal en el estado global
-	const { modalOpen } = useSelector(state => state.ui);
+  //Declaración del dispatch
+  const dispatch = useDispatch();
 
-	//Declaración del dispatch
-	const dispatch = useDispatch();
+  //Cerrar modal
+  const closeModal = () => {
+    //Indicar en el estado el cierre del modal
+    dispatch(uiCloseModal());
+  };
 
-	//Cerrar modal
-	const closeModal = () => {
-		
-		//Indicar en el estado el cierre del modal
-		dispatch(uiCloseModal());
-	}
-
-	//Modal del formulario para añadir a un alumno
-	return (
-		<Modal
-			isOpen={modalOpen}
-			onRequestClose={closeModal}
-			style={customStyles}
-			closeTimeoutMS={200}
-			className="modal"
-			overlayClassName="modal-fondo"
-		>
-			<FormAddAlumno />
-		</Modal>
-	)
-}
-
+  //Modal del formulario para añadir a un alumno
+  return (
+    <Modal
+      isOpen={modalOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      closeTimeoutMS={200}
+      className="modal"
+      overlayClassName="modal-fondo"
+    >
+      <FormAddAlumno />
+    </Modal>
+  );
+};

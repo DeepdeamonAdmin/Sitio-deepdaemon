@@ -1,24 +1,23 @@
 //Uso de React
-import React from "react";
+import React from 'react';
 
 //Uso de NavLink y Link para la navegación en el sitio
-import { NavLink } from "react-router-dom";
-import { Link } from "react-scroll";
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-scroll';
 
 //Componentes necesarios
-import logo from "../../styles/assets/img/sitio/deepdaemon.png";
+import logo from '../../styles/assets/img/sitio/deepdaemon.png';
 
 export const NavBar = () => {
-
-  //Despliegue del navbar general 
+  //Despliegue del navbar general
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
       <NavLink to="/">
-        <img src={logo} style={{ width: "30px" }} alt="logo" />
+        <img src={logo} style={{ width: '30px' }} alt="logo" />
       </NavLink>
       <NavLink to="/" className="navbar-brand mb-0">
-        {" "}
-        Lab. CCC{" "}
+        {' '}
+        Lab. CCC{' '}
       </NavLink>
       <button
         className="navbar-toggler"
@@ -66,15 +65,17 @@ export const NavBar = () => {
           >
             Proyectos
           </Link>
-          <Link activeClass="active"
-						className="nav-item nav-link"
-						to='Publicaciones'
-						spy={true}
-						smooth={true}
-						offset={-70}
-						duration={500}>
-						Publicaciones
-					</Link>
+          <Link
+            activeClass="active"
+            className="nav-item nav-link"
+            to="Publicaciones"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+          >
+            Publicaciones
+          </Link>
           <Link
             activeClass="active"
             className="nav-item nav-link"

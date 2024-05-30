@@ -1,5 +1,5 @@
 //Uso de React
-import React from 'react'
+import React from 'react';
 
 //Uso de Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,30 +16,28 @@ import { FormAddGalery } from './FormAddGalery';
 Modal.setAppElement('#app');
 
 export const ModalAddGalery = () => {
+  //Indicar al estado la apertura del modal
+  const { modalOpen } = useSelector((state) => state.ui);
 
-	//Indicar al estado la apertura del modal
-	const { modalOpen } = useSelector(state => state.ui);
+  //Declaración del dispatch
+  const dispatch = useDispatch();
 
-	//Declaración del dispatch
-	const dispatch = useDispatch();
+  //Función para el cierre del modal
+  const closeModal = () => {
+    //Indicar al estado el cierre del modal
+    dispatch(uiCloseModal());
+  };
 
-	//Función para el cierre del modal
-	const closeModal = () => {
-
-		//Indicar al estado el cierre del modal
-		dispatch(uiCloseModal());
-	}
-
-	//Despliegue del modal
-	return (
-		<Modal
-			isOpen={modalOpen}
-			onRequestClose={closeModal}
-			style={customStyles}
-			closeTimeoutMS={200}
-			overlayClassName="modal-fondo"
-		>
-			<FormAddGalery />
-		</Modal>
-	)
-}
+  //Despliegue del modal
+  return (
+    <Modal
+      isOpen={modalOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      closeTimeoutMS={200}
+      overlayClassName="modal-fondo"
+    >
+      <FormAddGalery />
+    </Modal>
+  );
+};

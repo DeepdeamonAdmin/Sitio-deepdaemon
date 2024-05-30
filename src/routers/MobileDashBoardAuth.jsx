@@ -11,16 +11,15 @@ import { GeneralMobile } from '../components/Usuario/GeneralMobile';
 import { NavBarMobileAuth } from '../components/ui/NavBarMobileAuth';
 
 export const MobileDashBoardAuth = () => {
-
-    //Redirección de rutas hacia los componentes.
-	return (
-	<>  
-        <NavBarMobileAuth />
-        <div>
-            <Routes>
-                <Route path="" element={<GeneralMobile />} />
-            </Routes>
-    </div>
+  //Redirección de rutas hacia los componentes.
+  return (
+    <>
+      <NavBarMobileAuth />
+      <div>
+        <Routes>
+          <Route path="" element={<GeneralMobile />} />
+        </Routes>
+      </div>
     </>
-	)
-}
+  );
+};

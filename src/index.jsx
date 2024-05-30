@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 //Hojas de estilo
-import './styles/index.css'
+import './styles/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Caché del sitio
@@ -13,11 +13,11 @@ import * as serviceWorker from './serviceWorker';
 import { AppDeepDaemon } from './AppDeepDaemon';
 
 //Renderizado del componente principal
-ReactDOM.createRoot(document.getElementById("app")).render(
-    <React.StrictMode>
-			<AppDeepDaemon />
-    </React.StrictMode>
-  );
+ReactDOM.createRoot(document.getElementById('app')).render(
+  <React.StrictMode>
+    <AppDeepDaemon />
+  </React.StrictMode>,
+);
 
 //Script generado por default al crear una aplicación en React.
 //No contribuye nada las páginas o en el DOM, sin embargo, sirve para funciones extras como caché

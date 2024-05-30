@@ -1,9 +1,9 @@
 //Uso de React
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 
 //Uso de Select
-import Select from 'react-select'
+import Select from 'react-select';
 
 //Uso de Swal para las alertas en las ejecuciones
 import Swal from 'sweetalert2';
@@ -16,8 +16,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 //Uso de Firestore
-import { db } from '../../../firebase/firebase-config'
-import { collection, getDocs } from "firebase/firestore";
+import { db } from '../../../firebase/firebase-config';
+import { collection, getDocs } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 //Uso del hook useForm
@@ -29,279 +29,292 @@ import { ModalGalleryAdd } from '../Galeria/ModalGalleryAdd';
 import { FotosGalleryChoose } from '../../ui/FotosGalleryChoose';
 
 export const FormAddTesisMaestria = () => {
+  //Declaración del dispatch
+  const dispatch = useDispatch();
+  const auth = getAuth();
+  const dN = auth.currentUser.displayName;
 
-	//Declaración del dispatch
-	const dispatch = useDispatch();
-	const auth = getAuth();
-	const dN = auth.currentUser.displayName;
+  //Declaración del useNavigate
+  const navigate = useNavigate();
 
-	//Declaración del useNavigate
-	const navigate = useNavigate();
+  //Traemos la información de los usuarios de firebase
+  const { usuarios } = useSelector((state) => state.user);
 
-	//Traemos la información de los usuarios de firebase
-	const { usuarios } = useSelector(state => state.user);
+  //Contenido del formulario
+  const [formValues, handleInputChange, reset] = useForm({
+    name: '',
+    correo: '',
+    descripcion: '',
+    results: '',
+    nameTech: '',
+    urlImg: '',
+    estado: 'indevelop',
+    display: 'Yes',
+    url: '',
+    publisher: dN,
+    asesoresLista: '',
+    alumnosLista: '',
+    grado: 'Maestría',
+  });
+  const {
+    name,
+    correo,
+    descripcion,
+    results,
+    nameTech,
+    urlImg,
+    estado,
+    display,
+    url,
+    publisher,
+    asesoresLista,
+    alumnosLista,
+    grado,
+  } = formValues;
 
-	//Contenido del formulario
-	const [formValues, handleInputChange, reset] = useForm({
-		name: '',
-		correo: '',
-		descripcion: '',
-		results: '',
-		nameTech: '',
-		urlImg: '',
-		estado: 'indevelop',
-		display: 'Yes',
-		url: '',
-		publisher: dN,
-		asesoresLista: '',
-		alumnosLista: '',
-		grado: 'Maestría'
-	});
-	const { name, correo, descripcion, results, nameTech, urlImg, estado, display, url, publisher, asesoresLista, alumnosLista, grado } = formValues;
+  //Obtención de la galería
+  const [datos, setDatos] = useState('');
+  const MgAFAP = (datosMg) => {
+    setDatos(datosMg);
+  };
 
-	//Obtención de la galería
-	const [datos, setDatos] = useState('');
-	const MgAFAP = (datosMg) => {
-		setDatos(datosMg);
-	}
+  //useEffect y hook para la obtención de las tecnologías
+  const [techOption, setTech] = React.useState([]);
+  React.useEffect(() => {
+    const obtenerTech = async () => {
+      try {
+        const Data = await getDocs(collection(db, 'Tecnologias'));
+        const arrayData = Data.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTech(arrayData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerTech();
+  }, []);
 
-	//useEffect y hook para la obtención de las tecnologías
-	const [techOption, setTech] = React.useState([])
-	React.useEffect(() => {
-		const obtenerTech = async () => {
-			try {
-				const Data = await getDocs(collection(db, "Tecnologias"));
-				const arrayData = Data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-				setTech(arrayData)
+  //Configuración de las tecnologías
+  const techoptions = [];
+  techOption.map((item) =>
+    techoptions.push({ value: item.id, label: item.nombre }),
+  );
+  const [tecnos, setTecnos] = useState({
+    selectedOption: null,
+  });
 
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		obtenerTech()
-	}, [])
+  //Función para la selección de tecnologías
+  const handleChangeTecnos = (selectedOption) => {
+    setTecnos({ selectedOption });
+  };
 
-	//Configuración de las tecnologías
-	const techoptions = []
-	techOption.map(item => (
-		techoptions.push({ value: item.id, label: item.nombre })
-	))
-	const [tecnos, setTecnos] = useState({
-		selectedOption: null
-	})
+  //Checkbox para los directores
+  const optionsD = [];
+  usuarios
+    .filter((u) => u.esAutor === 'Y' && u.rol === 'administrador')
+    .map((u) => optionsD.push({ value: u.id, label: u.nombre }));
+  const optionsA = [];
+  usuarios
+    .filter((u) => u.esAutor === 'Y' && u.rol !== 'administrador')
+    .map((u) => optionsA.push({ value: u.id, label: u.nombre }));
+  const [asesores, setAsesores] = useState({
+    selectedOption: null,
+  });
 
-	//Función para la selección de tecnologías
-	const handleChangeTecnos = selectedOption => {
-		setTecnos({ selectedOption });
-	}
+  //Función para seleccionar a los directores
+  const handleChangeDirectores = (selectedOption) => {
+    setAsesores({ selectedOption });
+  };
+  //Checkbox para los alumnos
+  const [alumnos, setAlumnos] = useState({
+    selectedOption: null,
+  });
 
-	//Checkbox para los directores
-	const optionsD = []
-	usuarios.filter(u => (u.esAutor === 'Y' && u.rol === 'administrador')).map((u) => (
-		optionsD.push({ value: u.id, label: u.nombre })
-	))
-	const optionsA = []
-	usuarios.filter(u => (u.esAutor === 'Y' && u.rol !== 'administrador')).map((u) => (
-		optionsA.push({ value: u.id, label: u.nombre })
-	))
-	const [asesores, setAsesores] = useState({
-		selectedOption: null
-	})
+  //Función para seleccionar a los alumnos
+  const handleChangeAlumnos = (selectedOption) => {
+    setAlumnos({ selectedOption });
+  };
 
-	//Función para seleccionar a los directores
-	const handleChangeDirectores = selectedOption => {
-		setAsesores({ selectedOption });
-	}
-	//Checkbox para los alumnos
-	const [alumnos, setAlumnos] = useState({
-		selectedOption: null
-	})
+  //Función para la inserción de una nueva tesis de posgrado en la BD
+  const handleEnvTesis = () => {
+    const selectedAsesores = [];
+    const selectedTecnos = [];
+    if (asesores.selectedOption != null && alumnos.selectedOption != null) {
+      if (asesores.selectedOption.length <= 2) {
+        if (asesores.selectedOption != null) {
+          asesores.selectedOption.map((u) => selectedAsesores.push(u.label));
+        }
+        if (tecnos.selectedOption != null) {
+          tecnos.selectedOption.map((u) => selectedTecnos.push(u.label));
+        }
+        formValues.directoresLista = selectedAsesores;
+        formValues.alumnosLista = alumnos.selectedOption.label;
+        formValues.nameTech = selectedTecnos;
+        formValues.urlImg = datos;
 
-	//Función para seleccionar a los alumnos
-	const handleChangeAlumnos = selectedOption => {
-		setAlumnos({ selectedOption });
-	}
+        //Envio al estado de una nueva tesis de posgrado
+        dispatch(startNewTesisPosgrado(formValues));
+        reset();
+        navigate('/admin/Tesis');
+      } else {
+        Swal.fire(
+          'Error al agregar tesis, sólo se admiten máximo 2 Directores',
+        );
+      }
+    } else {
+      Swal.fire(
+        'Error al agregar tesis,',
+        'Debe tener al menos un asesor y un alumno agregado',
+        'error',
+      );
+    }
+  };
 
-	//Función para la inserción de una nueva tesis de posgrado en la BD
-	const handleEnvTesis = () => {
-		const selectedAsesores = [];
-		const selectedTecnos = [];
-		if (asesores.selectedOption != null && alumnos.selectedOption != null) {
-			if (asesores.selectedOption.length <= 2) {
-				if (asesores.selectedOption != null) {
-					asesores.selectedOption.map((u) => (
-						selectedAsesores.push(u.label)
-					))
-				}
-				if (tecnos.selectedOption != null) {
-					tecnos.selectedOption.map((u) => (
-						selectedTecnos.push(u.label)
-					))
-				}
-				formValues.directoresLista = selectedAsesores;
-				formValues.alumnosLista = alumnos.selectedOption.label;
-				formValues.nameTech = selectedTecnos;
-				formValues.urlImg = datos;
-
-				//Envio al estado de una nueva tesis de posgrado
-				dispatch(startNewTesisPosgrado(formValues));
-				reset();
-				navigate('/admin/Tesis');
-
-			} else {
-				Swal.fire('Error al agregar tesis, sólo se admiten máximo 2 Directores');
-			}
-		} else {
-			Swal.fire('Error al agregar tesis,', 'Debe tener al menos un asesor y un alumno agregado', 'error');
-		}
-
-	}
-
-	//Despliegue del formulario para añadir una nueva tesis de maestría
-	return (
-		<div className="container">
-			<div className="app-title">
-				<h2>Agregar Tesis de Maestría</h2>
-				<hr />
-			</div>
-			<div className="form-group row">
-				<div className="col mb-3">
-					<label> Nombre de tesis </label>
-					<input
-						className="form-control"
-						type='text'
-						name='name'
-						value={name}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label> Contacto</label>
-					<input
-						className="form-control"
-						type='text'
-						name='correo'
-						placeholder='Correo electrónico'
-						value={correo}
-						onChange={handleInputChange}
-					/>
-				</div>
-			</div>
-			<div className="form-group row">
-				<div className="col mb-2">
-					<label>Tecnología utilizada</label>
-					<Select
-						isMulti
-						name="nameTech"
-						options={techoptions}
-						className="basic-multi-select"
-						classNamePrefix="select"
-						value={tecnos.selectedOption}
-						onChange={handleChangeTecnos}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label>Status de la tesis </label>
-					<select
-						className="form-control"
-						name='estado'
-						value={estado}
-						onChange={handleInputChange}
-					>
-						<option value='registered' > Registered </option>
-						<option value='indevelop' > Indevelop </option>
-						<option value='completed' > Completed </option>
-					</select>
-				</div>
-			</div>
-			<div className="form-group row">
-				<div className="col mb-3">
-					<label>Descripción</label>
-					<textarea
-						className="form-control"
-						rows='6' cols='40'
-						name='descripcion'
-						value={descripcion}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label> Resultados </label>
-					<textarea
-						className="form-control"
-						rows='6'
-						name='results'
-						value={results}
-						onChange={handleInputChange}
-					/>
-				</div>
-			</div>
-			<div className="form-group row">
-				<div className="col mb-3">
-					<label>Agregar asesores</label>
-					<Select
-						isMulti
-						name="directores"
-						options={optionsD}
-						className="basic-multi-select"
-						classNamePrefix="select"
-						value={asesores.selectedOption}
-						onChange={handleChangeDirectores}
-					/>
-				</div>
-				<div className="col mb-3">
-					<label>Agregar alumno</label>
-					<Select
-						name="alumno"
-						options={optionsA}
-						className="basic-single"
-						classNamePrefix="select"
-						value={alumnos.selectedOption}
-						onChange={handleChangeAlumnos}
-					/>
-				</div>
-			</div>
-			<div className="row mb-12">
-				<div className="col-md-3 mb-3">
-					<label> Imagen desde Galeria </label>
-					<div className="card">
-						<img className='foto' src={urlImg || datos} alt="Imagen" />
-						<ModalGalleryAdd MgAFAP={MgAFAP} />
-						<FotosGalleryChoose />
-					</div>
-				</div>
-				<div className="col mb-3">
-					<label>Mostrar en página principal</label>
-					<select
-						className="form-control col-md-1 mb-3"
-						name='display'
-						value={display}
-						onChange={handleInputChange}
-					>
-						<option value='Yes' > Si </option>
-						<option value='No' > No </option>
-					</select>
-				</div>
-				<div className="col mb-3">
-					<label>Liga del video</label>
-					<input
-						className="form-control"
-						type='text'
-						name='url'
-						placeholder='URL de video'
-						value={url}
-						onChange={handleInputChange}
-					/>
-				</div>
-			</div>
-			<div class="text-center">
-				<button
-					className="btn btn-primary btn-large"
-					onClick={handleEnvTesis}
-				>
-					Agregar
-				</button>
-			</div>
-		</div>
-	)
-}
+  //Despliegue del formulario para añadir una nueva tesis de maestría
+  return (
+    <div className="container">
+      <div className="app-title">
+        <h2>Agregar Tesis de Maestría</h2>
+        <hr />
+      </div>
+      <div className="form-group row">
+        <div className="col mb-3">
+          <label> Nombre de tesis </label>
+          <input
+            className="form-control"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="col mb-3">
+          <label> Contacto</label>
+          <input
+            className="form-control"
+            type="text"
+            name="correo"
+            placeholder="Correo electrónico"
+            value={correo}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+      <div className="form-group row">
+        <div className="col mb-2">
+          <label>Tecnología utilizada</label>
+          <Select
+            isMulti
+            name="nameTech"
+            options={techoptions}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            value={tecnos.selectedOption}
+            onChange={handleChangeTecnos}
+          />
+        </div>
+        <div className="col mb-3">
+          <label>Status de la tesis </label>
+          <select
+            className="form-control"
+            name="estado"
+            value={estado}
+            onChange={handleInputChange}
+          >
+            <option value="registered"> Registered </option>
+            <option value="indevelop"> Indevelop </option>
+            <option value="completed"> Completed </option>
+          </select>
+        </div>
+      </div>
+      <div className="form-group row">
+        <div className="col mb-3">
+          <label>Descripción</label>
+          <textarea
+            className="form-control"
+            rows="6"
+            cols="40"
+            name="descripcion"
+            value={descripcion}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="col mb-3">
+          <label> Resultados </label>
+          <textarea
+            className="form-control"
+            rows="6"
+            name="results"
+            value={results}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+      <div className="form-group row">
+        <div className="col mb-3">
+          <label>Agregar asesores</label>
+          <Select
+            isMulti
+            name="directores"
+            options={optionsD}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            value={asesores.selectedOption}
+            onChange={handleChangeDirectores}
+          />
+        </div>
+        <div className="col mb-3">
+          <label>Agregar alumno</label>
+          <Select
+            name="alumno"
+            options={optionsA}
+            className="basic-single"
+            classNamePrefix="select"
+            value={alumnos.selectedOption}
+            onChange={handleChangeAlumnos}
+          />
+        </div>
+      </div>
+      <div className="row mb-12">
+        <div className="col-md-3 mb-3">
+          <label> Imagen desde Galeria </label>
+          <div className="card">
+            <img className="foto" src={urlImg || datos} alt="Imagen" />
+            <ModalGalleryAdd MgAFAP={MgAFAP} />
+            <FotosGalleryChoose />
+          </div>
+        </div>
+        <div className="col mb-3">
+          <label>Mostrar en página principal</label>
+          <select
+            className="form-control col-md-1 mb-3"
+            name="display"
+            value={display}
+            onChange={handleInputChange}
+          >
+            <option value="Yes"> Si </option>
+            <option value="No"> No </option>
+          </select>
+        </div>
+        <div className="col mb-3">
+          <label>Liga del video</label>
+          <input
+            className="form-control"
+            type="text"
+            name="url"
+            placeholder="URL de video"
+            value={url}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+      <div class="text-center">
+        <button className="btn btn-primary btn-large" onClick={handleEnvTesis}>
+          Agregar
+        </button>
+      </div>
+    </div>
+  );
+};

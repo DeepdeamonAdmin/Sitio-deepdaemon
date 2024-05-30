@@ -11,16 +11,15 @@ import { General } from '../components/Usuario/General';
 import { NavBarExterno } from '../components/ui/NavBarExterno';
 
 export const ExternoDashBoard = () => {
-
-    //Redirección de rutas hacia los componentes.
-	return (
-	<>  
-        <NavBarExterno/>
-        <div>
-            <Routes>
-                <Route path="" element={<General />} />
-            </Routes>
-        </div>
+  //Redirección de rutas hacia los componentes.
+  return (
+    <>
+      <NavBarExterno />
+      <div>
+        <Routes>
+          <Route path="" element={<General />} />
+        </Routes>
+      </div>
     </>
-	)
-}
+  );
+};

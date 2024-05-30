@@ -1,293 +1,298 @@
+@import url('https://use.fontawesome.com/releases/v5.0.10/css/all.css');
+
 .DeepDaemon {
-    text-align: center;
-    
-    /*min-width: 600px;*/
-  }
+  text-align: center;
 
-  .ddcic {
-    /*animation: App-logo-spin infinite 20s linear;*/
-    height: 10vmin;
-    pointer-events: none;
-  }
-  
-  .ddlogo {
-    /*animation: App-logo-spin infinite 20s linear;*/
-    height: 15vmin;
-    pointer-events: none;
-  }
-  
-  .dd_header {
-    background: url("./assets/img/bg/header_bg.png");
-    text-align: center;
-    background-position: center center;
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    text-shadow: 1px 1px 1px #000;
-  }
-	
-	iframe { 
-		height: 350px;
-		width: 100%;
-	}
-  
-  h1 {
-    font-size: 40px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 40px;
-    letter-spacing: 3px;
-    margin: 15px;
-  }
-  
-  h2 {
-    font-size: 30px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 40px;
-    letter-spacing: 3px;
-    margin: 15px;
-  }
-  
-  p {
-    text-align: center;
-    margin: 15px;
-    margin-bottom: 25px;
-  }
-  
-  hr:before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 25%;
-    width: 50%;
-    height: 2px;
-    background: #ccc;
-  }
-  
-  hr {
-    position: relative;
-    display: block;
-    height: 1px;
-    border: 0;
-    /*border-top: 1px solid #ccc;*/
-    margin: 1em 0;
-    padding: 0;
-    width: 100%;
-  }
-  
-  .team_title{
-    color: white;
-    text-align: center;
-  }
+  /*min-width: 600px;*/
+}
 
-  /*Boton Logout*/
-  .btnLogout{
-    color: rgb(79, 79, 240);
-    height: 40px;
-    margin-left: -20px;
-    margin-top: 30px;
-  }
+.ddcic {
+  /*animation: App-logo-spin infinite 20s linear;*/
+  height: 10vmin;
+  pointer-events: none;
+}
 
-  .team_sectionBg {
-    background-image: url("./assets/img/bg/fdSections.jpg");
-    background-position: top center;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
-  }
+.ddlogo {
+  /*animation: App-logo-spin infinite 20s linear;*/
+  height: 15vmin;
+  pointer-events: none;
+}
 
-  .pub_sectionBg {
-    background-image: url("./assets/img/bg/Publicaciones.jpg");
-    background-position: top center;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
-  }
+.dd_header {
+  background: url('./assets/img/bg/header_bg.png');
+  text-align: center;
+  background-position: center center;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-shadow: 1px 1px 1px #000;
+}
 
-  .proy_sectionBg {
-    background-image: url("./assets/img/bg/Poyectos.jpg");
-    background-position: top center;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
-  }
-  .separator{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
-    background-color: #012e4d;
-    color: white;
-    border-radius: 8px;
-  }
+iframe {
+  height: 350px;
+  width: 100%;
+}
 
-  .separator2{ /*Fondo de las secciones del menu general, para poder separar e identificar*/
-    background-color: #025E9D;
-    color: white;
-    border-radius: 8px;
-  }
-  .sections{
-    border-radius: 8px;
-    width: 100%;
-    height: auto;
-    padding: 50px;
-  }
+h1 {
+  font-size: 40px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 40px;
+  letter-spacing: 3px;
+  margin: 15px;
+}
 
-  .team_separator {
-    background-image: url("./assets/img/bg/todos_2018_bg.jpg");
-    background-position: top center;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
-  }
-  
-  .section {
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: stretch;
-    font-size: 16px;
-    letter-spacing: 1px;
-    font-weight: 300;
-    margin-top: -59px;
-    padding-top: 81px;
-    margin-bottom: auto;
-  }
-  
-  .section h1 {
-    text-transform: uppercase;
-  }
+h2 {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 40px;
+  letter-spacing: 3px;
+  margin: 15px;
+}
 
-  .academy {
-    background-image: url("./assets/img/bg/text_bg.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-color: #012e4d;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
-    padding: 0px;
-  }
+p {
+  text-align: center;
+  margin: 15px;
+  margin-bottom: 25px;
+}
 
-  .imageleader{
-    margin-left: 10%;
-    width: 80%;
-    height: 100%;
-    border-radius: 5%;
-    margin-right: 10%;
-  }
-  .imageleader2{
-    margin-left: 10%;
-    width: 85%;
-    height: 80%;
-    border-radius: 5%;
-  }
+hr:before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: #ccc;
+}
 
-  .imagealum{
-    margin-left: 10%;
-    width: 95%;
-    height: 90%;
-    border-radius: 5%;
-    max-height: 90%;
-  }
+hr {
+  position: relative;
+  display: block;
+  height: 1px;
+  border: 0;
+  /*border-top: 1px solid #ccc;*/
+  margin: 1em 0;
+  padding: 0;
+  width: 100%;
+}
 
-  .modal-leader{ /*Modal que muestra detalles de los lideres*/
-    width: 100%;
-    height: 70%;
-    margin-right: 25%;
-    border-radius: 5px;
-  }
+.team_title {
+  color: white;
+  text-align: center;
+}
 
-  .modal-team{ /*Modal que muestra detalles de los usuarios, equipo*/
-    width: 100%;
-    height: 80%;
-    margin-right: 25%;
-    border-radius: 5px;
-  }
-  
-  .modalheader {
-    width: 100%;
-    font-size: 25px;
-    color: #ffffff;
-    text-align: center;
-    padding: 5px;
-  }
-  .modalcontent {
-    color: #000;
-    padding: 5%;
-  }
-  .modalactions {
-    width: 100%;
-    text-align: center;
-    margin-left: 40%;
-  }
-  
-  .sections{
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    width: auto;
-    height: auto;
-    padding: 50px;
-  }
+/*Boton Logout*/
+.btnLogout {
+  color: rgb(79, 79, 240);
+  height: 40px;
+  margin-left: -20px;
+  margin-top: 30px;
+}
 
-  .team_separator {
-    background-image: url("./assets/img/bg/todos_2018_bg.jpg");
-    background-position: top center;
-    min-height: 300px;
-    align-items: stretch;
-    display: flex;
-  }
-  
-  .section .icon {
-    font-size: 50px;
-    line-height: 30px;
-    margin-bottom: 10px;
-  }
-  
-  .white {
-    color: white;
-  }
-  
-  .contact {
-    background-image: url("./assets/img/bg/contact_bg.jpg");
-    background-position: center center;
-    margin-top: auto;
-    font-size: 1.5rem;
-  }
-  .contact .icon {
-    font-size: 1.2rem;
-    line-height: 30px;
-    margin-bottom: 10px;
-    padding: 0 0.5rem;
-  }
-  
-  .projects .nav-item {
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-  }
-  .projects .nav-link {
-    background-color: transparent;
-    color: inherit;
-    border-radius: 10px;
-  }
-  
-  .projects .nav-link.active {
-    background-color: rgba(4, 21, 46, 0.7);
-    border-radius: 10px;
-  }
+.team_sectionBg {
+  background-image: url('./assets/img/bg/fdSections.jpg');
+  background-position: top center;
+  min-height: 300px;
+  align-items: stretch;
+  display: flex;
+}
 
-  
+.pub_sectionBg {
+  background-image: url('./assets/img/bg/Publicaciones.jpg');
+  background-position: top center;
+  min-height: 300px;
+  align-items: stretch;
+  display: flex;
+}
+
+.proy_sectionBg {
+  background-image: url('./assets/img/bg/Poyectos.jpg');
+  background-position: top center;
+  min-height: 300px;
+  align-items: stretch;
+  display: flex;
+}
+.separator {
+  /*Fondo de las secciones del menu general, para poder separar e identificar*/
+  background-color: #012e4d;
+  color: white;
+  border-radius: 8px;
+}
+
+.separator2 {
+  /*Fondo de las secciones del menu general, para poder separar e identificar*/
+  background-color: #025e9d;
+  color: white;
+  border-radius: 8px;
+}
+.sections {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  padding: 50px;
+}
+
+.team_separator {
+  background-image: url('./assets/img/bg/todos_2018_bg.jpg');
+  background-position: top center;
+  min-height: 300px;
+  align-items: stretch;
+  display: flex;
+}
+
+.section {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  margin-top: -59px;
+  padding-top: 81px;
+  margin-bottom: auto;
+}
+
+.section h1 {
+  text-transform: uppercase;
+}
+
+.academy {
+  background-image: url('./assets/img/bg/text_bg.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #012e4d;
+  min-height: 300px;
+  align-items: stretch;
+  display: flex;
+  padding: 0px;
+}
+
+.imageleader {
+  margin-left: 10%;
+  width: 80%;
+  height: 100%;
+  border-radius: 5%;
+  margin-right: 10%;
+}
+.imageleader2 {
+  margin-left: 10%;
+  width: 85%;
+  height: 80%;
+  border-radius: 5%;
+}
+
+.imagealum {
+  margin-left: 10%;
+  width: 95%;
+  height: 90%;
+  border-radius: 5%;
+  max-height: 90%;
+}
+
+.modal-leader {
+  /*Modal que muestra detalles de los lideres*/
+  width: 100%;
+  height: 70%;
+  margin-right: 25%;
+  border-radius: 5px;
+}
+
+.modal-team {
+  /*Modal que muestra detalles de los usuarios, equipo*/
+  width: 100%;
+  height: 80%;
+  margin-right: 25%;
+  border-radius: 5px;
+}
+
+.modalheader {
+  width: 100%;
+  font-size: 25px;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+}
+.modalcontent {
+  color: #000;
+  padding: 5%;
+}
+.modalactions {
+  width: 100%;
+  text-align: center;
+  margin-left: 40%;
+}
+
+.sections {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  width: auto;
+  height: auto;
+  padding: 50px;
+}
+
+.team_separator {
+  background-image: url('./assets/img/bg/todos_2018_bg.jpg');
+  background-position: top center;
+  min-height: 300px;
+  align-items: stretch;
+  display: flex;
+}
+
+.section .icon {
+  font-size: 50px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
+.white {
+  color: white;
+}
+
+.contact {
+  background-image: url('./assets/img/bg/contact_bg.jpg');
+  background-position: center center;
+  margin-top: auto;
+  font-size: 1.5rem;
+}
+.contact .icon {
+  font-size: 1.2rem;
+  line-height: 30px;
+  margin-bottom: 10px;
+  padding: 0 0.5rem;
+}
+
+.projects .nav-item {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.projects .nav-link {
+  background-color: transparent;
+  color: inherit;
+  border-radius: 10px;
+}
+
+.projects .nav-link.active {
+  background-color: rgba(4, 21, 46, 0.7);
+  border-radius: 10px;
+}
+
 .contenedor-responsivo {
   position: relative;
   overflow: hidden;
 }
-.navbar{
+.navbar {
   z-index: 100;
 }
-.links_mobile{
+.links_mobile {
   position: absolute;
   top: -700px;
   left: -2000px;
@@ -295,50 +300,50 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  transition: all .5s ease;
-  a{
+  transition: all 0.5s ease;
+  a {
     display: block;
   }
 }
-.links_mobile.active{
+.links_mobile.active {
   width: 100%;
   position: absolute;
-  display:flex;
+  display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  top:100%;
+  top: 100%;
   left: 0;
   right: 0;
   text-align: center;
   text-decoration: none;
   z-index: 98;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
-#links_items_mobile{
+#links_items_mobile {
   font-size: 1.5rem;
   text-decoration: none;
   color: white;
 }
-.burguermenu{
+.burguermenu {
   position: absolute;
   background-color: #212529;
-  top:-1000px;
-  left:-1000px;
+  top: -1000px;
+  left: -1000px;
   width: 100%;
   height: 100%;
   z-index: -1;
-  transition: all .6s ease;
+  transition: all 0.6s ease;
 }
-.burguermenu.active{
-    top:50px;
-    left:0;
-    border-radius: 0 0 100% 0;
-    width: 100%;
-    height: 100%;
-    z-index: 98;
+.burguermenu.active {
+  top: 50px;
+  left: 0;
+  border-radius: 0 0 100% 0;
+  width: 100%;
+  height: 100%;
+  z-index: 98;
 }
-.section.white{
+.section.white {
   padding-left: 25px;
   padding-right: 25px;
 }
@@ -349,9 +354,8 @@
   margin-right: 0;
   justify-content: center;
 }
-  @import url("https://use.fontawesome.com/releases/v5.0.10/css/all.css");
-  
-  /*@keyframes App-logo-spin {
+
+/*@keyframes App-logo-spin {
     from {
       transform: rotate(0deg);
     }
@@ -360,4 +364,3 @@
     }
   }
   */
-  

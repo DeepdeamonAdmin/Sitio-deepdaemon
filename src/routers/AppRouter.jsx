@@ -1,5 +1,5 @@
 //Uso de React
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //Uso de Firebase
@@ -30,108 +30,104 @@ import { startLoadingAvisos } from '../actions/avisos';
 import { GoogleAnalytics } from './GoogleAnalytics';
 
 export const AppRouter = () => {
+  //Declaración de variables y obtención de datos
+  const dispatch = useDispatch();
+  const auth = getAuth();
+  const [checking, setChecking] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { rol } = useSelector((state) => state.user);
 
-    //Declaración de variables y obtención de datos
-    const dispatch = useDispatch();
-    const auth = getAuth();
-    const [checking, setChecking] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const { rol } = useSelector(state => state.user);
+  useEffect(() => {
+    //Cargar usuarios al estado
+    dispatch(startLoadingUsers());
 
-    useEffect(() => {
+    //Cargar proyectos al estado
+    dispatch(startLoadingProject());
 
-        //Cargar usuarios al estado
-        dispatch(startLoadingUsers());
+    //Cargar tesis al estado
+    dispatch(startLoadingTesis());
 
-        //Cargar proyectos al estado
-        dispatch(startLoadingProject());
+    //Cargar publicaciones al estado
+    dispatch(startLoadingPublication());
 
-        //Cargar tesis al estado
-        dispatch(startLoadingTesis());
+    //Cargar videos de youtube al estado
+    dispatch(startLoadingYoutube());
 
-        //Cargar publicaciones al estado
-        dispatch(startLoadingPublication());
+    //Cargar avisos al estado
+    dispatch(startLoadingAvisos());
 
-        //Cargar videos de youtube al estado
-        dispatch(startLoadingYoutube());
+    //Verficar si ha cambiado el tipo de autenticación
+    onAuthStateChanged(auth, (user) => {
+      if (user?.uid) {
+        //Cargar al estado los datos de identificación de usuario
+        dispatch(login(user.uid, user.displayName));
 
-        //Cargar avisos al estado
-        dispatch(startLoadingAvisos());
-        
-        //Verficar si ha cambiado el tipo de autenticación
-        onAuthStateChanged(auth, (user) => {
-            if ( (user?.uid)) {
+        //Cambiar el estado de logeo a verdadero
+        setIsLoggedIn(true);
 
-                //Cargar al estado los datos de identificación de usuario
-                dispatch(login(user.uid, user.displayName));
+        //Cargar el rol del usuario al estado
+        dispatch(getUserRolUid());
 
-                //Cambiar el estado de logeo a verdadero
-                setIsLoggedIn(true);
+        //Cargar galería al estado
+        dispatch(startLoadingGallery());
+      } else {
+        //Cambiar el estado de logeo a falso
+        setIsLoggedIn(false);
+      }
 
-                //Cargar el rol del usuario al estado
-                dispatch(getUserRolUid());
+      //Termino de verificación de la información del usuario
+      setChecking(false);
+    });
+  }, [dispatch, auth, setChecking, setIsLoggedIn]);
 
-                //Cargar galería al estado
-                dispatch(startLoadingGallery());
-            } else {
+  //Pantalla de espera
+  if (checking) {
+    return <h1>Espere...</h1>;
+  }
 
-                //Cambiar el estado de logeo a falso
-                setIsLoggedIn(false);
-            }
-
-            //Termino de verificación de la información del usuario
-            setChecking(false);
-        });
-    }, [dispatch, auth, setChecking, setIsLoggedIn])
-
-    //Pantalla de espera
-    if (checking) {
-        return (
-            <h1>Espere...</h1>
-        )
-    }
-
-    //Despliegue de las rutas (version desktop)
-    return (
-        <Router>
-            <Routes>
-                <Route
-                    path='/*'
-                    element={
-                        <PublicRoute isAuthenticade={isLoggedIn} rol={rol} >
-                            <GoogleAnalytics />
-                            <HomeRoutes />
-                        </PublicRoute>
-                    }
-                />
-                <Route
-                    path="admin/*"
-                    element={
-                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'administrador'}>
-                            <GoogleAnalytics />
-                            <AdminDashBoard />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="alumno/*"
-                    element={
-                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
-                            <GoogleAnalytics />
-                            <AlumnoDashBoard />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="externo/*"
-                    element={
-                        <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'externo'}>
-                            <GoogleAnalytics />
-                            <ExternoDashBoard />
-                        </ProtectedRoute>
-                    }
-                />
-            </Routes>
-        </Router>
-    )
-}
+  //Despliegue de las rutas (version desktop)
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/*"
+          element={
+            <PublicRoute isAuthenticade={isLoggedIn} rol={rol}>
+              <GoogleAnalytics />
+              <HomeRoutes />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="admin/*"
+          element={
+            <ProtectedRoute
+              isAuthenticade={isLoggedIn && rol === 'administrador'}
+            >
+              <GoogleAnalytics />
+              <AdminDashBoard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="alumno/*"
+          element={
+            <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'alumno'}>
+              <GoogleAnalytics />
+              <AlumnoDashBoard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="externo/*"
+          element={
+            <ProtectedRoute isAuthenticade={isLoggedIn && rol === 'externo'}>
+              <GoogleAnalytics />
+              <ExternoDashBoard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+};

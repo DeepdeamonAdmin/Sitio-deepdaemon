@@ -1,145 +1,141 @@
-.foto{
-    height: 185px;
-    width: 185px;
-    padding: 10px; 
+.foto {
+  height: 185px;
+  width: 185px;
+  padding: 10px;
 }
-.foto-project{
-    height: 50px;
-    width: 50px;
-    padding: 5px; 
+.foto-project {
+  height: 50px;
+  width: 50px;
+  padding: 5px;
 }
-.center-user{
-    margin-top: 20px;
-    width: 800px;
-    height:550px;
-    margin-left: auto;
-    margin-right: auto;
+.center-user {
+  margin-top: 20px;
+  width: 800px;
+  height: 550px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.titulo{
-    text-align: center;
-    font-size: 18px;
-    color: #000;
-    margin-bottom: 0px;
-
+.titulo {
+  text-align: center;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 0px;
 }
 .linea {
-    margin:0px 20px;
-    width:90px;    
-    border-top:1px solid #999;
-    position: relative;
-    top:10px;
-    float:left;
-    }
+  margin: 0px 20px;
+  width: 90px;
+  border-top: 1px solid #999;
+  position: relative;
+  top: 10px;
+  float: left;
+}
 
 .leyenda {
-  font-weight:bold;
-  float:left;
- }
-
-.caja-btn{
-    text-align: center;
-    height: 40px;
+  font-weight: bold;
+  float: left;
 }
 
-.btn{
-    margin-top: 20px;
-    margin-bottom: 15px;
-
+.caja-btn {
+  text-align: center;
+  height: 40px;
 }
 
-.linea{
-    height: 1px;
-}
-.hr-cliente{
-    border: 0;
-    height: 0; 
-    box-shadow: 0 1px 5px 1px rgb(139, 26, 26);
+.btn {
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
-.datos{
-    box-shadow: 0 3px 5px 1px rgb(139, 26, 26);
-    margin-top: 10px;
-    margin-bottom: 10px;
+.linea {
+  height: 1px;
+}
+.hr-cliente {
+  border: 0;
+  height: 0;
+  box-shadow: 0 1px 5px 1px rgb(139, 26, 26);
 }
 
-.tb-user{
-   
-    border-collapse: collapse;
-    box-shadow: 0 1px 5px 1px rgb(139, 26, 26);
-    width: 800px;
-    
+.datos {
+  box-shadow: 0 3px 5px 1px rgb(139, 26, 26);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
+.tb-user {
+  border-collapse: collapse;
+  box-shadow: 0 1px 5px 1px rgb(139, 26, 26);
+  width: 800px;
+}
 
 /*estilos project */
 
-.center-project{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 1300px;
-    height: 1000px;
+.center-project {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 1300px;
+  height: 1000px;
 }
 
-.td-project, .tr-project, .tb-project{
-    text-align: center;
-    border-collapse: separate;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: auto;
-    margin-right: auto;
-
+.td-project,
+.tr-project,
+.tb-project {
+  text-align: center;
+  border-collapse: separate;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.td-project, .tr-project{
-    border-width: 1px;
-    box-shadow: 0 3px 5px 1px rgb(40, 3, 3);
+.td-project,
+.tr-project {
+  border-width: 1px;
+  box-shadow: 0 3px 5px 1px rgb(40, 3, 3);
 }
-.th-project{
-    background-color: rgba(17, 16, 16, 0.852);
-    color: white;
-}
-
-
-.foto-project{
-    width: 50px;
-    height: 50px;
-    margin: 2px;
-    margin-top: 2px;
-    margin-right: 2px;
-    margin-bottom: 2px;
+.th-project {
+  background-color: rgba(17, 16, 16, 0.852);
+  color: white;
 }
 
-
-.btn-project-add, .btn-project-delete, .btn-project-edit, .btn-project-mas{
-    margin-bottom: 0px;
-    margin-top: 0px;
-    padding-top: 5px;
-    padding-left: 15px;
-    padding-bottom: 5px;
-    padding-right: 15px;
+.foto-project {
+  width: 50px;
+  height: 50px;
+  margin: 2px;
+  margin-top: 2px;
+  margin-right: 2px;
+  margin-bottom: 2px;
 }
 
-.btn-project-add{
-    border-color: aliceblue;
-    background-color: transparent;
-    color: white;
+.btn-project-add,
+.btn-project-delete,
+.btn-project-edit,
+.btn-project-mas {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  padding-right: 15px;
 }
 
-.btn-project-edit{
-    border-color: black;
+.btn-project-add {
+  border-color: aliceblue;
+  background-color: transparent;
+  color: white;
 }
 
-.btn-project-delete{
-    border-color: blue;
+.btn-project-edit {
+  border-color: black;
 }
 
-.btn-project-mas{
-    border-color:rgb(37, 23, 71);
+.btn-project-delete {
+  border-color: blue;
 }
 
-
+.btn-project-mas {
+  border-color: rgb(37, 23, 71);
+}

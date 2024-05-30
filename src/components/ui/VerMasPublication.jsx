@@ -15,30 +15,31 @@ import { uiOpenModal } from '../../actions/ui';
 import { PublicationDetaills } from '../Usuario/PublicationDetaills';
 
 export const VerMasPublication = (publicacion) => {
+  //Declaración del dispatch
+  const dispatch = useDispatch();
+  const pub = publicacion;
 
-    //Declaración del dispatch
-    const dispatch = useDispatch();
-    const pub = publicacion;
+  //Función para el manejo del clic
+  const handleClickNew = () => {
+    //Envio al estado la apertura del modal
+    dispatch(uiOpenModal());
+  };
 
-    //Función para el manejo del clic
-    const handleClickNew = () => {
+  //Obtención del usuario
+  const user = auth.currentUser;
 
-        //Envio al estado la apertura del modal
-        dispatch(uiOpenModal());
-    }
-
-    //Obtención del usuario
-    const user = auth.currentUser;
-    
-    //Condición de despliegue de información si el usuario está autenticado
-    if (!user) return <div>
+  //Condición de despliegue de información si el usuario está autenticado
+  if (!user)
+    return (
+      <div>
         <button
-            className="btn btn-success"
-            onClick={handleClickNew}
-            style={{marginTop:40}}
+          className="btn btn-success"
+          onClick={handleClickNew}
+          style={{ marginTop: 40 }}
         >
-            Ver más..
+          Ver más..
         </button>
-    </div>
-    return <PublicationDetaills publication = {pub.publicacion}/>
-}
+      </div>
+    );
+  return <PublicationDetaills publication={pub.publicacion} />;
+};

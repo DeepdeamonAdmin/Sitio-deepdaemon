@@ -2,24 +2,24 @@
 import { types } from '../types/types';
 
 //Función para publicar en el estado el mensaje de error
-export const setError = ( err ) => ({
-    type: types.uiSetError,
-    payload: err
+export const setError = (err) => ({
+  type: types.uiSetError,
+  payload: err,
 });
 
 //Función para publicar en el estado la eliminación del mensaje de error
 export const removeError = () => ({
-    type: types.uiRemoveError
+  type: types.uiRemoveError,
 });
 
 //Función para publicar en el estado el mensaje de cargar
 export const startLoading = () => ({
-    type: types.uiStartLoading
+  type: types.uiStartLoading,
 });
 
 //Función para publicar en el estado el mensaje de finalización de carga
 export const finishLoading = () => ({
-    type: types.uiFinishLoading
+  type: types.uiFinishLoading,
 });
 
 //Función para publicar en el estado el mensaje de apertura de modal

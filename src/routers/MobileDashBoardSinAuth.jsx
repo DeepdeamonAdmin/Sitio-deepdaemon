@@ -15,22 +15,21 @@ import { Login } from '../components/auth/Login';
 import { Registrer } from '../components/auth/Registrer';
 
 //Uso de ruta de error
-import { RutaError } from '../components/ui/RutaError'
+import { RutaError } from '../components/ui/RutaError';
 
 export const MobileDashBoardSinAuth = () => {
-
-    //Redirección de rutas hacia los componentes.
-	return (
-	<>  
-        <NavBarMobileSinAuth/>
-        <div>
-            <Routes>
-                <Route path="" element={<GeneralMobile />} />
-                <Route path='login' element={ <Login /> } />
-                <Route path='registrer' element={ <Registrer />} />
-                <Route path="*" element={ <RutaError />} />
-            </Routes>
-    </div>
+  //Redirección de rutas hacia los componentes.
+  return (
+    <>
+      <NavBarMobileSinAuth />
+      <div>
+        <Routes>
+          <Route path="" element={<GeneralMobile />} />
+          <Route path="login" element={<Login />} />
+          <Route path="registrer" element={<Registrer />} />
+          <Route path="*" element={<RutaError />} />
+        </Routes>
+      </div>
     </>
-	)
-}
+  );
+};

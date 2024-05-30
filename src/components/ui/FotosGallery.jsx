@@ -9,23 +9,20 @@ import { uiOpenModal } from '../../actions/ui';
 import './Ui.css';
 
 export const FotosGallery = () => {
+  //Declaración del dispatch
+  const dispatch = useDispatch();
 
-    //Declaración del dispatch
-    const dispatch = useDispatch();
+  //Función para manejar el clic sobre el botón
+  const handleClickNew = () => {
+    //Enviar al estado la apertura del modal
+    dispatch(uiOpenModal());
+  };
 
-    //Función para manejar el clic sobre el botón
-    const handleClickNew = () => {
-
-        //Enviar al estado la apertura del modal
-        dispatch( uiOpenModal() );
-    }
-
-    //Despliegue del botón para cambiar una foto a través del modal
-    return (
-        <button
-            className="btn btn-primary"
-            onClick={ handleClickNew }
-        >           Cambiar foto
-        </button>
-    )
-}
+  //Despliegue del botón para cambiar una foto a través del modal
+  return (
+    <button className="btn btn-primary" onClick={handleClickNew}>
+      {' '}
+      Cambiar foto
+    </button>
+  );
+};

@@ -9,24 +9,19 @@ import { uiOpenModal } from '../../actions/ui';
 import './../ui/Ui.css';
 
 export const AddNewFab = () => {
+  //Declaración del dispatch
+  const dispatch = useDispatch();
 
-    //Declaración del dispatch
-    const dispatch = useDispatch();
+  //Función para el manejo del clic
+  const handleClickNew = () => {
+    //Enviar al estado la apertura del modal
+    dispatch(uiOpenModal());
+  };
 
-    //Función para el manejo del clic
-    const handleClickNew = () => {
-
-        //Enviar al estado la apertura del modal
-        dispatch( uiOpenModal() );
-    }
-
-    //Despliegue del botno de adición
-    return (
-        <button
-            className="btn btn-primary fab"
-            onClick={ handleClickNew }
-        >
-            <i className="fas fa-plus"></i>
-        </button>
-    )
-}
+  //Despliegue del botno de adición
+  return (
+    <button className="btn btn-primary fab" onClick={handleClickNew}>
+      <i className="fas fa-plus"></i>
+    </button>
+  );
+};

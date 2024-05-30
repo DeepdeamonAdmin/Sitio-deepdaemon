@@ -1,35 +1,35 @@
 //Uso de React
-import React from "react";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { useEffect, useState } from 'react';
 
 //Uso de Firestore
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebase-config";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebase-config';
 
 //Uso de ReactGA
-import ReactGA from "react-ga";
+import ReactGA from 'react-ga';
 
 //imagenes fijas
-import join from "../../styles/assets/img/sitio/mastermind.png";
-import logo from "../../styles/assets/img/sitio/deepdaemon.png";
-import cic from "../../styles/assets/img/sitio/cic.png";
-import QR from "../../assets/QR_20_07_2023.jpeg";
+import join from '../../styles/assets/img/sitio/mastermind.png';
+import logo from '../../styles/assets/img/sitio/deepdaemon.png';
+import cic from '../../styles/assets/img/sitio/cic.png';
+import QR from '../../assets/QR_20_07_2023.jpeg';
 
 //Uso de Bootstrap y CSS
-import "../../styles/assets/icomoon/icomoon.css"; //https://icomoon.io/#preview-free checar si se usa
-import "../../styles/DeepDaemon.css";
-import { Container, Nav } from "react-bootstrap";
-import { Row, Col, Image } from "react-bootstrap";
-import { Tab } from "react-bootstrap";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import '../../styles/assets/icomoon/icomoon.css'; //https://icomoon.io/#preview-free checar si se usa
+import '../../styles/DeepDaemon.css';
+import { Container, Nav } from 'react-bootstrap';
+import { Row, Col, Image } from 'react-bootstrap';
+import { Tab } from 'react-bootstrap';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 //Componentes necesario
-import { LeaderScreen } from "./LeaderScreen";
-import { TeamScreen } from "./TeamScreen";
-import { ProjectScreen } from "./ProjectScreen";
-import { TesisScreen } from "./TesisScreen";
-import { PublicationScreen } from "./PublicationScreen";
-import { Carousel } from "./Carousel";
+import { LeaderScreen } from './LeaderScreen';
+import { TeamScreen } from './TeamScreen';
+import { ProjectScreen } from './ProjectScreen';
+import { TesisScreen } from './TesisScreen';
+import { PublicationScreen } from './PublicationScreen';
+import { Carousel } from './Carousel';
 
 export const General = ({ id }) => {
   //Configurar hooks para los avisos y videos
@@ -37,7 +37,7 @@ export const General = ({ id }) => {
   const [youtubes, setYoutubes] = useState([]);
 
   //Referenciar db de firebase
-  const avisosCollection = collection(db, "Avisos");
+  const avisosCollection = collection(db, 'Avisos');
 
   //Función para obtener todos los avisos
   const getAvisos = async () => {
@@ -45,12 +45,12 @@ export const General = ({ id }) => {
     setAvisos(
       datos.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
-      })
+      }),
     );
   };
 
   //Colección en la BD de los videos de YouTube
-  const youtubeCollection = collection(db, "Youtube");
+  const youtubeCollection = collection(db, 'Youtube');
 
   //Obtención de los videos de la BD
   const getYoutubes = async () => {
@@ -85,9 +85,9 @@ export const General = ({ id }) => {
     <div className="">
       <div className="d-flex flex-row dd_header">
         <div className="container">
-          <Row className="d-flex flex-row " style={{ width: "100%" }}>
+          <Row className="d-flex flex-row " style={{ width: '100%' }}>
             <div className="col-sm mb-4" id="Home">
-              <div className="content" style={{ position: "relative" }}>
+              <div className="content" style={{ position: 'relative' }}>
                 <img src={cic} className="ddcic" alt="cic" />
                 <img src={logo} className="ddlogo" alt="logo" />
                 <h1>Laboratorio de Ciencias </h1>
@@ -104,7 +104,7 @@ export const General = ({ id }) => {
           className="wrapper"
           style={{
             maxWidth: `${1300 + 260 * (avisos.length - 4)}px`,
-            margin: "auto",
+            margin: 'auto',
             marginTop: 4,
           }}
         >
@@ -283,19 +283,19 @@ export const General = ({ id }) => {
                   className="Container section"
                   style={{
                     height: 620,
-                    overflow: "hidden",
-                    position: "relative",
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <div
                     className="row overflow-scroll"
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 80,
                       bottom: -20,
                       left: 0,
-                      right: "3px",
-                      paddingBottom: "10px",
+                      right: '3px',
+                      paddingBottom: '10px',
                     }}
                   >
                     <PublicationScreen type="conference" />
@@ -307,21 +307,21 @@ export const General = ({ id }) => {
                   className="Container section"
                   style={{
                     height: 620,
-                    overflow: "hidden",
-                    position: "relative",
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <div
                     className="row overflow-scroll"
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 80,
                       bottom: -20,
                       left: 0,
-                      right: "3px",
+                      right: '3px',
                     }}
                   >
-                    <PublicationScreen type={["magazine", "article"]} />
+                    <PublicationScreen type={['magazine', 'article']} />
                   </div>
                 </div>
               </Tab.Pane>
@@ -330,18 +330,18 @@ export const General = ({ id }) => {
                   className="Container section"
                   style={{
                     height: 620,
-                    overflow: "hidden",
-                    position: "relative",
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <div
                     className="row overflow-scroll"
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 80,
                       bottom: -20,
                       left: 0,
-                      right: "3px",
+                      right: '3px',
                     }}
                   >
                     <PublicationScreen type="book" />
@@ -353,18 +353,18 @@ export const General = ({ id }) => {
                   className="Container section"
                   style={{
                     height: 620,
-                    overflow: "hidden",
-                    position: "relative",
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <div
                     className="row overflow-scroll"
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 80,
                       bottom: -20,
                       left: 0,
-                      right: "3px",
+                      right: '3px',
                     }}
                   >
                     <PublicationScreen type="inbook" />
@@ -403,18 +403,18 @@ export const General = ({ id }) => {
                   className="Container section"
                   style={{
                     height: 650,
-                    overflow: "hidden",
-                    position: "relative",
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <div
                     className="row overflow-scroll"
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 80,
                       bottom: -20,
                       left: 0,
-                      right: "3px",
+                      right: '3px',
                     }}
                   >
                     <TeamScreen status="current" />
@@ -426,18 +426,18 @@ export const General = ({ id }) => {
                   className="Container section"
                   style={{
                     height: 650,
-                    overflow: "hidden",
-                    position: "relative",
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <div
                     className="row overflow-scroll"
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 80,
                       bottom: -20,
                       left: 0,
-                      right: "3px",
+                      right: '3px',
                     }}
                   >
                     <TeamScreen status="graduate" />
@@ -492,7 +492,7 @@ export const General = ({ id }) => {
         <Container className="section">
           <Row>
             <Col md="auto">
-              <Image src={join} style={{ height: "320px" }} fluid />
+              <Image src={join} style={{ height: '320px' }} fluid />
             </Col>
             <Col>
               <h1>Únete al equipo!</h1>
@@ -504,7 +504,7 @@ export const General = ({ id }) => {
                 estamos buscando.
               </p>
               <div className="text-center">
-                <Image src={QR} style={{ height: "200px" }} alt="QR Contacto" />
+                <Image src={QR} style={{ height: '200px' }} alt="QR Contacto" />
                 <br />
               </div>
             </Col>
