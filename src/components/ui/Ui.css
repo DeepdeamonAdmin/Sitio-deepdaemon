@@ -1,12 +1,12 @@
 /* FABS */
 .fab {
   border-radius: 100%;
-  bottom: 25px;
-  font-size: 30px;
-  padding: 25px;
+  font-size: 24px;
   position: sticky;
   left: 150px;
-  top: 10px;
+  width: 4rem;
+  height: 4rem;
+  align-content: center;
 }
 
 .fab-danger {
